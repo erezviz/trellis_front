@@ -1,12 +1,12 @@
 import React from 'react';
 // import { Hero } from './pages/hero';
 import './App.css';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import {  Switch, Route } from 'react-router-dom';
 import routes from './routes'
 import {AppHeader} from './cmps/app-header'
 function App() {
   return (
-    <Router>
+   
     <div className="App">
      <AppHeader/>
      <main className="app-container">
@@ -17,7 +17,8 @@ function App() {
      </Switch>
      </main>
     </div>
-    </Router>
+
+  
   );
 }
 
