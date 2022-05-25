@@ -21,16 +21,12 @@ export class GroupFooter extends React.Component {
     onSaveTask = (ev) => {
         ev.preventDefault()
         const taskToSave = { ...this.state.task }
-        const boardId = this.getBoardId()
+        const boardId = this.props.boardId
         boardService.saveTask(boardId, taskToSave)
         this.setState({ isShown: true })
     }
 
-    getBoardId = () => {
-        const { boardId } = this.props.match.params
-        console.log(boardId);
-        return boardId
-    }
+   
 
     onToggle = () => {
         this.setState({ isShown: false })
@@ -38,7 +34,7 @@ export class GroupFooter extends React.Component {
 
 
     render() {
-        console.log('Noyyyyyyyyyyyyya', props);
+        
         const { isShown } = this.state
         return (
             <section className="group-footer">
