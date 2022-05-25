@@ -1,11 +1,11 @@
 
 
-export const GroupHeader = () => {
+export const GroupHeader = (props) => {
 
 
     return(
         <section className="group-header">
-            <h3>Im a group header</h3>
+            <h3>{props.title}</h3>
         </section>
     )
 }

@@ -3,12 +3,14 @@ import { TaskPreview } from "./task-preview"
 
 
 export const TaskList = (props) => {
+    
+    const {tasks} = props
 
     return(
         <section className="task-list">
-            <h3>I am a task list</h3>
-            
-                <TaskPreview/>
+            {(tasks || tasks.length)&& tasks.map(task=>{
+              return  <TaskPreview task={task}/>
+            })}
         </section>
     )
 }
