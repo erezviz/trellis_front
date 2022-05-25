@@ -3,8 +3,15 @@
 @import 'setup/variables';
 @import 'setup/mixins';
 @import 'setup/functions';
+
+
 // BASICS
 @import './basics/helpers';
 @import './basics/base';
+
+//PAGES
+@import './pages/hero';
+
+
 // COMPONENTS
 @import './components/app-header';

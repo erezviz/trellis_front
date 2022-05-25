@@ -22,7 +22,7 @@ export const AppHeader = (props) => {
                 <Link  to='/home'><p className="header-link">Boards</p></Link>
             </nav>
             <div  className="user-link">
-                <span>EW</span>
+                <span>NI</span>
             
             </div>
            
