@@ -1,13 +1,20 @@
 import { NavLink, Link } from "react-router-dom"
 
 
-export const AppHeader = (props) => {
-    
 
+export const AppHeader = (props) => {
+
+
+    const onGoBack = () => {
+        console.log(props.history);
+        
+    }
+
+    
     return (
         <section className="app-header flex">
          
-            <div className="logo-container">
+            <div onClick={onGoBack} className="logo-container">
                 <h3>Trellis</h3>
             </div>
             <nav>
