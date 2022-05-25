@@ -2,7 +2,7 @@
 
 export const TaskPreview = (props) => {
     const {task} = props
-    console.log('task',task)
+    // console.log('task',task)
    
     return (
         <section onClick={() => props.onOpenModal()} className="task-preview">
