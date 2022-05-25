@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import App from './root-cmp';
 
 import './index.css';
+import './assets/styles/styles.scss'
 import { BrowserRouter as Router } from 'react-router-dom';
 
 const container = document.getElementById('root');
