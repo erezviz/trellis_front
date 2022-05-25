@@ -3,14 +3,16 @@ import { TaskList } from "./task-list"
 import { GroupFooter } from "./group-footer"
 
 export const GroupPreview = (props) => {
+    
+    const {group} = props
 
     return (
         <section className="group-preview">
             <div className="header-container">
-            <GroupHeader/>
+            <GroupHeader title={group.title}/>
             </div>
             <div className="task-list-container">
-            <TaskList/>
+            <TaskList tasks={group.tasks}/>
             </div>
             <div className="task-footer-container">
             <GroupFooter/>

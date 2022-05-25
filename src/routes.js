@@ -12,17 +12,10 @@ const routes = [{
         component: Hero,
 
     },
-
     {
-        path: '/board',
-        component: BoardApp,
-
-    },
-    // {
-    //     path: 'chat',
-    //     component: <ChatApp />,
-    //     label: 'Chat'
-    // },
+        path: '/board/:boardId',
+        component: BoardApp
+    }
     // {
     //     path: 'about',
     //     component: <AboutUs />,

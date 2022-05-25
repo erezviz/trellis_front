@@ -68,6 +68,20 @@ function getEmptyBoard() {
 
 
 //? TEST DATA FOR HOMEPAGE
-// storageService.post(STORAGE_KEY, { _id: utilService.makeId(), title: 'Board 1' }).then(x => console.log(x))
+// storageService.post(STORAGE_KEY, { _id: utilService.makeId(), title: 'Board 1', groups:[
+//         {
+//             id:  "G-"+utilService.makeId(),
+//             title: "Group 1",
+//             tasks: [
+//                 {
+//                     id: "T-"+utilService.makeId(),
+//                     title: "Replace logo"
+//                 },
+//                 {
+//                     id: "T-"+utilService.makeId(),
+//                     title: "Add Samples"
+//                 }
+//             ],
+//         }]}).then(x => console.log(x))
 // storageService.post(STORAGE_KEY, { _id: utilService.makeId(), title: 'Board 2' }).then(x => console.log(x))
 // storageService.post(STORAGE_KEY, { _id: utilService.makeId(), title: 'Board 3' }).then(x => console.log(x))
