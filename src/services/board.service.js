@@ -15,6 +15,9 @@ export const boardService = {
     getEmptyBoard,
     getEmptyTask,
     saveTask,
+    addGroup,
+    updateGroup,
+    deleteGroup,
     // subscribe,
     // unsubscribe
 
@@ -71,6 +74,38 @@ function saveTask(boardId, taskToSave){
     console.log(board); 
 }
 
+async function addGroup(boardId, newGroup){
+    try{
+        const board = await getById(boardId)
+        board.groups = [...board.groups, newGroup]
+        save(board)
+        return board
+    }catch(err){
+        throw err
+    }
+} 
+async function updateGroup(boardId, groupId ,newName){
+    try{
+        const board = await getById(boardId)
+        const groupToUpdate = board.groups.find(group => group.id === groupId)
+        groupToUpdate.title = newName
+        save(board)
+        return groupToUpdate
+    }catch(err){
+        throw err
+    }
+} 
+async function deleteGroup(boardId, groupId){
+    try{
+        const board = await getById(boardId)
+        const groupIdx = board.groups.findIndex(group => group.id === groupId)
+        board.groups.splice(groupIdx, 1)
+        save(board)
+        return board
+    }catch(err){
+        throw err
+    }
+} 
 
 // function subscribe(listener) {
 //     boardChannel.addEventListener('message', listener)

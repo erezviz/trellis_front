@@ -1,6 +1,6 @@
 
 
-export const BoardPreview  = ({board}) =>{
+export const BoardPreview = ({ board }) => {
 
     return (
         <section className="board-preview">
