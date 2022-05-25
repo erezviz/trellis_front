@@ -1,0 +1,31 @@
+.app-header {
+    background-color: $clr1;
+    top: 0;
+    color: $clr2;
+    // height: rem(32px);
+    width: 100%;
+    padding: rem(6px) rem(4px);
+    justify-content: space-between;
+    align-items: center;
+    .header-link {
+        margin: 0;
+        color: $clr2;
+    }
+    .user-link {
+        span {
+            font-weight: bold;
+            font-size: rem(12px);
+            color: $clr2;
+            white-space: nowrap;
+        }
+        background-color: $clr6;
+        width: rem(32px);
+        height: rem(32px);
+        border-radius: 50%;
+    }
+    .logo-container {
+        h3 {
+            margin: 0;
+        }
+    }
+}
