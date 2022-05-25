@@ -1,5 +1,4 @@
 
-
 export const TaskPreview = (props) => {
     const {task} = props
     // console.log('task',task)
