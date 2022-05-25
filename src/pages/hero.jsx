@@ -6,8 +6,8 @@ export const Hero = () => {
     return (
         <section className="hero">
             <div className="hero-container">
-                <h1>Trello helps teams move work forward.</h1>
-                <p>Collaborate, manage projects, and reach new productivity peaks. From high rises to the home office, the way your team works is unique—accomplish it all with Trello.</p>
+                <h1 className="hero-h1">Trellis helps teams move work forward.</h1>
+                <p className="hero-p">Collaborate, manage projects, and reach new productivity peaks. From high rises to the home office, the way your team works is unique—accomplish it all with Trello.</p>
                 <Link to='/home'><div className="enter-link">Enter Demo</div></Link>
             </div>
             <div className="hero-img-container">
