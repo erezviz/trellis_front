@@ -1,10 +1,10 @@
 import { Hero } from './pages/hero'
-import { BoardApp } from './pages/board-app'
-
+import { HomePage } from './pages/home-page'
+import { BoardApp } from './pages/board-app';
 // Routes accesible from the main navigation (in AppHeader)
 const routes = [{
-        path: '/board',
-        component: BoardApp
+        path: '/home',
+        component: HomePage
 
     },
     {
@@ -13,11 +13,11 @@ const routes = [{
 
     },
 
-    // {
-    //     path: 'review',
-    //     component: <ReviewApp />,
-    //     label: 'Reviews'
-    // },
+    {
+        path: '/board',
+        component: BoardApp,
+
+    },
     // {
     //     path: 'chat',
     //     component: <ChatApp />,
