@@ -1,12 +1,13 @@
+import { withRouter } from "react-router-dom";
 import { NavLink, Link } from "react-router-dom"
 
 
 
-export const AppHeader = (props) => {
+ const _AppHeader = (props) => {
 
 
     const onGoBack = () => {
-        console.log(props.history);
+        props.history.push('/')
         
     }
 
@@ -30,3 +31,5 @@ export const AppHeader = (props) => {
     )
 }
 
+
+export const AppHeader = withRouter(_AppHeader)
