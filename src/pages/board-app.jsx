@@ -2,7 +2,7 @@ import React from "react";
 
 
 export class BoardApp extends React.Component {
-
+    state = {}
 
 
 

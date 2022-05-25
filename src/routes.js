@@ -3,15 +3,16 @@ import { BoardApp } from './pages/board-app'
 
 // Routes accesible from the main navigation (in AppHeader)
 const routes = [{
-        path: '/',
-        component: Hero,
-
-    },
-    {
         path: '/board',
         component: BoardApp
 
     },
+    {
+        path: '/',
+        component: Hero,
+
+    },
+
     // {
     //     path: 'review',
     //     component: <ReviewApp />,

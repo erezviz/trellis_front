@@ -1,4 +1,4 @@
-import React from 'react';
+// import React from 'react';
 // import { Hero } from './pages/hero';
 import './App.css';
 import {  Switch, Route } from 'react-router-dom';

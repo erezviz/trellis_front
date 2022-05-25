@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom"
+import { NavLink, Link } from "react-router-dom"
 
 
 export const AppHeader = (props) => {
@@ -7,8 +7,8 @@ export const AppHeader = (props) => {
     return (
         <section className="app-header">
             <nav>
-                <NavLink to='/'>Home</NavLink>| 
-                <NavLink to='/board'>boards</NavLink>|
+                <Link to='/'>Home</Link>| 
+                <Link to='/board'>boards</Link>|
             </nav>
             <h1>Hello from Header</h1>
         </section>
