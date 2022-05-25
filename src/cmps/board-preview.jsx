@@ -1,10 +1,10 @@
 
 
-export const BoardPreview  = (props) =>{
+export const BoardPreview  = ({board}) =>{
 
     return (
         <section className="board-preview">
-            <h2>Im a board preview</h2>
+            <h2>{board.title}</h2>
         </section>
     )
 } 
