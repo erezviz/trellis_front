@@ -1,13 +1,14 @@
 import React from "react";
+import {Link} from 'react-router-dom'
+import { connect } from "react-redux"
+
 import { GroupPreview } from "../cmps/group/group-preview";
 import { TaskDetails } from "../cmps/task/task-details";
 import { GroupList } from "../cmps/group/group-list"
 import { boardService } from "../services/board.service";
 import { utilService } from "../services/util.service";
-import { connect } from "react-redux"
 import { loadBoard } from '../store/board.action'
 import {Screen} from '../cmps/dynamic-cmps/screen'
-import {Link} from 'react-router-dom'
 
 class _BoardApp extends React.Component {
 
