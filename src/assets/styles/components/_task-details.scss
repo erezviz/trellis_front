@@ -15,6 +15,23 @@
     }
 }
 
+.screen {
+    align-items: flex-start;
+    background-color: #000000a3;
+    display: none;
+    height: 100%;
+    justify-content: center;
+    left: 0;
+    overflow-y: auto;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 20;
+    &.overlay-up {
+        display: flex;
+    }
+}
+
 .task-details {
     background-color: #f4f5f7;
     border-radius: 2px;
@@ -24,4 +41,20 @@
     position: relative;
     width: 768px;
     z-index: 25;
+}
+
+.details-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.details-header.flex {
+    justify-content: space-between;
+    .details-title {
+        width: 100%;
+        h3 {
+            margin: rem(-4px) rem(-8px);
+            padding: rem(4px) rem(8px);
+        }
+    }
 }

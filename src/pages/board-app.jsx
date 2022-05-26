@@ -4,7 +4,8 @@ import { TaskDetails } from "../cmps/task-details";
 import { GroupList } from "../cmps/group-list"
 import { boardService } from "../services/board.service";
 import { utilService } from "../services/util.service";
-
+import {Screen} from '../cmps/dynamic-cmps/screen'
+import {Link} from 'react-router-dom'
 export class BoardApp extends React.Component {
 
     state = {
@@ -55,22 +56,37 @@ export class BoardApp extends React.Component {
         }
     }
 
-    onOpenDetails = () => {
-        
-        this.setState({isModalOpen: !this.isModalOpen})
-    } 
+    onToggleDetails = (ev) => {
+
+        this.setState(prevState => ({
+            isModalOpen: !prevState.isModalOpen
+          }));
+      
+    }
+
+    onCloseDetails = (ev) => {
+        // ev.stopPropagation()
+      
+        // this.props.history.goBack()
+        this.onToggleDetails()
+    }
 
     render() {
+ 
         const { groups, isModalOpen } = this.state
+        // console.log('isModalOpen? ',isModalOpen);
         return (
             <section className="board-app">
-                <section className={`task-details-overlay ${isModalOpen ? 'overlay-up' : ''} `}>
-                    <TaskDetails isOpen={isModalOpen} onOpenDetails={this.onOpenDetails} />
-                </section>
+                <Screen isOpen={isModalOpen}   >
+                    <TaskDetails isOpen={isModalOpen} onToggleDetails={this.onToggleDetails} />
+
+                </Screen>
+                {/* <section onClick={this.onToggleDetails} className={`task-details-overlay ${isModalOpen ? 'overlay-up' : ''} `}>
+                </section> */}
                 <button onClick={this.onAddGroup}>Add Group</button>
                 {(!groups || !groups.length) && <h3>Loading...</h3>}
                 <div className="list-container">
-                    <GroupList groups={groups} onOpenDetails={this.onOpenDetails} />
+                    <GroupList groups={groups} onToggleDetails={this.onToggleDetails} />
                 </div>
             </section>
         )

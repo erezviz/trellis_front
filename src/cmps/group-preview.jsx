@@ -5,7 +5,7 @@ import { boardService } from "../services/board.service"
 import { useState } from "react"
 
 export const GroupPreview = (props) => {
-console.log(props);
+
   const [group, setGroup] = useState(props.group)
     
     const {boardId} = props
@@ -37,7 +37,7 @@ console.log(props);
             <GroupHeader title={group.title}/>
             </div>
             <div className="task-list-container">
-            <TaskList tasks={group.tasks} onOpenDetails={props.onOpenDetails}/>
+            <TaskList tasks={group.tasks} onToggleDetails={props.onToggleDetails}/>
             </div>
             <div className="task-footer-container">
             <GroupFooter boardId={boardId} groupId={props.group.id} />
