@@ -1,5 +1,5 @@
 import React from "react";
-import { GroupPreview } from "../cmps/group-preview";
+import {GroupList} from "../cmps/group-list"
 import { boardService } from "../services/board.service";
 import { utilService } from "../services/util.service";
 
@@ -59,14 +59,13 @@ export class BoardApp extends React.Component{
 
                 <button onClick={this.onAddGroup}>Add Group</button>
                 {(!groups || !groups.length) && <h3>Loading...</h3>}
-                {groups && groups.length && groups.map(group=>{
-                   return (
+                {/* {groups && groups.length &&  */}
+                    
                        <div className="list-container">
-                        <button onClick={()=>this.onDeleteGroup(group.id)}>X</button>
-                   <GroupPreview boardId={this.getBoardId()} key={group.id} group={group}/>
+                  <GroupList groups={groups} />
                    </div>
-                   )
-                })}
+                   
+                {/* } */}
             </section>
         )
     }
