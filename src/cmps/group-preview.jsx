@@ -5,8 +5,8 @@ import { boardService } from "../services/board.service"
 import { useState } from "react"
 
 export const GroupPreview = (props) => {
-
-    const [group, setGroup] = useState(props.group)
+console.log(props);
+  const [group, setGroup] = useState(props.group)
     
     const {boardId} = props
 
@@ -20,8 +20,19 @@ export const GroupPreview = (props) => {
         }
     }
 
+    const onDeleteGroup=async(groupId)=>{
+        
+        try{
+            const board = await boardService.deleteGroup(boardId, groupId)
+            this.loadGroups(board)
+        }catch(err){
+            throw err
+        }
+    }
+
     return (
         <section className="group-preview">
+            <button onClick={()=>onDeleteGroup(group.id)}>X</button>
             <div onClick={onChangeName} className="header-container">
             <GroupHeader title={group.title}/>
             </div>
@@ -29,7 +40,7 @@ export const GroupPreview = (props) => {
             <TaskList tasks={group.tasks}/>
             </div>
             <div className="task-footer-container">
-            <GroupFooter/>
+            <GroupFooter boardId={boardId} groupId={props.group.id} />
             </div>
         </section>
     )

@@ -63,50 +63,65 @@ function getEmptyBoard() {
     }
 }
 
+//Group CRUDL
+
+async function addGroup(boardId, newGroup) {
+    try {
+        const board = await getById(boardId)
+        board.groups = [...board.groups, newGroup]
+        save(board)
+        return board
+    } catch (err) {
+        throw err
+    }
+}
+async function updateGroup(boardId, groupId, newName) {
+    try {
+        const board = await getById(boardId)
+        const groupToUpdate = board.groups.find(group => group.id === groupId)
+        groupToUpdate.title = newName
+        save(board)
+        return groupToUpdate
+    } catch (err) {
+        throw err
+    }
+}
+async function deleteGroup(boardId, groupId) {
+    try {
+        const board = await getById(boardId)
+        const groupIdx = board.groups.findIndex(group => group.id === groupId)
+        board.groups.splice(groupIdx, 1)
+        save(board)
+        return board
+    } catch (err) {
+        throw err
+    }
+}
+//Task CRUDL
 function getEmptyTask() {
     return {
         title: '',
     }
 }
 
-function saveTask(boardId, taskToSave){
-    const board = getById(boardId)
-    console.log(board); 
+async function saveTask(boardId, groupId, taskToSave) {
+    try {
+        const board = await getById(boardId)
+        const groups = board.groups.map(group => {
+            console.log('my group', group);
+            if (group.id === groupId){
+              if(group.tasks)group.tasks.push(taskToSave)
+              else group.tasks = [taskToSave]
+            } 
+            return group
+        })
+        board.groups = groups
+        save(board)
+    } catch (err) {
+        throw err
+    }
+
 }
-
-async function addGroup(boardId, newGroup){
-    try{
-        const board = await getById(boardId)
-        board.groups = [...board.groups, newGroup]
-        save(board)
-        return board
-    }catch(err){
-        throw err
-    }
-} 
-async function updateGroup(boardId, groupId ,newName){
-    try{
-        const board = await getById(boardId)
-        const groupToUpdate = board.groups.find(group => group.id === groupId)
-        groupToUpdate.title = newName
-        save(board)
-        return groupToUpdate
-    }catch(err){
-        throw err
-    }
-} 
-async function deleteGroup(boardId, groupId){
-    try{
-        const board = await getById(boardId)
-        const groupIdx = board.groups.findIndex(group => group.id === groupId)
-        board.groups.splice(groupIdx, 1)
-        save(board)
-        return board
-    }catch(err){
-        throw err
-    }
-} 
-
 // function subscribe(listener) {
 //     boardChannel.addEventListener('message', listener)
 // }

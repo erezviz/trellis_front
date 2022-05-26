@@ -1,12 +1,13 @@
 import { GroupPreview } from "./group-preview"
 
-export const GroupList = (props) => {
+export const GroupList = ({groups}) => {
 
     return (
         <section className="group-list">
-            <GroupPreview />
-            <GroupPreview />
-            <GroupPreview />
+          {groups.map(group=> {  
+         return   <GroupPreview key={group._id} group={group}/>
+        }
+            )}
         </section>
     )
 }
