@@ -1,6 +1,7 @@
 import { Hero } from './pages/hero'
 import { HomePage } from './pages/home-page'
 import { BoardApp } from './pages/board-app';
+import { TaskDetails } from './cmps/task-details';
 // Routes accesible from the main navigation (in AppHeader)
 const routes = [{
         path: '/home',
@@ -15,12 +16,12 @@ const routes = [{
     {
         path: '/board/:boardId',
         component: BoardApp
-    }
-    // {
-    //     path: 'about',
-    //     component: <AboutUs />,
-    //     label: 'About us'
-    // },
+    },
+    {
+        path: '/board/:boardId/:taskId',
+        component: TaskDetails,
+
+    },
     // {
     //     path: 'admin',
     //     component: <AdminApp />,

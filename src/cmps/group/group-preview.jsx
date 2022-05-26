@@ -9,7 +9,6 @@ import { boardService } from "../../services/board.service"
 
 
 export const GroupPreview = (props) => {
-console.log(props.onDeleteGroup);
   const [group, setGroup] = useState(props.group)
     
     const {boardId} = props
@@ -33,7 +32,7 @@ console.log(props.onDeleteGroup);
             <GroupHeader title={group.title}/>
             </div>
             <div className="task-list-container">
-            <TaskList  tasks={group.tasks}/>
+            <TaskList tasks={group.tasks} onToggleDetails={props.onToggleDetails}/>
             </div>
             <div className="task-footer-container">
             <GroupFooter boardId={boardId} groupId={props.group.id} />

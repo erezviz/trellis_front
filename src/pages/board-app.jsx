@@ -6,11 +6,15 @@ import { boardService } from "../services/board.service";
 import { utilService } from "../services/util.service";
 import { connect } from "react-redux"
 import { loadBoard } from '../store/board.action'
+import {Screen} from '../cmps/dynamic-cmps/screen'
+import {Link} from 'react-router-dom'
 
 class _BoardApp extends React.Component {
 
+
     state = {
-        groups: []
+        groups: [],
+        isModalOpen: false
     }
 
     componentDidMount = () => {
@@ -56,19 +60,41 @@ class _BoardApp extends React.Component {
         }
     }
 
+    onToggleDetails = (ev) => {
+
+        this.setState(prevState => ({
+            isModalOpen: !prevState.isModalOpen
+          }));
+      
+    }
+
+    onCloseDetails = (ev) => {
+        // ev.stopPropagation()
+      
+        // this.props.history.goBack()
+        this.onToggleDetails()
+    }
+
     render() {
-        const { groups } = this.state
+       
         const { boardId } = this.props.match.params
 
+ 
+        const { groups, isModalOpen } = this.state
+        // console.log('isModalOpen? ',isModalOpen);
         return (
             <section className="board-app">
-                <section className="task-details-overlay">
-                    <TaskDetails />
-                </section>
+                <Screen isOpen={isModalOpen}   >
+                    <TaskDetails isOpen={isModalOpen} onToggleDetails={this.onToggleDetails} />
+
+                </Screen>
+                {/* <section onClick={this.onToggleDetails} className={`task-details-overlay ${isModalOpen ? 'overlay-up' : ''} `}>
+                </section> */}
                 <button onClick={this.onAddGroup}>Add Group</button>
                 {(!groups || !groups.length) && <h3>Loading...</h3>}
                 <div className="list-container">
-                    <GroupList boardId={boardId} onDeleteGroup={this.onDeleteGroup} groups={groups} />
+                    <GroupList boardId={boardId} onToggleDetails={this.onToggleDetails} onDeleteGroup={this.onDeleteGroup} groups={groups} />
+               
                 </div>
             </section>
         )
