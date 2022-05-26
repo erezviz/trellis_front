@@ -1,11 +1,13 @@
 import React from "react";
-import { GroupPreview } from "../cmps/group-preview";
-import { TaskDetails } from "../cmps/task-details";
-import { GroupList } from "../cmps/group-list"
+import { GroupPreview } from "../cmps/group/group-preview";
+import { TaskDetails } from "../cmps/task/task-details";
+import { GroupList } from "../cmps/group/group-list"
 import { boardService } from "../services/board.service";
 import { utilService } from "../services/util.service";
+import { connect } from "react-redux"
+import { loadBoard } from '../store/board.action'
 
-export class BoardApp extends React.Component {
+class _BoardApp extends React.Component {
 
     state = {
         groups: []
@@ -19,7 +21,7 @@ export class BoardApp extends React.Component {
         const boardId = this.getBoardId()
         if (!board) {
             try {
-                const board = await boardService.getById(boardId)
+                const board = await this.props.loadBoard(boardId)
                 this.setState({ groups: [...board.groups] })
             } catch (err) {
                 throw err
@@ -56,8 +58,8 @@ export class BoardApp extends React.Component {
 
     render() {
         const { groups } = this.state
-        const {boardId} = this.props.match.params
-        
+        const { boardId } = this.props.match.params
+
         return (
             <section className="board-app">
                 <section className="task-details-overlay">
@@ -72,3 +74,16 @@ export class BoardApp extends React.Component {
         )
     }
 }
+
+
+function mapStateToProps(state) {
+    return {
+        currBoard: state.boardModule.currBoard
+    }
+}
+const mapDispatchToProps = {
+    loadBoard,
+}
+
+
+export const BoardApp = connect(mapStateToProps, mapDispatchToProps)(_BoardApp)

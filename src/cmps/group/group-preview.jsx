@@ -1,8 +1,12 @@
+import { useState, useEffect } from 'react'
+import { connect } from 'react-redux'
+
+
 import { GroupHeader } from "./group-header"
-import { TaskList } from "./task-list"
+import { TaskList } from "../task/task-list"
 import { GroupFooter } from "./group-footer"
-import { boardService } from "../services/board.service"
-import { useState } from "react"
+import { boardService } from "../../services/board.service"
+
 
 export const GroupPreview = (props) => {
 console.log(props.onDeleteGroup);
