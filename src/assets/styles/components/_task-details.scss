@@ -46,12 +46,44 @@
 .details-container {
     display: flex;
     flex-direction: column;
+    .details-contents {
+        justify-content: space-between;
+    }
+    .close-details-btn {
+        border-radius: 50%;
+        color: #42526e;
+        height: 32px;
+        margin: 4px;
+        overflow: hidden;
+        padding: 4px;
+        position: absolute;
+        right: 0;
+        top: 0;
+        transition: background-color 85ms, color 85ms;
+        width: 32px;
+        z-index: 2;
+    }
+    .details-desc {
+        display: flex;
+        flex-direction: column;
+    }
 }
 
 .details-header.flex {
     justify-content: space-between;
     .details-title {
-        width: 100%;
+        background: #0000;
+        border-radius: 3px;
+        box-shadow: none;
+        font-size: 20px;
+        font-weight: 600;
+        height: 32px;
+        line-height: 24px;
+        margin: -4px -8px;
+        min-height: 24px;
+        padding: 4px 8px;
+        resize: none;
+        overflow: hidden;
         h3 {
             margin: rem(-4px) rem(-8px);
             padding: rem(4px) rem(8px);

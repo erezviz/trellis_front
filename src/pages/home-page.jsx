@@ -24,7 +24,7 @@ export class HomePage extends React.Component {
                 <h1>This is the Home Page</h1>
                <section className="previews-container">
                 {!boards && !boards.length  && <div>Loading...</div>}
-                {boards && boards.map(board => <Link to={`/board/${board._id}`}><BoardPreview key={board._id} board={board}/></Link>)}
+                {boards && boards.map(board => <Link key={board._id} to={`/board/${board._id}`}><BoardPreview  board={board}/></Link>)}
 {/*                 
                 <Link to='/board'><BoardPreview/></Link>
                 <Link to='/board'><BoardPreview/></Link>
