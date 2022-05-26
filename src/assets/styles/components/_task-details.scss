@@ -1,0 +1,27 @@
+.task-details-overlay {
+    align-items: flex-start;
+    background-color: #000000a3;
+    display: none;
+    height: 100%;
+    justify-content: center;
+    left: 0;
+    overflow-y: auto;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 20;
+    &.overlay-up {
+        display: flex;
+    }
+}
+
+.task-details {
+    background-color: #f4f5f7;
+    border-radius: 2px;
+    display: none;
+    margin: 48px 0 80px;
+    overflow: hidden;
+    position: relative;
+    width: 768px;
+    z-index: 25;
+}

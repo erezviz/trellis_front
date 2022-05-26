@@ -1,5 +1,6 @@
 import React from "react";
 import { GroupPreview } from "../cmps/group-preview";
+import { TaskDetails } from "../cmps/task-details";
 import { boardService } from "../services/board.service";
 import { utilService } from "../services/util.service";
 
@@ -56,7 +57,9 @@ export class BoardApp extends React.Component{
         const {groups} = this.state
         return (
             <section className="board-app">
-
+                <section className="task-details-overlay">
+                    <TaskDetails/>
+                </section>
                 <button onClick={this.onAddGroup}>Add Group</button>
                 {(!groups || !groups.length) && <h3>Loading...</h3>}
                 {groups && groups.length && groups.map(group=>{
