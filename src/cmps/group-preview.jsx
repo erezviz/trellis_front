@@ -37,7 +37,7 @@ console.log(props);
             <GroupHeader title={group.title}/>
             </div>
             <div className="task-list-container">
-            <TaskList tasks={group.tasks}/>
+            <TaskList tasks={group.tasks} onOpenDetails={props.onOpenDetails}/>
             </div>
             <div className="task-footer-container">
             <GroupFooter boardId={boardId} groupId={props.group.id} />

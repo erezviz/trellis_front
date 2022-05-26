@@ -8,7 +8,8 @@ import { utilService } from "../services/util.service";
 export class BoardApp extends React.Component {
 
     state = {
-        groups: []
+        groups: [],
+        isModalOpen: false
     }
 
     componentDidMount = () => {
@@ -54,17 +55,22 @@ export class BoardApp extends React.Component {
         }
     }
 
+    onOpenDetails = () => {
+        
+        this.setState({isModalOpen: !this.isModalOpen})
+    } 
+
     render() {
-        const { groups } = this.state
+        const { groups, isModalOpen } = this.state
         return (
             <section className="board-app">
-                <section className="task-details-overlay">
-                    <TaskDetails />
+                <section className={`task-details-overlay ${isModalOpen ? 'overlay-up' : ''} `}>
+                    <TaskDetails isOpen={isModalOpen} onOpenDetails={this.onOpenDetails} />
                 </section>
                 <button onClick={this.onAddGroup}>Add Group</button>
                 {(!groups || !groups.length) && <h3>Loading...</h3>}
                 <div className="list-container">
-                    <GroupList groups={groups} />
+                    <GroupList groups={groups} onOpenDetails={this.onOpenDetails} />
                 </div>
             </section>
         )

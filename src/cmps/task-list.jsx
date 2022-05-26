@@ -11,7 +11,7 @@ export const TaskList = (props) => {
     return(
         <section className="task-list">
             {(tasks || tasks.length)&& tasks.map(task=>{
-              return  <TaskPreview key={task.id} task={task}/>
+              return  <TaskPreview onOpenDetails={props.onOpenDetails} key={task.id} task={task}/>
             })}
         </section>
     )
