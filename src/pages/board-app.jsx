@@ -56,6 +56,8 @@ export class BoardApp extends React.Component {
 
     render() {
         const { groups } = this.state
+        const {boardId} = this.props.match.params
+        
         return (
             <section className="board-app">
                 <section className="task-details-overlay">
@@ -64,7 +66,7 @@ export class BoardApp extends React.Component {
                 <button onClick={this.onAddGroup}>Add Group</button>
                 {(!groups || !groups.length) && <h3>Loading...</h3>}
                 <div className="list-container">
-                    <GroupList groups={groups} />
+                    <GroupList boardId={boardId} onDeleteGroup={this.onDeleteGroup} groups={groups} />
                 </div>
             </section>
         )
