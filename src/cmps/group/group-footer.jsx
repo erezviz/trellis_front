@@ -1,9 +1,9 @@
 import { TextField } from "@mui/material"
 import React from "react"
-import { boardService } from "../services/board.service"
+import { boardService } from "../../services/board.service"
+import { connect } from "react-redux"
 
-
-export class GroupFooter extends React.Component {
+class _GroupFooter extends React.Component {
     state = {
         task: boardService.getEmptyTask(),
         isShown: true
@@ -34,7 +34,7 @@ export class GroupFooter extends React.Component {
 
 
     render() {
-        
+        console.log(this.props.board);
         const { isShown } = this.state
         return (
             <section className="group-footer">
@@ -52,3 +52,11 @@ export class GroupFooter extends React.Component {
         )
     }
 }
+
+function mapStateToProps(state) {
+    return {
+        board: state.boardModule
+    }
+}
+
+export const GroupFooter = connect(mapStateToProps)(_GroupFooter)

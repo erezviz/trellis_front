@@ -1,6 +1,7 @@
 
 import * as React from 'react';
-import {useState} from 'react'
+import { useState } from 'react'
+
 // import Box from '@mui/material/Box';
 // import Modal from '@mui/material/Modal';
 // import Button from '@mui/material/Button';
@@ -26,12 +27,12 @@ export const TaskDetails = (props) => {
         pb: 3,
 
     }
- 
+
     return (
-        
+
         <section style={{ display: `${modalStyle}` }} className="task-details">
 
-        <h2>I am Task Details</h2>
+            <h2>I am Task Details</h2>
         </section>
     )
 }
