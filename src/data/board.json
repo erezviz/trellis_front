@@ -132,6 +132,36 @@
             }
         ],
         "members": [{
+            "task": {
+                "id": "c101",
+                "title": "Replace Logo"
+            }
+        }]
+
+    },
+    {
+        "_id": "b102",
+        "title": "Board 2",
+        "archivedAt": 1589983468418,
+        "createdAt": 1589983468418,
+        "createdBy": {
+            "_id": "u101",
+            "fullname": "Abi Abambi",
+            "imgUrl": "http://some-img"
+        },
+        "style": {},
+        "labels": [{
+                "id": "l101",
+                "title": "Done",
+                "color": "#61bd4f"
+            },
+            {
+                "id": "l102",
+                "title": "Progress",
+                "color": "#61bd33"
+            }
+        ],
+        "members": [{
             "_id": "u101",
             "fullname": "Tal Tarablus",
             "imgUrl": "https://www.google.com"

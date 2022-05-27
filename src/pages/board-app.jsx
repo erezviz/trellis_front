@@ -90,7 +90,6 @@ class _BoardApp extends React.Component {
               
                 {/* <section onClick={this.onToggleDetails} className={`task-details-overlay ${isModalOpen ? 'overlay-up' : ''} `}>
                 </section> */}
-                <button onClick={this.onAddGroup}>Add Group</button>
                 {(!groups || !groups.length) && <h3>Loading...</h3>}
                 <div className="list-container">
                     <GroupList boardId={boardId} onToggleDetails={this.onToggleDetails} onDeleteGroup={this.onDeleteGroup} groups={groups} />
@@ -111,6 +110,7 @@ class _BoardApp extends React.Component {
                 </Screen>
                 </Route>
                 </>
+                <button className="add-group-btn" onClick={this.onAddGroup}><span className="plus">+</span> Add another list</button>
             </section>
         )
     }
