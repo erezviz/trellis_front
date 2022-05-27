@@ -1,6 +1,8 @@
 import React from "react";
 import {Link} from 'react-router-dom'
 import { connect } from "react-redux"
+import TextField from '@mui/material/TextField';
+
 
 import { GroupPreview } from "../cmps/group/group-preview";
 import { TaskDetails } from "../cmps/task/task-details";
@@ -11,13 +13,15 @@ import { loadBoard } from '../store/board.action'
 import {Screen} from '../cmps/dynamic-cmps/screen'
 import { Route } from "react-router-dom";
 import { Switch } from "react-router-dom";
+import { formatMuiErrorMessage } from "@mui/utils";
 
 class _BoardApp extends React.Component {
 
 
     state = {
         groups: [],
-        isModalOpen: false
+        isModalOpen: false,
+        isShown: true
     }
 
     componentDidMount = () => {
@@ -63,6 +67,14 @@ class _BoardApp extends React.Component {
         }
     }
 
+    onHandleChange = ({ target }) => {
+        console.log(target.value);
+        const field = target.name
+        this.setState((prevState) => ({
+            task: { ...prevState.groups, [field]: target.value },
+        }))
+    }
+
     onToggleDetails = (ev) => {
 
         this.setState(prevState => ({
@@ -79,11 +91,11 @@ class _BoardApp extends React.Component {
     }
 
     render() {
-       
+    
         const { boardId } = this.props.match.params
 
  
-        const { groups, isModalOpen } = this.state
+        const { groups, isModalOpen, isShown } = this.state
         // console.log('isModalOpen? ',isModalOpen);
         return (
             <section className="board-app">
@@ -110,7 +122,12 @@ class _BoardApp extends React.Component {
                 </Screen>
                 </Route>
                 </>
-                <button className="add-group-btn" onClick={this.onAddGroup}><span className="plus">+</span> Add another list</button>
+                <div className="add-group">
+              {!isShown &&  <button className="add-group-btn" onClick={this.onAddGroup}><span className="plus">+</span> Add another list</button>}
+              {isShown && <form >
+              <TextField onChange={this.onHandleChange} name="title"id="outlined-textarea" placeholder="Enter list title..." multiline />
+              </form> }
+                </div>
             </section>
         )
     }
