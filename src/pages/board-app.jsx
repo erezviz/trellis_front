@@ -74,7 +74,7 @@ class _BoardApp extends React.Component {
     onCloseDetails = (ev) => {
         // ev.stopPropagation()
       
-        // this.props.history.goBack()
+        
         this.onToggleDetails()
     }
 
