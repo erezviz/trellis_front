@@ -1,6 +1,6 @@
 
 import * as React from 'react';
-import { useState , useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouteMatch } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
@@ -15,29 +15,32 @@ import { TaskTitle } from '../dynamic-cmps/task-title';
 export const TaskDetails = (props) => {
     // const [isOpen, setIsOpen] = useState(true)
     let [isEdit, setIsEdit] = useState(false)
-    let [title,setTitle] = useState({title: ''})
-    let [task,setTask] = useState(null)
-    let {taskId} = useParams()
+    let [title, setTitle] = useState({ title: '' })
+    let [task, setTask] = useState(null)
+    let { taskId } = useParams()
     let { path, url } = useRouteMatch();
+
     useEffect(() => {
-        const test = urlGetter(url)
-       console.log('Task ID in Task Details!!!', taskId);
-       console.log('URL in Task Details!!!', url, path);
-       console.log('URL in Task Details!!!', test);
-    
-      
+        const test = getIdsAsObject(path, url)
+        //    console.log('Task ID in Task Details!!!', taskId);
+        //    console.log('URL in Task Details!!!', url, path);
+        console.log('URL in Task Details!!!', test);
+
+
     }, [taskId])
 
-    const urlGetter = (url) => {
+    const getIdsAsObject = (path, url) => {
         const urlObj = {}
-        let urls = url.split('/')
-        urls.filter(url=> !url)
-        urls.map((url,idx) => {
-            
-            return urlObj.url = url 
-                        
-        })
-        return {...urls}
+
+        let slicedPath = path.slice(1)
+        let slicedUrl = url.slice(1)
+
+        let paths = slicedPath.split('/:')
+        let urls = slicedUrl.split('/')
+
+        urls.map((url, idx) => urlObj[paths[idx]] = url)
+
+        return urlObj
     }
     const modalStyle = {
         display: props.isOpen ? 'block' : 'none',
@@ -61,7 +64,7 @@ export const TaskDetails = (props) => {
     }
     function onSave(ev) {
         ev.preventDefault()
-     
+
     }
 
     const handleFormChange = ev => {
@@ -81,7 +84,7 @@ export const TaskDetails = (props) => {
                 <button onClick={(ev) => props.onToggleDetails()} className="close-details-btn">X</button>
                 <div onClick={() => setIsEdit(isEdit = !isEdit)} className="details-header flex">
                     <form onSubmit={(ev) => onSave(ev)} >
-                            <textarea style={isEdit ? { titleStyle } : {}} onChange={handleFormChange} className="details-title" name="" id="" cols="30" rows="10" />
+                        <textarea style={isEdit ? { titleStyle } : {}} onChange={handleFormChange} className="details-title" name="" id="" cols="30" rows="10" />
                         <input type="submit" value="Submit" />
                     </form>
                     {/* <div contentEditable="true" className="details-title">
