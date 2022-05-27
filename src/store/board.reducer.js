@@ -13,6 +13,7 @@ export function boardReducer(state = initialState, action) {
             break
         case 'SET_BOARD':
             newState = { ...state, currBoard: action.board }
+            break
         case 'REMOVE_BOARD':
             const lastRemovedBoard = state.boards.find(board => board._id === action.boardId)
             board = state.boards.filter(board => board._id !== action.boardId)
@@ -21,9 +22,14 @@ export function boardReducer(state = initialState, action) {
         case 'ADD_BOARD':
             newState = { ...state, board: [...state.boards, action.board] }
             break
+        // case 'UPDATE_BOARDS':
+        //     board = state.boards.map(board => (board._id === action.board._id) ? action.board : board)
+        //     newState = { ...state, board }
+        //     break
         case 'UPDATE_BOARD':
-            board = state.boards.map(board => (board._id === action.board._id) ? action.board : board)
-            newState = { ...state, board }
+            // board = state.boards.map(board => (board._id === action.board._id) ? action.board : board)
+            newState = { ...state, currBoard: action.board }
+            console.log('hay from reducer');
             break
         default:
     }

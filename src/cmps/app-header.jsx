@@ -16,7 +16,7 @@ import { NavLink, Link } from "react-router-dom"
         <section className="app-header flex">
          
             <div onClick={onGoBack} className="logo-container">
-                <h3>Trellis</h3>
+             <h3>Trellis</h3>
             </div>
             <nav>
             

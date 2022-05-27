@@ -105,6 +105,7 @@ function getEmptyTask() {
 }
 
 async function saveTask(boardId, groupId, taskToSave) {
+    taskToSave.id = utilService.makeId()
     try {
         const board = await getById(boardId)
         const groups = board.groups.map(group => {
@@ -116,7 +117,7 @@ async function saveTask(boardId, groupId, taskToSave) {
             return group
         })
         board.groups = groups
-        save(board)
+        return save(board)
     } catch (err) {
         throw err
     }
