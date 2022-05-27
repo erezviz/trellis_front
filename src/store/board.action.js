@@ -25,10 +25,10 @@ export function getActionUpdateBoard(board) {
 var subscriber
 
 export function loadBoards() {
-    return async (dispatch) => {
+    return async(dispatch) => {
         try {
             const boards = await boardService.query()
-            console.log('boards', boards);
+
             dispatch({
                 type: 'SET_BOARDS',
                 boards
@@ -49,10 +49,10 @@ export function loadBoards() {
     }
 }
 export function loadBoard(boardId) {
-    return async (dispatch) => {
+    return async(dispatch) => {
         try {
             const board = await boardService.getById(boardId)
-            console.log('board', board);
+
             dispatch({
                 type: 'SET_BOARD',
                 board
@@ -74,7 +74,7 @@ export function loadBoard(boardId) {
 }
 
 export function removeBoard(boardId) {
-    return async (dispatch) => {
+    return async(dispatch) => {
         try {
             await boardService.remove(boardId)
             console.log('Deleted Succesfully!');
@@ -86,7 +86,7 @@ export function removeBoard(boardId) {
 }
 
 export function addBoard(board) {
-    return async (dispatch) => {
+    return async(dispatch) => {
         try {
             const savedBoard = await boardService.save(board)
             console.log('Added Board', savedBoard);
@@ -98,7 +98,7 @@ export function addBoard(board) {
 }
 
 export function updateBoard(board) {
-    return async (dispatch) => {
+    return async(dispatch) => {
         try {
             const savedBoard = await boardService.save(board)
             console.log('Updated Board:', savedBoard);

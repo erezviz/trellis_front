@@ -34,7 +34,7 @@ class _GroupFooter extends React.Component {
 
 
     render() {
-        console.log(this.props.board);
+  
         const { isShown } = this.state
         return (
             <section className="group-footer">

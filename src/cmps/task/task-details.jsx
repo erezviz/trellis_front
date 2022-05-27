@@ -1,7 +1,8 @@
 
 import * as React from 'react';
-import { useState } from 'react'
+import { useState , useEffect } from 'react'
 import { Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import { TaskTitle } from '../dynamic-cmps/task-title';
 // import Box from '@mui/material/Box';
 // import Modal from '@mui/material/Modal';
@@ -14,6 +15,15 @@ export const TaskDetails = (props) => {
     // const [isOpen, setIsOpen] = useState(true)
     let [isEdit, setIsEdit] = useState(false)
     let [title,setTitle] = useState({title: ''})
+    let [task,setTask] = useState(null)
+    let {taskId} = useParams()
+
+    useEffect(() => {
+       
+    
+      
+    }, [])
+    
     const modalStyle = {
         display: props.isOpen ? 'block' : 'none',
         position: 'absolute',
@@ -36,7 +46,7 @@ export const TaskDetails = (props) => {
     }
     function onSave(ev) {
         ev.preventDefault()
-        console.log('YAYA');
+     
     }
 
     const handleFormChange = ev => {

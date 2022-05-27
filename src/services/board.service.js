@@ -4,8 +4,8 @@ import { userService } from './user.service.js'
 // import { getActionRemoveBoard, getActionAddBoard, getActionUpdateBoard } from '../store/board.actions.js'
 
 const STORAGE_KEY = 'board'
-// const boardChannel = new BroadcastChannel('boardChannel')
-// const listeners = []
+    // const boardChannel = new BroadcastChannel('boardChannel')
+    // const listeners = []
 
 export const boardService = {
     query,
@@ -31,7 +31,7 @@ function query() {
 
 function getById(boardId) {
     return storageService.get(STORAGE_KEY, boardId)
-    // return axios.get(`/api/board/${boardId}`)
+        // return axios.get(`/api/board/${boardId}`)
 }
 async function remove(boardId) {
     // return new Promise((resolve, reject) => {
@@ -39,19 +39,19 @@ async function remove(boardId) {
     // })
     // return Promise.reject('Not now!');
     await storageService.remove(STORAGE_KEY, boardId)
-    // boardChannel.postMessage(getActionRemoveBoard(boardId))
+        // boardChannel.postMessage(getActionRemoveBoard(boardId))
 }
 async function save(board) {
     var savedBoard
     if (board._id) {
         savedBoard = await storageService.put(STORAGE_KEY, board)
-        // boardChannel.postMessage(getActionUpdateBoard(savedBoard))
+            // boardChannel.postMessage(getActionUpdateBoard(savedBoard))
 
     } else {
         // Later, owner is set by the backend
         board.owner = userService.getLoggedinUser()
         savedBoard = await storageService.post(STORAGE_KEY, board)
-        // boardChannel.postMessage(getActionAddBoard(savedBoard))
+            // boardChannel.postMessage(getActionAddBoard(savedBoard))
     }
     return savedBoard
 }
@@ -105,14 +105,15 @@ function getEmptyTask() {
 }
 
 async function saveTask(boardId, groupId, taskToSave) {
+    taskToSave.id = utilService.makeId()
     try {
         const board = await getById(boardId)
         const groups = board.groups.map(group => {
             console.log('my group', group);
-            if (group.id === groupId){
-              if(group.tasks)group.tasks.push(taskToSave)
-              else group.tasks = [taskToSave]
-            } 
+            if (group.id === groupId) {
+                if (group.tasks) group.tasks.push(taskToSave)
+                else group.tasks = [taskToSave]
+            }
             return group
         })
         board.groups = groups

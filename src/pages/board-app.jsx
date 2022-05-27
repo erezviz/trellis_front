@@ -9,6 +9,8 @@ import { boardService } from "../services/board.service";
 import { utilService } from "../services/util.service";
 import { loadBoard } from '../store/board.action'
 import {Screen} from '../cmps/dynamic-cmps/screen'
+import { Route } from "react-router-dom";
+import { Switch } from "react-router-dom";
 
 class _BoardApp extends React.Component {
 
@@ -85,10 +87,14 @@ class _BoardApp extends React.Component {
         // console.log('isModalOpen? ',isModalOpen);
         return (
             <section className="board-app">
+              
+                <Route path='/board/:boardId/:taskId' component={TaskDetails}>
                 <Screen isOpen={isModalOpen}   >
                     <TaskDetails isOpen={isModalOpen} onToggleDetails={this.onToggleDetails} />
 
                 </Screen>
+                </Route>
+              
                 {/* <section onClick={this.onToggleDetails} className={`task-details-overlay ${isModalOpen ? 'overlay-up' : ''} `}>
                 </section> */}
                 <button onClick={this.onAddGroup}>Add Group</button>
