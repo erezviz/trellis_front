@@ -12,23 +12,43 @@
         color: $clr2;
     }
     .user-link {
-        span {
-            font-weight: bold;
-            font-size: rem(12px);
-            color: $clr2;
-            white-space: nowrap;
-        }
-        background-color: $clr6;
-        width: rem(32px);
-        height: rem(32px);
-        border-radius: 50%;
+            cursor: pointer;
+            font-weight: 600;
+            .login{
+                color: $clr1;
+                padding-right: 10px;
+                padding-bottom: 1px;
+            }
+            .login:hover{
+                text-decoration: underline;
+            }
+            .signup{
+                background-color: $clr1;
+                padding: 0.25rem 0.5rem;
+                border-radius: 0.2rem;
+                transition: background-color, 0.15s;
+            }
+            .signup:hover{
+                background-color: darken($color: $clr1, $amount: 8%)
+            }
+        
     }
     .logo-container {
+        align-items: center;
+        display: flex;
         &:hover {
             cursor: pointer;
         }
         h3 {
+            font-family: Secular, sans-serif;
+            font-weight: 500;
+            font-size: 2rem;
             margin: 0;
+            color: $clr5;
+        }
+        img{
+            height: 2.75vh;
+            margin-right: 5px;
         }
     }
 }

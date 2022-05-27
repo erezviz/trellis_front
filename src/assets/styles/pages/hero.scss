@@ -5,7 +5,7 @@
         display: flex;
         justify-content: space-between;
         position: relative;
-       height: 90vh;
+       height: 100vh; 
        background: linear-gradient(rgb(229 229 255),rgba(229, 229, 255, 0.688));
        
        .hero-container{
@@ -21,10 +21,16 @@
     }
     
     .enter-link{
+        font-weight: 600;
+        color: $clr2;
         width: 200px;
         text-align: center;
         padding: 10px 30px;
-        border-radius: 2px;
-        background-color: rgb(129, 212, 253);
+        border-radius: 0.2rem;
+        background-color: $clr1;
+        transition: background-color, 0.25s;
+    }
+    .enter-link:hover{
+        background-color: darken($color:$clr1, $amount: 10%) ;
     }
 }
