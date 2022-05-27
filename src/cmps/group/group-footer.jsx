@@ -35,6 +35,7 @@ export const GroupFooter = (props) => {
 
 
 
+
     return (
         <section className="group-footer">
             {isShown && <div onClick={onToggle} className="add-task">

@@ -9,6 +9,8 @@ import { boardService } from "../services/board.service";
 import { utilService } from "../services/util.service";
 import { loadBoard } from '../store/board.action'
 import {Screen} from '../cmps/dynamic-cmps/screen'
+import { Route } from "react-router-dom";
+import { Switch } from "react-router-dom";
 
 class _BoardApp extends React.Component {
 
@@ -87,18 +89,30 @@ class _BoardApp extends React.Component {
         // console.log('isModalOpen? ',isModalOpen);
         return (
             <section className="board-app">
-                <Screen isOpen={isModalOpen}   >
-                    <TaskDetails isOpen={isModalOpen} onToggleDetails={this.onToggleDetails} />
-
-                </Screen>
+              
                 {/* <section onClick={this.onToggleDetails} className={`task-details-overlay ${isModalOpen ? 'overlay-up' : ''} `}>
                 </section> */}
-                <button onClick={this.onAddGroup}>Add Group</button>
                 {(!groups || !groups.length) && <h3>Loading...</h3>}
                 <div className="list-container">
                     <GroupList boardId={boardId} onToggleDetails={this.onToggleDetails} onDeleteGroup={this.onDeleteGroup} groups={groups} />
                
                 </div>
+
+                <>
+                {/* <Route path='/board/:boardId/:groupId/:taskId' component={TaskDetails}>
+                <Screen isOpen={isModalOpen}   >
+                    <TaskDetails isOpen={isModalOpen} onToggleDetails={this.onToggleDetails} />
+
+                </Screen>
+                </Route> */}
+                <Route path='/board/:boardId/:groupId/:taskId' >
+                <Screen isOpen={isModalOpen}   >
+                    <TaskDetails isOpen={isModalOpen} onToggleDetails={this.onToggleDetails} />
+
+                </Screen>
+                </Route>
+                </>
+                <button className="add-group-btn" onClick={this.onAddGroup}><span className="plus">+</span> Add another list</button>
             </section>
         )
     }

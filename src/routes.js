@@ -17,11 +17,11 @@ const routes = [{
         path: '/board/:boardId',
         component: BoardApp
     },
-    {
-        path: '/board/:boardId/:taskId',
-        component: TaskDetails,
+    // {
+    //     path: '/board/:boardId/:groupId/:taskId',
+    //     component: TaskDetails,
 
-    },
+    // },
     // {
     //     path: 'admin',
     //     component: <AdminApp />,

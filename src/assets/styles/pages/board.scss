@@ -1,0 +1,36 @@
+.board-app {
+    display: flex;
+    gap: 5px;
+    left: 0;
+    margin-bottom: 8px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-bottom: 8px;
+    position: absolute;
+    right: 0;
+    // top: 0;
+    -webkit-user-select: none;
+    user-select: none;
+    white-space: nowrap;
+
+    .add-group-btn {
+        padding: 6px 8px;
+        width: 250px;
+        height: fit-content;
+        display: flex;
+        align-items: center;
+        border-style: none;
+        color: $clr2;
+        background-color: transparentize($color: $clr5, $amount: 0.75);
+        border-radius: 2px;
+        transition: background-color, 0.25s;
+        .plus {
+            font-size: 18px;
+            padding-right: 5px;
+        }
+        
+    }
+    .add-group-btn:hover{
+            background-color: transparentize($color: lighten($color: $clr5, $amount: 20%), $amount: 0.75);
+        }
+}

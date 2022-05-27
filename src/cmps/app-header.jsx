@@ -16,15 +16,16 @@ import { NavLink, Link } from "react-router-dom"
         <section className="app-header flex">
          
             <div onClick={onGoBack} className="logo-container">
-             <h3>Trellis</h3>
+
+            <img src={require('../assets/img/trellis.png')} alt=""  /> <h3>Trellis</h3>
             </div>
             <nav>
             
-                <Link  to='/home'><p className="header-link">Boards</p></Link>
+                {/* <Link  to='/home'><p className="header-link">Boards</p></Link> */}
             </nav>
             <div  className="user-link">
-                <span>NI</span>
-            
+                <span className="login">Log In</span>
+                <span className="signup">Sign Up</span>
             </div>
            
         </section>
