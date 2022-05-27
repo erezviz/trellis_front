@@ -88,13 +88,6 @@ class _BoardApp extends React.Component {
         return (
             <section className="board-app">
               
-                <Route path='/board/:boardId/:taskId' component={TaskDetails}>
-                <Screen isOpen={isModalOpen}   >
-                    <TaskDetails isOpen={isModalOpen} onToggleDetails={this.onToggleDetails} />
-
-                </Screen>
-                </Route>
-              
                 {/* <section onClick={this.onToggleDetails} className={`task-details-overlay ${isModalOpen ? 'overlay-up' : ''} `}>
                 </section> */}
                 <button onClick={this.onAddGroup}>Add Group</button>
@@ -103,6 +96,21 @@ class _BoardApp extends React.Component {
                     <GroupList boardId={boardId} onToggleDetails={this.onToggleDetails} onDeleteGroup={this.onDeleteGroup} groups={groups} />
                
                 </div>
+
+                <>
+                {/* <Route path='/board/:boardId/:groupId/:taskId' component={TaskDetails}>
+                <Screen isOpen={isModalOpen}   >
+                    <TaskDetails isOpen={isModalOpen} onToggleDetails={this.onToggleDetails} />
+
+                </Screen>
+                </Route> */}
+                <Route path='/board/:boardId/:groupId/:taskId' >
+                <Screen isOpen={isModalOpen}   >
+                    <TaskDetails isOpen={isModalOpen} onToggleDetails={this.onToggleDetails} />
+
+                </Screen>
+                </Route>
+                </>
             </section>
         )
     }

@@ -1,6 +1,7 @@
 
 import * as React from 'react';
 import { useState , useEffect } from 'react'
+import { useRouteMatch } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import { TaskTitle } from '../dynamic-cmps/task-title';
@@ -17,13 +18,27 @@ export const TaskDetails = (props) => {
     let [title,setTitle] = useState({title: ''})
     let [task,setTask] = useState(null)
     let {taskId} = useParams()
-
+    let { path, url } = useRouteMatch();
     useEffect(() => {
-       
+        const test = urlGetter(url)
+       console.log('Task ID in Task Details!!!', taskId);
+       console.log('URL in Task Details!!!', url, path);
+       console.log('URL in Task Details!!!', test);
     
       
-    }, [])
-    
+    }, [taskId])
+
+    const urlGetter = (url) => {
+        const urlObj = {}
+        let urls = url.split('/')
+        urls.filter(url=> !url)
+        urls.map((url,idx) => {
+            
+            return urlObj.url = url 
+                        
+        })
+        return {...urls}
+    }
     const modalStyle = {
         display: props.isOpen ? 'block' : 'none',
         position: 'absolute',

@@ -111,26 +111,44 @@ export function updateBoard(board) {
     }
 }
 
+export function loadTask(taskId, groupId, boardId) {
+    let currGroup
+    return async() => {
+        try {
+            const board = await boardService.getById(boardId)
 
-// Demo for Optimistic Mutation (IOW - Assuming the server call will work, so updating the UI first)
-export function onRemoveBoardOptimistic(boardId) {
-
-    return (dispatch, getState) => {
-
-        dispatch({
-            type: 'REMOVE_CAR',
-            boardId
-        })
-
-        boardService.remove(boardId)
-            .then(() => {
-                console.log('Server Reported - Deleted Succesfully');
+            const task = board.groups.find(group => {
+                currGroup = group.id === groupId
+                return currGroup.tasks.find(task => task.id === taskId)
             })
-            .catch(err => {
-                console.log('Cannot load boards', err)
-                dispatch({
-                    type: 'UNDO_REMOVE_CAR',
-                })
-            })
+            return task
+
+        } catch (err) {
+            console.log('Cannot load boards', err)
+            throw err
+        }
+
     }
 }
+// Demo for Optimistic Mutation (IOW - Assuming the server call will work, so updating the UI first)
+// export function onRemoveBoardOptimistic(boardId) {
+
+//     return (dispatch, getState) => {
+
+//         dispatch({
+//             type: 'REMOVE_CAR',
+//             boardId
+//         })
+
+//         boardService.remove(boardId)
+//             .then(() => {
+//                 console.log('Server Reported - Deleted Succesfully');
+//             })
+//             .catch(err => {
+//                 console.log('Cannot load boards', err)
+//                 dispatch({
+//                     type: 'UNDO_REMOVE_CAR',
+//                 })
+//             })
+//     }
+// }

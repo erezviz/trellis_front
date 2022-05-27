@@ -32,7 +32,7 @@ export const GroupPreview = (props) => {
             <GroupHeader title={group.title}/>
             </div>
             <div className="task-list-container">
-            <TaskList boardId={boardId} tasks={group.tasks} onToggleDetails={props.onToggleDetails}/>
+            <TaskList groupId={props.group.id} boardId={boardId} tasks={group.tasks} onToggleDetails={props.onToggleDetails}/>
             </div>
             <div className="task-footer-container">
             <GroupFooter boardId={boardId} groupId={props.group.id} />
