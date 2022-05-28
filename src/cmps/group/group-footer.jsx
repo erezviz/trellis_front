@@ -45,7 +45,7 @@ class _GroupFooter extends React.Component {
                 {!isShown && <form onSubmit={(ev)=>this.onSaveTask(ev)}>
                     <TextField name="title" id="outlined-basic" onChange={this.onHandleChange}
                         size="small" placeholder="Enter a title for this card..." variant="outlined" />
-                    <button className='btn-save'>Save card</button>
+                    <button className='btn-save'>+</button>
                 </form>}
 
             </section>
