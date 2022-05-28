@@ -73,7 +73,6 @@ class _BoardApp extends React.Component {
 
     onHandleChange = ({ target }) => {
         const field = target.name
-        console.log(field);
         this.setState((prevState) => ({
             task: { ...prevState.newGroup, [field]: target.value },
         }))
