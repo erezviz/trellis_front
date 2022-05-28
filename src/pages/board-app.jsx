@@ -80,17 +80,19 @@ class _BoardApp extends React.Component {
     }
 
     onToggleDetails = (ev) => {
+        const { boardId } = this.props.match.params
 
         this.setState(prevState => ({
             isModalOpen: !prevState.isModalOpen
-        }));
-
+          }));
+          this.props.history.push(`/board/${boardId}`)
+      
     }
 
     onCloseDetails = (ev) => {
         // ev.stopPropagation()
-
-        // this.props.history.goBack()
+      
+        
         this.onToggleDetails()
     }
 
