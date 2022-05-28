@@ -55,7 +55,7 @@ async function save(board) {
     var savedBoard
     if (board._id) {
         savedBoard = await storageService.put(STORAGE_KEY, board)
-        // console.log('save (board)', savedBoard)
+            // console.log('save (board)', savedBoard)
             // boardChannel.postMessage(getActionUpdateBoard(savedBoard))
 
     } else {
@@ -101,7 +101,7 @@ async function deleteGroup(boardId, groupId) {
         const board = await getById(boardId)
         const newGroups = board.groups.filter(group => group.id !== groupId)
         board.groups = newGroups
-       return save(board)
+        return save(board)
     } catch (err) {
         throw err
     }
@@ -158,18 +158,23 @@ async function updateTask(boardId, groupId, taskToSave) {
     // const updatedBoard
     try {
         const board = await boardService.getById(boardId)
-        console.log('board from getbyid ', board);
-        // const group = board.groups.find(group => group.id === groupId)
-        // console.log('group ', group);
-        // const task = group.tasks.find(task => task.id === taskToSave.id)
 
         const updatedGroups = board.groups.map(group => {
-            return group.id === groupId ? group.tasks.map(task => task.id === taskToSave.id ? taskToSave : task) : group
+            if (group.id === groupId) {
+                const newTasks = group.tasks.map(task => {
+                    if (task.id === taskToSave.id) task = taskToSave
+                    return task
+
+                })
+                group.tasks = newTasks
+            }
+            return group
         })
+
         const updatedBoard = {...board, groups: updatedGroups }
-        console.log('updated board test inside updateTask', updatedBoard);
-        // save(updatedBoard)
-        // return updatedBoard
+
+        save(updatedBoard)
+        return updatedBoard
     } catch (err) {
         console.log('ERROR: Cannot update task', err);
         throw err
