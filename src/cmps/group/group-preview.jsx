@@ -6,7 +6,6 @@ import { connect } from 'react-redux'
 import { GroupHeader } from "./group-header"
 import { TaskList } from "../task/task-list"
 import { GroupFooter } from "./group-footer"
-import { boardService } from "../../services/board.service"
 import { onUpdateGroup} from "../../store/board.action"
 
 
@@ -16,11 +15,19 @@ export const GroupPreview = (props) => {
   const { currBoard } = useSelector(state => state.boardModule)
   
   useEffect(()=>{
-      const currGroup = currBoard.groups.find(boardGroup=>{
-          return boardGroup.id === group.id
-        })
-        if (!currGroup) return
-        setGroup(currGroup)
+      (async=>{
+         console.log('group preview', currBoard)
+        try{ 
+            const currGroup = currBoard.groups.find(boardGroup=>{
+                return boardGroup.id === group.id
+              })
+              if (!currGroup) return
+              setGroup(currGroup)
+
+        }catch(err){
+            throw err
+        }
+    })();
   },[currBoard])
 
     const {boardId} = props
@@ -37,7 +44,7 @@ export const GroupPreview = (props) => {
    
 
     return (
-        <section className="group-preview">
+        <section className="group-preview" >
             
             <div className="header-container">
             <GroupHeader onChangeName={onChangeName} title={group.title}/>

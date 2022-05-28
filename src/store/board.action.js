@@ -126,8 +126,8 @@ export function onDeleteGroup(boardId, groupId) {
     return async(dispatch) => {
         try {
             const updatedBoard = await boardService.deleteGroup(boardId, groupId)
-            const reducerBoard = dispatch(getActionUpdateBoard(updatedBoard))
-            return reducerBoard.board
+             dispatch(getActionUpdateBoard(updatedBoard))
+            return updatedBoard
         } catch (err) {
             console.log('Cannot save board', err)
             throw err
