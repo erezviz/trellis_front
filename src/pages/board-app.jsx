@@ -29,6 +29,8 @@ class _BoardApp extends React.Component {
         this.loadGroups()
     }
 
+  
+
     loadGroups = async (board) => {
         const boardId = this.getBoardId()
         if (!board) {

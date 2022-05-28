@@ -151,7 +151,7 @@ async function saveTask(boardId, groupId, taskToSave) {
             return group
         })
         board.groups = groups
-        save(board)
+        return save(board)
     } catch (err) {
         throw err
     }
