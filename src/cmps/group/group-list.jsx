@@ -8,6 +8,8 @@ export const GroupList = ({ groups, onDeleteGroup, boardId, onToggleDetails }) =
                 return <GroupPreview boardId={boardId} onToggleDetails={onToggleDetails} onDeleteGroup={onDeleteGroup} key={group._id} group={group} />
             }
             )}
+          
         </section>
     )
+    
 }

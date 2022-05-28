@@ -22,20 +22,25 @@ class _HomePage extends React.Component {
 
     onLoadBoards = async () => {
 
-        
+
         const boards = await this.props.loadBoards()
-        console.log('onloadboards', boards);
+
     }
 
     render() {
         const { boards } = this.props
-        console.log('Boards from home', boards)
+
         return (
             <section className="home-page">
+                <h1>This is the Home Page</h1>
+                <section className="previews-container">
+                    {(!boards && !boards.length) && <div>Loading...</div>}
+                    {boards && boards.map((board, idx) => <Link key={board._id + idx} to={`/board/${board._id}`}><BoardPreview board={board} /></Link>)}
+                    {/*                 
                 <h1><img src={require('../assets/img/templates.png')} alt="" /> Most popular templates</h1>
                <section className="previews-container">
                 {(!boards && !boards.length)  && <div>Loading...</div>}
-                {boards && boards.map(board => <Link key={board._id} to={`/board/${board._id}`}><BoardPreview  board={board}/></Link>)}
+                {boards && boards.map(board => <Link key={board._id + 1} to={`/board/${board._id}`}><BoardPreview  board={board}/></Link>)}
 {/*                 
                 <Link to='/board'><BoardPreview/></Link>
                 <Link to='/board'><BoardPreview/></Link>
