@@ -16,16 +16,16 @@ class _HomePage extends React.Component {
     // }
 
 
-    componentDidMount() {
-        this.onLoadBoards();
-    }
+    // componentDidMount() {
+    //     this.onLoadBoards();
+    // }
 
-    onLoadBoards = async () => {
+    // onLoadBoards = async () => {
 
 
-        const boards = await this.props.loadBoards()
+    //     const boards = await this.props.loadBoards()
 
-    }
+    // }
 
     render() {
         const { boards } = this.props
