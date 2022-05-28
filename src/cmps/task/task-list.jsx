@@ -1,9 +1,11 @@
+import { useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 import { useRouteMatch } from "react-router-dom/cjs/react-router-dom.min"
 import { TaskPreview } from "./task-preview"
 
 
 export const TaskList = (props) => {
+
 
     const { tasks } = props
 
@@ -23,6 +25,7 @@ export const TaskList = (props) => {
 
                    
                 )
+
             })}
         </section>
     )
