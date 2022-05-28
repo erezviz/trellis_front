@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import { TaskTitle } from '../dynamic-cmps/task-title';
 import { boardService } from '../../services/board.service';
+import { useHistory } from 'react-router-dom';
 
 // import Box from '@mui/material/Box';
 // import Modal from '@mui/material/Modal';
@@ -20,49 +21,39 @@ export const TaskDetails = (props) => {
     let [title, setTitle] = useState({ title: '' })
     let [task, setTask] = useState(null)
 
-    // let { taskId } = useParams()
-    let { path, url } = useRouteMatch();
-   
+    let history = useHistory()
+    // let { boardId, groupId, taskId } = useParams()
+    let {params:{boardId, groupId, taskId}} = useRouteMatch();
+
     useEffect(() => {
+
         (async () => {
-            const urlObject = getIdsAsObject(path, url)
-            const currTask = await boardService.loadTask(urlObject.boardId, urlObject.groupId, urlObject.taskId)
+
+            const currTask = await boardService.loadTask(boardId, groupId, taskId)
             setTask(currTask)
             return () => {
-               
-                setTask(null)
+
+                return setTask(null)
             }
-
-         
         })();
-        //    console.log('Task ID in Task Details!!!', taskId);
-        //    console.log('URL in Task Details!!!', url, path);
-        // console.log('URL in Task Details!!!', test);
-
 
     }, [])
 
-    // const getUrlArr = (path, url) => {
-    //     let slicedUrl = url.slice(1, 6)
-    //     console.log(slicedUrl);
+
+//? This is actually a useParams kind of function... you can erase this later
+    // const getIdsAsObject = (path, url) => {
+    //     const urlObj = {}
+
+    //     let slicedPath = path.slice(1)
+    //     let slicedUrl = url.slice(1)
+
+    //     let paths = slicedPath.split('/:')
     //     let urls = slicedUrl.split('/')
 
+    //     urls.map((url, idx) => urlObj[paths[idx]] = url)
+    //     delete urlObj.board
+    //     return urlObj
     // }
-
-
-    const getIdsAsObject = (path, url) => {
-        const urlObj = {}
-
-        let slicedPath = path.slice(1)
-        let slicedUrl = url.slice(1)
-
-        let paths = slicedPath.split('/:')
-        let urls = slicedUrl.split('/')
-
-        urls.map((url, idx) => urlObj[paths[idx]] = url)
-        delete urlObj.board
-        return urlObj
-    }
 
     const modalStyle = {
         display: props.isOpen ? 'block' : 'none',
@@ -84,6 +75,8 @@ export const TaskDetails = (props) => {
         overflowWrap: 'break-word',
         height: '33px'
     }
+    // TODO work on a function to save the title of the task in the task.
+    // TODO this function will need to dispatch to the state and update the task in the JSON file.
     function onSave(ev) {
         ev.preventDefault()
 
@@ -94,19 +87,19 @@ export const TaskDetails = (props) => {
         console.log(value);
         setTitle(prevTitle => ({ ...prevTitle, [name]: value }))
     }
-    const goBack = () =>{
-        this.props.history.push(`/board/`)
+    const goBack = () => {
+        this.props.history.push(`/board/${boardId}`)
     }
-   if(!task) return <>Loading...</>
+    if (!task) return <>Loading...</>
     return (
 
         <section style={modalStyle} className="task-details">
             <div className="details-container flex">
 
-               
-                <button  onClick={(ev) => {
 
-                   return props.onToggleDetails()
+                <button onClick={(ev) => {
+                    // return goBack()
+                    return props.onToggleDetails()
                 }} className="close-details-btn">X</button>
                 <div onClick={() => setIsEdit(isEdit = !isEdit)} className="details-header flex">
                     <form onSubmit={(ev) => onSave(ev)} >
@@ -122,7 +115,7 @@ export const TaskDetails = (props) => {
                     <section className="details-main-col flex">
                         <div className="details-desc">
                             <label htmlFor="description">Description</label>
-                        
+
                             <textarea
                                 name="description"
                                 id="description"
