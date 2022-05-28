@@ -89,8 +89,7 @@ async function updateGroup(boardId, groupId, newName) {
         const board = await getById(boardId)
         const groupToUpdate = board.groups.find(group => group.id === groupId)
         groupToUpdate.title = newName
-        save(board)
-        return groupToUpdate
+        return save(board)
     } catch (err) {
         throw err
     }

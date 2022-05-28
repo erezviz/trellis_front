@@ -2,7 +2,7 @@ import { TextField } from "@mui/material"
 import React, { useState } from "react"
 import { boardService } from "../../services/board.service"
 import { useDispatch, useSelector } from "react-redux"
-import { updateBoard } from "../../store/board.action"
+import { updateGroupTask } from "../../store/board.action"
 
 
 export const GroupFooter = (props) => {
@@ -22,7 +22,7 @@ export const GroupFooter = (props) => {
         const groupId = props.groupId
 
         try{
-            const updatedBoard = await dispatch(updateBoard(boardId, groupId, task))
+            const updatedBoard = await dispatch(updateGroupTask(boardId, groupId, task))
             setIsShown(true)
         }catch(err){
             throw err

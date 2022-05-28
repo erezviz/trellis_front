@@ -1,22 +1,17 @@
 import React from "react";
-import { Link } from 'react-router-dom'
 import { connect } from "react-redux"
 import TextField from '@mui/material/TextField';
 
-
-import { GroupPreview } from "../cmps/group/group-preview";
 import { TaskDetails } from "../cmps/task/task-details";
 import { GroupList } from "../cmps/group/group-list"
 import { boardService } from "../services/board.service";
 import { utilService } from "../services/util.service";
-import { loadBoard } from '../store/board.action'
+import { loadBoard, deleteGroup, addGroup } from '../store/board.action'
 import { Screen } from '../cmps/dynamic-cmps/screen'
 import { Route } from "react-router-dom";
-import { Switch } from "react-router-dom";
-import { formatMuiErrorMessage } from "@mui/utils";
 
 class _BoardApp extends React.Component {
-
+    
 
     state = {
         groups: [],
@@ -48,7 +43,7 @@ class _BoardApp extends React.Component {
     onDeleteGroup = async (groupId) => {
         const boardId = this.getBoardId()
         try {
-            const board = await boardService.deleteGroup(boardId, groupId)
+            const board = await this.props.deleteGroup(boardId, groupId)
             this.loadGroups(board)
         } catch (err) {
             throw err
@@ -58,10 +53,8 @@ class _BoardApp extends React.Component {
     onAddGroup = async (ev) => {
         ev.preventDefault()
         const { newGroup } = this.state
-        // console.log('newGroup',newGroup)
         const boardId = this.getBoardId()
          newGroup.id =utilService.makeId()
-        //  console.log(newGroup)
         try {
             const board = await boardService.addGroup(boardId, newGroup)
             console.log('board after update', board)
@@ -75,7 +68,6 @@ class _BoardApp extends React.Component {
 
     onHandleChange = ({ target }) => {
         const field = target.name
-        // console.log(field, target.value);
         this.setState((prevState) => ({
             newGroup: { ...prevState.newGroup, [field]: target.value },
         }))
@@ -92,9 +84,6 @@ class _BoardApp extends React.Component {
     }
 
     onCloseDetails = (ev) => {
-        // ev.stopPropagation()
-      
-        
         this.onToggleDetails()
     }
 
@@ -108,25 +97,14 @@ class _BoardApp extends React.Component {
 
 
         const { groups, isModalOpen, isShown } = this.state
-        // console.log('isModalOpen? ',isModalOpen);
         return (
             <section className="board-app">
-
-                {/* <section onClick={this.onToggleDetails} className={`task-details-overlay ${isModalOpen ? 'overlay-up' : ''} `}>
-                </section> */}
                 {(!groups || !groups.length) && <h3>Loading...</h3>}
                 <div className="list-container">
                     <GroupList boardId={boardId} onToggleDetails={this.onToggleDetails} onDeleteGroup={this.onDeleteGroup} groups={groups} />
 
                 </div>
-
                 <>
-                    {/* <Route path='/board/:boardId/:groupId/:taskId' component={TaskDetails}>
-                <Screen isOpen={isModalOpen}   >
-                    <TaskDetails isOpen={isModalOpen} onToggleDetails={this.onToggleDetails} />
-
-                </Screen>
-                </Route> */}
                     <Route path='/board/:boardId/:groupId/:taskId' >
                         <Screen isOpen={isModalOpen}   >
                             <TaskDetails isOpen={isModalOpen} onToggleDetails={this.onToggleDetails} />
@@ -155,6 +133,8 @@ function mapStateToProps(state) {
 }
 const mapDispatchToProps = {
     loadBoard,
+    deleteGroup,
+    addGroup,
 }
 
 
