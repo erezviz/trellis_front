@@ -110,7 +110,7 @@ export function updateBoard(board) {
         }
     }
 }
-
+//! THIS FUNCTION  HAS BEEN FULLFILLED IN THE BOARDSERVICE - - YOU MAY DELETE IT
 // export function loadTask(taskId, groupId, boardId) {
 //     let currGroup
 //     return async() => {
@@ -130,7 +130,8 @@ export function updateBoard(board) {
 
 //     }
 // }
-// Demo for Optimistic Mutation (IOW - Assuming the server call will work, so updating the UI first)
+
+//? Demo for Optimistic Mutation (IOW - Assuming the server call will work, so updating the UI first)
 // export function onRemoveBoardOptimistic(boardId) {
 
 //     return (dispatch, getState) => {
