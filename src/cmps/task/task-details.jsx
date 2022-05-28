@@ -144,13 +144,13 @@ export const TaskDetails = (props) => {
                     <section className="details-sidebar">
                         <div className="main-add-actions">
                             <h3 className="sidebar-add-heading"> </h3>
-                            <div>
+                            <div className="sidebar-btn">
                                 Labels
                             </div>
-                            <div>
+                            <div className="sidebar-btn">
                                 Attachments
                             </div>
-                            <div>
+                            <div className="sidebar-btn">
                                 Checklist
                             </div>
                         </div>

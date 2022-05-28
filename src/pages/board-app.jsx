@@ -2,6 +2,8 @@ import React from "react";
 import { connect } from "react-redux"
 import TextField from '@mui/material/TextField';
 
+
+import { BoardHeader } from "../cmps/board/board-header";
 import { TaskDetails } from "../cmps/task/task-details";
 import { GroupList } from "../cmps/group/group-list"
 import { boardService } from "../services/board.service";
@@ -110,6 +112,8 @@ class _BoardApp extends React.Component {
         const { groups, isModalOpen, isShown } = this.state
         return (
             <section className="board-app">
+                <BoardHeader/>
+                <section className="main-board">
                 {(!groups || !groups.length) && <h3>Loading...</h3>}
                 <div className="list-container">
                     <GroupList boardId={boardId} onToggleDetails={this.onToggleDetails} onDeleteGroup={this.onDeleteGroup} groups={groups}/>
@@ -131,6 +135,7 @@ class _BoardApp extends React.Component {
                         <button onClick={this.onToggleGroup}>x</button>
                     </form>}
                 </div>
+                </section>
             </section>
         )
     }
