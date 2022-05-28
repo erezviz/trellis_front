@@ -97,10 +97,59 @@ export function addBoard(board) {
     }
 }
 
+export function updateGroupTask(boardId, groupId, task) {
+    return async(dispatch) => {
+        try {
+            const updatedBoard = await boardService.saveTask(boardId, groupId, task)
+            const reducerBoard = dispatch(getActionUpdateBoard(updatedBoard))
+            return reducerBoard.board
+        } catch (err) {
+            console.log('Cannot save board', err)
+            throw err
+        }
+    }
+}
 export function updateBoard(boardId, groupId, task) {
     return async(dispatch) => {
         try {
             const updatedBoard = await boardService.saveTask(boardId, groupId, task)
+            const reducerBoard = dispatch(getActionUpdateBoard(updatedBoard))
+            return reducerBoard.board
+        } catch (err) {
+            console.log('Cannot save board', err)
+            throw err
+        }
+    }
+}
+// GROUP CRUDL
+export function onDeleteGroup(boardId, groupId) {
+    return async(dispatch) => {
+        try {
+            const updatedBoard = await boardService.deleteGroup(boardId, groupId)
+            const reducerBoard = dispatch(getActionUpdateBoard(updatedBoard))
+            return reducerBoard.board
+        } catch (err) {
+            console.log('Cannot save board', err)
+            throw err
+        }
+    }
+}
+export function onAddGroup(boardId, group) {
+    return async(dispatch) => {
+        try {
+            const updatedBoard = await boardService.addGroup(boardId, group)
+            const reducerBoard = dispatch(getActionUpdateBoard(updatedBoard))
+            return reducerBoard.board
+        } catch (err) {
+            console.log('Cannot save board', err)
+            throw err
+        }
+    }
+}
+export function onUpdateGroup(boardId, groupId, newName) {
+    return async(dispatch) => {
+        try {
+            const updatedBoard = await boardService.updateGroup(boardId, groupId, newName)
             const reducerBoard = dispatch(getActionUpdateBoard(updatedBoard))
             return reducerBoard.board
         } catch (err) {

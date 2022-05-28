@@ -7,9 +7,11 @@ import { GroupHeader } from "./group-header"
 import { TaskList } from "../task/task-list"
 import { GroupFooter } from "./group-footer"
 import { boardService } from "../../services/board.service"
+import { onUpdateGroup} from "../../store/board.action"
 
 
 export const GroupPreview = (props) => {
+    const dispatch = useDispatch()
   const [group, setGroup] = useState(props.group)
   const { currBoard } = useSelector(state => state.boardModule)
   
@@ -26,8 +28,7 @@ export const GroupPreview = (props) => {
     const onChangeName=async()=>{
         const newName = prompt('new Name?')
         try{
-            const newGroup = await boardService.updateGroup(boardId, group.id, newName)
-            setGroup(newGroup)
+            dispatch(onUpdateGroup(boardId, group.id, newName))
         }catch(err){
             throw err
         }
