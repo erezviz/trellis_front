@@ -56,7 +56,7 @@ class _BoardApp extends React.Component {
         const boardId = this.getBoardId()
          newGroup.id =utilService.makeId()
         try {
-            const board = await boardService.onAddGroup(boardId, newGroup)
+            const board = await this.props.onAddGroup(boardId, newGroup)
             console.log('board after update', board)
             this.loadGroups(board)
         } catch (err) {
