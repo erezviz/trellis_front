@@ -29,8 +29,6 @@ class _BoardApp extends React.Component {
         this.loadGroups()
     }
 
-  
-
     loadGroups = async (board) => {
         const boardId = this.getBoardId()
         if (!board) {
@@ -60,11 +58,13 @@ class _BoardApp extends React.Component {
     onAddGroup = async (ev) => {
         ev.preventDefault()
         const { newGroup } = this.state
-        console.log(newGroup)
+        // console.log('newGroup',newGroup)
         const boardId = this.getBoardId()
          newGroup.id =utilService.makeId()
+        //  console.log(newGroup)
         try {
             const board = await boardService.addGroup(boardId, newGroup)
+            console.log('board after update', board)
             this.loadGroups(board)
         } catch (err) {
             throw err
@@ -75,9 +75,9 @@ class _BoardApp extends React.Component {
 
     onHandleChange = ({ target }) => {
         const field = target.name
-        console.log(field);
+        // console.log(field, target.value);
         this.setState((prevState) => ({
-            task: { ...prevState.newGroup, [field]: target.value },
+            newGroup: { ...prevState.newGroup, [field]: target.value },
         }))
     }
 

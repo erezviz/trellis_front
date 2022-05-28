@@ -143,7 +143,7 @@ async function saveTask(boardId, groupId, taskToSave) {
     try {
         const board = await getById(boardId)
         const groups = board.groups.map(group => {
-            console.log('my group', group);
+            // console.log('my group', group);
             if (group.id === groupId) {
                 if (group.tasks) group.tasks.push(taskToSave)
                 else group.tasks = [taskToSave]

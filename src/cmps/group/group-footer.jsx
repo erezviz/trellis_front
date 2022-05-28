@@ -20,12 +20,16 @@ export const GroupFooter = (props) => {
         ev.preventDefault()
         const boardId = props.boardId
         const groupId = props.groupId
-        const updatedBoard = await boardService.saveTask(boardId, groupId, task)
 
-        console.log(updatedBoard);
+        try{
+            const updatedBoard = await dispatch(updateBoard(boardId, groupId, task))
+            setIsShown(true)
+        }catch(err){
+            throw err
+        }
 
-        dispatch(updateBoard(updatedBoard))
-        setIsShown(true)
+
+
     }
 
 
@@ -47,7 +51,7 @@ export const GroupFooter = (props) => {
             {!isShown && <form onSubmit={(ev) => onSaveTask(ev)}>
                 <TextField name="title" id="outlined-basic" onChange={onHandleChange}
                     size="small" placeholder="Enter a title for this card..." variant="outlined" />
-                <button className='btn-save'>Save card</button>
+                <button className='btn-save'>+</button>
             </form>}
 
         </section>

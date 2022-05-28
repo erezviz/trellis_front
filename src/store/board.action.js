@@ -97,10 +97,12 @@ export function addBoard(board) {
     }
 }
 
-export function updateBoard(board) {
+export function updateBoard(boardId, groupId, task) {
     return async(dispatch) => {
         try {
-            dispatch(getActionUpdateBoard(board))
+            const updatedBoard = await boardService.saveTask(boardId, groupId, task)
+            const reducerBoard = dispatch(getActionUpdateBoard(updatedBoard))
+            return reducerBoard.board
         } catch (err) {
             console.log('Cannot save board', err)
             throw err

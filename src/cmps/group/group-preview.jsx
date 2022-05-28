@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { useDispatch, useSelector } from "react-redux"
 import { connect } from 'react-redux'
 
 
@@ -10,7 +11,16 @@ import { boardService } from "../../services/board.service"
 
 export const GroupPreview = (props) => {
   const [group, setGroup] = useState(props.group)
-    
+  const { currBoard } = useSelector(state => state.boardModule)
+  
+  useEffect(()=>{
+      const currGroup = currBoard.groups.find(boardGroup=>{
+          return boardGroup.id === group.id
+        })
+        if (!currGroup) return
+        setGroup(currGroup)
+  },[currBoard])
+
     const {boardId} = props
 
     const onChangeName=async()=>{
