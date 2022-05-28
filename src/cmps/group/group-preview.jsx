@@ -7,7 +7,7 @@ import { GroupHeader } from "./group-header"
 import { TaskList } from "../task/task-list"
 import { GroupFooter } from "./group-footer"
 import { boardService } from "../../services/board.service"
-import { updateGroup} from "../../store/board.action"
+import { onUpdateGroup} from "../../store/board.action"
 
 
 export const GroupPreview = (props) => {
@@ -28,7 +28,7 @@ export const GroupPreview = (props) => {
     const onChangeName=async()=>{
         const newName = prompt('new Name?')
         try{
-            dispatch(updateGroup(boardId, group.id, newName))
+            dispatch(onUpdateGroup(boardId, group.id, newName))
         }catch(err){
             throw err
         }

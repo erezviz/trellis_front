@@ -122,7 +122,7 @@ export function updateBoard(boardId, groupId, task) {
     }
 }
 // GROUP CRUDL
-export function deleteGroup(boardId, groupId) {
+export function onDeleteGroup(boardId, groupId) {
     return async(dispatch) => {
         try {
             const updatedBoard = await boardService.deleteGroup(boardId, groupId)
@@ -134,7 +134,7 @@ export function deleteGroup(boardId, groupId) {
         }
     }
 }
-export function addGroup(boardId, group) {
+export function onAddGroup(boardId, group) {
     return async(dispatch) => {
         try {
             const updatedBoard = await boardService.addGroup(boardId, group)
@@ -146,7 +146,7 @@ export function addGroup(boardId, group) {
         }
     }
 }
-export function updateGroup(boardId, groupId, newName) {
+export function onUpdateGroup(boardId, groupId, newName) {
     return async(dispatch) => {
         try {
             const updatedBoard = await boardService.updateGroup(boardId, groupId, newName)

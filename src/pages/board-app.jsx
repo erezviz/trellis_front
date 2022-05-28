@@ -6,7 +6,7 @@ import { TaskDetails } from "../cmps/task/task-details";
 import { GroupList } from "../cmps/group/group-list"
 import { boardService } from "../services/board.service";
 import { utilService } from "../services/util.service";
-import { loadBoard, deleteGroup, addGroup } from '../store/board.action'
+import { loadBoard, onDeleteGroup, onAddGroup } from '../store/board.action'
 import { Screen } from '../cmps/dynamic-cmps/screen'
 import { Route } from "react-router-dom";
 
@@ -43,7 +43,7 @@ class _BoardApp extends React.Component {
     onDeleteGroup = async (groupId) => {
         const boardId = this.getBoardId()
         try {
-            const board = await this.props.deleteGroup(boardId, groupId)
+            const board = await this.props.onDeleteGroup(boardId, groupId)
             this.loadGroups(board)
         } catch (err) {
             throw err
@@ -56,7 +56,7 @@ class _BoardApp extends React.Component {
         const boardId = this.getBoardId()
          newGroup.id =utilService.makeId()
         try {
-            const board = await boardService.addGroup(boardId, newGroup)
+            const board = await boardService.onAddGroup(boardId, newGroup)
             console.log('board after update', board)
             this.loadGroups(board)
         } catch (err) {
@@ -133,8 +133,8 @@ function mapStateToProps(state) {
 }
 const mapDispatchToProps = {
     loadBoard,
-    deleteGroup,
-    addGroup,
+    onDeleteGroup,
+    onAddGroup,
 }
 
 
