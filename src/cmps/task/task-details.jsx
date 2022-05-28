@@ -7,7 +7,10 @@ import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import { TaskTitle } from '../dynamic-cmps/task-title';
 import { boardService } from '../../services/board.service';
 import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
+import { queryTask, updateTask } from '../../store/board.action';
+import { useSelector } from 'react-redux';
 // import Box from '@mui/material/Box';
 // import Modal from '@mui/material/Modal';
 // import Button from '@mui/material/Button';
@@ -20,22 +23,30 @@ export const TaskDetails = (props) => {
     let [isEdit, setIsEdit] = useState(false)
     let [title, setTitle] = useState({ title: '' })
     let [task, setTask] = useState(null)
-
+    const dispatch = useDispatch()
+    const {currBoard} = useSelector((storeState)=> storeState.boardModule)
     let history = useHistory()
     // let { boardId, groupId, taskId } = useParams()
     let {params:{boardId, groupId, taskId}} = useRouteMatch();
 
     useEffect(() => {
 
-        (async () => {
+      
+        (async()=>{
+            const newtask = await dispatch( queryTask(boardId, groupId, taskId))
+         
+            setTask(newtask)
 
-            const currTask = await boardService.loadTask(boardId, groupId, taskId)
-            setTask(currTask)
-            return () => {
-
-                return setTask(null)
-            }
         })();
+      
+        // ( async () => {
+        //     const currTask = await boardService.loadTask(boardId, groupId, taskId)
+        //     setTask(currTask)
+        // })();
+        return () => {
+
+            return setTask(null)
+        }
 
     }, [])
 
@@ -79,8 +90,8 @@ export const TaskDetails = (props) => {
     // TODO this function will need to dispatch to the state and update the task in the JSON file.
     function onSave(ev) {
         ev.preventDefault()
-
-
+        dispatch(updateTask(boardId, groupId, task))
+        
     }
 
     const handleFormChange = ev => {
@@ -118,10 +129,12 @@ export const TaskDetails = (props) => {
                             <label htmlFor="description">Description</label>
 
                             <textarea
+                                onChange={handleFormChange}
                                 name="description"
                                 id="description"
                                 cols="30"
                                 rows="10"
+                                value={task.description}
                                 placeholder="Add a more detailed description..."
                             ></textarea>
 

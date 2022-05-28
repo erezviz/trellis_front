@@ -2,19 +2,21 @@ const initialState = {
     boards: [],
     currBoard: null,
 
+
 }
 
 
 export function boardReducer(state = initialState, action) {
     // var newState = state
     var board
+    var task
     switch (action.type) {
         case 'SET_BOARDS':
             state = {...state, boards: action.boards }
             break
         case 'SET_BOARD':
 
-            state = { ...state, currBoard: action.board }
+            state = {...state, currBoard: action.board }
             break
 
         case 'REMOVE_BOARD':
@@ -25,13 +27,16 @@ export function boardReducer(state = initialState, action) {
         case 'ADD_BOARD':
             state = {...state, board: [...state.boards, action.board] }
             break
-        // case 'UPDATE_BOARDS':
-        //     board = state.boards.map(board => (board._id === action.board._id) ? action.board : board)
-        //     newState = { ...state, board }
-        //     break
+            // case 'UPDATE_BOARDS':
+            //     board = state.boards.map(board => (board._id === action.board._id) ? action.board : board)
+            //     newState = { ...state, board }
+            //     break
         case 'UPDATE_BOARD':
             // board = state.boards.map(board => (board._id === action.board._id) ? action.board : board)
-            state = { ...state, currBoard: action.board }
+            state = {...state, currBoard: action.board }
+            break
+        case 'SET_TASK':
+            state = {...state, currTask: action.task }
             break
 
         default:
