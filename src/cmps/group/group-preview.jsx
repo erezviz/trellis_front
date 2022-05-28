@@ -27,9 +27,10 @@ export const GroupPreview = (props) => {
 
     return (
         <section className="group-preview">
+            
+            <div className="header-container">
+            <GroupHeader onChangeName={onChangeName} title={group.title}/>
             <button onClick={()=>props.onDeleteGroup(group.id)}>X</button>
-            <div onClick={onChangeName} className="header-container">
-            <GroupHeader title={group.title}/>
             </div>
             <div className="task-list-container">
             <TaskList groupId={props.group.id} boardId={boardId} tasks={group.tasks} onToggleDetails={props.onToggleDetails}/>

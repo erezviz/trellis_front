@@ -1,7 +1,6 @@
 // import React from 'react';
 // import { Hero } from './pages/hero';
 import { Switch, Route } from 'react-router-dom';
-import './App.css';
 import routes from './routes'
 import { AppHeader } from './cmps/app-header'
 import { BoardApp } from './pages/board-app';

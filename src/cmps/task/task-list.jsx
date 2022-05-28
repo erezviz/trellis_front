@@ -7,25 +7,24 @@ import { TaskPreview } from "./task-preview"
 export const TaskList = (props) => {
 
 
-    
-    const {tasks} = props
-  
-    
- 
-    if (!tasks) return(<p>No tasks</p>)
-    return(
-        <section className="task-list">
-            {(tasks || tasks.length)&& tasks.map(task=>{
-         
-              return(
+    const { tasks } = props
 
-                  <> 
-                  <Link key={task.id} to={`/board/${props.boardId}/${props.groupId}/${task.id}`}>
-               <TaskPreview  boardId={props.boardId} onToggleDetails={props.onToggleDetails} key={task.id} task={task}/>
-                  </Link>
-               
-               </> 
-            )
+
+
+    if (!tasks) return (<p>No tasks</p>)
+    return (
+        <section className="task-list">
+            {(tasks || tasks.length) && tasks.map((task, idx) => {
+
+                return (
+
+                    
+                        <Link key={task.id + idx} to={`/board/${props.boardId}/${props.groupId}/${task.id}`}>
+                            <TaskPreview boardId={props.boardId} onToggleDetails={props.onToggleDetails} key={task.id} task={task} />
+                        </Link>
+
+                   
+                )
 
             })}
         </section>

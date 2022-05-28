@@ -1,12 +1,12 @@
 import { GroupPreview } from "./group-preview"
 
 export const GroupList = ({ groups, onDeleteGroup, boardId, onToggleDetails }) => {
-    
+
     return (
         <section className="group-list">
-            {groups.map(group => {
+            {groups.map((group,idx) => {
                 const props = {
-                    key: group._id,
+                    key:  idx,
                     boardId,
                     onToggleDetails,
                     onDeleteGroup,
@@ -15,8 +15,9 @@ export const GroupList = ({ groups, onDeleteGroup, boardId, onToggleDetails }) =
                 return <GroupPreview {...props} />
                 // return <GroupPreview key={group._id} boardId={boardId} onToggleDetails={onToggleDetails} onDeleteGroup={onDeleteGroup}  group={group} />
             }
-            // }
             )}
+          
         </section>
     )
+    
 }

@@ -108,25 +108,25 @@ export function updateBoard(board) {
     }
 }
 
-export function loadTask(taskId, groupId, boardId) {
-    let currGroup
-    return async() => {
-        try {
-            const board = await boardService.getById(boardId)
+// export function loadTask(taskId, groupId, boardId) {
+//     let currGroup
+//     return async() => {
+//         try {
+//             const board = await boardService.getById(boardId)
 
-            const task = board.groups.find(group => {
-                currGroup = group.id === groupId
-                return currGroup.tasks.find(task => task.id === taskId)
-            })
-            return task
+//             const task = board.groups.find(group => {
+//                 currGroup = group.id === groupId
+//                 return currGroup.tasks.find(task => task.id === taskId)
+//             })
+//             return task
 
-        } catch (err) {
-            console.log('Cannot load boards', err)
-            throw err
-        }
+//         } catch (err) {
+//             console.log('Cannot load task', err)
+//             throw err
+//         }
 
-    }
-}
+//     }
+// }
 // Demo for Optimistic Mutation (IOW - Assuming the server call will work, so updating the UI first)
 // export function onRemoveBoardOptimistic(boardId) {
 

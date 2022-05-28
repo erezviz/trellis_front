@@ -10,7 +10,7 @@ export const GroupFooter = (props) => {
     const [isShown, setIsShown] = useState(true)
     var task = { title: '' }
     const { currBoard } = useSelector(state => state.boardModule)
-    console.log(currBoard);
+
 
     const onHandleChange = ({ target }) => {
         task = { title: target.value }
@@ -21,7 +21,9 @@ export const GroupFooter = (props) => {
         const boardId = props.boardId
         const groupId = props.groupId
         const updatedBoard = await boardService.saveTask(boardId, groupId, task)
+
         console.log(updatedBoard);
+
         dispatch(updateBoard(updatedBoard))
         setIsShown(true)
     }
@@ -52,4 +54,5 @@ export const GroupFooter = (props) => {
     )
 
 }
+
 

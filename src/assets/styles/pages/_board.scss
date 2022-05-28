@@ -1,4 +1,5 @@
 .board-app {
+    height: 95vh;
     display: flex;
     gap: 5px;
     left: 0;
@@ -14,6 +15,7 @@
     white-space: nowrap;
 
     .add-group-btn {
+        margin: 15px;
         padding: 6px 8px;
         width: 250px;
         height: fit-content;
@@ -31,6 +33,6 @@
         
     }
     .add-group-btn:hover{
-            background-color: transparentize($color: lighten($color: $clr5, $amount: 20%), $amount: 0.75);
-        }
+        background-color: transparentize($color: lighten($color: $clr5, $amount: 20%), $amount: 0.75);
+    }
 }

@@ -1,11 +1,76 @@
-.group-preview{
-    background-color: #ebecf0;
-    border-radius: 3px;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    max-height: 100%;
-    position: relative;
-    white-space: normal;
-    width: 100%!important;
+.group-preview {
+    width: 272px;
+    background-color: darken($color: $clr2, $amount: 3%);
+    padding: 5px 15px;
+    margin: 15px;
+    border-radius: 5px;
+
+    .header-container {
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 5px;
+
+        h3{
+            width: 217px;
+            height: 15px;
+        }
+
+        .group-header {
+            color: darken($color: $clr2, $amount: 60%);
+            font-size: 14px;
+        }
+
+        button {
+            border-radius: 2px;
+            cursor: pointer;
+            border-style: none;
+            background-color: darken($color: $clr2, $amount: 3%);
+            transition: background-color, .25s;
+        }
+
+        button:hover {
+            background-color: darken($color: $clr2, $amount: 10%);
+        }
+    }
+
+    .task-preview {
+        background-color: $clr2;
+        border-radius: 3px;
+        box-shadow: 0 1px 0 #091e4240;
+        cursor: pointer;
+        display: block;
+        margin-bottom: 8px;
+        max-width: 300px;
+        min-height: 20px;
+        position: relative;
+        text-decoration: none;
+        z-index: 0;
+        transition: background-color, .25s;
+
+        h5 {
+            color: darken($color: $clr2, $amount: 55%);
+            font-weight: 400;
+            padding: 5px;
+        }
+    }
+
+    .task-preview:hover {
+        background-color: darken($color: $clr2, $amount: 5%);
+    }
+
+    .group-footer {
+        transition: background-color, 0.25s;
+        border-radius: 3px;
+        display: flex;
+        .btn-save {
+            font-size: 20px;
+            border-style: none;
+        }
+    }
+
+    .group-footer:hover {
+        background-color: darken($color: $clr2, $amount: 10%);
+    }
+
 }

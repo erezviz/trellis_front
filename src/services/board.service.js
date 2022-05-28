@@ -18,6 +18,7 @@ export const boardService = {
     addGroup,
     updateGroup,
     deleteGroup,
+    loadTask,
     // subscribe,
     // unsubscribe
 
@@ -112,6 +113,31 @@ function getEmptyTask() {
     }
 }
 
+async function loadTask(boardId, groupId, taskId) {
+    let currGroup
+
+    try {
+        const board = await boardService.getById(boardId)
+            // console.log('board in load task', board);
+        const group = board.groups.find(group => group.id === groupId)
+        const task = group.tasks.find(task => task.id === taskId)
+
+
+        // console.log('group in load task', group);
+        // const task = board.groups.find(group => {
+        //     currGroup = group.id === groupId
+        //     return currGroup.tasks.find(task => task.id === taskId)
+        // })
+
+        return task
+    } catch (err) {
+        console.log('Cannot load task', err)
+        throw err
+    }
+
+}
+
+
 async function saveTask(boardId, groupId, taskToSave) {
     taskToSave.id = utilService.makeId()
     try {
@@ -131,6 +157,9 @@ async function saveTask(boardId, groupId, taskToSave) {
     }
 
 }
+
+
+
 // function subscribe(listener) {
 //     boardChannel.addEventListener('message', listener)
 // }
