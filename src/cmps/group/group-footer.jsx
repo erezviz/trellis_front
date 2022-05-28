@@ -2,7 +2,7 @@ import { TextField } from "@mui/material"
 import React, { useState } from "react"
 import { boardService } from "../../services/board.service"
 import { useDispatch, useSelector } from "react-redux"
-import { updateBoard } from "../../store/board.action"
+import { updateGroupTask } from "../../store/board.action"
 
 
 export const GroupFooter = (props) => {
@@ -10,7 +10,7 @@ export const GroupFooter = (props) => {
     const [isShown, setIsShown] = useState(true)
     var task = { title: '' }
     const { currBoard } = useSelector(state => state.boardModule)
-   
+
 
     const onHandleChange = ({ target }) => {
         task = { title: target.value }
@@ -20,9 +20,16 @@ export const GroupFooter = (props) => {
         ev.preventDefault()
         const boardId = props.boardId
         const groupId = props.groupId
-        const updatedBoard = await boardService.saveTask(boardId, groupId, task)
-        dispatch(updateBoard(updatedBoard))
-        setIsShown(true)
+
+        try{
+            const updatedBoard = await dispatch(updateGroupTask(boardId, groupId, task))
+            setIsShown(true)
+        }catch(err){
+            throw err
+        }
+
+
+
     }
 
 
@@ -30,6 +37,7 @@ export const GroupFooter = (props) => {
     const onToggle = () => {
         setIsShown(false)
     }
+
 
 
 
@@ -43,11 +51,12 @@ export const GroupFooter = (props) => {
             {!isShown && <form onSubmit={(ev) => onSaveTask(ev)}>
                 <TextField name="title" id="outlined-basic" onChange={onHandleChange}
                     size="small" placeholder="Enter a title for this card..." variant="outlined" />
-                <button className='btn-save'>Save card</button>
+                <button className='btn-save'>+</button>
             </form>}
 
         </section>
     )
 
 }
+
 

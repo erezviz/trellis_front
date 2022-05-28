@@ -1,10 +1,16 @@
 
 import * as React from 'react';
-import { useState , useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouteMatch } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import { TaskTitle } from '../dynamic-cmps/task-title';
+import { boardService } from '../../services/board.service';
+import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+
+import { queryTask, updateTask } from '../../store/board.action';
+import { useSelector } from 'react-redux';
 // import Box from '@mui/material/Box';
 // import Modal from '@mui/material/Modal';
 // import Button from '@mui/material/Button';
@@ -13,32 +19,53 @@ import { TaskTitle } from '../dynamic-cmps/task-title';
 
 
 export const TaskDetails = (props) => {
-    // const [isOpen, setIsOpen] = useState(true)
-    let [isEdit, setIsEdit] = useState(false)
-    let [title,setTitle] = useState({title: ''})
-    let [task,setTask] = useState(null)
-    let {taskId} = useParams()
-    let { path, url } = useRouteMatch();
-    useEffect(() => {
-        const test = urlGetter(url)
-       console.log('Task ID in Task Details!!!', taskId);
-       console.log('URL in Task Details!!!', url, path);
-       console.log('URL in Task Details!!!', test);
-    
-      
-    }, [taskId])
 
-    const urlGetter = (url) => {
-        const urlObj = {}
-        let urls = url.split('/')
-        urls.filter(url=> !url)
-        urls.map((url,idx) => {
-            
-            return urlObj.url = url 
-                        
-        })
-        return {...urls}
-    }
+    let [isEdit, setIsEdit] = useState(false)
+    let [title, setTitle] = useState({ title: '' })
+    let [task, setTask] = useState(null)
+    const dispatch = useDispatch()
+    const {currBoard} = useSelector((storeState)=> storeState.boardModule)
+    let history = useHistory()
+    // let { boardId, groupId, taskId } = useParams()
+    let {params:{boardId, groupId, taskId}} = useRouteMatch();
+
+    useEffect(() => {
+
+      
+        (async()=>{
+            const newtask = await dispatch( queryTask(boardId, groupId, taskId))
+         
+            setTask(newtask)
+
+        })();
+      
+        // ( async () => {
+        //     const currTask = await boardService.loadTask(boardId, groupId, taskId)
+        //     setTask(currTask)
+        // })();
+        return () => {
+
+            return setTask(null)
+        }
+
+    }, [])
+
+
+//? This is actually a useParams kind of function... you can erase this later
+    // const getIdsAsObject = (path, url) => {
+    //     const urlObj = {}
+
+    //     let slicedPath = path.slice(1)
+    //     let slicedUrl = url.slice(1)
+
+    //     let paths = slicedPath.split('/:')
+    //     let urls = slicedUrl.split('/')
+
+    //     urls.map((url, idx) => urlObj[paths[idx]] = url)
+    //     delete urlObj.board
+    //     return urlObj
+    // }
+
     const modalStyle = {
         display: props.isOpen ? 'block' : 'none',
         position: 'absolute',
@@ -59,45 +86,55 @@ export const TaskDetails = (props) => {
         overflowWrap: 'break-word',
         height: '33px'
     }
+    // TODO work on a function to save the title of the task in the task.
+    // TODO this function will need to dispatch to the state and update the task in the JSON file.
     function onSave(ev) {
         ev.preventDefault()
-     
+        dispatch(updateTask(boardId, groupId, task))
+        
     }
 
     const handleFormChange = ev => {
         const { name, value } = ev.target
-        console.log(value);
-        setTitle(prevTitle => ({ ...prevTitle, [name]: value }))
+ 
+        setTask(prevTask => ({ ...prevTask, [name]: value }))
     }
-
+    const goBack = () => {
+        this.props.history.push(`/board/${boardId}`)
+    }
+    if (!task) return <>Loading...</>
     return (
 
         <section style={modalStyle} className="task-details">
             <div className="details-container flex">
 
-                {/* <div onClick={setIsEdit(!isEdit)}>
-                <TaskTitle isFocus={isEdit}/>
-            </div> */}
-                <button onClick={(ev) => props.onToggleDetails()} className="close-details-btn">X</button>
+
+                <button onClick={(ev) => {
+                    // return goBack()
+                    return props.onToggleDetails()
+                }} className="close-details-btn">X</button>
                 <div onClick={() => setIsEdit(isEdit = !isEdit)} className="details-header flex">
                     <form onSubmit={(ev) => onSave(ev)} >
-                            <textarea style={isEdit ? { titleStyle } : {}} onChange={handleFormChange} className="details-title" name="" id="" cols="30" rows="10" />
+                        <textarea style={isEdit ? { titleStyle } : {}} value={task.title} onChange={handleFormChange} className="details-title" name="title" id="" cols="30" rows="10" />
                         <input type="submit" value="Submit" />
                     </form>
                     {/* <div contentEditable="true" className="details-title">
                     This is the Title
                 </div> */}
                 </div>
+
                 <div className="details-contents flex">
                     <section className="details-main-col flex">
                         <div className="details-desc">
                             <label htmlFor="description">Description</label>
 
                             <textarea
+                                onChange={handleFormChange}
                                 name="description"
                                 id="description"
                                 cols="30"
                                 rows="10"
+                                value={task.description}
                                 placeholder="Add a more detailed description..."
                             ></textarea>
 

@@ -97,40 +97,119 @@ export function addBoard(board) {
     }
 }
 
-export function updateBoard(board) {
+export function updateGroupTask(boardId, groupId, task) {
     return async(dispatch) => {
         try {
-            const savedBoard = await boardService.save(board)
-            console.log('Updated Board:', savedBoard);
-            dispatch(getActionUpdateBoard(savedBoard))
-
+            const updatedBoard = await boardService.saveTask(boardId, groupId, task)
+            const reducerBoard = dispatch(getActionUpdateBoard(updatedBoard))
+            return reducerBoard.board
         } catch (err) {
             console.log('Cannot save board', err)
             throw err
         }
     }
 }
-
-export function loadTask(taskId, groupId, boardId) {
-    let currGroup
-    return async() => {
+export function updateBoard(boardId, groupId, task) {
+    return async(dispatch) => {
         try {
-            const board = await boardService.getById(boardId)
-
-            const task = board.groups.find(group => {
-                currGroup = group.id === groupId
-                return currGroup.tasks.find(task => task.id === taskId)
-            })
-            return task
-
+            const updatedBoard = await boardService.saveTask(boardId, groupId, task)
+            const reducerBoard = dispatch(getActionUpdateBoard(updatedBoard))
+            return reducerBoard.board
         } catch (err) {
-            console.log('Cannot load boards', err)
+            console.log('Cannot save board', err)
             throw err
         }
-
     }
 }
-// Demo for Optimistic Mutation (IOW - Assuming the server call will work, so updating the UI first)
+// GROUP CRUDL
+export function onDeleteGroup(boardId, groupId) {
+    return async(dispatch) => {
+        try {
+            const updatedBoard = await boardService.deleteGroup(boardId, groupId)
+             dispatch(getActionUpdateBoard(updatedBoard))
+            return updatedBoard
+        } catch (err) {
+            console.log('Cannot save board', err)
+            throw err
+        }
+    }
+}
+export function onAddGroup(boardId, group) {
+    return async(dispatch) => {
+        try {
+            const updatedBoard = await boardService.addGroup(boardId, group)
+            const reducerBoard = dispatch(getActionUpdateBoard(updatedBoard))
+            return reducerBoard.board
+        } catch (err) {
+            console.log('Cannot save board', err)
+            throw err
+        }
+    }
+}
+export function onUpdateGroup(boardId, groupId, newName) {
+    return async(dispatch) => {
+        try {
+            const updatedBoard = await boardService.updateGroup(boardId, groupId, newName)
+            const reducerBoard = dispatch(getActionUpdateBoard(updatedBoard))
+            return reducerBoard.board
+        } catch (err) {
+            console.log('Cannot save board', err)
+            throw err
+        }
+    }
+}
+//! THIS FUNCTION  HAS BEEN FULLFILLED IN THE BOARDSERVICE - - YOU MAY DELETE IT
+// export function loadTask(taskId, groupId, boardId) {
+//     let currGroup
+//     return async() => {
+//         try {
+//             const board = await boardService.getById(boardId)
+
+//             const task = board.groups.find(group => {
+//                 currGroup = group.id === groupId
+//                 return currGroup.tasks.find(task => task.id === taskId)
+//             })
+//             return task
+
+//         } catch (err) {
+//             console.log('Cannot load task', err)
+//             throw err
+//         }
+
+//     }
+// }
+
+export function queryTask(boardId, groupId, taskId) {
+    return async(dispatch) => {
+        try {
+
+            const task = await boardService.loadTask(boardId, groupId, taskId)
+
+            dispatch({
+                type: 'SET_TASK',
+                task
+            })
+            return task
+        } catch (err) {
+            console.log('ERROR: cannot load task', err)
+            throw err
+        }
+    }
+}
+
+export function updateTask(boardId, groupId, taskToSave) {
+    return async(dispatch) => {
+        try {
+            const updatedBoard = await boardService.updateTask(boardId, groupId, taskToSave)
+            getActionUpdateBoard(updatedBoard)
+        } catch (err) {
+            console.log('ERROR: cannot update task', err)
+            throw err
+        }
+    }
+}
+
+//? Demo for Optimistic Mutation (IOW - Assuming the server call will work, so updating the UI first)
 // export function onRemoveBoardOptimistic(boardId) {
 
 //     return (dispatch, getState) => {
