@@ -33,16 +33,15 @@ export const GroupFooter = (props) => {
 
 
 
-  
-        console.log(props.board);
-       
+    // render() {
+    //     console.log(this.props.board);
         return (
             <section className="group-footer">
                 {isShown && <div onClick={onToggle} className="add-task">
                     <span className="plus-task">+</span>
                     <span>Add a card</span>
                 </div>}
-                {!isShown && <form onSubmit={(ev)=>this.onSaveTask(ev)}>
+                {!isShown && <form onSubmit={(ev)=>onSaveTask(ev)}>
                     <TextField name="title" id="outlined-basic" onChange={onHandleChange}
                         size="small" placeholder="Enter a title for this card..." variant="outlined" />
                     <button className='btn-save'>+</button>
