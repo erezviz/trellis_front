@@ -1,12 +1,14 @@
-import { configureStore } from '@reduxjs/toolkit'
+import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit'
 // import rootReducer from './reducers'
 import { boardReducer } from './store/board.reducer'
 
 const rootReducer = {
-  boardModule: boardReducer,
+    boardModule: boardReducer,
 }
 const store = configureStore({
-  reducer: rootReducer,
+    reducer: rootReducer,
+    middleware: [...getDefaultMiddleware()]
+
 })
 
 

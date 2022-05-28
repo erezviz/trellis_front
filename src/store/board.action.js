@@ -130,6 +130,36 @@ export function updateBoard(boardId, groupId, task) {
 //     }
 // }
 
+export function queryTask(boardId, groupId, taskId) {
+    return async(dispatch) => {
+        try {
+
+            const task = await boardService.loadTask(boardId, groupId, taskId)
+
+            dispatch({
+                type: 'SET_TASK',
+                task
+            })
+            return task
+        } catch (err) {
+            console.log('ERROR: cannot load task', err)
+            throw err
+        }
+    }
+}
+
+export function updateTask(boardId, groupId, taskToSave) {
+    return async(dispatch) => {
+        try {
+            const updatedBoard = await boardService.updateTask(boardId, groupId, taskToSave)
+            getActionUpdateBoard(updatedBoard)
+        } catch (err) {
+            console.log('ERROR: cannot update task', err)
+            throw err
+        }
+    }
+}
+
 //? Demo for Optimistic Mutation (IOW - Assuming the server call will work, so updating the UI first)
 // export function onRemoveBoardOptimistic(boardId) {
 

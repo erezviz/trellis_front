@@ -150,7 +150,8 @@ class _BoardApp extends React.Component {
 
 function mapStateToProps(state) {
     return {
-        currBoard: state.boardModule.currBoard
+        currBoard: state.boardModule.currBoard,
+        currTask: state.boardModule.currTask
     }
 }
 const mapDispatchToProps = {

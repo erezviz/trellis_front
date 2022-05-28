@@ -19,6 +19,7 @@ export const boardService = {
     updateGroup,
     deleteGroup,
     loadTask,
+    updateTask,
     // subscribe,
     // unsubscribe
 
@@ -154,8 +155,26 @@ async function saveTask(boardId, groupId, taskToSave) {
 
 }
 
-async function taskSave(boardId, groupId, taskToSave) {
+async function updateTask(boardId, groupId, taskToSave) {
+    // const updatedBoard
+    try {
+        const board = await boardService.getById(boardId)
+        console.log('board from getbyid ', board);
+        // const group = board.groups.find(group => group.id === groupId)
+        // console.log('group ', group);
+        // const task = group.tasks.find(task => task.id === taskToSave.id)
 
+        const updatedGroups = board.groups.map(group => {
+            return group.id === groupId ? group.tasks.map(task => task.id === taskToSave.id ? taskToSave : task) : group
+        })
+        const updatedBoard = {...board, groups: updatedGroups }
+        console.log('updated board test inside updateTask', updatedBoard);
+        // save(updatedBoard)
+        // return updatedBoard
+    } catch (err) {
+        console.log('ERROR: Cannot update task', err);
+        throw err
+    }
 }
 
 
