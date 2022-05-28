@@ -115,7 +115,7 @@ export const TaskDetails = (props) => {
                 }} className="close-details-btn">X</button>
                 <div onClick={() => setIsEdit(isEdit = !isEdit)} className="details-header flex">
                     <form onSubmit={(ev) => onSave(ev)} >
-                        <textarea style={isEdit ? { titleStyle } : {}} value={task.title} onChange={handleFormChange} className="details-title" name="title" id="" cols="30" rows="10" />
+                        <textarea  style={isEdit ? { titleStyle } : {}} value={task.title} onChange={handleFormChange} className="details-title" name="title" id="" cols="30" rows="10" />
                         <input type="submit" value="Submit" />
                     </form>
                     {/* <div contentEditable="true" className="details-title">
