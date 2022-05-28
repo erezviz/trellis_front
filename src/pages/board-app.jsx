@@ -20,21 +20,30 @@ class _BoardApp extends React.Component {
         newGroup: { title: '' }
     }
 
-    componentDidMount = () => {
-        this.loadGroups()
+    componentDidMount = async() => {
+            this.loadGroups()
     }
 
     loadGroups = async (board) => {
+        this.setState({ groups: [] })
         const boardId = this.getBoardId()
         if (!board) {
             try {
                 const board = await this.props.loadBoard(boardId)
-                this.setState({ groups: [...board.groups] })
+                this.setState({ groups: board.groups })
+                
             } catch (err) {
                 throw err
             }
-        } else this.setState({ groups: [...board.groups] })
+        } else {
+            try{
+                await this.setState({ groups: board.groups })
+            } catch(err){
+                throw err
+            }
+        }
     }
+
     getBoardId = () => {
         const { boardId } = (this.props.match.params)
         return boardId
@@ -47,6 +56,8 @@ class _BoardApp extends React.Component {
             this.loadGroups(board)
         } catch (err) {
             throw err
+        }finally{
+
         }
     }
 
@@ -57,7 +68,7 @@ class _BoardApp extends React.Component {
          newGroup.id =utilService.makeId()
         try {
             const board = await this.props.onAddGroup(boardId, newGroup)
-            console.log('board after update', board)
+            // console.log('board after update', board)
             this.loadGroups(board)
         } catch (err) {
             throw err
@@ -101,7 +112,7 @@ class _BoardApp extends React.Component {
             <section className="board-app">
                 {(!groups || !groups.length) && <h3>Loading...</h3>}
                 <div className="list-container">
-                    <GroupList boardId={boardId} onToggleDetails={this.onToggleDetails} onDeleteGroup={this.onDeleteGroup} groups={groups} />
+                    <GroupList boardId={boardId} onToggleDetails={this.onToggleDetails} onDeleteGroup={this.onDeleteGroup} groups={groups}/>
 
                 </div>
                 <>

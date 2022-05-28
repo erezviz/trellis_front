@@ -55,6 +55,7 @@ async function save(board) {
     var savedBoard
     if (board._id) {
         savedBoard = await storageService.put(STORAGE_KEY, board)
+        // console.log('save (board)', savedBoard)
             // boardChannel.postMessage(getActionUpdateBoard(savedBoard))
 
     } else {
@@ -98,10 +99,9 @@ async function updateGroup(boardId, groupId, newName) {
 async function deleteGroup(boardId, groupId) {
     try {
         const board = await getById(boardId)
-        const groupIdx = board.groups.findIndex(group => group.id === groupId)
-        board.groups.splice(groupIdx, 1)
-        save(board)
-        return board
+        const newGroups = board.groups.filter(group => group.id !== groupId)
+        board.groups = newGroups
+       return save(board)
     } catch (err) {
         throw err
     }
