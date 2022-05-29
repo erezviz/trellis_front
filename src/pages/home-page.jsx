@@ -33,9 +33,9 @@ class _HomePage extends React.Component {
         return (
             <section className="home-page">
                 <h1>Our most popular templates</h1>
-                <section className="previews-container">
+                <section className="previews-container bci1">
                     {(!boards && !boards.length) && <div>Loading...</div>}
-                    {boards && boards.map((board, idx) => <Link key={board._id + idx} to={`/board/${board._id}`}><BoardPreview board={board} /></Link>)}
+                    {boards && boards.map((board, idx) => <Link className={`bci${idx+1}`} key={board._id + idx} to={`/board/${board._id}`}><BoardPreview board={board} /></Link>)}
                     {/*                 
                 <h1><img src={require('../assets/img/templates.png')} alt="" /> Most popular templates</h1>
                <section className="previews-container">

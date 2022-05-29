@@ -1,3 +1,15 @@
+.b101 {
+    background: url('../../img/background-fall.jpg');
+}
+
+.b102 {
+    background: url('../../img/background-fall2.jpg');
+}
+
+.b103 {
+    background: url('../../img/background-fall3.jpg');
+}
+
 .board-app {
     height: 95vh;
     // display: flex;
@@ -13,7 +25,7 @@
     -webkit-user-select: none;
     user-select: none;
     white-space: nowrap;
-    background: url('../../img/background-fall.jpg');
+    // background: url('../../img/background-fall.jpg');
     background-size: cover;
     .main-board {
         display: flex;

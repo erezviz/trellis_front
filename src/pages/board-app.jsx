@@ -113,7 +113,7 @@ class _BoardApp extends React.Component {
 
         const { groups, isModalOpen, isShown } = this.state
         return (
-            <section className="board-app">
+            <section className={`board-app ${boardId}`}>
                 <BoardHeader/>
                 <section className="main-board">
                 {(!groups || !groups.length) && <h3>Loading...</h3>}
