@@ -81,6 +81,8 @@ export const TaskDetails = (props) => {
     const goBack = () => {
         this.props.history.push(`/board/${boardId}`)
     }
+
+
     if (!task) return <>Loading...</>
     return (
 
@@ -94,8 +96,8 @@ export const TaskDetails = (props) => {
                 }} className="close-details-btn">X</button>
                 <div onClick={() => setIsEdit(isEdit = !isEdit)} className="details-header flex">
                     <form onSubmit={(ev) => onSave(ev)} >
-                        <textarea  style={isEdit ? { titleStyle } : {}} value={task.title} onChange={handleFormChange} className="details-title" name="title" id="" cols="30" rows="10" />
-                        <input type="submit" value="Submit" />
+                        <input onBlur={(ev) => onSave(ev)} style={isEdit ? { titleStyle } : {}} value={task.title} onChange={handleFormChange} className="details-title" name="title"  />
+                   
                     </form>
                     {/* <div contentEditable="true" className="details-title">
                     This is the Title
@@ -103,32 +105,39 @@ export const TaskDetails = (props) => {
                 </div>
 
                 <div className="details-contents flex">
-                    <label htmlFor="description">Description</label>
                     <section className="details-main-col flex">
-                        {isDesc && <div onClick={() => setIsDesc(true)} className="details-desc">
-                            {task.description && <p>{task.description}</p>}
+                        <div className="desc-container">
 
-                        </div>}
+                            <label className="description" htmlFor="description">Description</label>
+                            {isDesc && <div onClick={() => setIsDesc(true)} className="details-desc">
+                                {task.description && <p>{task.description}</p>}
 
-                        <form onSubmit={onSave}>
-                            <textarea
-                                onChange={handleFormChange}
-                                name="description"
-                                id="description"
-                                cols="30"
-                                rows="10"
-                                value={task.description}
-                                placeholder="Add a more detailed description..."
-                            />
-                            <input type="submit" value="Desc" />
-                        </form>
+                            </div>}
+
+                            <form onSubmit={onSave}>
+                                <textarea
+                                    onBlur={(ev) => onSave(ev)}
+                                    onChange={handleFormChange}
+                                    name="description"
+                                    id="description"
+                                    cols="30"
+                                    rows="10"
+                                    value={task.description}
+                                    placeholder="Add a more detailed description..."
+                                />
+                                {/* <button>Send</button>                              */}
+                                {/* <button>Cancel</button>                              */}
+                                <input className='desc-send-btn' type="submit" value="Send" />
+                            </form>
+                        </div>
 
 
                     </section>
 
                     <section className="details-sidebar">
                         <div className="main-add-actions">
-                            <h3 className="sidebar-add-heading"> </h3>
+
+                            <h6 className="sidebar-add-heading">Add to card</h6>
                             <div className="sidebar-btn">
                                 Labels
                             </div>
