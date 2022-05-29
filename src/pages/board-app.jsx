@@ -34,7 +34,7 @@ class _BoardApp extends React.Component {
         if (!board) {
             try {
                 const board = await this.props.loadBoard(boardId)
-                this.setState({ groups: board.groups }, (()=> console.log(this.state.groups)))
+                this.setState({ groups: board.groups })
       
             } catch (err) {
                 throw err

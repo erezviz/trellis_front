@@ -1,7 +1,6 @@
-import { DragDropContext } from "react-beautiful-dnd"
-import { useSelector } from "react-redux"
+// import { DragDropContext } from "react-beautiful-dnd"
+// import { useSelector } from "react-redux"
 import { Link } from "react-router-dom"
-import { useRouteMatch } from "react-router-dom/cjs/react-router-dom.min"
 import { TaskPreview } from "./task-preview"
 import {Droppable} from "react-beautiful-dnd"
 
