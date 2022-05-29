@@ -17,8 +17,9 @@ export const GroupPreview = (props) => {
   const groupIdx = currBoard.groups.findIndex(currGroup=> currGroup.id === group.id)
   
   useEffect(()=>{
+      
       (async=>{
-        //  console.log('group preview', currBoard)
+
         try{ 
             const currGroup = currBoard.groups.find(boardGroup=>{
                 return boardGroup.id === group.id

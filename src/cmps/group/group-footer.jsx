@@ -49,7 +49,7 @@ export const GroupFooter = (props) => {
                 <span>Add a card</span>
             </div>}
             {!isShown && <form onSubmit={(ev) => onSaveTask(ev)}>
-                <TextField name="title" id="outlined-basic" onChange={onHandleChange}
+                <TextField name="title" id="outlined-basic" onChange={onHandleChange} 
                     size="small" placeholder="Enter a title for this card..." variant="outlined" />
                 <button className='btn-save'>+</button>
             </form>}

@@ -19,52 +19,31 @@ import { useSelector } from 'react-redux';
 
 
 export const TaskDetails = (props) => {
-
+    const [isDesc, setIsDesc] = useState(false)
     let [isEdit, setIsEdit] = useState(false)
     let [title, setTitle] = useState({ title: '' })
     let [task, setTask] = useState(null)
     const dispatch = useDispatch()
-    const {currBoard} = useSelector((storeState)=> storeState.boardModule)
+    const { currBoard } = useSelector((storeState) => storeState.boardModule)
     let history = useHistory()
     // let { boardId, groupId, taskId } = useParams()
-    let {params:{boardId, groupId, taskId}} = useRouteMatch();
+    let { params: { boardId, groupId, taskId } } = useRouteMatch();
+
+
 
     useEffect(() => {
 
-      
-        (async()=>{
-            const newtask = await dispatch( queryTask(boardId, groupId, taskId))
-         
+        (async () => {
+            const newtask = await dispatch(queryTask(boardId, groupId, taskId))
+
             setTask(newtask)
 
         })();
-      
-        // ( async () => {
-        //     const currTask = await boardService.loadTask(boardId, groupId, taskId)
-        //     setTask(currTask)
-        // })();
+
         return () => {
-
-            return setTask(null)
+            setTask(null)
         }
-
     }, [])
-
-
-//? This is actually a useParams kind of function... you can erase this later
-    // const getIdsAsObject = (path, url) => {
-    //     const urlObj = {}
-
-    //     let slicedPath = path.slice(1)
-    //     let slicedUrl = url.slice(1)
-
-    //     let paths = slicedPath.split('/:')
-    //     let urls = slicedUrl.split('/')
-
-    //     urls.map((url, idx) => urlObj[paths[idx]] = url)
-    //     delete urlObj.board
-    //     return urlObj
-    // }
 
     const modalStyle = {
         display: props.isOpen ? 'block' : 'none',
@@ -88,15 +67,15 @@ export const TaskDetails = (props) => {
     }
     // TODO work on a function to save the title of the task in the task.
     // TODO this function will need to dispatch to the state and update the task in the JSON file.
-    function onSave(ev) {
+    async function onSave(ev) {
         ev.preventDefault()
-        dispatch(updateTask(boardId, groupId, task))
-        
+        const updatedBoard = await dispatch(updateTask(boardId, groupId, task))
+        console.log('updatedboad inside onSave', updatedBoard);
     }
 
     const handleFormChange = ev => {
         const { name, value } = ev.target
- 
+
         setTask(prevTask => ({ ...prevTask, [name]: value }))
     }
     const goBack = () => {
@@ -115,7 +94,7 @@ export const TaskDetails = (props) => {
                 }} className="close-details-btn">X</button>
                 <div onClick={() => setIsEdit(isEdit = !isEdit)} className="details-header flex">
                     <form onSubmit={(ev) => onSave(ev)} >
-                        <textarea style={isEdit ? { titleStyle } : {}} value={task.title} onChange={handleFormChange} className="details-title" name="title" id="" cols="30" rows="10" />
+                        <textarea  style={isEdit ? { titleStyle } : {}} value={task.title} onChange={handleFormChange} className="details-title" name="title" id="" cols="30" rows="10" />
                         <input type="submit" value="Submit" />
                     </form>
                     {/* <div contentEditable="true" className="details-title">
@@ -124,10 +103,14 @@ export const TaskDetails = (props) => {
                 </div>
 
                 <div className="details-contents flex">
+                    <label htmlFor="description">Description</label>
                     <section className="details-main-col flex">
-                        <div className="details-desc">
-                            <label htmlFor="description">Description</label>
+                        {isDesc && <div onClick={() => setIsDesc(true)} className="details-desc">
+                            {task.description && <p>{task.description}</p>}
 
+                        </div>}
+
+                        <form onSubmit={onSave}>
                             <textarea
                                 onChange={handleFormChange}
                                 name="description"
@@ -136,21 +119,23 @@ export const TaskDetails = (props) => {
                                 rows="10"
                                 value={task.description}
                                 placeholder="Add a more detailed description..."
-                            ></textarea>
+                            />
+                            <input type="submit" value="Desc" />
+                        </form>
 
-                        </div>
+
                     </section>
 
                     <section className="details-sidebar">
                         <div className="main-add-actions">
                             <h3 className="sidebar-add-heading"> </h3>
-                            <div>
+                            <div className="sidebar-btn">
                                 Labels
                             </div>
-                            <div>
+                            <div className="sidebar-btn">
                                 Attachments
                             </div>
-                            <div>
+                            <div className="sidebar-btn">
                                 Checklist
                             </div>
                         </div>

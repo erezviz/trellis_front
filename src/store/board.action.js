@@ -126,7 +126,7 @@ export function onDeleteGroup(boardId, groupId) {
     return async(dispatch) => {
         try {
             const updatedBoard = await boardService.deleteGroup(boardId, groupId)
-             dispatch(getActionUpdateBoard(updatedBoard))
+            dispatch(getActionUpdateBoard(updatedBoard))
             return updatedBoard
         } catch (err) {
             console.log('Cannot save board', err)
@@ -201,7 +201,8 @@ export function updateTask(boardId, groupId, taskToSave) {
     return async(dispatch) => {
         try {
             const updatedBoard = await boardService.updateTask(boardId, groupId, taskToSave)
-            getActionUpdateBoard(updatedBoard)
+            dispatch(getActionUpdateBoard(updatedBoard))
+            return updatedBoard
         } catch (err) {
             console.log('ERROR: cannot update task', err)
             throw err

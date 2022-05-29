@@ -1,9 +1,12 @@
 .group-preview {
     width: 272px;
     background-color: darken($color: $clr2, $amount: 3%);
-    padding: 5px 15px;
-    margin: 15px;
+    padding: 5px 8px;
+    margin-block-start: 15px;
     border-radius: 5px;
+    height: 100%;
+    padding-block-end: 10px;
+  
     .task-list-container{
         display: flex;
         flex-direction: column;
@@ -55,7 +58,7 @@
         h5 {
             color: darken($color: $clr2, $amount: 55%);
             font-weight: 400;
-            padding: 5px;
+            padding: 7px;
         }
     }
 
