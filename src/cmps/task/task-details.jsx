@@ -82,6 +82,10 @@ export const TaskDetails = (props) => {
         this.props.history.push(`/board/${boardId}`)
     }
 
+   const onAddLabel = ()=>{
+       console.log('hay from add label');
+   }
+
 
     if (!task) return <>Loading...</>
     return (
@@ -138,7 +142,7 @@ export const TaskDetails = (props) => {
                         <div className="main-add-actions">
 
                             <h6 className="sidebar-add-heading">Add to card</h6>
-                            <div className="sidebar-btn">
+                            <div onClick={()=>onAddLabel()} className="sidebar-btn">
                                 Labels
                             </div>
                             <div className="sidebar-btn">
