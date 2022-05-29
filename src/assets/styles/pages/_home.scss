@@ -24,7 +24,17 @@
         flex-wrap: wrap;
         margin-top: 24px;
         
+        .bci1{
+            background-image: url('../../img/background-fall.jpg');
+        }
+        .bci2{
+            background-image: url('../../img/background-fall2.jpg');
+        }
+        .bci3{
+            background-image: url('../../img/background-fall3.jpg');
+        }
         a {
+            background-size:cover;
             background-color: lighten($color: $clr1, $amount: 15%);
             border-radius: 3px;
             font-size: 16px;
@@ -38,6 +48,7 @@
             margin: 0 1rem 1rem 0;
             transition: background-color, .25s;
             width: 190px;
+
         }
 
         a:hover {
