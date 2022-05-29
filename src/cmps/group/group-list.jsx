@@ -1,11 +1,14 @@
 import { GroupPreview } from "./group-preview"
 
 export const GroupList = ({ groups, onDeleteGroup, boardId, onToggleDetails }) => {
+   
+
+    if(!groups) return <>Loading...</>
     return (
         <section className="group-list">
             {groups.map((group,idx) => {
                 const props = {
-                    key: idx,
+                    // key: idx,
                     boardId,
                     onToggleDetails,
                     onDeleteGroup,

@@ -24,16 +24,18 @@ class _BoardApp extends React.Component {
 
     componentDidMount = async() => {
             this.loadGroups()
+            
     }
 
     loadGroups = async (board) => {
+        //###  What is this line for?  ###
         this.setState({ groups: [] })
         const boardId = this.getBoardId()
         if (!board) {
             try {
                 const board = await this.props.loadBoard(boardId)
-                this.setState({ groups: board.groups })
-                
+                this.setState({ groups: board.groups }, (()=> console.log(this.state.groups)))
+      
             } catch (err) {
                 throw err
             }
@@ -116,13 +118,13 @@ class _BoardApp extends React.Component {
                 <section className="main-board">
                 {(!groups || !groups.length) && <h3>Loading...</h3>}
                 <div className="list-container">
-                    <GroupList boardId={boardId} onToggleDetails={this.onToggleDetails} onDeleteGroup={this.onDeleteGroup} groups={groups}/>
+                    <GroupList key={'GroupList'} boardId={boardId} onToggleDetails={this.onToggleDetails} onDeleteGroup={this.onDeleteGroup} groups={groups}/>
 
                 </div>
                 <>
                     <Route path='/board/:boardId/:groupId/:taskId' >
-                        <Screen isOpen={isModalOpen}   >
-                            <TaskDetails isOpen={isModalOpen} onToggleDetails={this.onToggleDetails} />
+                        <Screen  key={'Screen'} isOpen={isModalOpen}   >
+                            <TaskDetails key={'TaskDetails'} isOpen={isModalOpen} onToggleDetails={this.onToggleDetails} />
 
                         </Screen>
                     </Route>
