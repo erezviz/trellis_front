@@ -10,6 +10,7 @@
     .header-link {
         margin: 0;
         color: $clr2;
+       
     }
     .user-link {
             cursor: pointer;
@@ -36,6 +37,7 @@
     .logo-container {
         align-items: center;
         display: flex;
+        margin-inline-start: 15px;
         &:hover {
             cursor: pointer;
         }
