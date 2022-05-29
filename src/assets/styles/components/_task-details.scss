@@ -44,12 +44,21 @@
 }
 
 textarea#description {
+    font-family: Roboto, sans-serif;
     border-style: none;
     background-color: #f4f5f7;
+    text-shadow: 0 0 0.5px;
+    resize: none;
+    &:focus {
+        border-radius: 5px;
+        outline: 0;
+        background-color: #fff;
+        box-shadow: inset 0 0 0 2px #0079bf;
+    }
 }
 
-.main-add-actions{
-    div{
+.main-add-actions {
+    div {
         margin-top: 7px;
         padding: 3px 10px 3px 3px;
         border-radius: 3px;
@@ -60,9 +69,10 @@ textarea#description {
 .details-container {
     display: flex;
     flex-direction: column;
-    height: 95vh;
+    min-height: 600px;
     margin: 10px 30px;
     .details-contents {
+        padding-top: 15px;
         justify-content: space-between;
     }
     .close-details-btn {
@@ -81,12 +91,26 @@ textarea#description {
         z-index: 2;
         transition: background-color, .25s;
     }
-    .close-details-btn:hover{
+    .close-details-btn:hover {
         background-color: darken($color: $clr2, $amount: 10%);
     }
     .details-desc {
         display: flex;
         flex-direction: column;
+    }
+    .desc-container {
+        form {
+            display: flex;
+            flex-direction: column;
+            input {
+                background-color: #0079bf;
+                border: none;
+                box-shadow: none;
+                color: #fff;
+                width: rem(65px);
+                padding: rem(10px);
+            }
+        }
     }
 }
 
@@ -105,7 +129,6 @@ textarea#description {
         padding: 4px 8px;
         resize: none;
         overflow: hidden;
-        
         h3 {
             margin: rem(-4px) rem(-8px);
             padding: rem(4px) rem(8px);
@@ -113,14 +136,13 @@ textarea#description {
     }
 }
 
-.sidebar-btn{
+.sidebar-btn {
     width: 180px;
     font-size: 15px;
     cursor: pointer;
-    &:hover{
+    &:hover {
         background-color: #091e4214;
         border: none;
         box-shadow: none;
     }
 }
-
