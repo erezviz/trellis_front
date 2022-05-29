@@ -6,6 +6,11 @@
     border-radius: 5px;
     height: 100%;
     padding-block-end: 10px;
+  
+    .task-list-container{
+        display: flex;
+        flex-direction: column;
+    }
 
     .header-container {
         cursor: pointer;

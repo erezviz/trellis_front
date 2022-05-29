@@ -113,6 +113,12 @@ textarea#description {
     }
 }
 
+.task-list{
+    flex-grow: 1;
+    min-height: 100px;
+}
+
+
 .sidebar-btn{
     width: 180px;
     font-size: 15px;
@@ -123,4 +129,5 @@ textarea#description {
         box-shadow: none;
     }
 }
+
 
