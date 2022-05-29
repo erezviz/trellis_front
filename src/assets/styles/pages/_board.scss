@@ -31,7 +31,8 @@
         display: flex;
     }
     .add-group {
-        padding: 15px 5px;
+        padding: 16px 4px;
+        width: 272px;
        
         
         form{
@@ -69,7 +70,7 @@
         grid-column: 2;
     }
     .add-group-btn {
-        margin: 15px;
+        margin-inline-start: 15px;
         padding: 6px 8px;
         width: 250px;
         height: fit-content;
