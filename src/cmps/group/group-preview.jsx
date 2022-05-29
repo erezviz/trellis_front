@@ -15,8 +15,9 @@ export const GroupPreview = (props) => {
   const { currBoard } = useSelector(state => state.boardModule)
   
   useEffect(()=>{
+      
       (async=>{
-         console.log('group preview', currBoard)
+
         try{ 
             const currGroup = currBoard.groups.find(boardGroup=>{
                 return boardGroup.id === group.id
@@ -47,11 +48,11 @@ export const GroupPreview = (props) => {
         <section className="group-preview" >
             
             <div className="header-container">
-            <GroupHeader onChangeName={onChangeName} title={group.title}/>
+            <GroupHeader  onChangeName={onChangeName} title={group.title}/>
             <button onClick={()=>props.onDeleteGroup(group.id)}>X</button>
             </div>
             <div className="task-list-container">
-            <TaskList groupId={props.group.id} boardId={boardId} tasks={group.tasks} onToggleDetails={props.onToggleDetails}/>
+            <TaskList  groupId={props.group.id} boardId={boardId} tasks={group.tasks} onToggleDetails={props.onToggleDetails}/>
             </div>
             <div className="task-footer-container">
             <GroupFooter boardId={boardId} groupId={props.group.id} />

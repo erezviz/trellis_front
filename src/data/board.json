@@ -2,7 +2,7 @@
 
 
     {
-        "_id": "b101",
+        "_id": "b102",
         "title": "Board 1",
         "archivedAt": 1589983468418,
         "createdAt": 1589983468418,
@@ -109,38 +109,9 @@
         }]
 
     },
-    {
-        "_id": "b101",
-        "title": "Board 1",
-        "archivedAt": 1589983468418,
-        "createdAt": 1589983468418,
-        "createdBy": {
-            "_id": "u101",
-            "fullname": "Abi Abambi",
-            "imgUrl": "http://some-img"
-        },
-        "style": {},
-        "labels": [{
-                "id": "l101",
-                "title": "Done",
-                "color": "#61bd4f"
-            },
-            {
-                "id": "l102",
-                "title": "Progress",
-                "color": "#61bd33"
-            }
-        ],
-        "members": [{
-            "task": {
-                "id": "c101",
-                "title": "Replace Logo"
-            }
-        }]
 
-    },
     {
-        "_id": "b102",
+        "_id": "b103",
         "title": "Board 2",
         "archivedAt": 1589983468418,
         "createdAt": 1589983468418,
@@ -167,7 +138,7 @@
             "imgUrl": "https://www.google.com"
         }],
         "groups": [{
-                "id": "g101",
+                "id": "g105",
                 "title": "Group 1",
                 "archivedAt": 1589983468418,
                 "tasks": [{
