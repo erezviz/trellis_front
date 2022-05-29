@@ -4,6 +4,10 @@
     padding: 5px 15px;
     margin: 15px;
     border-radius: 5px;
+    .task-list-container{
+        display: flex;
+        flex-direction: column;
+    }
 
     .header-container {
         cursor: pointer;
