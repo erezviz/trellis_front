@@ -132,7 +132,7 @@ class _BoardApp extends React.Component {
                 <div className="add-group">
                     {!isShown && <button className="add-group-btn" onClick={this.onToggleGroup}><span className="plus">+</span> Add another list</button>}
                     {isShown && <form onSubmit={(ev)=>this.onAddGroup(ev)}>
-                        <TextField onChange={this.onHandleChange} name="title" id="outlined-textarea" placeholder="Enter list title..." multiline />
+                        <TextField inputProps={{className: 'add-group-field'}} onChange={this.onHandleChange} name="title" id="outlined-textarea" placeholder="Enter list title..." multiline />
                         <button >save list</button>
                         <button onClick={this.onToggleGroup}>x</button>
                     </form>}
