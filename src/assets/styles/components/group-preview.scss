@@ -21,6 +21,7 @@
         h3{
             width: 217px;
             height: 15px;
+            margin-inline-start: 7px;
         }
 
         .group-header {
@@ -70,6 +71,8 @@
         transition: background-color, 0.25s;
         border-radius: 3px;
         display: flex;
+        font-size: 15px;
+        color: #5e6c84;
         .btn-save {
             font-size: 20px;
             border-style: none;
