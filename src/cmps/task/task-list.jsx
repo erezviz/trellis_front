@@ -2,7 +2,7 @@
 // import { useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 import { TaskPreview } from "./task-preview"
-import {Droppable} from "react-beautiful-dnd"
+import { Droppable, Draggable } from "react-beautiful-dnd"
 
 
 export const TaskList = (props) => {
@@ -12,26 +12,37 @@ export const TaskList = (props) => {
 
     if (!tasks) return (<p>No tasks</p>)
     return (
-            <Droppable index={idx} droppableId={props.groupId}>
-                {(provided)=>{
-       return <section className="task-list" {...provided.droppableProps} ref={provided.innerRef}>
+        // <Draggable draggableId={props.groupId} index={idx}>
+        //     {(provided)=>{
+        // return 
+        // <div {...provided.dragHandleProps}
+        // {...provided.draggableProps}
+        // ref={provided.innerRef}
+        // >
+        <Droppable type='task' index={idx} droppableId={props.groupId}>
+            {(provided) => {
+                return <section className="task-list" {...provided.droppableProps} ref={provided.innerRef}>
 
-               
-            { (tasks || tasks.length) && tasks.map((task, idx) => {
 
-                return (
+                    {(tasks || tasks.length) && tasks.map((task, idx) => {
 
-                    <div id={task.id} key={task.id}>
-                        <Link key={task.id + idx} to={`/board/${props.boardId}/${props.groupId}/${task.id}`}>
-                            <TaskPreview idx={idx} boardId={props.boardId} onToggleDetails={props.onToggleDetails} key={task.id} task={task} />
-                        </Link>
-                    </div>
-                )
+                        return (
 
-            })}
-            {provided.placeholder}
-        </section>
-             }}
-            </Droppable>
+                            <div id={task.id} key={task.id}>
+                                <Link key={task.id + idx} to={`/board/${props.boardId}/${props.groupId}/${task.id}`}>
+                                    <TaskPreview idx={idx} boardId={props.boardId} onToggleDetails={props.onToggleDetails} key={task.id} task={task} />
+                                </Link>
+                            </div>
+                        )
+
+                    })}
+                    {provided.placeholder}
+                </section>
+            }}
+        </Droppable>
+
+        // </div>
+        // }}
+        // </Draggable>
     )
 }

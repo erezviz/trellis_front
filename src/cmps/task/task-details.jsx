@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import { TaskTitle } from '../dynamic-cmps/task-title';
 import { boardService } from '../../services/board.service';
+import {TaskChecklist} from './checklist/task-checklist.jsx'
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
@@ -68,14 +69,18 @@ export const TaskDetails = (props) => {
     // TODO work on a function to save the title of the task in the task.
     // TODO this function will need to dispatch to the state and update the task in the JSON file.
     async function onSave(ev) {
-        ev.preventDefault()
+        if (ev){
+            ev.preventDefault()
+            console.log(ev.target)
+
+        } 
+        console.log("PRINT TODOS", task.checklist)
         const updatedBoard = await dispatch(updateTask(boardId, groupId, task))
         console.log('updatedboad inside onSave', updatedBoard);
     }
 
     const handleFormChange = ev => {
         const { name, value } = ev.target
-
         setTask(prevTask => ({ ...prevTask, [name]: value }))
     }
     const goBack = () => {
@@ -129,12 +134,11 @@ export const TaskDetails = (props) => {
                                     value={task.description}
                                     placeholder="Add a more detailed description..."
                                 />
-                                {/* <button>Send</button>                              */}
-                                {/* <button>Cancel</button>                              */}
+
                                 <input className='desc-send-btn' type="submit" value="Send" />
                             </form>
                         </div>
-
+                    <div className='checklist'><TaskChecklist onSave={onSave} checklist={task.checklist} handleFormChange={handleFormChange}/></div>
 
                     </section>
 

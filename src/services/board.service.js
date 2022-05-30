@@ -64,6 +64,7 @@ async function save(board) {
         savedBoard = await storageService.post(STORAGE_KEY, board)
             // boardChannel.postMessage(getActionAddBoard(savedBoard))
     }
+    console.log(savedBoard)
     return savedBoard
 }
 
