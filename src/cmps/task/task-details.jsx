@@ -46,7 +46,7 @@ export const TaskDetails = (props) => {
         return () => {
             setTask(null)
         }
-    })
+    },[])
 
     const modalStyle = {
         display: props.isOpen ? 'block' : 'none',
