@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from "react-redux"
+import {Droppable, Draggable} from "react-beautiful-dnd"
 
 import { GroupHeader } from "./group-header"
 import { TaskList } from "../task/task-list"
@@ -42,7 +43,12 @@ export const GroupPreview = (props) => {
     }
 
     return (
-        <section className="group-preview" key={group.id}>
+        <Draggable draggableId={group.id} index={groupIdx}>
+            {(provided)=>{
+           return  <section {...provided.dragHandleProps} 
+        {...provided.draggableProps}
+        ref={provided.innerRef}
+         className="group-preview" key={group.id}>
             
             <div className="header-container">
             <GroupHeader key={group.id} onChangeName={onChangeName} title={group.title}/>
@@ -54,6 +60,9 @@ export const GroupPreview = (props) => {
             <div className="task-footer-container">
             <GroupFooter boardId={boardId} groupId={props.group.id} />
             </div>
+            {provided.placeholder}
         </section>
+            }}
+        </Draggable>
     )
 }
