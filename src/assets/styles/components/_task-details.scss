@@ -69,6 +69,9 @@
     position: relative;
     width: 768px;
     z-index: 25;
+    .details-main-col {
+        flex-direction: column;
+    }
 }
 
 textarea#description {
@@ -177,5 +180,41 @@ textarea#description {
         background-color: #091e4214;
         border: none;
         box-shadow: none;
+    }
+}
+
+.checklist {
+    margin-top: 15px;
+}
+
+.checklist-item {
+    display: flex;
+    align-items: center;
+    img {
+        visibility: hidden;
+        width: fit-content;
+        position: relative;
+        margin-left: 153px;
+        cursor: pointer;
+    }
+    .delete-modal {
+        text-align: center;
+        background-color: white;
+        height: 100px;
+        position: fixed;
+        width: 230px;
+        will-change: top, left;
+        top: 430px;
+        left: 250px;
+        p {
+            margin: 0;
+        }
+    }
+}
+
+.checklist-item:hover {
+    background-color: darken($color: $clr2, $amount: 15%);
+    img {
+        visibility: visible;
     }
 }

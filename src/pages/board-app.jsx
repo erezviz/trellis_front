@@ -12,6 +12,8 @@ import { loadBoard, onDeleteGroup, onAddGroup } from '../store/board.action'
 import { Screen } from '../cmps/dynamic-cmps/screen'
 import { Route } from "react-router-dom";
 import { Labels } from '../cmps/task/labels'
+import { TrellisSpinner } from "../cmps/util-cmps/trellis-spinner";
+
 class _BoardApp extends React.Component {
 
 
@@ -120,9 +122,10 @@ class _BoardApp extends React.Component {
             <section className={`board-app ${boardId}`}>
                 <BoardHeader />
                 <section className="main-board">
-                    {(!groups || !groups.length) && <h3>Loading...</h3>}
-                    <div className="list-container">
-                        <GroupList key={'GroupList'} boardId={boardId} onToggleDetails={this.onToggleDetails} onDeleteGroup={this.onDeleteGroup} groups={groups} />
+                    {/* <TrellisSpinner isLarge={true}/> */}
+                {(!groups || !groups.length) && <TrellisSpinner isLarge={true}/>}
+                <div className="list-container">
+                    <GroupList key={'GroupList'} boardId={boardId} onToggleDetails={this.onToggleDetails} onDeleteGroup={this.onDeleteGroup} groups={groups}/>
 
                     </div>
                     <>

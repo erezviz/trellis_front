@@ -2,17 +2,22 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react'
 import { useRouteMatch } from 'react-router-dom';
-import { Link } from 'react-router-dom';
-import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
-import { TaskTitle } from '../dynamic-cmps/task-title';
-import { boardService } from '../../services/board.service';
-import { useHistory } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
+// import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
+// import { TaskTitle } from '../dynamic-cmps/task-title';
+// import { boardService } from '../../services/board.service';
+import { TaskChecklist } from './checklist/task-checklist.jsx'
+// import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
 import member from '../../assets/icon/member.svg'
-import { queryTask, updateTask } from '../../store/board.action';
 import { useSelector } from 'react-redux';
 import { Labels } from './labels';
+import { queryTask, updateTask } from '../../store/board.action';
+// import { useSelector } from 'react-redux';
+
+import { TrellisSpinner } from '../util-cmps/trellis-spinner';
+import { Attachments } from './attachments';
 // import Box from '@mui/material/Box';
 // import Modal from '@mui/material/Modal';
 // import Button from '@mui/material/Button';
@@ -23,11 +28,11 @@ import { Labels } from './labels';
 export const TaskDetails = (props) => {
     const [isDesc, setIsDesc] = useState(false)
     let [isEdit, setIsEdit] = useState(false)
-    let [title, setTitle] = useState({ title: '' })
+    // let [title, setTitle] = useState({ title: '' })
     let [task, setTask] = useState(null)
     const dispatch = useDispatch()
-    const { currBoard } = useSelector((storeState) => storeState.boardModule)
-    let history = useHistory()
+    // const { currBoard } = useSelector((storeState) => storeState.boardModule)
+    // let history = useHistory()
     // let { boardId, groupId, taskId } = useParams()
     let { params: { boardId, groupId, taskId } } = useRouteMatch();
 
@@ -41,7 +46,7 @@ export const TaskDetails = (props) => {
         return () => {
             setTask(null)
         }
-    }, [])
+    },[])
 
     const modalStyle = {
         display: props.isOpen ? 'block' : 'none',
@@ -63,17 +68,20 @@ export const TaskDetails = (props) => {
         overflowWrap: 'break-word',
         height: '33px'
     }
-    // TODO work on a function to save the title of the task in the task.
-    // TODO this function will need to dispatch to the state and update the task in the JSON file.
+
     async function onSave(ev) {
-        ev.preventDefault()
+        if (ev) {
+            ev.preventDefault()
+            console.log(ev.target)
+
+        }
+
         const updatedBoard = await dispatch(updateTask(boardId, groupId, task))
-        console.log('updatedboad inside onSave', updatedBoard);
+
     }
 
     const handleFormChange = ev => {
         const { name, value } = ev.target
-
         setTask(prevTask => ({ ...prevTask, [name]: value }))
     }
     const goBack = () => {
@@ -85,12 +93,12 @@ export const TaskDetails = (props) => {
     }
 
 
-    if (!task) return <>Loading...</>
+    if (!task) return <><TrellisSpinner isLarge={true} /></>
+
     return (
 
         <section style={modalStyle} className="task-details">
             <div className="details-container flex">
-
 
                 <button onClick={(ev) => {
                     // return goBack()
@@ -145,12 +153,13 @@ export const TaskDetails = (props) => {
                                     value={task.description}
                                     placeholder="Add a more detailed description..."
                                 />
-                                {/* <button>Send</button>                              */}
-                                {/* <button>Cancel</button>                              */}
+
                                 <input className='desc-send-btn' type="submit" value="Send" />
                             </form>
                         </div>
+                        <Attachments handleChange={handleFormChange} />
 
+                        <div className='checklist'><TaskChecklist onSave={onSave} checklist={task.checklist} handleFormChange={handleFormChange} /></div>
 
                     </section>
 
@@ -163,6 +172,7 @@ export const TaskDetails = (props) => {
                             </div>
                             <div className="sidebar-btn">
                                 Attachments
+
                             </div>
                             <div className="sidebar-btn">
                                 Checklist

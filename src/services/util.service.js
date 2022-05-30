@@ -2,7 +2,8 @@ export const utilService = {
     makeId,
     makeLorem,
     getRandomIntInclusive,
-    delay
+    delay,
+    getFilename
 }
 
 function makeId(length = 6) {
@@ -36,4 +37,23 @@ function delay(ms = 1500) {
     return new Promise(resolve => {
         setTimeout(resolve, ms)
     })
+}
+
+function getFilename(strUrl) {
+    let filename
+        // if (isValidUrl(strUrl)) {
+
+    const URLObj = new URL(strUrl)
+    const { pathname } = URLObj
+    filename = pathname.split('/').pop()
+    if (!filename.includes('.')) filename += '.jpeg'
+        // } else {
+        //     filename = 'http://' + strUrl
+        // }
+    return filename
+}
+
+function isValidUrl(str) {
+    const matchpattern = /^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)$/gm;
+    return matchpattern.test(str);
 }
