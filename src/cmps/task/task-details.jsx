@@ -2,14 +2,15 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react'
 import { useRouteMatch } from 'react-router-dom';
-import { Link } from 'react-router-dom';
-import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
-import { TaskTitle } from '../dynamic-cmps/task-title';
-import { boardService } from '../../services/board.service';
-import { useHistory } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
+// import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
+// import { TaskTitle } from '../dynamic-cmps/task-title';
+// import { boardService } from '../../services/board.service';
+import { TaskChecklist } from './checklist/task-checklist.jsx'
+// import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { queryTask, updateTask } from '../../store/board.action';
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 
 import { TrellisSpinner } from '../util-cmps/trellis-spinner';
 import { Attachments } from './attachments';
@@ -23,11 +24,11 @@ import { Attachments } from './attachments';
 export const TaskDetails = (props) => {
     const [isDesc, setIsDesc] = useState(false)
     let [isEdit, setIsEdit] = useState(false)
-    let [title, setTitle] = useState({ title: '' })
+    // let [title, setTitle] = useState({ title: '' })
     let [task, setTask] = useState(null)
     const dispatch = useDispatch()
-    const { currBoard } = useSelector((storeState) => storeState.boardModule)
-    let history = useHistory()
+    // const { currBoard } = useSelector((storeState) => storeState.boardModule)
+    // let history = useHistory()
     // let { boardId, groupId, taskId } = useParams()
     let { params: { boardId, groupId, taskId } } = useRouteMatch();
 
@@ -45,7 +46,7 @@ export const TaskDetails = (props) => {
         return () => {
             setTask(null)
         }
-    }, [])
+    })
 
     const modalStyle = {
         display: props.isOpen ? 'block' : 'none',
@@ -69,23 +70,31 @@ export const TaskDetails = (props) => {
     }
 
     async function onSave(ev) {
-        ev.preventDefault()
+        if (ev) {
+            ev.preventDefault()
+            console.log(ev.target)
+
+        }
+
         const updatedBoard = await dispatch(updateTask(boardId, groupId, task))
-  
+
     }
 
     const handleFormChange = ev => {
         const { name, value } = ev.target
-
         setTask(prevTask => ({ ...prevTask, [name]: value }))
     }
     const goBack = () => {
         this.props.history.push(`/board/${boardId}`)
     }
 
+    const onAddLabel = () => {
+        console.log('hay from add label');
+    }
 
-    if (!task) return <><TrellisSpinner isLarge={true}/></>
-   
+
+    if (!task) return <><TrellisSpinner isLarge={true} /></>
+
     return (
 
         <section style={modalStyle} className="task-details">
@@ -97,8 +106,8 @@ export const TaskDetails = (props) => {
                 }} className="close-details-btn">X</button>
                 <div onClick={() => setIsEdit(isEdit = !isEdit)} className="details-header flex">
                     <form onSubmit={(ev) => onSave(ev)} >
-                        <input onBlur={(ev) => onSave(ev)} style={isEdit ? { titleStyle } : {}} value={task.title} onChange={handleFormChange} className="details-title" name="title"  />
-                   
+                        <input onBlur={(ev) => onSave(ev)} style={isEdit ? { titleStyle } : {}} value={task.title} onChange={handleFormChange} className="details-title" name="title" />
+
                     </form>
                     {/* <div contentEditable="true" className="details-title">
                     This is the Title
@@ -126,13 +135,13 @@ export const TaskDetails = (props) => {
                                     value={task.description}
                                     placeholder="Add a more detailed description..."
                                 />
-                                {/* <button>Send</button>                              */}
-                                {/* <button>Cancel</button>                              */}
+
                                 <input className='desc-send-btn' type="submit" value="Send" />
                             </form>
                         </div>
-                        <Attachments handleChange={handleFormChange}/>
+                        <Attachments handleChange={handleFormChange} />
 
+                        <div className='checklist'><TaskChecklist onSave={onSave} checklist={task.checklist} handleFormChange={handleFormChange} /></div>
 
                     </section>
 
@@ -140,12 +149,12 @@ export const TaskDetails = (props) => {
                         <div className="main-add-actions">
 
                             <h6 className="sidebar-add-heading">Add to card</h6>
-                            <div className="sidebar-btn">
+                            <div onClick={() => onAddLabel()} className="sidebar-btn">
                                 Labels
                             </div>
                             <div className="sidebar-btn">
                                 Attachments
-                              
+
                             </div>
                             <div className="sidebar-btn">
                                 Checklist
