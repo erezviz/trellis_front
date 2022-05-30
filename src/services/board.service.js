@@ -20,6 +20,8 @@ export const boardService = {
     deleteGroup,
     loadTask,
     updateTask,
+    createAttachment,
+    getAttachmentTitle,
     // subscribe,
     // unsubscribe
 
@@ -181,6 +183,29 @@ async function updateTask(boardId, groupId, taskToSave) {
     }
 }
 
+function createAttachment(attachmentType, str) {
+    const attachment = {
+        id: utilService.makeId(),
+        createdAt: Date.now(),
+        title: '',
+        details: ''
+
+    }
+    switch (attachmentType) {
+        case 'link':
+            attachment.details = str
+            break;
+
+        default:
+            break;
+    }
+    return attachment
+}
+
+function getAttachmentTitle(urlStr) {
+    let url = new URL(urlStr)
+    console.log(url);
+}
 
 // function subscribe(listener) {
 //     boardChannel.addEventListener('message', listener)

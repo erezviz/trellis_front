@@ -1,6 +1,7 @@
 import { GroupPreview } from "./group-preview"
 import {DragDropContext} from "react-beautiful-dnd"
 import { useSelector } from "react-redux"
+import { TrellisSpinner } from "../util-cmps/trellis-spinner"
 
 export const GroupList = ({ groups, onDeleteGroup, boardId, onToggleDetails }) => {
     const { currBoard } = useSelector(state => state.boardModule)
@@ -32,7 +33,7 @@ export const GroupList = ({ groups, onDeleteGroup, boardId, onToggleDetails }) =
         }
     }
 
-    if(!groups) return <>Loading...</>
+    if(!groups) return <TrellisSpinner/>
     return (
         <DragDropContext onDragEnd={onDragEnd} id={currBoard}>
         <section className="group-list">

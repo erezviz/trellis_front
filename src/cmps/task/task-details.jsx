@@ -8,9 +8,11 @@ import { TaskTitle } from '../dynamic-cmps/task-title';
 import { boardService } from '../../services/board.service';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-
 import { queryTask, updateTask } from '../../store/board.action';
 import { useSelector } from 'react-redux';
+
+import { TrellisSpinner } from '../util-cmps/trellis-spinner';
+import { Attachments } from './attachments';
 // import Box from '@mui/material/Box';
 // import Modal from '@mui/material/Modal';
 // import Button from '@mui/material/Button';
@@ -65,12 +67,11 @@ export const TaskDetails = (props) => {
         overflowWrap: 'break-word',
         height: '33px'
     }
-    // TODO work on a function to save the title of the task in the task.
-    // TODO this function will need to dispatch to the state and update the task in the JSON file.
+
     async function onSave(ev) {
         ev.preventDefault()
         const updatedBoard = await dispatch(updateTask(boardId, groupId, task))
-        console.log('updatedboad inside onSave', updatedBoard);
+  
     }
 
     const handleFormChange = ev => {
@@ -83,12 +84,12 @@ export const TaskDetails = (props) => {
     }
 
 
-    if (!task) return <>Loading...</>
+    if (!task) return <><TrellisSpinner isLarge={true}/></>
+   
     return (
 
         <section style={modalStyle} className="task-details">
             <div className="details-container flex">
-
 
                 <button onClick={(ev) => {
                     // return goBack()
@@ -130,6 +131,7 @@ export const TaskDetails = (props) => {
                                 <input className='desc-send-btn' type="submit" value="Send" />
                             </form>
                         </div>
+                        <Attachments handleChange={handleFormChange}/>
 
 
                     </section>
@@ -143,6 +145,7 @@ export const TaskDetails = (props) => {
                             </div>
                             <div className="sidebar-btn">
                                 Attachments
+                              
                             </div>
                             <div className="sidebar-btn">
                                 Checklist

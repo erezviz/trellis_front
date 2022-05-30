@@ -41,6 +41,9 @@
     position: relative;
     width: 768px;
     z-index: 25;
+    .details-main-col {
+        flex-direction: column;
+    }
 }
 
 textarea#description {
