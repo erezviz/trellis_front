@@ -31,6 +31,34 @@
         display: flex;
     }
 }
+.members{
+    margin-block-start: 10px;
+    p{
+        margin: 0;
+        font-size: small;
+    }
+    .main-members{
+        display: flex;
+        .member-icon{
+            width: 30px;
+            height: 30px;
+            margin-block-end: 10px;
+            display: flex;
+            gap: 5px;
+            image{
+                width: 100%;
+            }
+        }
+        .add-member{
+            text-align: start ;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            background-color: #5e6c84;
+            
+        }
+    }
+}
 
 .task-details {
     background-color: #f4f5f7;

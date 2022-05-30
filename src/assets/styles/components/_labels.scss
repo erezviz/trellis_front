@@ -1,0 +1,124 @@
+.labels{
+    background: #fff;
+    border-radius: 3px;
+    padding: 10px;
+    box-shadow: 0 8px 16px -4px #091e4240, 0 0 0 1px #091e4214;
+    // display: none;
+    // overflow: hidden;
+    position: absolute;
+    right: 3%;
+    top: 25%;
+    width: 280px;
+    z-index: 70;
+
+    .mainlabels{
+        padding: 0 12px 12px;
+    }
+
+    ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+        li{
+        display: list-item;
+        text-align: -webkit-match-parent;
+        padding-right: 36px;
+        position: relative;
+        font-size: 13px;
+        font-weight: lighte;
+        }
+    }
+
+    
+
+    header{
+        border-bottom: 1px solid #091e4221;
+        box-sizing: border-box;
+        color: #5e6c84;
+        display: block;
+        line-height: 40px;
+        margin: 0 12px;
+        overflow: hidden;
+        padding: 0 32px;
+        position: relative;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        z-index: 1;
+        text-align: center;
+       
+    }
+
+    .card-label {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        /* background-color: #b3bac5; */
+        /* border-radius: 4px; */
+        color: #fff;
+        display: block;
+        margin-right: 4px;
+        max-width: 100%;
+        overflow: hidden;
+        padding: 4px 6px;
+        position: relative;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .card-label.mod-selectable{
+        border-radius: 3px;
+        cursor: pointer;
+        font-weight: 700;
+        margin: 0 0 4px;
+        min-height: 20px;
+        padding: 6px 12px;
+        position: relative;
+        transition: padding 85ms,margin 85ms,box-shadow 85ms;
+       
+    }
+
+    .edit-icon{
+        // width: 40px;
+        // height: 40px;
+        // position: absolute;
+        // right: 0;
+        // top: 20px;
+        border-radius: 3px;
+        padding: 6px;
+        position: absolute;
+        right: 0;
+        top: 0;
+        font-size: 16px;
+        height: 20px;
+        line-height: 20px;
+        width: 20px;
+        color: #42526e;
+        image{
+            width: 100%;
+        }
+    }
+    h2{
+        font-size: 15px;
+        font-weight: lighter;
+    }
+    
+    
+    .card-label-green{
+        background-color: #519839;
+     }
+    .card-label-yellow{
+        background-color: #f2d600;
+     }
+    .card-label-red{
+        background-color: #eb5a46;
+     }
+    .card-label-orenge{
+        background-color: #ff9f1a;
+       }
+    .card-label-blue{
+        background-color: #055a8c;
+       }
+    .card-label-purple{
+        background-color:#c377e0;
+    }
+}

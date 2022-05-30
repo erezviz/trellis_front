@@ -9,8 +9,10 @@ import { boardService } from '../../services/board.service';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
+import member from '../../assets/icon/member.svg'
 import { queryTask, updateTask } from '../../store/board.action';
 import { useSelector } from 'react-redux';
+import { Labels } from './labels';
 // import Box from '@mui/material/Box';
 // import Modal from '@mui/material/Modal';
 // import Button from '@mui/material/Button';
@@ -32,14 +34,10 @@ export const TaskDetails = (props) => {
 
 
     useEffect(() => {
-
         (async () => {
             const newtask = await dispatch(queryTask(boardId, groupId, taskId))
-
             setTask(newtask)
-
         })();
-
         return () => {
             setTask(null)
         }
@@ -82,9 +80,9 @@ export const TaskDetails = (props) => {
         this.props.history.push(`/board/${boardId}`)
     }
 
-   const onAddLabel = ()=>{
-       console.log('hay from add label');
-   }
+    const onAddLabel = () => {
+        console.log('hay from add label');
+    }
 
 
     if (!task) return <>Loading...</>
@@ -100,18 +98,36 @@ export const TaskDetails = (props) => {
                 }} className="close-details-btn">X</button>
                 <div onClick={() => setIsEdit(isEdit = !isEdit)} className="details-header flex">
                     <form onSubmit={(ev) => onSave(ev)} >
-                        <input onBlur={(ev) => onSave(ev)} style={isEdit ? { titleStyle } : {}} value={task.title} onChange={handleFormChange} className="details-title" name="title"  />
-                   
+                        <input onBlur={(ev) => onSave(ev)} style={isEdit ? { titleStyle } : {}} value={task.title} onChange={handleFormChange} className="details-title" name="title" />
+
                     </form>
                     {/* <div contentEditable="true" className="details-title">
                     This is the Title
                 </div> */}
                 </div>
+                <header className="task-header">
+
+                    <div className="members">
+                        <p>Members</p>
+                        <div className="main-members">
+                            <div className="member-icon">
+                                <img src={member} alt="" />
+                            </div>
+                            <div className="add-member">+</div>
+                        </div>
+                    </div>
+
+                    <div className="labels-list">
+                        <div className="label"></div>
+                    </div>
+                </header>
+
+
+
 
                 <div className="details-contents flex">
                     <section className="details-main-col flex">
                         <div className="desc-container">
-
                             <label className="description" htmlFor="description">Description</label>
                             {isDesc && <div onClick={() => setIsDesc(true)} className="details-desc">
                                 {task.description && <p>{task.description}</p>}
@@ -142,7 +158,7 @@ export const TaskDetails = (props) => {
                         <div className="main-add-actions">
 
                             <h6 className="sidebar-add-heading">Add to card</h6>
-                            <div onClick={()=>onAddLabel()} className="sidebar-btn">
+                            <div onClick={() => onAddLabel()} className="sidebar-btn">
                                 Labels
                             </div>
                             <div className="sidebar-btn">
@@ -156,6 +172,7 @@ export const TaskDetails = (props) => {
                 </div>
 
             </div>
+
         </section>
     )
 }

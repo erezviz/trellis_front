@@ -1,5 +1,10 @@
 [
-
+   
+    
+    
+    
+    
+    
 
     {
         "_id": "b101",
@@ -15,12 +20,32 @@
         "labels": [{
                 "id": "l101",
                 "title": "Done",
-                "color": "#61bd4f"
+                "color": "#519839"
             },
             {
                 "id": "l102",
                 "title": "Progress",
-                "color": "#61bd33"
+                "color": "#f2d600"
+            },
+            {
+                "id": "l103",
+                "title": "Open",
+                "color": " #eb5a46"
+            },
+            {
+                "id": "l104",
+                "title": "Urgent",
+                "color": "#ff9f1a"
+            },
+            {
+                "id": "l105",
+                "title": "Irrelevant",
+                "color": "#055a8c"
+            },
+            {
+                "id": "l106",
+                "title": "Assigned",
+                "color": "#c377e0"
             }
         ],
         "members": [{
@@ -76,7 +101,7 @@
                             }]
                         }],
                         "memberIds": ["u101"],
-                        "labelIds": ["l101", "l102"],
+                        "labelIds": [],
                         "createdAt": 1590999730348,
                         "dueDate": 16156215211,
                         "byMember": {
@@ -185,7 +210,7 @@
                             }]
                         }],
                         "memberIds": ["u101"],
-                        "labelIds": ["l101", "l102"],
+                        "labelIds": [],
                         "createdAt": 1590999730348,
                         "dueDate": 16156215211,
                         "byMember": {
@@ -293,7 +318,7 @@
                             }]
                         }],
                         "memberIds": ["u101"],
-                        "labelIds": ["l101", "l102"],
+                        "labelIds": [],
                         "createdAt": 1590999730348,
                         "dueDate": 16156215211,
                         "byMember": {
