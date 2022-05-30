@@ -54,6 +54,7 @@ export const Labels = (props) => {
         <section className="labels">
             <header>
                 <h2>labels</h2>
+                <button className="close-btn" onClick={()=>props.onToggleLabels()}></button>
             </header>
             <section className="main-labels">
                 <ul className="edit-labels">

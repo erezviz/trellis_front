@@ -167,7 +167,7 @@ export const TaskDetails = (props) => {
                         <div className="main-add-actions">
 
                             <h6 className="sidebar-add-heading">Add to card</h6>
-                            <div onClick={() => onAddLabel()} className="sidebar-btn">
+                            <div onClick={() => props.onToggleLabels()} className="sidebar-btn">
                                 Labels
                             </div>
                             <div className="sidebar-btn">
