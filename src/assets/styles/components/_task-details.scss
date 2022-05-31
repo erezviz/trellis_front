@@ -66,6 +66,7 @@
     .labels-section{
         p{
             font-size: 15px;
+            margin: 0;
         }
         .labels-list{
             display: flex;
@@ -195,7 +196,7 @@ textarea#description {
 
 .task-list {
     flex-grow: 1;
-    min-height: 100px;
+    min-height: 75px;
 }
 
 .sidebar-btn {

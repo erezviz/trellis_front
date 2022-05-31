@@ -72,7 +72,7 @@ export const TaskDetails = (props) => {
     async function onSave(ev) {
         if (ev) {
             ev.preventDefault()
-            console.log(ev.target)
+            
 
         }
 
@@ -91,7 +91,7 @@ export const TaskDetails = (props) => {
 
 
     if (!task) return <><TrellisSpinner isLarge={true} /></>
-    console.log('task', task);
+
     return (
 
         <section style={modalStyle} className="task-details">
@@ -123,12 +123,12 @@ export const TaskDetails = (props) => {
                     </div>
 
                     <section className="labels-section">
-                        <p>labels</p>
+                        <p>Labels</p>
                         <div className="labels-list">
                             {task.labelIds && props.labels.map(label => {
                                 return task.labelIds.map(labelId => {
                                     if (label.id === labelId) {
-                                        console.log('label', label);
+                                     
                                         return <div className="label-task" style={{ backgroundColor: label.color }}>
                                             <span>{label.title}</span>
                                         </div>
