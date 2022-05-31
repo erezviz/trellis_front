@@ -5,7 +5,7 @@ import { useRouteMatch } from 'react-router-dom';
 // import { Link } from 'react-router-dom';
 // import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 // import { TaskTitle } from '../dynamic-cmps/task-title';
-// import { boardService } from '../../services/board.service';
+import { boardService } from '../../services/board.service';
 import { TaskChecklist } from './checklist/task-checklist.jsx'
 // import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
@@ -28,10 +28,11 @@ import { Attachments } from './attachments';
 export const TaskDetails = (props) => {
     const [isDesc, setIsDesc] = useState(false)
     let [isEdit, setIsEdit] = useState(false)
+    let [isLabelOpen, setIsLabelOpen] = useState(false)
     // let [title, setTitle] = useState({ title: '' })
-    let [task, setTask] = useState(null)
+    const [task, setTask] = useState(null)
     const dispatch = useDispatch()
-    // const { currBoard } = useSelector((storeState) => storeState.boardModule)
+    const { currBoard } = useSelector((storeState) => storeState.boardModule)
     // let history = useHistory()
     // let { boardId, groupId, taskId } = useParams()
     let { params: { boardId, groupId, taskId } } = useRouteMatch();
@@ -40,13 +41,15 @@ export const TaskDetails = (props) => {
 
     useEffect(() => {
         (async () => {
-            const newtask = await dispatch(queryTask(boardId, groupId, taskId))
-            setTask(newtask)
+            const task = boardService.loadTask(currBoard, groupId, taskId)
+            console.log('task from details', task);
+            // const newtask = await dispatch(queryTask(boardId, groupId, taskId))
+            setTask(task)
         })();
         return () => {
             setTask(null)
         }
-    }, [])
+    }, [currBoard])
 
     const modalStyle = {
         display: props.isOpen ? 'block' : 'none',
@@ -72,7 +75,7 @@ export const TaskDetails = (props) => {
     async function onSave(ev, newTask) {
         if (ev) {
             ev.preventDefault()
-        
+
         }
         console.log('task before dispatch', task)
         await dispatch(updateTask(boardId, groupId, task))
@@ -129,7 +132,7 @@ export const TaskDetails = (props) => {
                             {task.labelIds && props.labels.map(label => {
                                 return task.labelIds.map(labelId => {
                                     if (label.id === labelId) {
-                                     
+
                                         return <div className="label-task" style={{ backgroundColor: label.color }}>
                                             <span>{label.title}</span>
                                         </div>
@@ -177,7 +180,7 @@ export const TaskDetails = (props) => {
                         <div className="main-add-actions">
 
                             <h6 className="sidebar-add-heading">Add to card</h6>
-                            <div onClick={() => props.onToggleLabels()} className="sidebar-btn">
+                            <div onClick={() => setIsLabelOpen(true)} className="sidebar-btn">
                                 Labels
                             </div>
                             <div className="sidebar-btn">
@@ -192,7 +195,7 @@ export const TaskDetails = (props) => {
                 </div>
 
             </div>
-
+            {(currBoard.labels && isLabelOpen) && <Labels onToggleLabels={setIsLabelOpen} task={task} labels={currBoard.labels} />}
         </section>
     )
 }

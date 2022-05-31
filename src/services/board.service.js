@@ -116,10 +116,9 @@ function getEmptyTask() {
     }
 }
 //? THIS FUNCTION WORKS -- DO NOT DELETE
-async function loadTask(boardId, groupId, taskId) {
+ function loadTask(board, groupId, taskId) {
 
     try {
-        const board = await boardService.getById(boardId)
         const group = board.groups.find(group => group.id === groupId)
         const task = group.tasks.find(task => task.id === taskId)
 

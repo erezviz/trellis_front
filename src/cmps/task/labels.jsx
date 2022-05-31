@@ -8,46 +8,30 @@ import pen from '../../assets/icon/pen.svg'
 
 export const Labels = (props) => {
     let { params: { boardId, groupId, taskId } } = useRouteMatch();
-    let [task, setTask] = useState(null)
-    let [labelIds, setLabelIds] = useState([])
     const dispatch = useDispatch()
 
 
-    useEffect(() => {
-        (async () => {
-            const newTask = await dispatch(queryTask(boardId, groupId, taskId))
-            setTask(newTask)
-        })();
-        return () => {
-            setTask(null)
-        }
-    }, [])
-
-    useEffect(() => {
-        setTask(prevTask => ({ ...prevTask, labelIds }))
-        
-    }, [labelIds])
-
-
     const onToggleLabel = async (labelId) => {
-        const newLabelId = labelIds.find(currLabelId => currLabelId === labelId)
+        console.log(props.task);
+        const newTask = { ...props.task }
+        const newLabelId = props.task.labelIds ? props.task.labelIds.find(currLabelId => currLabelId === labelId): null
         if (newLabelId) {
-            const newLabelIds = labelIds.filter(labelId => labelId !== newLabelId)
-            setLabelIds(newLabelIds)
+            const newLabelIds = props.task.labelIds.filter(labelId => labelId !== newLabelId)
+            newTask.labelIds = newLabelIds
         } else {
-            setLabelIds(prevLabelIds => ([...prevLabelIds, labelId]))
-
+            if (!newTask.labelIds) newTask.labelIds = [labelId]
+            else newTask.labelIds = [...newTask.labelIds, labelId]
         }
-        setTimeout(()=>console.log('task befor dispatch', task), 1500)
-        
-        await dispatch(updateTask(boardId, groupId, task))
+        console.log('newTask', newTask);
+
+        dispatch(updateTask(boardId, groupId, newTask))
     }
 
     return (
         <section className="labels">
             <header>
                 <h2>Labels</h2>
-                <button className="close-btn close-labels" onClick={() => props.onToggleLabels()}></button>
+                <button className="close-btn close-labels" onClick={() => props.onToggleLabels(false)}></button>
             </header>
             <section className="main-labels">
                 <span>Labels</span>

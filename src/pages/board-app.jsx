@@ -139,7 +139,7 @@ class _BoardApp extends React.Component {
                                 <TaskDetails labels={labels} onToggleLabels={this.onToggleLabels}  key={'TaskDetails'} isOpen={isModalOpen} onCloseDetails={this.onCloseDetails} />
 
                             </Screen>
-                            {(labels  &&  islabelOpen) && <Labels onToggleLabels={this.onToggleLabels} labels={labels} />}
+                          
                         </Route>
                     </>
                     <div className="add-group">
