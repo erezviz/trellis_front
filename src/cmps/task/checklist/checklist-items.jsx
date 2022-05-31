@@ -35,10 +35,11 @@ export const ChecklistItems = (props) => {
         }
         try{
             if(!todos){
-            setTodos(newTodo)
+            setTodos([newTodo])
             await props.onSave()
-         } else{
-               const newTodos = [...todos, newTodo] 
+        } else{
+            const newTodos = [...todos, newTodo] 
+            console.log('onSubmit newTodos', newTodos)
                setTodos(newTodos)
                await props.onSave()
             }
@@ -137,7 +138,8 @@ export const ChecklistItems = (props) => {
             props.onSave(ev)}
             }>
                 <input onChange={(ev) => onHandleTodoName(ev)} />
-                <button>Add</button><button type="button" onClick={onCancel}>Cancel</button>
+                <button onClick={onSubmitTodo}>Add</button>
+                <button type="button" onClick={onCancel}>Cancel</button>
             </form>}
         </div>
     )

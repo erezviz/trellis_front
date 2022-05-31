@@ -101,8 +101,8 @@ export function updateGroupTask(boardId, groupId, task) {
     return async(dispatch) => {
         try {
             const updatedBoard = await boardService.saveTask(boardId, groupId, task)
-            const reducerBoard = dispatch(getActionUpdateBoard(updatedBoard))
-            return reducerBoard.board
+            dispatch(getActionUpdateBoard(updatedBoard))
+            // return reducerBoard.board
         } catch (err) {
             console.log('Cannot save board', err)
             throw err
@@ -214,9 +214,10 @@ export function queryTask(boardId, groupId, taskId) {
 export function updateTask(boardId, groupId, taskToSave) {
     return async(dispatch) => {
         try {
+            // console.log('updated task from action', taskToSave)
             const updatedBoard = await boardService.updateTask(boardId, groupId, taskToSave)
             dispatch(getActionUpdateBoard(updatedBoard))
-            return updatedBoard
+            // return updatedBoard
         } catch (err) {
             console.log('ERROR: cannot update task', err)
             throw err

@@ -69,20 +69,22 @@ export const TaskDetails = (props) => {
         height: '33px'
     }
 
-    async function onSave(ev) {
+    async function onSave(ev, newTask) {
         if (ev) {
             ev.preventDefault()
-            console.log(ev.target)
+            // console.log(ev.target)
 
         }
+        console.log('task before dispatch', task)
+        await dispatch(updateTask(boardId, groupId, task))
 
-        const updatedBoard = await dispatch(updateTask(boardId, groupId, task))
 
     }
 
     const handleFormChange = ev => {
         const { name, value } = ev.target
         setTask(prevTask => ({ ...prevTask, [name]: value }))
+        console.log('saveTask task-details', task)
     }
     const goBack = () => {
         this.props.history.push(`/board/${boardId}`)
@@ -168,7 +170,7 @@ export const TaskDetails = (props) => {
                         </div>
                         <Attachments handleChange={handleFormChange} />
 
-                        <div className='checklist'><TaskChecklist onSave={onSave} checklist={task.checklist} handleFormChange={handleFormChange} /></div>
+                        <div className='checklist'><TaskChecklist onSave={onSave} task={task} handleFormChange={handleFormChange} /></div>
 
                     </section>
 
