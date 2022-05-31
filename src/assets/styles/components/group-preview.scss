@@ -18,6 +18,7 @@
         justify-content: space-between;
         margin-bottom: 5px;
 
+
         h3{
             width: 217px;
             height: 15px;
@@ -27,6 +28,7 @@
         .group-header {
             color: darken($color: $clr2, $amount: 60%);
             font-size: 14px;
+            padding-top: 7px;
         }
 
         button {

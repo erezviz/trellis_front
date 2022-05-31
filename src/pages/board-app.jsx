@@ -116,7 +116,7 @@ class _BoardApp extends React.Component {
 
     render() {
         const { currBoard } = this.props
-        if(!currBoard) return <h1>probssss...</h1>
+        if(!currBoard) return <></>
         const { labels } = currBoard
         const { boardId } = this.props.match.params
 
