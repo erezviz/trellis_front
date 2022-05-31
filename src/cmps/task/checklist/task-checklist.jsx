@@ -15,7 +15,7 @@ export const TaskChecklist = (props) => {
 
     const [task, setTask] = useState(props.task)
     const [checklist, setChecklist] = useState(initialChecklist)
-    console.log('task checklist', task)
+    // console.log('task checklist', task)
     useEffect(()=>{
         // console.log('checklist change!', checklist)
         setTask(prevTask=>({...prevTask, checklist:checklist}))

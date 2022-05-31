@@ -41,15 +41,16 @@ function delay(ms = 1500) {
 
 function getFilename(strUrl) {
     let filename
-        // if (isValidUrl(strUrl)) {
-
-    const URLObj = new URL(strUrl)
-    const { pathname } = URLObj
-    filename = pathname.split('/').pop()
-    if (!filename.includes('.')) filename += '.jpeg'
-        // } else {
-        //     filename = 'http://' + strUrl
-        // }
+    if (isValidUrl(strUrl)) {
+        console.log('strUrl in if', strUrl);
+        const URLObj = new URL(strUrl)
+        const { pathname } = URLObj
+        filename = pathname.split('/').pop()
+        if (!filename.includes('.')) filename += '.jpeg'
+        console.log('filename in if', filename);
+    } else {
+        filename = 'http://' + strUrl
+    }
     return filename
 }
 
