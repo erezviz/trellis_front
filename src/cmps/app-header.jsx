@@ -23,10 +23,12 @@ import { NavLink, Link } from "react-router-dom"
             
                 {/* <Link  to='/home'><p className="header-link">Boards</p></Link> */}
             </nav>
+           {!user && <Link to={'/login'}>
             <div  className="user-link">
                 <span className="login">Log In</span>
                 <span className="signup">Sign Up</span>
             </div>
+            </Link>}
            
         </section>
     )
