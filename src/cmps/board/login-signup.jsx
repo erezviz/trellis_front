@@ -1,8 +1,12 @@
 import { Component } from 'react'
-import { userService } from '../../services/user.service'  
+import { connect } from 'react-redux'  
+import {
+    onLogin,
+    onSignup,
+    onLogout
+} from '../../store/user.actions'
 
-
-export class LoginSignup extends Component {
+class _LoginSignup extends Component {
     state = {
         credentials: {
             username: '',
@@ -39,6 +43,7 @@ export class LoginSignup extends Component {
         console.log('hello from login');
         const { username, password, fullname } = this.state.credentials;
         const { isSignup } = this.state;
+        const {onLogin, onSignup} = this.props
         return (
            
             <div className="login-page">
@@ -63,7 +68,7 @@ export class LoginSignup extends Component {
                         onChange={this.handleChange}
                         required
                     />
-                    <button onClick={() => { this.props.onLogin(this.state.credentials) }} >Login!</button>
+                    <button onClick={() => {onLogin(this.state.credentials) }} >Login!</button>
                 </form>}
 
                 <div className="signup-section">
@@ -92,7 +97,7 @@ export class LoginSignup extends Component {
                             onChange={this.handleChange}
                             required
                         />
-                        <button onClick={() => { this.props.onSignup(this.state.credentials) }} >Signup!</button>
+                        <button onClick={() => {onSignup(this.state.credentials) }} >Signup!</button>
                     </form>}
                 </div>
 
@@ -100,3 +105,17 @@ export class LoginSignup extends Component {
         )
     }
 }
+
+function mapStateToProps(state) {
+    return {
+        User: state.userModule.user
+    }
+}
+const mapDispatchToProps = {
+    onLogin,
+    onSignup,
+    onLogout
+}
+
+
+export const LoginSignup = connect(mapStateToProps, mapDispatchToProps)(_LoginSignup)

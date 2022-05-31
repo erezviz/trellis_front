@@ -9,7 +9,6 @@ const initialState = {
 export function boardReducer(state = initialState, action) {
     // var newState = state
     var board
-    var task
 
     switch (action.type) {
         case 'SET_BOARDS':
