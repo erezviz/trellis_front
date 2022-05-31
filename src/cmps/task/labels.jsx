@@ -8,54 +8,58 @@ import pen from '../../assets/icon/pen.svg'
 
 export const Labels = (props) => {
     let { params: { boardId, groupId, taskId } } = useRouteMatch();
-    let [task, setTask] = useState(null)
+    // let [task, setTask] = useState(null)
     let [labelIds, setLabelIds] = useState([])
     const dispatch = useDispatch()
-
+    let task
 
     useEffect(() => {
-        console.log('biglal Roi', props.labels);
         (async () => {
-            const newTask = await dispatch(queryTask(boardId, groupId, taskId))
-            console.log('this is newTask', newTask);
-            setTask(newTask)
+            task = await dispatch(queryTask(boardId, groupId, taskId))
+            console.log('task from labl', task)
         })();
         return () => {
-            setTask(null)
+            // setTask(null)
         }
     }, [])
 
     useEffect(() => {
-        setTask(prevTask => ({ ...prevTask, labelIds }))
+        // setTask(prevTask => ({ ...prevTask, labelIds }))
     }, [labelIds])
 
-    const onToggleLabel = (labelId) => {
-        // const newLabelIds= labelIds.find()
-        const newLabelId = labelIds.find(currLabelId => currLabelId === labelId)
-        console.log('from onToggle', newLabelId)
-        if (newLabelId) {
-            const newLabelIds = labelIds.filter(labelId => labelId !== newLabelId)
-            console.log(newLabelIds);
-            setLabelIds(prevLabelIds => prevLabelIds = newLabelIds)
-        } else onAddLabel(labelId)
 
+    const onToggleLabel =  (labelId) => {
+        let newTask = {...task}
+        // setTask(labelId)
+        console.log(task)
+        if (!task.labelIds || !task.labelIds.length) {
+            newTask.labelIds = [labelId]
+            return  dispatch(updateTask(boardId, groupId, newTask))
+        }
+        const newLabelId = {...task.labelIds.find(currLabelId => currLabelId === labelId)}
+        if (newLabelId) {
+            const newLabelIds = {...labelIds.filter(labelId => labelId !== newLabelId)}
+            task.labelIds = {...newLabelIds}
+        } else { onAddLabel(labelId) }
+        console.log(task)
+         dispatch(updateTask(boardId, groupId,{ ...newTask}))
     }
 
     const onAddLabel = (labelId) => {
-
-
-        setLabelIds(prevLabelIds => ([...prevLabelIds, labelId]))
-        // setTask(prevTask => ({ ...prevTask, ...labelIds:labelId }))
-
+        task.labelIds.push(labelId)
+        // setLabelIds(prevLabelIds => ([...prevLabelIds, labelId]))
     }
-    console.log('Erez ata Melech', labelIds)
-    console.log('helllllloh', task)
+
+
+    console.log('helllllloh', props.labels)
     return (
         <section className="labels">
             <header>
-                <h2>labels</h2>
+                <h2>Labels</h2>
+                <button className="close-btn close-labels" onClick={() => props.onToggleLabels()}></button>
             </header>
             <section className="main-labels">
+                <span>Labels</span>
                 <ul className="edit-labels">
                     {props.labels.map(label => {
                         return (

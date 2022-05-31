@@ -21,6 +21,7 @@ class _BoardApp extends React.Component {
         groups: [],
         isModalOpen: false,
         isShown: false,
+        islabelOpen: false,
         newGroup: { title: '' }
     }
 
@@ -92,31 +93,35 @@ class _BoardApp extends React.Component {
 
     onToggleDetails = (ev) => {
         const { boardId } = this.props.match.params
-
+        
         this.setState(prevState => ({
             isModalOpen: !prevState.isModalOpen
         }));
         this.props.history.push(`/board/${boardId}`)
-
+        
     }
-
+    
     onCloseDetails = (ev) => {
         this.onToggleDetails()
+        this.onToggleLabels()
     }
 
     onToggleGroup = () => {
         this.setState({ isShown: !this.state.isShown })
     }
 
+    onToggleLabels= ()=>{
+        this.setState({  islabelOpen: !this.state. islabelOpen })
+    }
+
     render() {
         const { currBoard } = this.props
         if(!currBoard) return <h1>probssss...</h1>
         const { labels } = currBoard
-        console.log('labels', labels);
         const { boardId } = this.props.match.params
-        console.log('currBoard',currBoard);
 
-        const { groups, isModalOpen, isShown } = this.state
+
+        const { groups, isModalOpen, isShown, islabelOpen } = this.state
         if (!labels) return <></>
         return (
             <section className={`board-app ${boardId}`}>
@@ -131,10 +136,10 @@ class _BoardApp extends React.Component {
                     <>
                         <Route path='/board/:boardId/:groupId/:taskId' >
                             <Screen key={'Screen'} isOpen={isModalOpen}   >
-                                <TaskDetails key={'TaskDetails'} isOpen={isModalOpen} onToggleDetails={this.onToggleDetails} />
+                                <TaskDetails labels={labels} onToggleLabels={this.onToggleLabels}  key={'TaskDetails'} isOpen={isModalOpen} onCloseDetails={this.onCloseDetails} />
 
                             </Screen>
-                            {labels && <Labels labels={labels} />}
+                            {(labels  &&  islabelOpen) && <Labels onToggleLabels={this.onToggleLabels} labels={labels} />}
                         </Route>
                     </>
                     <div className="add-group">
