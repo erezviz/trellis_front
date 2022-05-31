@@ -20,7 +20,7 @@ export const TaskChecklist = (props) => {
         // console.log('checklist change!', checklist)
         setTask(prevTask=>({...prevTask, checklist:checklist}))
         // console.log('did task changed?', task)
-        props.onSave(task)
+        props.onSave(null,task)
     },[checklist])
     
 
