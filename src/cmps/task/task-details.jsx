@@ -74,7 +74,7 @@ export const TaskDetails = (props) => {
             ev.preventDefault()
         
         }
-        console.log('task before dispatch', task)
+        // console.log('task before dispatch', task)
         await dispatch(updateTask(boardId, groupId, task))
 
 
@@ -83,7 +83,7 @@ export const TaskDetails = (props) => {
     const handleFormChange = ev => {
         const { name, value } = ev.target
         setTask(prevTask => ({ ...prevTask, [name]: value }))
-        console.log('saveTask task-details', task)
+        // console.log('saveTask task-details', task)
     }
     const goBack = () => {
         this.props.history.push(`/board/${boardId}`)

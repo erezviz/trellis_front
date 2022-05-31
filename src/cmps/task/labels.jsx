@@ -38,7 +38,7 @@ export const Labels = (props) => {
             setLabelIds(prevLabelIds => ([...prevLabelIds, labelId]))
 
         }
-        setTimeout(()=>console.log('task befor dispatch', task), 1500)
+        // setTimeout(()=>console.log('task befor dispatch', task), 1500)
         
         await dispatch(updateTask(boardId, groupId, task))
     }

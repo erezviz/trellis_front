@@ -14,14 +14,15 @@ export const Attachments = (props) => {
         createdAt: Date.now(),
         url: null
     })
-
+    window.t = attachment
     const resetAttachment = () => {
         const emptyAttach = {
             title: null,
             createdAt: Date.now(),
             url: null
-        } 
-        setAttachment(prevAttachment => ({...prevAttachment, emptyAttach}))
+        }
+        console.log('resetting attachment...');
+        setAttachment(emptyAttach)
     }
 
     const handleChange = ev => {
@@ -32,7 +33,7 @@ export const Attachments = (props) => {
 
     }
     const uploadImg = async (ev) => {
-        if(!ev.target.files[0] || !ev.target.files.length) return
+        if (!ev.target.files[0] || !ev.target.files.length) return
         attachment.title = utilService.getFilename(ev.target.value)
         setIsUploading(prevUploading => prevUploading = true)
         const url = await uploadService.uploadImg(ev)
@@ -41,10 +42,16 @@ export const Attachments = (props) => {
         setAttachment(prevAttachment => ({ ...prevAttachment, url }))
     }
 
+
     const onSaveAttachment = ev => {
         ev.preventDefault()
         setIsAdd(prevIsAdd => prevIsAdd = false)
-        if (!attachment.title) attachment.title = utilService.getFilename(attachment.url)
+        console.log('attachment in onSaveAttachment',attachment);
+        console.log('attachment title in onSaveAttachment',attachment.title);
+        if (!attachment.title) {
+            attachment.title = utilService.getFilename(attachment.url)
+            console.log('this happened in attachment title change if');
+        }
         attachment.id = utilService.makeId()
         setAttachments(prevAttachments => ([...prevAttachments, attachment]))
         resetAttachment()
@@ -98,14 +105,18 @@ export const Attachments = (props) => {
                 })}
 
                 <button onClick={() => setIsAdd(isAdd = !isAdd)} className="btn-light" >Add an attachment</button>
-                {isAdd &&
-                    <form onSubmit={onSaveAttachment} >
+                {isAdd && <div className="attachment-form-container">
+                    <form className="link-form" onSubmit={onSaveAttachment} >
                         <label htmlFor="link">Add a link</label>
                         <input type="text" id="link" name="link" placeholder="Add a link here" onChange={handleChange} />
+                        <input className="btn-light" type="submit" value="Submit" />
+                    </form >
+                    <form  className="link-form"  onSubmit={onSaveAttachment}>
                         <label htmlFor="file">Add a file</label>
                         <input type="file" onChange={uploadImg} accept="img/*" id="imgUpload" />
                         <input className="btn-light" type="submit" value="Submit" />
-                    </form>}
+                    </form>
+                </div>}
                 {/* <input type="file" name="file" tabindex="-1" multiple="multiple"/> */}
 
             </div>
