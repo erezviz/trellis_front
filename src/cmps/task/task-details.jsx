@@ -72,8 +72,7 @@ export const TaskDetails = (props) => {
     async function onSave(ev, newTask) {
         if (ev) {
             ev.preventDefault()
-            
-
+        
         }
         console.log('task before dispatch', task)
         await dispatch(updateTask(boardId, groupId, task))
