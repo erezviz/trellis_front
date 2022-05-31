@@ -8,50 +8,41 @@ import pen from '../../assets/icon/pen.svg'
 
 export const Labels = (props) => {
     let { params: { boardId, groupId, taskId } } = useRouteMatch();
-    // let [task, setTask] = useState(null)
+    let [task, setTask] = useState(null)
     let [labelIds, setLabelIds] = useState([])
     const dispatch = useDispatch()
-    let task
+
 
     useEffect(() => {
         (async () => {
-            task = await dispatch(queryTask(boardId, groupId, taskId))
-            console.log('task from labl', task)
+            const newTask = await dispatch(queryTask(boardId, groupId, taskId))
+            setTask(newTask)
         })();
         return () => {
-            // setTask(null)
+            setTask(null)
         }
     }, [])
 
     useEffect(() => {
-        // setTask(prevTask => ({ ...prevTask, labelIds }))
+        setTask(prevTask => ({ ...prevTask, labelIds }))
+        
     }, [labelIds])
 
 
-    const onToggleLabel =  (labelId) => {
-        let newTask = {...task}
-        // setTask(labelId)
-        console.log(task)
-        if (!task.labelIds || !task.labelIds.length) {
-            newTask.labelIds = [labelId]
-            return  dispatch(updateTask(boardId, groupId, newTask))
-        }
-        const newLabelId = {...task.labelIds.find(currLabelId => currLabelId === labelId)}
+    const onToggleLabel = async (labelId) => {
+        const newLabelId = labelIds.find(currLabelId => currLabelId === labelId)
         if (newLabelId) {
-            const newLabelIds = {...labelIds.filter(labelId => labelId !== newLabelId)}
-            task.labelIds = {...newLabelIds}
-        } else { onAddLabel(labelId) }
-        console.log(task)
-         dispatch(updateTask(boardId, groupId,{ ...newTask}))
+            const newLabelIds = labelIds.filter(labelId => labelId !== newLabelId)
+            setLabelIds(newLabelIds)
+        } else {
+            setLabelIds(prevLabelIds => ([...prevLabelIds, labelId]))
+
+        }
+        setTimeout(()=>console.log('task befor dispatch', task), 1500)
+        
+        await dispatch(updateTask(boardId, groupId, task))
     }
 
-    const onAddLabel = (labelId) => {
-        task.labelIds.push(labelId)
-        // setLabelIds(prevLabelIds => ([...prevLabelIds, labelId]))
-    }
-
-
-    console.log('helllllloh', props.labels)
     return (
         <section className="labels">
             <header>
