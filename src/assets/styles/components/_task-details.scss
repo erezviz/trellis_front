@@ -92,7 +92,8 @@
     margin: 48px 0 80px;
     overflow: hidden;
     position: relative;
-    width: 768px;
+    max-width: 768px;
+    width: 100%;
     z-index: 25;
     .details-main-col {
         flex-direction: column;

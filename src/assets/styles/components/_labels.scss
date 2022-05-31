@@ -1,4 +1,4 @@
-.labels{
+.labels {
     background: #fff;
     border-radius: 3px;
     padding: 10px;
@@ -10,39 +10,32 @@
     top: 25%;
     width: 280px;
     z-index: 70;
-
-    .main-labels{
+    .main-labels {
         margin-block-start: 5px;
         // padding: 0 12px 12px;
-        span{
+        span {
             font-size: 13px;
         }
     }
-
-    ul{
-    list-style: none;
-    margin: 0;
-    padding: 0;
-
-        li{
-        display: list-item;
-        text-align: -webkit-match-parent;
-        padding-right: 36px;
-        // position: relative;
-        font-size: 13px;
-        font-weight: lighte;
+    ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        li {
+            display: flex;
+            text-align: match-parent;
+            font-size: 13px;
+            align-items: center;
+            order: 1;
         }
     }
-
-    
-
-    header{
+    header {
         border-bottom: 1px solid #091e4221;
         box-sizing: border-box;
         color: #5e6c84;
         display: block;
         line-height: 40px;
-        margin: 0 12px;
+        // margin: 0 12px;
         overflow: hidden;
         padding: 0 32px;
         position: relative;
@@ -50,14 +43,14 @@
         white-space: nowrap;
         z-index: 1;
         text-align: center;
-        .close-labels{
+        .close-labels {
             position: absolute;
             top: 0;
             right: 0;
+            width: 12px;
+            height: 12px;
         }
-       
     }
-
     .card-label {
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
@@ -73,8 +66,7 @@
         text-overflow: ellipsis;
         white-space: nowrap;
     }
-
-    .card-label.mod-selectable{
+    .card-label.mod-selectable {
         border-radius: 3px;
         cursor: pointer;
         font-weight: 700;
@@ -82,52 +74,44 @@
         min-height: 20px;
         padding: 6px 12px;
         position: relative;
-        transition: padding 85ms,margin 85ms,box-shadow 85ms;
-       
+        flex: 1;
+        transition: padding 85ms, margin 85ms, box-shadow 85ms;
     }
-
-    .edit-icon{
-        // width: 40px;
-        // height: 40px;
-        // position: absolute;
-        // right: 0;
-        // top: 20px;
+    .edit-icon {
         border-radius: 3px;
-        padding: 6px;
-        position: absolute;
+        /* padding: 6px; */
+        /* position: absolute; */
+        order: 1;
         right: 8px;
-        // top: 0;
         font-size: 16px;
-        height: 20px;
+        /* height: 20px; */
         line-height: 20px;
-        width: 20px;
+        width: 12px;
         color: #42526e;
-        image{
+        image {
             width: 100%;
         }
     }
-    h2{
+    h2 {
         font-size: 15px;
         font-weight: lighter;
     }
-    
-    
-    .card-label-green{
+    .card-label-green {
         background-color: #519839;
-     }
-    .card-label-yellow{
+    }
+    .card-label-yellow {
         background-color: #f2d600;
-     }
-    .card-label-red{
+    }
+    .card-label-red {
         background-color: #eb5a46;
-     }
-    .card-label-orenge{
+    }
+    .card-label-orenge {
         background-color: #ff9f1a;
-       }
-    .card-label-blue{
+    }
+    .card-label-blue {
         background-color: #055a8c;
-       }
-    .card-label-purple{
-        background-color:#c377e0;
+    }
+    .card-label-purple {
+        background-color: #c377e0;
     }
 }
