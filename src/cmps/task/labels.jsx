@@ -8,15 +8,16 @@ import pen from '../../assets/icon/pen.svg'
 
 export const Labels = (props) => {
     let { params: { boardId, groupId, taskId } } = useRouteMatch();
-    // let [task, setTask] = useState(null)
+    let [task, setTask] = useState(null)
     let [labelIds, setLabelIds] = useState([])
     const dispatch = useDispatch()
-    let task
+    // let task
 
     useEffect(() => {
         (async () => {
-            task = await dispatch(queryTask(boardId, groupId, taskId))
-            console.log('task from labl', task)
+            const task = await dispatch(queryTask(boardId, groupId, taskId))
+            setTask(prevTask => prevTask = task)
+
         })();
         return () => {
             // setTask(null)
@@ -28,21 +29,33 @@ export const Labels = (props) => {
     }, [labelIds])
 
 
-    const onToggleLabel =  (labelId) => {
-        let newTask = {...task}
+    const onToggleLabel = (labelId) => {
+        // let newTask = {...task}
+        console.log('task in onToggle ', task);
         // setTask(labelId)
-        console.log(task)
-        if (!task.labelIds || !task.labelIds.length) {
-            newTask.labelIds = [labelId]
-            return  dispatch(updateTask(boardId, groupId, newTask))
+        // console.log(task)
+        if (!task.labelIds || task.labelIds.length <= 0) {
+            console.log('this happened in first if');
+            task.labelIds = [labelId]
+            return dispatch(updateTask(boardId, groupId, task))
+        } else {
+            
+            console.log('this happened in first else');
+            const labelIdToRemove = task.labelIds.find(currLabelId => currLabelId === labelId) 
+            if (labelIdToRemove) {
+                const newLabelIds = labelIds.filter(labelId => labelId !== labelIdToRemove) 
+                task.labelIds = newLabelIds 
+                if(task.labelIds.length === 0) task.labelIds = null
+                console.log('this happened in labelToRemove if');
+            } else{
+                task.labelIds.push(labelId)
+                console.log('this happened in labelToRemove else');
+                // onAddLabel(labelId) 
+            }
+            console.log(task)
+            console.log('this happened before last dispatch');
+            dispatch(updateTask(boardId, groupId, task))
         }
-        const newLabelId = {...task.labelIds.find(currLabelId => currLabelId === labelId)}
-        if (newLabelId) {
-            const newLabelIds = {...labelIds.filter(labelId => labelId !== newLabelId)}
-            task.labelIds = {...newLabelIds}
-        } else { onAddLabel(labelId) }
-        console.log(task)
-         dispatch(updateTask(boardId, groupId,{ ...newTask}))
     }
 
     const onAddLabel = (labelId) => {
@@ -50,8 +63,8 @@ export const Labels = (props) => {
         // setLabelIds(prevLabelIds => ([...prevLabelIds, labelId]))
     }
 
-
-    console.log('helllllloh', props.labels)
+    
+    console.log('this is task before render return', task);
     return (
         <section className="labels">
             <header>

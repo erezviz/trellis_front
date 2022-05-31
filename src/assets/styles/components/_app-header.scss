@@ -1,5 +1,5 @@
 .app-header {
-    background-color:rgb(229 229 255) ;
+    background-color: rgb(229 229 255);
     top: 0;
     color: $clr2;
     // height: rem(32px);
@@ -10,29 +10,27 @@
     .header-link {
         margin: 0;
         color: $clr2;
-       
     }
     .user-link {
-            cursor: pointer;
-            font-weight: 600;
-            .login{
-                color: $clr1;
-                padding-right: 10px;
-                padding-bottom: 1px;
-            }
-            .login:hover{
-                text-decoration: underline;
-            }
-            .signup{
-                background-color: $clr1;
-                padding: 0.25rem 0.5rem;
-                border-radius: 0.2rem;
-                transition: background-color, 0.15s;
-            }
-            .signup:hover{
-                background-color: darken($color: $clr1, $amount: 8%)
-            }
-        
+        cursor: pointer;
+        font-weight: 600;
+        .login {
+            color: $clr1;
+            padding-right: 10px;
+            padding-bottom: 1px;
+        }
+        .login:hover {
+            text-decoration: underline;
+        }
+        .signup {
+            background-color: $clr1;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.2rem;
+            transition: background-color, 0.15s;
+        }
+        .signup:hover {
+            background-color: darken($color: $clr1, $amount: 8%)
+        }
     }
     .logo-container {
         align-items: center;
@@ -48,7 +46,7 @@
             margin: 0;
             color: $clr5;
         }
-        img{
+        img {
             height: 2.75vh;
             margin: 0 5px;
         }

@@ -1,26 +1,18 @@
-
-    .hero{
-        text-align: left;
-        padding-top: 30px;
-        display: flex;
-        justify-content: space-between;
-        position: relative;
-       height: 100vh; 
-       background: linear-gradient(rgb(229 229 255),rgba(229, 229, 255, 0.688));
-       
-       .hero-container{
-           width: 50%;
+.hero {
+    display: flex;
+    justify-content: center;
+    background: linear-gradient(rgb(229 229 255), rgba(229, 229, 255, 0.688));
+    .hero-container {
+        width: 50%;
         margin-inline-start: 50px;
     }
-    
-    .hero-img-container{
+    .hero-img-container {
         height: 50vh;
     }
-    .hero-img{
+    .hero-img {
         height: 100%;
     }
-    
-    .enter-link{
+    .enter-link {
         font-weight: 600;
         color: $clr2;
         width: 200px;
@@ -30,7 +22,7 @@
         background-color: $clr1;
         transition: background-color, 0.25s;
     }
-    .enter-link:hover{
-        background-color: darken($color:$clr1, $amount: 10%) ;
+    .enter-link:hover {
+        background-color: darken($color: $clr1, $amount: 10%);
     }
 }
