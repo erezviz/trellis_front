@@ -93,16 +93,17 @@ class _BoardApp extends React.Component {
 
     onToggleDetails = (ev) => {
         const { boardId } = this.props.match.params
-
+        
         this.setState(prevState => ({
             isModalOpen: !prevState.isModalOpen
         }));
         this.props.history.push(`/board/${boardId}`)
-
+        
     }
-
+    
     onCloseDetails = (ev) => {
         this.onToggleDetails()
+        this.onToggleLabels()
     }
 
     onToggleGroup = () => {
@@ -117,9 +118,8 @@ class _BoardApp extends React.Component {
         const { currBoard } = this.props
         if(!currBoard) return <h1>probssss...</h1>
         const { labels } = currBoard
-        console.log('labels', labels);
         const { boardId } = this.props.match.params
-        console.log('currBoard',currBoard);
+
 
         const { groups, isModalOpen, isShown, islabelOpen } = this.state
         if (!labels) return <></>
@@ -136,7 +136,7 @@ class _BoardApp extends React.Component {
                     <>
                         <Route path='/board/:boardId/:groupId/:taskId' >
                             <Screen key={'Screen'} isOpen={isModalOpen}   >
-                                <TaskDetails onToggleLabels={this.onToggleLabels}  key={'TaskDetails'} isOpen={isModalOpen} onToggleDetails={this.onToggleDetails} />
+                                <TaskDetails labels={labels} onToggleLabels={this.onToggleLabels}  key={'TaskDetails'} isOpen={isModalOpen} onCloseDetails={this.onCloseDetails} />
 
                             </Screen>
                             {(labels  &&  islabelOpen) && <Labels onToggleLabels={this.onToggleLabels} labels={labels} />}

@@ -11,8 +11,12 @@
     width: 280px;
     z-index: 70;
 
-    .mainlabels{
-        padding: 0 12px 12px;
+    .main-labels{
+        margin-block-start: 5px;
+        // padding: 0 12px 12px;
+        span{
+            font-size: 13px;
+        }
     }
 
     ul{
@@ -24,7 +28,7 @@
         display: list-item;
         text-align: -webkit-match-parent;
         padding-right: 36px;
-        position: relative;
+        // position: relative;
         font-size: 13px;
         font-weight: lighte;
         }
@@ -46,6 +50,11 @@
         white-space: nowrap;
         z-index: 1;
         text-align: center;
+        .close-labels{
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
        
     }
 
@@ -86,8 +95,8 @@
         border-radius: 3px;
         padding: 6px;
         position: absolute;
-        right: 0;
-        top: 0;
+        right: 8px;
+        // top: 0;
         font-size: 16px;
         height: 20px;
         line-height: 20px;

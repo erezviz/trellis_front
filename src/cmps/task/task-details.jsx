@@ -46,7 +46,7 @@ export const TaskDetails = (props) => {
         return () => {
             setTask(null)
         }
-    },[])
+    }, [])
 
     const modalStyle = {
         display: props.isOpen ? 'block' : 'none',
@@ -88,13 +88,10 @@ export const TaskDetails = (props) => {
         this.props.history.push(`/board/${boardId}`)
     }
 
-    const onAddLabel = () => {
-        console.log('hay from add label');
-    }
 
 
     if (!task) return <><TrellisSpinner isLarge={true} /></>
-
+    console.log('task', task);
     return (
 
         <section style={modalStyle} className="task-details">
@@ -102,7 +99,7 @@ export const TaskDetails = (props) => {
 
                 <button onClick={(ev) => {
                     // return goBack()
-                    return props.onToggleDetails()
+                    return props.onCloseDetails()
                 }} className="close-details-btn">X</button>
                 <div onClick={() => setIsEdit(isEdit = !isEdit)} className="details-header flex">
                     <form onSubmit={(ev) => onSave(ev)} >
@@ -125,9 +122,21 @@ export const TaskDetails = (props) => {
                         </div>
                     </div>
 
-                    <div className="labels-list">
-                        <div className="label"></div>
-                    </div>
+                    <section className="labels-section">
+                        <p>labels</p>
+                        <div className="labels-list">
+                            {task.labelIds && props.labels.map(label => {
+                                return task.labelIds.map(labelId => {
+                                    if (label.id === labelId) {
+                                        console.log('label', label);
+                                        return <div className="label-task" style={{ backgroundColor: label.color }}>
+                                            <span>{label.title}</span>
+                                        </div>
+                                    }
+                                });
+                            })}
+                        </div>
+                    </section>
                 </header>
 
 
