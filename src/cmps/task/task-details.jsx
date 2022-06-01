@@ -121,7 +121,7 @@ export const TaskDetails = (props) => {
                             <div className="add-member">+</div>
                         </div>
                     </div>
-                   {task.labelIds.length > 0 && <section className="labels-section">
+                   {(task.labelIds.length > 0) && <section className="labels-section">
                         <p>Labels</p>
                         <div className="labels-list">
                             {task.labelIds && props.labels.map(label => {

@@ -58,7 +58,7 @@ export const GroupPreview = (props) => {
             <TaskList idx={groupIdx} groupId={props.group.id} boardId={boardId} tasks={group.tasks} onToggleDetails={props.onToggleDetails}/>
             </div>
             <div className="task-footer-container">
-            <GroupFooter boardId={boardId} groupId={props.group.id} />
+                <GroupFooter boardId={boardId} groupId={props.group.id} />
             </div>
             {provided.placeholder}
         </section>

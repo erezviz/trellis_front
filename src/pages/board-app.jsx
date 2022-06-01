@@ -31,7 +31,6 @@ class _BoardApp extends React.Component {
     }
 
     loadGroups = async (board) => {
-        //###  What is this line for?  ###
         this.setState(prevState=>({...prevState, groups: [] }),async()=>{
 
             const boardId = this.getBoardId()
