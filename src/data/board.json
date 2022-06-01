@@ -1,5 +1,4 @@
-[
-    {
+[{
         "_id": "b101",
         "title": "Travel plans",
         "archivedAt": 1589983468418,
@@ -10,7 +9,7 @@
             "imgUrl": "http://some-img"
         },
         "style": {
-            "imgUrl":"https://images.unsplash.com/photo-1616909424441-295fc97bcefb?crop=entropy&cs=tinysrgb&fm=jpg&ixid=MnwzMzM5ODF8MHwxfHNlYXJjaHwyfHxzfGVufDB8MHx8fDE2NTQwOTU5MjM&ixlib=rb-1.2.1&q=80"
+            "imgUrl": "https://images.unsplash.com/photo-1616909424441-295fc97bcefb?crop=entropy&cs=tinysrgb&fm=jpg&ixid=MnwzMzM5ODF8MHwxfHNlYXJjaHwyfHxzfGVufDB8MHx8fDE2NTQwOTU5MjM&ixlib=rb-1.2.1&q=80"
         },
         "labels": [{
                 "id": "l101",
@@ -43,8 +42,7 @@
                 "color": "#c377e0"
             }
         ],
-        "members": [
-            {
+        "members": [{
                 "_id": "u101",
                 "fullname": "Homer Simpson",
                 "imgUrl": "homer.png"
@@ -61,13 +59,11 @@
                 "imgUrl": "lisa.png"
             }
         ],
-        "groups": [
-            {
+        "groups": [{
                 "id": "g101",
                 "title": "To do",
                 "archivedAt": 1589983468418,
-                "tasks": [
-                    {
+                "tasks": [{
                         "id": "c101",
                         "title": "Book flight"
                     },
@@ -81,8 +77,7 @@
             {
                 "id": "g102",
                 "title": "Doing",
-                "tasks": [
-                    {
+                "tasks": [{
                         "id": "c103",
                         "title": "Packing",
                         "archivedAt": 1589983468418
@@ -92,31 +87,25 @@
                         "title": "Booking hotel",
                         "status": "in-progress",
                         "description": "description",
-                        "comments": [
-                            {
-                                "id": "ZdPnm",
-                                "txt": "also @yaronb please CR this",
-                                "createdAt": 1590999817436.0,
-                                "byMember": {
-                                    "_id": "u101",
-                                    "fullname": "Tal Tarablus",
-                                    "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
-                                }
+                        "comments": [{
+                            "id": "ZdPnm",
+                            "txt": "also @yaronb please CR this",
+                            "createdAt": 1590999817436.0,
+                            "byMember": {
+                                "_id": "u101",
+                                "fullname": "Tal Tarablus",
+                                "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
                             }
-                        ],
-                        "checklists": [
-                            {
-                                "id": "YEhmF",
-                                "title": "Checklist",
-                                "todos": [
-                                    {
-                                        "id": "212jX",
-                                        "title": "To Do 1",
-                                        "isDone": false
-                                    }
-                                ]
-                            }
-                        ],
+                        }],
+                        "checklists": [{
+                            "id": "YEhmF",
+                            "title": "Checklist",
+                            "todos": [{
+                                "id": "212jX",
+                                "title": "To Do 1",
+                                "isDone": false
+                            }]
+                        }],
                         "memberIds": [
                             "u101"
                         ],
@@ -137,22 +126,20 @@
                 "style": {}
             }
         ],
-        "activities": [
-            {
-                "id": "a101",
-                "txt": "Changed Color",
-                "createdAt": 154514,
-                "byMember": {
-                    "_id": "u101",
-                    "fullname": "Abi Abambi",
-                    "imgUrl": "http://some-img"
-                },
-                "task": {
-                    "id": "c101",
-                    "title": "Replace Logo"
-                }
+        "activities": [{
+            "id": "a101",
+            "txt": "Changed Color",
+            "createdAt": 154514,
+            "byMember": {
+                "_id": "u101",
+                "fullname": "Abi Abambi",
+                "imgUrl": "http://some-img"
+            },
+            "task": {
+                "id": "c101",
+                "title": "Replace Logo"
             }
-        ]
+        }]
     },
     {
         "_id": "b102",
@@ -178,20 +165,16 @@
                 "color": "#61bd33"
             }
         ],
-        "members": [
-            {
-                "_id": "u101",
-                "fullname": "Tal Tarablus",
-                "imgUrl": "https://www.google.com"
-            }
-        ],
-        "groups": [
-            {
+        "members": [{
+            "_id": "u101",
+            "fullname": "Tal Tarablus",
+            "imgUrl": "https://www.google.com"
+        }],
+        "groups": [{
                 "id": "g105",
                 "title": "Development",
                 "archivedAt": 1589983468418,
-                "tasks": [
-                    {
+                "tasks": [{
                         "id": "c101",
                         "title": "Replace logo"
                     },
@@ -205,8 +188,7 @@
             {
                 "id": "g102",
                 "title": "QA",
-                "tasks": [
-                    {
+                "tasks": [{
                         "id": "c103",
                         "title": "Check details for bugs",
                         "archivedAt": 1589983468418
@@ -216,31 +198,25 @@
                         "title": "Check for defects",
                         "status": "in-progress",
                         "description": "description",
-                        "comments": [
-                            {
-                                "id": "ZdPnm",
-                                "txt": "also @yaronb please CR this",
-                                "createdAt": 1590999817436.0,
-                                "byMember": {
-                                    "_id": "u101",
-                                    "fullname": "Tal Tarablus",
-                                    "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
-                                }
+                        "comments": [{
+                            "id": "ZdPnm",
+                            "txt": "also @yaronb please CR this",
+                            "createdAt": 1590999817436.0,
+                            "byMember": {
+                                "_id": "u101",
+                                "fullname": "Tal Tarablus",
+                                "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
                             }
-                        ],
-                        "checklists": [
-                            {
-                                "id": "YEhmF",
-                                "title": "Checklist",
-                                "todos": [
-                                    {
-                                        "id": "212jX",
-                                        "title": "To Do 1",
-                                        "isDone": false
-                                    }
-                                ]
-                            }
-                        ],
+                        }],
+                        "checklists": [{
+                            "id": "YEhmF",
+                            "title": "Checklist",
+                            "todos": [{
+                                "id": "212jX",
+                                "title": "To Do 1",
+                                "isDone": false
+                            }]
+                        }],
                         "memberIds": [
                             "u101"
                         ],
@@ -261,22 +237,20 @@
                 "style": {}
             }
         ],
-        "activities": [
-            {
-                "id": "a101",
-                "txt": "Changed Color",
-                "createdAt": 154514,
-                "byMember": {
-                    "_id": "u101",
-                    "fullname": "Abi Abambi",
-                    "imgUrl": "http://some-img"
-                },
-                "task": {
-                    "id": "c101",
-                    "title": "Replace Logo"
-                }
+        "activities": [{
+            "id": "a101",
+            "txt": "Changed Color",
+            "createdAt": 154514,
+            "byMember": {
+                "_id": "u101",
+                "fullname": "Abi Abambi",
+                "imgUrl": "http://some-img"
+            },
+            "task": {
+                "id": "c101",
+                "title": "Replace Logo"
             }
-        ]
+        }]
     },
     {
         "_id": "b103",
@@ -302,20 +276,16 @@
                 "color": "#61bd33"
             }
         ],
-        "members": [
-            {
-                "_id": "u101",
-                "fullname": "Tal Tarablus",
-                "imgUrl": "https://www.google.com"
-            }
-        ],
-        "groups": [
-            {
+        "members": [{
+            "_id": "u101",
+            "fullname": "Tal Tarablus",
+            "imgUrl": "https://www.google.com"
+        }],
+        "groups": [{
                 "id": "g105",
                 "title": "To do",
                 "archivedAt": 1589983468418,
-                "tasks": [
-                    {
+                "tasks": [{
                         "id": "c101",
                         "title": "Rent clown costume"
                     },
@@ -329,8 +299,7 @@
             {
                 "id": "g102",
                 "title": "Doing",
-                "tasks": [
-                    {
+                "tasks": [{
                         "id": "c103",
                         "title": "Prepare invitations",
                         "archivedAt": 1589983468418
@@ -340,31 +309,25 @@
                         "title": "Fill Pin`ata",
                         "status": "in-progress",
                         "description": "description",
-                        "comments": [
-                            {
-                                "id": "ZdPnm",
-                                "txt": "also @yaronb please CR this",
-                                "createdAt": 1590999817436.0,
-                                "byMember": {
-                                    "_id": "u101",
-                                    "fullname": "Tal Tarablus",
-                                    "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
-                                }
+                        "comments": [{
+                            "id": "ZdPnm",
+                            "txt": "also @yaronb please CR this",
+                            "createdAt": 1590999817436.0,
+                            "byMember": {
+                                "_id": "u101",
+                                "fullname": "Tal Tarablus",
+                                "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
                             }
-                        ],
-                        "checklists": [
-                            {
-                                "id": "YEhmF",
-                                "title": "Checklist",
-                                "todos": [
-                                    {
-                                        "id": "212jX",
-                                        "title": "To Do 1",
-                                        "isDone": false
-                                    }
-                                ]
-                            }
-                        ],
+                        }],
+                        "checklists": [{
+                            "id": "YEhmF",
+                            "title": "Checklist",
+                            "todos": [{
+                                "id": "212jX",
+                                "title": "To Do 1",
+                                "isDone": false
+                            }]
+                        }],
                         "memberIds": [
                             "u101"
                         ],
@@ -385,21 +348,19 @@
                 "style": {}
             }
         ],
-        "activities": [
-            {
-                "id": "a101",
-                "txt": "Changed Color",
-                "createdAt": 154514,
-                "byMember": {
-                    "_id": "u101",
-                    "fullname": "Abi Abambi",
-                    "imgUrl": "http://some-img"
-                },
-                "task": {
-                    "id": "c101",
-                    "title": "Replace Logo"
-                }
+        "activities": [{
+            "id": "a101",
+            "txt": "Changed Color",
+            "createdAt": 154514,
+            "byMember": {
+                "_id": "u101",
+                "fullname": "Abi Abambi",
+                "imgUrl": "http://some-img"
+            },
+            "task": {
+                "id": "c101",
+                "title": "Replace Logo"
             }
-        ]
+        }]
     }
 ]

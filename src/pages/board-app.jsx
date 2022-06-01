@@ -118,40 +118,53 @@ class _BoardApp extends React.Component {
         this.setState({ islabelOpen: !this.state.isLabelOpen })
     }
 
-    onToggleStatus=()=>{
+    onToggleStatus = () => {
         this.setState({ isSideBarOpen: !this.state.isSideBarOpen })
     }
 
-    
+
     render() {
         const { currBoard } = this.props
         if (!currBoard) return <></>
-        const { labels, members} = currBoard
+        const { labels, members } = currBoard
         const { boardId } = this.props.match.params
         const { groups, isModalOpen, isShown, isLabelOpen: islabelOpen, isSideBarOpen } = this.state
-        let status = (isSideBarOpen)? 'open':''
+        let status = (isSideBarOpen) ? 'open' : ''
         const background = {
-        background: `url(${currBoard.style.imgUrl})`, 
-        backgroundSize: 'cover'
+            background: `url(${currBoard.style.imgUrl})`,
+            backgroundSize: 'cover',
+            top: '0px'
         }
+        console.log('the board in boardApp', currBoard);
         if (!labels) return <></>
         return (
             <section style={background} className={`board-app ${status}`}>
                 <div className="board-name flex">
-                <BoardHeader />
-                <button className="show-menu-btn" onClick={this.onToggleStatus}>Show Menu</button>
+                    <BoardHeader />
+                    <button className="show-menu-btn" onClick={this.onToggleStatus}>Show Menu</button>
                 </div>
                 <section className="main-board">
-                <SideMenu props={currBoard}/>
+                    <SideMenu props={currBoard} />
                     {(!groups || !groups.length) && <TrellisSpinner isLarge={true} />}
                     <div className="list-container">
-                        <GroupList key={'GroupList'} boardId={boardId} onToggleDetails={this.onToggleDetails} onDeleteGroup={this.onDeleteGroup} groups={groups} />
+                        <GroupList
+                            key={'GroupList'}
+                            boardId={boardId}
+                            onToggleDetails={this.onToggleDetails}
+                            onDeleteGroup={this.onDeleteGroup}
+                            groups={groups} />
 
                     </div>
                     <>
                         <Route path='/board/:boardId/:groupId/:taskId' >
                             <Screen key={'Screen'} isOpen={isModalOpen}   >
-                                <TaskDetails members={members} labels={labels} onToggleLabels={this.onToggleLabels} key={'TaskDetails'} isOpen={isModalOpen} onCloseDetails={this.onCloseDetails} />
+                                <TaskDetails
+                                    key={'TaskDetails'}
+                                    members={members}
+                                    labels={labels}
+                                    onToggleLabels={this.onToggleLabels}
+                                    isOpen={isModalOpen}
+                                    onCloseDetails={this.onCloseDetails} />
 
                             </Screen>
 

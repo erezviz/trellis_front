@@ -1,0 +1,38 @@
+.create-board-modal {
+    .create-board-title {
+        flex-direction: column;
+        padding: 0 5px 5px;
+        label[for=title] {
+            color: #5e6c84;
+            font-size: 12px;
+            line-height: 16px;
+            font-weight: 700;
+        }
+        label[for=title] span {
+            color: #eb5a46;
+            margin-left: 2px;
+        }
+        input[name=title] {
+            outline: none;
+            border: none;
+            box-sizing: border-box;
+            color: #172b4d;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Noto Sans', 'Ubuntu', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            font-size: 14px;
+            line-height: 20px;
+            font-weight: 400;
+            transition-property: background-color, border-color, box-shadow;
+            transition-duration: 85ms;
+            transition-timing-function: ease;
+            border-radius: 3px;
+            padding: 8px 12px;
+            box-shadow: inset 0 0 0 2px #dfe1e6;
+            background-color: #fafbfc;
+            width: 100%;
+            margin-bottom: 0;
+        }
+        >button {
+            margin: 16px 0 8px;
+        }
+    }
+}

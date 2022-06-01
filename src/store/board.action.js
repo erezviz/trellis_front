@@ -91,6 +91,7 @@ export function addBoard(board) {
             const savedBoard = await boardService.save(board)
             console.log('Added Board', savedBoard);
             dispatch(getActionAddBoard(savedBoard))
+            return savedBoard
         } catch (err) {
             console.log('Cannot add board', err)
         }
@@ -115,8 +116,8 @@ export function updateWholeBoard(board) {
             // console.log(boardId)
             await boardService.save(board)
             dispatch(getActionUpdateBoard(board))
-            // console.log('reducer board', reducerBoard)
-            // return reducerBoard.board
+                // console.log('reducer board', reducerBoard)
+                // return reducerBoard.board
         } catch (err) {
             console.log('Cannot save board', err)
             throw err
@@ -172,26 +173,7 @@ export function onUpdateGroup(boardId, groupId, newName) {
         }
     }
 }
-//! THIS FUNCTION  HAS BEEN FULLFILLED IN THE BOARDSERVICE - - YOU MAY DELETE IT
-// export function loadTask(taskId, groupId, boardId) {
-//     let currGroup
-//     return async() => {
-//         try {
-//             const board = await boardService.getById(boardId)
 
-//             const task = board.groups.find(group => {
-//                 currGroup = group.id === groupId
-//                 return currGroup.tasks.find(task => task.id === taskId)
-//             })
-//             return task
-
-//         } catch (err) {
-//             console.log('Cannot load task', err)
-//             throw err
-//         }
-
-//     }
-// }
 
 export function queryTask(boardId, groupId, taskId) {
     return async(dispatch) => {
