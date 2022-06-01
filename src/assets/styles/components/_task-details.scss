@@ -121,7 +121,7 @@ textarea#description {
 .main-add-actions {
     div {
         margin-top: 7px;
-        padding: 3px 10px 3px 3px;
+        padding: 3px 10px 3px 6px;
         border-radius: 3px;
         background-color: #091e420a;
     }
@@ -205,6 +205,8 @@ textarea#description {
 .sidebar-btn {
     width: 180px;
     font-size: 15px;
+    align-items: center;
+    gap: 6px;
     cursor: pointer;
     &:hover {
         background-color: #091e4214;
@@ -213,3 +215,16 @@ textarea#description {
     }
 }
 
+.sidebar-icon {
+    &-members {
+        display: inline-block;
+        font-style: normal;
+        margin-top: 0.5px;
+        height: 12px;
+        width: 12px;
+        background-color: transparent;
+        background-size: contain;
+        text-align: center;
+        background-image: url('../../icon/member-icon.svg');
+    }
+}

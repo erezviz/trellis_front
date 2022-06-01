@@ -25,12 +25,14 @@ export const TaskDetails = (props) => {
     let [isEdit, setIsEdit] = useState(false)
     let [isLabelOpen, setIsLabelOpen] = useState(false)
     const [isAttachOpen, setIsAttachOpen] = useState(false)
+    const [isMembersOpen, setIsMembersOpen] = useState(false)
     let [isDatesOpen, setIsDatesOpen] = useState(false)
     // let [title, setTitle] = useState({ title: '' })
     const [task, setTask] = useState(null)
     const dispatch = useDispatch()
     const { currBoard } = useSelector((storeState) => storeState.boardModule)
 
+    
     // let { boardId, groupId, taskId } = useParams()
     let { params: { boardId, groupId, taskId } } = useRouteMatch();
     useEffect(() => {
@@ -69,8 +71,8 @@ export const TaskDetails = (props) => {
         }
 
         // console.log('task before dispatch', task)
-         dispatch(updateTask(boardId, groupId, task))
-         setIsDesc(false)
+        dispatch(updateTask(boardId, groupId, task))
+        setIsDesc(false)
 
 
     }
@@ -121,7 +123,8 @@ export const TaskDetails = (props) => {
                             <div className="add-member">+</div>
                         </div>
                     </div>
-                   {(task.labelIds.length > 0) && <section className="labels-section">
+                  
+                    {task.labelIds?.length > 0 && <section className="labels-section">
                         <p>Labels</p>
                         <div className="labels-list">
                             {task.labelIds && props.labels.map(label => {
@@ -175,6 +178,10 @@ export const TaskDetails = (props) => {
                     <section className="details-sidebar">
                         <div className="main-add-actions">
                             <h6 className="sidebar-add-heading">Add to card</h6>
+                            <div className="sidebar-btn flex" onClick={() => setIsMembersOpen(prevMembersOpen => prevMembersOpen = !isMembersOpen)} >
+                                <span className="sidebar-icon-members"></span>
+                                <span>Members</span>
+                            </div>
                             <div onClick={() => setIsLabelOpen(true)} className="sidebar-btn">
                                 Labels
                             </div>
