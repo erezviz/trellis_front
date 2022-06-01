@@ -4,13 +4,14 @@ import { TrellisSpinner } from "../util-cmps/trellis-spinner"
 import { DragDropContext, Droppable } from "react-beautiful-dnd"
 import { useDispatch, useSelector } from "react-redux"
 import { updateWholeBoard } from "../../store/board.action"
+import { useEffect } from "react"
 
 export const GroupList = ({ groups, onDeleteGroup, boardId, onToggleDetails }) => {
     let { currBoard } = useSelector(state => state.boardModule)
     const dispatch = useDispatch()
+    useEffect(()=>{
 
-
-
+    },[currBoard])
 
     const onDragEnd = async (res) => {
         const board = JSON.parse(JSON.stringify(currBoard))
@@ -23,6 +24,7 @@ export const GroupList = ({ groups, onDeleteGroup, boardId, onToggleDetails }) =
             // console
             board.groups.splice(source.index, 1)
             board.groups.splice(destination.index, 0, group)
+            currBoard = board
             // dispatch(updateWholeBoard(board))
         }
         else if (type === 'task') {
@@ -51,6 +53,7 @@ export const GroupList = ({ groups, onDeleteGroup, boardId, onToggleDetails }) =
         // currBoard = board
         try {
             await dispatch(updateWholeBoard(board))
+            // console.log('uodated board', board)
             // currBoard = newBoard
         } catch (err) {
             console.log('error', err)

@@ -1,47 +1,182 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { utilService } from '../../../services/util.service.js'
-import {ChecklistHeader} from './checklist-header.jsx'
-import {ChecklistItems} from './checklist-items.jsx'
+import checklistIcon from '../../../assets/icon/checklist-icon.png'
+import threeDotsMenu from '../../../assets/icon/three-dot-menu.svg'
+import { useDispatch } from 'react-redux';
+import { updateTask } from '../../../store/board.action'
+import { useRouteMatch } from 'react-router-dom';
+import {ProgressBar} from './progress-bar'
+;
 
 export const TaskChecklist = (props) => {
-    let initialChecklist
-    if (!props.checklist){
-        initialChecklist = {
-            title: 'checklist', 
+    const { params: { boardId, groupId} } = useRouteMatch()
+    const {task} = props
+    const dispatch = useDispatch()
+    const [isAddingItem, setIsAddingItem] = useState(false)
+    const [isEditTitle, setIsEditTitle] = useState(null)
+    const [itemTitle, setItemTitle] = useState('')
+    const [isDeleteModalOpen, setDeleteModal] = useState(false)
+
+
+    const titleStyle = {
+        overflow: 'hidden',
+        overflowWrap: 'break-word',
+        height: '33px'
+    }
+
+    const dispatchTask=(newTask)=>{
+        dispatch(updateTask(boardId, groupId, newTask))
+     }
+
+    if(!task.checklist) {
+        const newTask = {...task}
+        newTask.checklist ={
+            title: 'Checklist', 
             id: utilService.makeId(),
             todos:[]
+    }
+    dispatchTask(newTask)
+}
+
+ const toggleAddItem=()=>{
+     setIsAddingItem(!isAddingItem)
+    }
+    
+ const onHandleChange=(ev,todoId)=>{
+    const newTask = {...task}
+    const {value} = ev.target
+    setItemTitle(value)
+    newTask.checklist.todos.map(todo=>{
+        if (todo.id === todoId){
+            todo.title = value
         }
-    }else initialChecklist = props.task.checklist
+        return todo
+    })
+}
+ const onHandleChangeTitle=(ev)=>{
+    const newTask = {...task}
+    const {value} = ev.target
+    setItemTitle(value)
+    newTask.checklist.title = value
 
-    const [task, setTask] = useState(props.task)
-    const [checklist, setChecklist] = useState(initialChecklist)
-    // console.log('task checklist', task)
-    useEffect(()=>{
-        // console.log('checklist change!', checklist)
-        setTask(prevTask=>({...prevTask, checklist:checklist}))
-        // console.log('did task changed?', task)
-        props.onSave(null,task)
-    },[checklist])
-    
+}
 
-    const onChangeTitle = (newTitle)=>{
-        setChecklist(prevChecklist=>({...prevChecklist, title: newTitle}))
-        setTask(prevTask=>({...prevTask, checklist:checklist}))
+const onCheck=(todoId)=>{
+    const newTask = {...task}
+    const newTodos= newTask.checklist.todos.map(todo=>{
+        if (todo.id === todoId){
+            todo.isDone =!todo.isDone
+        }
+        return todo
+    })
+    newTask.checklist.todos = newTodos
+    console.log(newTask)
+    dispatchTask(newTask)
+}
+
+const onDeleteTodo=(todoId)=>{
+    const todoIdx = task.checklist.todos.findIndex(todo=>{
+        return todo.id ===todoId
+    })
+    const newTask = {...task}
+    newTask.checklist.todos.splice(todoIdx, 1)
+    dispatchTask(newTask)
+}
+
+const onAddTodo=()=>{
+    if(!itemTitle)return
+     setIsAddingItem(false)
+    const newTask = {...task}
+    const newTodo = {
+        title: itemTitle,
+        id: utilService.makeId(),
+        isDone: false
     }
-    
-    const onChangeTodos=async(newTodos)=>{
-        setChecklist(prevChecklist=>({...prevChecklist, todos: newTodos}))
-        setTask(prevTask=>({...prevTask, checklist:checklist}))
-        // props.handleFormChange({target:{name: 'checklist', value: checklist}})
-        // console.log('checklist from task-checklist',checklist)
-        // props.onSave()
-    }
+    const newTodos = [...newTask.checklist.todos, newTodo]
+    newTask.checklist.todos = newTodos
+    console.log(newTask)
+    dispatchTask(newTask)
+ }
 
-    return (
-        <>
-        <ChecklistHeader onSave={props.onSave} onChangeTitle={onChangeTitle} task={props.task} title={checklist.title} />
-        <ChecklistItems onSave={props.onSave} onChangeTodos={onChangeTodos} todos={checklist.todos}/>
-        </>
+ const onSaveName=(todoId)=>{
+    const newTask = {...task}
+    const newTodos= newTask.checklist.todos.map(todo=>{
+        if (todo.id === todoId){
+            todo.title = itemTitle
+        }
+        return todo
+    })
+    newTask.checklist.todos = newTodos
+    console.log(newTask)
+    dispatchTask(newTask)
+    setItemTitle('')
+ }
+
+ const onSaveHeader=(ev)=>{
+     if(ev) ev.preventDefault()
+    const newTask = {...task}
+    newTask.checklist.title = itemTitle
+    dispatchTask(newTask)
+    setItemTitle('')
+ }
+
+ const getPrecentage = () => {
+    const done = task.checklist.todos.filter(todo => todo.isDone === true)
+    if(!task.checklist.todos.length) return done.length
+    return (Math.floor((100 * done.length) / task.checklist.todos.length))
+}
+
+
+    
+   if(task.checklist) return (
+        <div>
+            <div onClick={() => setIsEditTitle('header')} className="details-header flex cl-header">
+            <img src={checklistIcon} alt="" className='checklist-icon'/>
+                    <form onBlur={onSaveHeader} onSubmit={(ev)=>onSaveHeader()}>
+                        <input style={isEditTitle==='header' ? { titleStyle } : {}} value={task.checklist.title} onChange={(ev)=>onHandleChangeTitle(ev)} className="details-title cl-header" name="checklist"  />
+                    </form>
+                </div>
+            <ProgressBar completed={getPrecentage()} />
+            {task.checklist.todos &&
+            <div>
+               { task.checklist.todos.map(todo=>{
+                 return <div className='checklist-item'>
+                 {!isEditTitle && <>
+                 <img src={threeDotsMenu} alt="more" onClick={()=>setDeleteModal(true)}/>
+                  <input type="checkbox" id={todo.id} name={todo.title} checked={todo.isDone} onChange={(ev) => onCheck(todo.id)}/>
+                 <label value={todo.title} onClick={()=>setIsEditTitle(todo.id)} htmlFor={todo.title}>{todo.title}</label></>
+                 }
+                 
+               {isDeleteModalOpen && <div className="delete-modal">
+                   Are you sure you want to delete {todo.title}?
+                   <button onClick={()=>onDeleteTodo(todo.id)}>Yes</button>
+                   <button onClick={()=>setDeleteModal(false)}>Cancel</button>
+                   </div>}
+                   {isEditTitle === todo.id && <>
+                       <input value={todo.title} onChange={(ev) => onHandleChange(ev, todo.id)} id={todo.id} />
+                       <button onClick={(ev) => {onSaveName(todo.id)
+                    setIsEditTitle(null)
+                    }}>Save</button>
+                       <button onClick={()=>setIsEditTitle(null)}>Cancel</button>
+                   </>
+                   }
+                   </div>
+               })}
+        
+               </div>
+               }
+            {!isAddingItem && <button onClick={toggleAddItem}>Add an item</button>}
+            {isAddingItem &&<div>
+            <input onChange={(ev)=>onHandleChange(ev)}/>
+            <button onClick={onAddTodo}>Add</button><button onClick={toggleAddItem}>Cancel</button>
+            </div>
+            }
+            
+        </div>
+
     )
 
 }
+
+
+

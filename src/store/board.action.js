@@ -113,10 +113,10 @@ export function updateWholeBoard(board) {
     return async(dispatch) => {
         try {
             // console.log(boardId)
-            const reducerBoard = dispatch(getActionUpdateBoard(board))
-            const updatedBoard = await boardService.save(board)
-            console.log('reducer board', reducerBoard)
-            return reducerBoard.board
+            await boardService.save(board)
+            dispatch(getActionUpdateBoard(board))
+            // console.log('reducer board', reducerBoard)
+            // return reducerBoard.board
         } catch (err) {
             console.log('Cannot save board', err)
             throw err

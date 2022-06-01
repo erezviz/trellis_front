@@ -35,7 +35,8 @@ class _LoginSignup extends Component {
     }
 
 
-    toggleSignup = () => {
+    toggleSignup = (ev) => {
+        ev.preventDefault()
         this.setState({ isSignup: !this.state.isSignup })
     }
 
@@ -48,7 +49,7 @@ class _LoginSignup extends Component {
            
             <div className="login-page">
                 <p>
-                    <a href="#" onClick={this.toggleSignup}>{!isSignup ? 'Signup' : 'Login'}</a>
+                    <a href="#" onClick={(ev)=>this.toggleSignup(ev)}>{!isSignup ? 'Signup' : 'Login'}</a>
                 </p>
                 {!isSignup && <form className="login-form" onSubmit={this.onLogin}>
                     <input

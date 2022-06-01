@@ -1,0 +1,53 @@
+.checklist {
+    margin-top: 15px;
+
+    .checklist-icon {
+        margin: 0 12px 0px 0px;
+        padding: 8px 0;
+        height: 36px;
+        line-height: 32px;
+        width: 20px;
+    }
+
+    .cl-header {
+        color: darken($color: $clr2, $amount: 45%);
+        align-items: center;
+        justify-content: flex-start
+    }
+}
+
+.checklist-item {
+    display: flex;
+    align-items: center;
+
+    img {
+        visibility: hidden;
+        width: fit-content;
+        position: relative;
+        margin-left: 153px;
+        cursor: pointer;
+    }
+
+    .delete-modal {
+        text-align: center;
+        background-color: white;
+        height: 100px;
+        position: fixed;
+        width: 230px;
+        will-change: top, left;
+        top: 430px;
+        left: 250px;
+
+        p {
+            margin: 0;
+        }
+    }
+}
+
+.checklist-item:hover {
+    background-color: darken($color: $clr2, $amount: 15%);
+
+    img {
+        visibility: visible;
+    }
+}
