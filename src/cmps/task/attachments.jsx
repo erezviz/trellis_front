@@ -59,7 +59,7 @@ export const Attachments = ({ task }) => {
             attachment.title = utilService.getFilename(attachment.url)
 
         }
-        const newTask = { ...task }
+        const newTask = utilService.getDeepCopy(task)
         attachment.id = utilService.makeId()
         console.log('attachment.id in on save', attachment.id);
         // setAttachments(prevAttachments => ([...prevAttachments, attachment]))
@@ -75,8 +75,8 @@ export const Attachments = ({ task }) => {
 
     const onRemoveAttachment = (attachmentId) => {
         console.log('attach id in onremove', attachmentId);
-        const newTask = { ...task }
-        const newAttachments = attachments.filter(attachment => attachment.id !== attachmentId)
+        const newTask = utilService.getDeepCopy(task)
+        const newAttachments = newTask.attachments.filter(attachment => attachment.id !== attachmentId)
         console.log('newAttachments in onRemove', newAttachments);
         newTask.attachments = newAttachments
         dispatch(updateTask(boardId, groupId, newTask))
@@ -87,8 +87,9 @@ export const Attachments = ({ task }) => {
 
         //TODO  Change prompt to a nice modal -- preferably something dynamic you can use again and again
         const newTitle = prompt('Edit attachment', 'Link name')
-        const newTask = { ...task }
-        console.log('the newTask in editTilte', newTask);
+        
+        const newTask = utilService.getDeepCopy(task)
+        console.log('the newTask in editTitle', newTask);
         if (!newTitle) return
         const newAttachments = newTask.attachments.map(attachment => {
             if (attachment.id === attachId) attachment.title = newTitle
