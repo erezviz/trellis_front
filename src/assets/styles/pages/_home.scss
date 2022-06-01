@@ -24,15 +24,6 @@
         flex-wrap: wrap;
         margin-top: 24px;
         
-        .bci1{
-            background-image: url('../../img/background-fall.jpg');
-        }
-        .bci2{
-            background-image: url('../../img/background-fall2.jpg');
-        }
-        .bci3{
-            background-image: url('../../img/background-fall3.jpg');
-        }
         a {
             background-size:cover;
             background-color: lighten($color: $clr1, $amount: 15%);
