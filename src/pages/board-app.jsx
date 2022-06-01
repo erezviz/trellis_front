@@ -21,7 +21,7 @@ class _BoardApp extends React.Component {
         groups: [],
         isModalOpen: false,
         isShown: false,
-        islabelOpen: false,
+        isLabelOpen: false,
         newGroup: { title: '' }
     }
 
@@ -32,20 +32,20 @@ class _BoardApp extends React.Component {
 
     loadGroups = async (board) => {
         //###  What is this line for?  ###
-        this.setState(prevState=>({...prevState, groups: [] }),async()=>{
+        this.setState(prevState => ({ ...prevState, groups: [] }), async () => {
 
             const boardId = this.getBoardId()
             if (!board) {
                 try {
                     const board = await this.props.loadBoard(boardId)
-                    this.setState(prevState=>({...prevState, groups: board.groups }))
-                    
+                    this.setState(prevState => ({ ...prevState, groups: board.groups }))
+
                 } catch (err) {
                     throw err
                 }
             } else {
                 try {
-                    await this.setState(prevState=>({...prevState, groups: board.groups }))
+                    await this.setState(prevState => ({ ...prevState, groups: board.groups }))
                 } catch (err) {
                     throw err
                 }
@@ -95,14 +95,14 @@ class _BoardApp extends React.Component {
 
     onToggleDetails = (ev) => {
         const { boardId } = this.props.match.params
-        
+
         this.setState(prevState => ({
             isModalOpen: !prevState.isModalOpen
         }));
         this.props.history.push(`/board/${boardId}`)
-        
+
     }
-    
+
     onCloseDetails = (ev) => {
         this.onToggleDetails()
         this.onToggleLabels()
@@ -112,39 +112,39 @@ class _BoardApp extends React.Component {
         this.setState({ isShown: !this.state.isShown })
     }
 
-    onToggleLabels= ()=>{
-        this.setState({  islabelOpen: !this.state. islabelOpen })
+    onToggleLabels = () => {
+        this.setState({ islabelOpen: !this.state.isLabelOpen })
     }
 
     render() {
         const { currBoard } = this.props
-        if(!currBoard) return <></>
+        if (!currBoard) return <></>
         const { labels } = currBoard
         const { boardId } = this.props.match.params
 
 
-        const { groups, isModalOpen, isShown, islabelOpen } = this.state
+        const { groups, isModalOpen, isShown, isLabelOpen: islabelOpen } = this.state
         if (!labels) return <></>
         return (
             <section className={`board-app ${boardId}`}>
                 <BoardHeader />
                 <section className="main-board">
                     {/* <TrellisSpinner isLarge={true}/> */}
-                {(!groups || !groups.length) && <TrellisSpinner isLarge={true}/>}
-                <div className="list-container">
-                    <GroupList key={'GroupList'} boardId={boardId} onToggleDetails={this.onToggleDetails} onDeleteGroup={this.onDeleteGroup} groups={groups}/>
+                    {(!groups || !groups.length) && <TrellisSpinner isLarge={true} />}
+                    <div className="list-container">
+                        <GroupList key={'GroupList'} boardId={boardId} onToggleDetails={this.onToggleDetails} onDeleteGroup={this.onDeleteGroup} groups={groups} />
 
                     </div>
                     <>
                         <Route path='/board/:boardId/:groupId/:taskId' >
                             <Screen key={'Screen'} isOpen={isModalOpen}   >
-                                <TaskDetails labels={labels} onToggleLabels={this.onToggleLabels}  key={'TaskDetails'} isOpen={isModalOpen} onCloseDetails={this.onCloseDetails} />
+                                <TaskDetails labels={labels} onToggleLabels={this.onToggleLabels} key={'TaskDetails'} isOpen={isModalOpen} onCloseDetails={this.onCloseDetails} />
 
                             </Screen>
-                          
+
                         </Route>
                     </>
-                   
+
                     <div className="add-group">
                         {!isShown && <button className="add-group-btn" onClick={this.onToggleGroup}><span className="plus">+</span> Add another list</button>}
                         {isShown && <form onSubmit={(ev) => this.onAddGroup(ev)}>

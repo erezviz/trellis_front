@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useRouteMatch } from 'react-router-dom';
 import { utilService } from '../../services/util.service';
-import {  updateTask } from '../../store/board.action'
+import { updateTask } from '../../store/board.action'
 
 
 export const TaskDate = (props) => {
@@ -14,7 +14,7 @@ export const TaskDate = (props) => {
 
     const onSaveDate = () => {
         const newTask = utilService.getDeepCopy(props.task)
-        const newDate = date._d.toString() 
+        const newDate = date._d.toString()
         console.log(typeof date._d.toString());
         newTask.dueDate = newDate
         console.log(newTask);
@@ -22,7 +22,7 @@ export const TaskDate = (props) => {
         props.onToggleDates(false)
     }
 
-    const onRemoveDate = () =>{
+    const onRemoveDate = () => {
         const newTask = utilService.getDeepCopy(props.task)
         newTask.dueDate = null
         dispatch(updateTask(boardId, groupId, newTask))
