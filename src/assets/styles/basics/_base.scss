@@ -94,8 +94,8 @@ body {
     background-image: url('../../icon/close-icon.png');
     height: 16px;
     width: 16px;
+    background-color: transparent;
     &:hover {
-        background-color: rgba(255, 255, 255, 0.3);
         cursor: pointer;
     }
 }

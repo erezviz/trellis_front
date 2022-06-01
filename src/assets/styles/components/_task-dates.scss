@@ -1,0 +1,70 @@
+.task-dates{
+    background: #fff;
+    border-radius: 3px;
+    padding: 10px;
+    box-shadow: 0 8px 16px -4px #091e4240, 0 0 0 1px #091e4214;
+    position: absolute;
+    right: 4%;
+    top: 25%;
+    width: 292px;
+    z-index: 70;
+    header{
+        border-bottom: 1px solid #091e4221;
+        box-sizing: border-box;
+        color: #5e6c84;
+        display: block;
+        line-height: 40px;
+        // margin: 0 12px;
+        overflow: hidden;
+        padding: 0 32px;
+        position: relative;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        z-index: 1;
+        text-align: center;
+        button{
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 12px;
+            height: 12px;
+        }
+        h2{
+            font-size: 15px;
+        }
+    }
+    .main-dates{
+        
+        .btns{
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            button{
+                height: 30px;
+                border: none;
+            }
+            .save-date{
+                background-color: #0079bf;
+                padding: 0.25rem 0.5rem;
+                border-radius: 0.2rem;
+                transition: background-color, 0.15s;
+                color: white;
+                &:hover {
+                    background-color: darken($color:#0079bf, $amount: 8%)
+                }
+            }
+
+        }
+    }
+
+    
+    .MuiPickersStaticWrapper-staticWrapperRoot {
+        min-width: 270px;
+        width: 270px;
+        .MuiPickersBasePicker-pickerView {
+            min-width: 270px;
+            width: 270px;
+        }
+    }
+
+}
