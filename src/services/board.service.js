@@ -18,7 +18,7 @@ export const boardService = {
     addGroup,
     updateGroup,
     deleteGroup,
-    loadTask,
+    getTask,
     updateTask,
     createAttachment,
     getAttachmentTitle,
@@ -116,7 +116,7 @@ function getEmptyTask() {
     }
 }
 //? THIS FUNCTION WORKS -- DO NOT DELETE
- function loadTask(board, groupId, taskId) {
+function getTask(board, groupId, taskId) {
 
     try {
         const group = board.groups.find(group => group.id === groupId)

@@ -29,11 +29,12 @@ export const TaskDetails = (props) => {
     const [isDesc, setIsDesc] = useState(false)
     let [isEdit, setIsEdit] = useState(false)
     let [isLabelOpen, setIsLabelOpen] = useState(false)
+    const [isAttachOpen, setIsAttachOpen] = useState(false)
     // let [title, setTitle] = useState({ title: '' })
     const [task, setTask] = useState(null)
     const dispatch = useDispatch()
     const { currBoard } = useSelector((storeState) => storeState.boardModule)
-    // let history = useHistory()
+
     // let { boardId, groupId, taskId } = useParams()
     let { params: { boardId, groupId, taskId } } = useRouteMatch();
 
@@ -41,8 +42,8 @@ export const TaskDetails = (props) => {
 
     useEffect(() => {
         (async () => {
-            const task = boardService.loadTask(currBoard, groupId, taskId)
-            console.log('task from details', task);
+            const task = boardService.getTask(currBoard, groupId, taskId)
+            // console.log('task from details', task);
             // const newtask = await dispatch(queryTask(boardId, groupId, taskId))
             setTask(task)
         })();
@@ -72,22 +73,35 @@ export const TaskDetails = (props) => {
         height: '33px'
     }
 
-    async function onSave(ev, newTask) {
+    function onSave(ev) {
         if (ev) {
             ev.preventDefault()
 
         }
+
         // console.log('task before dispatch', task)
-        await dispatch(updateTask(boardId, groupId, task))
+         dispatch(updateTask(boardId, groupId, task))
+         setIsDesc(false)
 
 
     }
+
+    const onDescResize = ev => {
+        let desc = ev.target
+        desc.style.height = ''
+        //     textarea.style.height = "";
+        //     /* textarea.style.height = Math.min(textarea.scrollHeight, 300) + "px"; */
+        desc.style.height = desc.scrollHeight + "px"
+
+    }
+
 
     const handleFormChange = ev => {
         const { name, value } = ev.target
         setTask(prevTask => ({ ...prevTask, [name]: value }))
         // console.log('saveTask task-details', task)
     }
+
     const goBack = () => {
         this.props.history.push(`/board/${boardId}`)
     }
@@ -133,7 +147,7 @@ export const TaskDetails = (props) => {
                                 return task.labelIds.map(labelId => {
                                     if (label.id === labelId) {
 
-                                        return <div className="label-task" style={{ backgroundColor: label.color }}>
+                                        return <div key={labelId} className="label-task" style={{ backgroundColor: label.color }}>
                                             <span>{label.title}</span>
                                         </div>
                                     }
@@ -150,13 +164,15 @@ export const TaskDetails = (props) => {
                     <section className="details-main-col flex">
                         <div className="desc-container">
                             <label className="description" htmlFor="description">Description</label>
-                            {isDesc && <div onClick={() => setIsDesc(true)} className="details-desc">
+                            {/* {isDesc && <div onClick={() => setIsDesc(true)} className="details-desc">
                                 {task.description && <p>{task.description}</p>}
 
-                            </div>}
+                            </div>} */}
 
                             <form onSubmit={onSave}>
                                 <textarea
+                                    onInput={onDescResize}
+                                    onFocus={() => setIsDesc(true)}
                                     onBlur={(ev) => onSave(ev)}
                                     onChange={handleFormChange}
                                     name="description"
@@ -166,11 +182,12 @@ export const TaskDetails = (props) => {
                                     value={task.description}
                                     placeholder="Add a more detailed description..."
                                 />
-
-                                <input className='desc-send-btn' type="submit" value="Send" />
+                                {isDesc && <div className="desc-controls">
+                                    <input className='desc-send-btn' type="submit" value="Send" />
+                                </div>}
                             </form>
                         </div>
-                        <Attachments handleChange={handleFormChange} />
+                        <Attachments task={task} handleChange={handleFormChange} />
 
                         <div className='checklist'><TaskChecklist onSave={onSave} task={task} handleFormChange={handleFormChange} /></div>
 
@@ -183,7 +200,7 @@ export const TaskDetails = (props) => {
                             <div onClick={() => setIsLabelOpen(true)} className="sidebar-btn">
                                 Labels
                             </div>
-                            <div className="sidebar-btn">
+                            <div onClick={() => setIsAttachOpen(prevAttachOpen => prevAttachOpen = !isAttachOpen)} className="sidebar-btn">
                                 Attachments
 
                             </div>
