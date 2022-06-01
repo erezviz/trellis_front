@@ -1,36 +1,33 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react'
 import { useRouteMatch } from 'react-router-dom';
-// import { Link } from 'react-router-dom';
-// import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
-// import { TaskTitle } from '../dynamic-cmps/task-title';
+import {ReactComponent as TitleIcon} from '../../assets/icon/task-title-icon.svg' 
 import { boardService } from '../../services/board.service';
 import { TaskChecklist } from './checklist/task-checklist.jsx'
-// import { useHistory } from 'react-router-dom';
+
 import { useDispatch } from 'react-redux';
 import member from '../../assets/icon/member.svg'
 import { useSelector } from 'react-redux';
 import { Labels } from './labels';
 import { queryTask, updateTask } from '../../store/board.action';
-// import { useSelector } from 'react-redux';
+
 import { TrellisSpinner } from '../util-cmps/trellis-spinner';
 import { Attachments } from './attachments';
 import { TaskDate } from './task-dates';
-// import Box from '@mui/material/Box';
-// import Modal from '@mui/material/Modal';
-// import Button from '@mui/material/Button';
+
 
 export const TaskDetails = (props) => {
+
+    const { currBoard } = useSelector((storeState) => storeState.boardModule)
+    const dispatch = useDispatch()
+    
+    const [task, setTask] = useState(null)
     const [isDesc, setIsDesc] = useState(false)
     let [isEdit, setIsEdit] = useState(false)
     let [isLabelOpen, setIsLabelOpen] = useState(false)
     const [isAttachOpen, setIsAttachOpen] = useState(false)
     const [isMembersOpen, setIsMembersOpen] = useState(false)
     let [isDatesOpen, setIsDatesOpen] = useState(false)
-    // let [title, setTitle] = useState({ title: '' })
-    const [task, setTask] = useState(null)
-    const dispatch = useDispatch()
-    const { currBoard } = useSelector((storeState) => storeState.boardModule)
 
     
     // let { boardId, groupId, taskId } = useParams()
@@ -46,18 +43,11 @@ export const TaskDetails = (props) => {
             setTask(null)
         }
     }, [currBoard])
+
     const modalStyle = {
         display: props.isOpen ? 'block' : 'none',
         position: 'absolute',
-        // top: '50%',
-        // left: '50%',
-        // transform: 'translate(-50%, -50%)',
         bgcolor: 'background.paper',
-        // border: '2px solid #000',
-        // boxShadow: 24,
-        // pt: 2,
-        // px: 4,
-        // pb: 3,
     }
     const titleStyle = {
         overflow: 'hidden',
@@ -106,6 +96,9 @@ export const TaskDetails = (props) => {
                     return props.onCloseDetails()
                 }} className="close-details-btn">X</button>
                 <div onClick={() => setIsEdit(isEdit = !isEdit)} className="details-header flex">
+                    <span className="task-title-icon">
+                        <TitleIcon/>
+                    </span>
                     <form onSubmit={(ev) => onSave(ev)} >
                         <input onBlur={(ev) => onSave(ev)} style={isEdit ? { titleStyle } : {}} value={task.title} onChange={handleFormChange} className="details-title" name="title" />
                     </form>

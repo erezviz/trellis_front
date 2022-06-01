@@ -9,11 +9,14 @@ import {
     addBoard,
     updateBoard,
 } from '../store/board.action'
+import { PopOver } from "../cmps/dynamic-cmps/pop-over";
+import { CreateBoardModal } from "../cmps/board/create-board-modal";
+
 
 class _HomePage extends React.Component {
-    // state = {
-    //     boards: []
-    // }
+    state = {
+        isModalShown: false
+    }
 
 
     componentDidMount() {
@@ -21,21 +24,24 @@ class _HomePage extends React.Component {
     }
 
     onLoadBoards = async () => {
+        this.props.loadBoards()
+    }
 
-
-        const boards = await this.props.loadBoards()
-
+    onToggleModal = () => {
+        const { isModalShown } = this.state
+        this.setState(prevState => ({ ...prevState, isModalShown: !isModalShown }))
     }
 
     render() {
         const { boards } = this.props
+        const { isModalShown } = this.state
 
         return (
             <section className="home-page">
                 <h1>Our most popular templates</h1>
                 <section className="previews-container bci1">
                     {(!boards && !boards.length) && <div>Loading...</div>}
-                    {boards && boards.map((board, idx) => <Link className={`bci${idx+1}`} key={board._id + idx} to={`/board/${board._id}`}><BoardPreview board={board} /></Link>)}
+                    {boards && boards.map((board, idx) => <Link className={`bci${idx + 1}`} key={board._id + idx} to={`/board/${board._id}`}><BoardPreview board={board} /></Link>)}
                     {/*                 
                 <h1><img src={require('../assets/img/templates.png')} alt="" /> Most popular templates</h1>
                <section className="previews-container">
@@ -45,8 +51,13 @@ class _HomePage extends React.Component {
                 <Link to='/board'><BoardPreview/></Link>
                 <Link to='/board'><BoardPreview/></Link>
                  */}
+                    <div onClick={() => this.onToggleModal()} className="create-board flex">
+                        <span className="create-board-icon" ></span>
+                    </div>
                 </section>
-                <div className="create-board"></div>
+                <PopOver cb={this.onToggleModal} isShown={isModalShown} title={'Create board'}>
+                    <CreateBoardModal isShown={isModalShown} />
+                </PopOver>
             </section>
         )
     }

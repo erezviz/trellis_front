@@ -61,8 +61,9 @@ async function save(board) {
             // boardChannel.postMessage(getActionUpdateBoard(savedBoard))
 
     } else {
-        // Later, owner is set by the backend
-        board.owner = userService.getLoggedinUser()
+        board.labels = _getBoardLabels()
+            // Later, owner is set by the backend
+            // board.owner = userService.getLoggedinUser()
         savedBoard = await storageService.post(STORAGE_KEY, board)
             // boardChannel.postMessage(getActionAddBoard(savedBoard))
     }
@@ -233,6 +234,40 @@ function getAttachmentTitle(urlStr) {
 //             }
 //         ],
 //     }]
+
+function _getBoardLabels() {
+    return [{
+            id: "l101",
+            title: "Done",
+            color: "#519839"
+        },
+        {
+            id: "l102",
+            title: "Progress",
+            color: "#f2d600"
+        },
+        {
+            id: "l103",
+            title: "Open",
+            color: " #eb5a46"
+        },
+        {
+            id: "l104",
+            title: "Urgent",
+            color: "#ff9f1a"
+        },
+        {
+            id: "l105",
+            title: "Irrelevant",
+            color: "#055a8c"
+        },
+        {
+            id: "l106",
+            title: "Assigned",
+            color: "#c377e0"
+        }
+    ]
+}
 // }).then(x => console.log(x))
 
 
