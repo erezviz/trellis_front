@@ -6,19 +6,22 @@ import { NavLink, Link } from "react-router-dom"
 
 const _AppHeader = (props) => {
     const { user } = useSelector((state) => state.userModule)
-
+    let status = 'Hero'
+    const location = (props.location.pathname)
     const onGoBack = () => {
         props.history.push('/')
-
     }
 
+    if(location.includes('board')){
+        status = ''
+    }
 
     return (
         <section className="app-header flex">
 
-            <div onClick={onGoBack} className="logo-container">
-
-                <img src={require('../assets/img/trellis.png')} alt="" /> <h3>Trellis</h3>
+            <div onClick={onGoBack} className={`logo-container ${status}`}>
+            
+               <img src={require(`../assets/img/trellis${status}.png`)} alt="" /> <h3>Trellis</h3>
             </div>
             <nav>
 

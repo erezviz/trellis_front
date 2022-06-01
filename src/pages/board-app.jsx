@@ -132,7 +132,8 @@ class _BoardApp extends React.Component {
         let status = (isSideBarOpen)? 'open':''
         const background = {
         background: `url(${currBoard.style.imgUrl})`, 
-        backgroundSize: 'cover'
+        backgroundSize: 'cover',
+        top: '0px'
         }
         if (!labels) return <></>
         return (
