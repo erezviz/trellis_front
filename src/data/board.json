@@ -9,16 +9,10 @@
             "fullname": "Abi Abambi",
             "imgUrl": "http://some-img"
         },
-<<<<<<< HEAD
-        "style": {},
-        "labels": [
-            {
-=======
         "style": {
             "imgUrl":"https://images.unsplash.com/photo-1616909424441-295fc97bcefb?crop=entropy&cs=tinysrgb&fm=jpg&ixid=MnwzMzM5ODF8MHwxfHNlYXJjaHwyfHxzfGVufDB8MHx8fDE2NTQwOTU5MjM&ixlib=rb-1.2.1&q=80"
         },
         "labels": [{
->>>>>>> d5533cab9a1f9444d11e92b7642b30df0f929c16
                 "id": "l101",
                 "title": "Done",
                 "color": "#519839"
@@ -170,16 +164,10 @@
             "fullname": "Abi Abambi",
             "imgUrl": "http://some-img"
         },
-<<<<<<< HEAD
-        "style": {},
-        "labels": [
-            {
-=======
         "style": {
             "imgUrl": "https://images.unsplash.com/photo-1607296393394-6e25d0fc15cc?crop=entropy&cs=tinysrgb&fm=jpg&ixid=MnwzMzM5ODF8MHwxfHNlYXJjaHwxMHx8ZHxlbnwwfDB8fHwxNjU0MDkyMDQ3&ixlib=rb-1.2.1&q=80"
         },
         "labels": [{
->>>>>>> d5533cab9a1f9444d11e92b7642b30df0f929c16
                 "id": "l101",
                 "title": "Done",
                 "color": "#61bd4f"
@@ -300,16 +288,10 @@
             "fullname": "Abi Abambi",
             "imgUrl": "http://some-img"
         },
-<<<<<<< HEAD
-        "style": {},
-        "labels": [
-            {
-=======
         "style": {
             "imgUrl": "https://images.unsplash.com/photo-1516222338250-863216ce01ea?crop=entropy&cs=tinysrgb&fm=jpg&ixid=MnwzMzM5ODF8MHwxfHNlYXJjaHwyfHxjb29sfGVufDB8MHx8fDE2NTQwOTYwNjY&ixlib=rb-1.2.1&q=80"
         },
         "labels": [{
->>>>>>> d5533cab9a1f9444d11e92b7642b30df0f929c16
                 "id": "l101",
                 "title": "Done",
                 "color": "#61bd4f"
