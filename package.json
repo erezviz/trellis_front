@@ -19,6 +19,7 @@
     "immer": "^9.0.14",
     "material-ui": "^0.20.2",
     "moment": "^2.29.3",
+    "node-fetch": "^3.2.4",
     "react": "^18.1.0",
     "react-beautiful-dnd": "^13.1.0",
     "react-dom": "^18.1.0",
@@ -28,7 +29,9 @@
     "redux-immutable-state-invariant": "^2.1.0",
     "sass": "^1.52.1",
     "socket.io-client": "^4.5.1",
-    "web-vitals": "^2.1.4"
+    "unsplash-js": "^7.0.15",
+    "web-vitals": "^2.1.4",
+    "whatwg-fetch": "^3.6.2"
   },
   "scripts": {
     "start": "react-scripts start",

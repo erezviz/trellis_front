@@ -1,16 +1,17 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react'
 import { useRouteMatch } from 'react-router-dom';
-import {ReactComponent as TitleIcon} from '../../assets/icon/task-title-icon.svg' 
+import { useSelector, useDispatch } from 'react-redux'
 import { boardService } from '../../services/board.service';
-import { TaskChecklist } from './checklist/task-checklist.jsx'
 
-import { useDispatch } from 'react-redux';
+import { ReactComponent as TitleIcon } from '../../assets/icon/task-title-icon.svg'
 import member from '../../assets/icon/member.svg'
-import { useSelector } from 'react-redux';
-import { Labels } from './labels';
-import { queryTask, updateTask } from '../../store/board.action';
 
+import { TaskMembers } from './task-members';
+import { Labels } from './labels';
+
+import { TaskChecklist } from './checklist/task-checklist.jsx'
+import { queryTask, updateTask } from '../../store/board.action';
 import { TrellisSpinner } from '../util-cmps/trellis-spinner';
 import { Attachments } from './attachments';
 import { TaskDate } from './task-dates';
@@ -20,7 +21,7 @@ export const TaskDetails = (props) => {
 
     const { currBoard } = useSelector((storeState) => storeState.boardModule)
     const dispatch = useDispatch()
-    
+
     const [task, setTask] = useState(null)
     const [isDesc, setIsDesc] = useState(false)
     let [isEdit, setIsEdit] = useState(false)
@@ -29,7 +30,7 @@ export const TaskDetails = (props) => {
     const [isMembersOpen, setIsMembersOpen] = useState(false)
     let [isDatesOpen, setIsDatesOpen] = useState(false)
 
-    
+
     // let { boardId, groupId, taskId } = useParams()
     let { params: { boardId, groupId, taskId } } = useRouteMatch();
     useEffect(() => {
@@ -97,7 +98,7 @@ export const TaskDetails = (props) => {
                 }} className="close-details-btn">X</button>
                 <div onClick={() => setIsEdit(isEdit = !isEdit)} className="details-header flex">
                     <span className="task-title-icon">
-                        <TitleIcon/>
+                        <TitleIcon />
                     </span>
                     <form onSubmit={(ev) => onSave(ev)} >
                         <input onBlur={(ev) => onSave(ev)} style={isEdit ? { titleStyle } : {}} value={task.title} onChange={handleFormChange} className="details-title" name="title" />
@@ -107,16 +108,25 @@ export const TaskDetails = (props) => {
                 </div> */}
                 </div>
                 <header className="task-header">
-                    <div className="members">
+                    {task.memberIds?.length > 0 && <div className="members">
                         <p>Members</p>
                         <div className="main-members">
-                            <div className="member-icon">
-                                <img src={member} alt="" />
+                            {task.memberIds && props.members.map(member => {
+                                return task.memberIds.map(memberId => {
+                                    if (member.id === memberId) {
+                                        return <div key={memberId} className="member-task">
+                                            <img src={require(`../../assets/img/${member.imgUrl}`)} alt="" />
+                                        </div>
+                                    }
+                                });
+                            })}
+                            <div className="add-member">
+                                <span>+</span>
                             </div>
-                            <div className="add-member">+</div>
+
                         </div>
-                    </div>
-                  
+                    </div>}
+
                     {task.labelIds?.length > 0 && <section className="labels-section">
                         <p>Labels</p>
                         <div className="labels-list">
@@ -130,11 +140,16 @@ export const TaskDetails = (props) => {
                                     }
                                 });
                             })}
+                            <span>+</span>
                         </div>
                     </section>}
                     {task.dueDate && <section className="show-date">
                         <p>Date</p>
-                        <div>{task.dueDate}</div>
+
+                        <div className="date">
+                            <input type="checkBox" />
+                            <span>{task.dueDate}</span>
+                        </div>
                     </section>}
                 </header>
                 <div className="details-contents flex">
@@ -171,7 +186,7 @@ export const TaskDetails = (props) => {
                     <section className="details-sidebar">
                         <div className="main-add-actions">
                             <h6 className="sidebar-add-heading">Add to card</h6>
-                            <div className="sidebar-btn flex" onClick={() => setIsMembersOpen(prevMembersOpen => prevMembersOpen = !isMembersOpen)} >
+                            <div className="sidebar-btn flex" onClick={() => setIsMembersOpen(!isMembersOpen)} >
                                 <span className="sidebar-icon-members"></span>
                                 <span>Members</span>
                             </div>
@@ -193,6 +208,7 @@ export const TaskDetails = (props) => {
             </div>
             {(currBoard.labels && isLabelOpen) && <Labels onToggleLabels={setIsLabelOpen} task={task} labels={currBoard.labels} />}
             {isDatesOpen && <TaskDate onToggleDates={setIsDatesOpen} task={task} />}
+            {isMembersOpen && <TaskMembers onToggleMembers={setIsMembersOpen} task={task} members={currBoard.members} />}
         </section>
     )
 }

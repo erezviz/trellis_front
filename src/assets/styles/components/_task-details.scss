@@ -33,23 +33,25 @@
 }
 
 .task-header {
+    p {
+        font-size: small;
+    }
     display: flex;
-    gap: 15px;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding-top: 25px;
+    align-items: center;
     .members {
         margin-block-start: 10px;
-        p {
-            margin: 0;
-            font-size: small;
-        }
         .main-members {
             display: flex;
-            .member-icon {
+            .member-task {
                 width: 30px;
                 height: 30px;
                 margin-block-end: 10px;
                 display: flex;
                 gap: 5px;
-                image {
+                .member-img {
                     width: 100%;
                 }
             }
@@ -63,10 +65,6 @@
         }
     }
     .labels-section {
-        p {
-            font-size: 15px;
-            margin: 0;
-        }
         .labels-list {
             display: flex;
             gap: 2px;
@@ -81,6 +79,13 @@
                     margin: 0;
                 }
             }
+        }
+    }
+
+    .show-date{
+        .date{
+            display: flex;
+            font-size: 1rem;
         }
     }
 }

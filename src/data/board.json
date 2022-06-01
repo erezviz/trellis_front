@@ -8,7 +8,9 @@
             "fullname": "Abi Abambi",
             "imgUrl": "http://some-img"
         },
-        "style": {},
+        "style": {
+            "imgUrl": "https://images.unsplash.com/photo-1616909424441-295fc97bcefb?crop=entropy&cs=tinysrgb&fm=jpg&ixid=MnwzMzM5ODF8MHwxfHNlYXJjaHwyfHxzfGVufDB8MHx8fDE2NTQwOTU5MjM&ixlib=rb-1.2.1&q=80"
+        },
         "labels": [{
                 "id": "l101",
                 "title": "Done",
@@ -41,10 +43,22 @@
             }
         ],
         "members": [{
-            "_id": "u101",
-            "fullname": "Tal Tarablus",
-            "imgUrl": "https://www.google.com"
-        }],
+                "_id": "u101",
+                "fullname": "Homer Simpson",
+                "imgUrl": "homer.png"
+            },
+            {
+                "_id": "u102",
+                "fullname": "Bart Simpson",
+                "imgUrl": "bart.png"
+
+            },
+            {
+                "_id": "u103",
+                "fullname": "Lisa Simpson",
+                "imgUrl": "lisa.png"
+            }
+        ],
         "groups": [{
                 "id": "g101",
                 "title": "To do",
@@ -92,7 +106,9 @@
                                 "isDone": false
                             }]
                         }],
-                        "memberIds": ["u101"],
+                        "memberIds": [
+                            "u101"
+                        ],
                         "labelIds": [],
                         "createdAt": 1590999730348,
                         "dueDate": 16156215211,
@@ -124,9 +140,7 @@
                 "title": "Replace Logo"
             }
         }]
-
     },
-
     {
         "_id": "b102",
         "title": "Final project",
@@ -137,7 +151,9 @@
             "fullname": "Abi Abambi",
             "imgUrl": "http://some-img"
         },
-        "style": {},
+        "style": {
+            "imgUrl": "https://images.unsplash.com/photo-1607296393394-6e25d0fc15cc?crop=entropy&cs=tinysrgb&fm=jpg&ixid=MnwzMzM5ODF8MHwxfHNlYXJjaHwxMHx8ZHxlbnwwfDB8fHwxNjU0MDkyMDQ3&ixlib=rb-1.2.1&q=80"
+        },
         "labels": [{
                 "id": "l101",
                 "title": "Done",
@@ -201,7 +217,9 @@
                                 "isDone": false
                             }]
                         }],
-                        "memberIds": ["u101"],
+                        "memberIds": [
+                            "u101"
+                        ],
                         "labelIds": [],
                         "createdAt": 1590999730348,
                         "dueDate": 16156215211,
@@ -233,7 +251,6 @@
                 "title": "Replace Logo"
             }
         }]
-
     },
     {
         "_id": "b103",
@@ -245,7 +262,9 @@
             "fullname": "Abi Abambi",
             "imgUrl": "http://some-img"
         },
-        "style": {},
+        "style": {
+            "imgUrl": "https://images.unsplash.com/photo-1516222338250-863216ce01ea?crop=entropy&cs=tinysrgb&fm=jpg&ixid=MnwzMzM5ODF8MHwxfHNlYXJjaHwyfHxjb29sfGVufDB8MHx8fDE2NTQwOTYwNjY&ixlib=rb-1.2.1&q=80"
+        },
         "labels": [{
                 "id": "l101",
                 "title": "Done",
@@ -309,7 +328,9 @@
                                 "isDone": false
                             }]
                         }],
-                        "memberIds": ["u101"],
+                        "memberIds": [
+                            "u101"
+                        ],
                         "labelIds": [],
                         "createdAt": 1590999730348,
                         "dueDate": 16156215211,
@@ -341,6 +362,5 @@
                 "title": "Replace Logo"
             }
         }]
-
     }
 ]

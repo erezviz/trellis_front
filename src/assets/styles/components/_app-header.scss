@@ -1,5 +1,7 @@
 .app-header {
-    background-color: rgb(229 229 255);
+    z-index: 30;
+    // background-color: rgb(229 229 255);
+    position: absolute;
     top: 0;
     color: $clr2;
     // height: rem(32px);
@@ -14,6 +16,9 @@
     .user-link {
         cursor: pointer;
         font-weight: 600;
+        span{
+            color: $clr2;
+        }
         .login {
             color: $clr1;
             padding-right: 10px;

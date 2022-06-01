@@ -16,8 +16,8 @@ function App() {
   return (
     <MuiPickersUtilsProvider utils={MomentUtils}>
     <div className="App">
-      <AppHeader />
       <main className="app-container">
+      <AppHeader />
         {/* <Hero/> */}
 
         <Switch>
