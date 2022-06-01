@@ -87,7 +87,7 @@ export const Attachments = ({ task }) => {
 
         //TODO  Change prompt to a nice modal -- preferably something dynamic you can use again and again
         const newTitle = prompt('Edit attachment', 'Link name')
-        
+       
         const newTask = utilService.getDeepCopy(task)
         console.log('the newTask in editTitle', newTask);
         if (!newTitle) return
