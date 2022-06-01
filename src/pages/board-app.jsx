@@ -4,6 +4,7 @@ import TextField from '@mui/material/TextField';
 
 
 import { BoardHeader } from "../cmps/board/board-header";
+import { SideMenu } from "../cmps/dynamic-cmps/side-menu";
 import { TaskDetails } from "../cmps/task/task-details";
 import { GroupList } from "../cmps/group/group-list"
 import { boardService } from "../services/board.service";
@@ -22,7 +23,8 @@ class _BoardApp extends React.Component {
         isModalOpen: false,
         isShown: false,
         isLabelOpen: false,
-        newGroup: { title: '' }
+        newGroup: { title: '' },
+        isSideBarOpen: false
     }
 
     componentDidMount = () => {
@@ -116,20 +118,31 @@ class _BoardApp extends React.Component {
         this.setState({ islabelOpen: !this.state.isLabelOpen })
     }
 
+    onToggleStatus=()=>{
+        this.setState({ isSideBarOpen: !this.state.isSideBarOpen })
+    }
+
+    
     render() {
         const { currBoard } = this.props
         if (!currBoard) return <></>
         const { labels, members} = currBoard
         const { boardId } = this.props.match.params
-
-
-        const { groups, isModalOpen, isShown, isLabelOpen: islabelOpen } = this.state
+        const { groups, isModalOpen, isShown, isLabelOpen: islabelOpen, isSideBarOpen } = this.state
+        let status = (isSideBarOpen)? 'open':''
+        const background = {
+        background: `url(${currBoard.style.imgUrl})`, 
+        backgroundSize: 'cover'
+        }
         if (!labels) return <></>
         return (
-            <section className={`board-app ${boardId}`}>
+            <section style={background} className={`board-app ${status}`}>
+                <div className="board-name flex">
                 <BoardHeader />
+                <button className="show-menu-btn" onClick={this.onToggleStatus}>Show Menu</button>
+                </div>
                 <section className="main-board">
-                    {/* <TrellisSpinner isLarge={true}/> */}
+                <SideMenu props={currBoard}/>
                     {(!groups || !groups.length) && <TrellisSpinner isLarge={true} />}
                     <div className="list-container">
                         <GroupList key={'GroupList'} boardId={boardId} onToggleDetails={this.onToggleDetails} onDeleteGroup={this.onDeleteGroup} groups={groups} />
