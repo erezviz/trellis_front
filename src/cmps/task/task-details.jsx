@@ -121,7 +121,7 @@ export const TaskDetails = (props) => {
                             <div className="add-member">+</div>
                         </div>
                     </div>
-                    <section className="labels-section">
+                   {task.labelIds.length > 0 && <section className="labels-section">
                         <p>Labels</p>
                         <div className="labels-list">
                             {task.labelIds && props.labels.map(label => {
@@ -135,7 +135,11 @@ export const TaskDetails = (props) => {
                                 });
                             })}
                         </div>
-                    </section>
+                    </section>}
+                    {task.dueDate && <section className="show-date">
+                        <p>Date</p>
+                        <div>{task.dueDate}</div>
+                    </section>}
                 </header>
                 <div className="details-contents flex">
                     <section className="details-main-col flex">
@@ -188,7 +192,7 @@ export const TaskDetails = (props) => {
                 </div>
             </div>
             {(currBoard.labels && isLabelOpen) && <Labels onToggleLabels={setIsLabelOpen} task={task} labels={currBoard.labels} />}
-            {isDatesOpen && <TaskDate onToggleDates={setIsDatesOpen} />}
+            {isDatesOpen && <TaskDate onToggleDates={setIsDatesOpen} task={task} />}
         </section>
     )
 }

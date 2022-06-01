@@ -3,7 +3,8 @@ export const utilService = {
     makeLorem,
     getRandomIntInclusive,
     delay,
-    getFilename
+    getFilename,
+    getDeepCopy
 }
 
 function makeId(length = 6) {
@@ -60,4 +61,8 @@ function getFilename(strUrl) {
 function isValidUrl(str) {
     const matchpattern = /^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)$/gm;
     return matchpattern.test(str);
+}
+
+function getDeepCopy(object) {
+    return JSON.parse(JSON.stringify(object))
 }
