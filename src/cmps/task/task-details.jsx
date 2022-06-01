@@ -1,4 +1,3 @@
-
 import * as React from 'react';
 import { useState, useEffect } from 'react'
 import { useRouteMatch } from 'react-router-dom';
@@ -9,27 +8,24 @@ import { boardService } from '../../services/board.service';
 import { TaskChecklist } from './checklist/task-checklist.jsx'
 // import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-
 import member from '../../assets/icon/member.svg'
 import { useSelector } from 'react-redux';
 import { Labels } from './labels';
 import { queryTask, updateTask } from '../../store/board.action';
 // import { useSelector } from 'react-redux';
-
 import { TrellisSpinner } from '../util-cmps/trellis-spinner';
 import { Attachments } from './attachments';
+import { TaskDate } from './task-dates';
 // import Box from '@mui/material/Box';
 // import Modal from '@mui/material/Modal';
 // import Button from '@mui/material/Button';
-
-
-
 
 export const TaskDetails = (props) => {
     const [isDesc, setIsDesc] = useState(false)
     let [isEdit, setIsEdit] = useState(false)
     let [isLabelOpen, setIsLabelOpen] = useState(false)
     const [isAttachOpen, setIsAttachOpen] = useState(false)
+    let [isDatesOpen, setIsDatesOpen] = useState(false)
     // let [title, setTitle] = useState({ title: '' })
     const [task, setTask] = useState(null)
     const dispatch = useDispatch()
@@ -37,9 +33,6 @@ export const TaskDetails = (props) => {
 
     // let { boardId, groupId, taskId } = useParams()
     let { params: { boardId, groupId, taskId } } = useRouteMatch();
-
-
-
     useEffect(() => {
         (async () => {
             const task = boardService.getTask(currBoard, groupId, taskId)
@@ -51,21 +44,18 @@ export const TaskDetails = (props) => {
             setTask(null)
         }
     }, [currBoard])
-
     const modalStyle = {
         display: props.isOpen ? 'block' : 'none',
         position: 'absolute',
         // top: '50%',
         // left: '50%',
         // transform: 'translate(-50%, -50%)',
-
         bgcolor: 'background.paper',
         // border: '2px solid #000',
         // boxShadow: 24,
         // pt: 2,
         // px: 4,
         // pb: 3,
-
     }
     const titleStyle = {
         overflow: 'hidden',
@@ -76,7 +66,6 @@ export const TaskDetails = (props) => {
     function onSave(ev) {
         if (ev) {
             ev.preventDefault()
-
         }
 
         // console.log('task before dispatch', task)
@@ -106,15 +95,10 @@ export const TaskDetails = (props) => {
         this.props.history.push(`/board/${boardId}`)
     }
 
-
-
     if (!task) return <><TrellisSpinner isLarge={true} /></>
-
     return (
-
         <section style={modalStyle} className="task-details">
             <div className="details-container flex">
-
                 <button onClick={(ev) => {
                     // return goBack()
                     return props.onCloseDetails()
@@ -122,14 +106,12 @@ export const TaskDetails = (props) => {
                 <div onClick={() => setIsEdit(isEdit = !isEdit)} className="details-header flex">
                     <form onSubmit={(ev) => onSave(ev)} >
                         <input onBlur={(ev) => onSave(ev)} style={isEdit ? { titleStyle } : {}} value={task.title} onChange={handleFormChange} className="details-title" name="title" />
-
                     </form>
                     {/* <div contentEditable="true" className="details-title">
                     This is the Title
                 </div> */}
                 </div>
                 <header className="task-header">
-
                     <div className="members">
                         <p>Members</p>
                         <div className="main-members">
@@ -139,7 +121,6 @@ export const TaskDetails = (props) => {
                             <div className="add-member">+</div>
                         </div>
                     </div>
-
                     <section className="labels-section">
                         <p>Labels</p>
                         <div className="labels-list">
@@ -156,10 +137,6 @@ export const TaskDetails = (props) => {
                         </div>
                     </section>
                 </header>
-
-
-
-
                 <div className="details-contents flex">
                     <section className="details-main-col flex">
                         <div className="desc-container">
@@ -190,32 +167,38 @@ export const TaskDetails = (props) => {
                         <Attachments task={task} handleChange={handleFormChange} />
 
                         <div className='checklist'><TaskChecklist onSave={onSave} task={task} handleFormChange={handleFormChange} /></div>
-
                     </section>
-
                     <section className="details-sidebar">
                         <div className="main-add-actions">
-
                             <h6 className="sidebar-add-heading">Add to card</h6>
                             <div onClick={() => setIsLabelOpen(true)} className="sidebar-btn">
                                 Labels
                             </div>
                             <div onClick={() => setIsAttachOpen(prevAttachOpen => prevAttachOpen = !isAttachOpen)} className="sidebar-btn">
                                 Attachments
-
                             </div>
                             <div className="sidebar-btn">
                                 Checklist
                             </div>
+                            <div onClick={() => setIsDatesOpen(true)} className="sidebar-btn">
+                                Dates
+                            </div>
                         </div>
                     </section>
                 </div>
-
             </div>
             {(currBoard.labels && isLabelOpen) && <Labels onToggleLabels={setIsLabelOpen} task={task} labels={currBoard.labels} />}
+            {isDatesOpen && <TaskDate onToggleDates={setIsDatesOpen} />}
         </section>
     )
 }
+
+
+
+
+
+
+
 
 
 

@@ -26,8 +26,8 @@ const _AppHeader = (props) => {
             </nav>
             {!user && <Link to={'/login'}>
                 <div className="user-link">
-                    <span className="login">Log In</span>
-                    <span className="signup">Sign Up</span>
+                    <span className="login">Log in</span>
+                    <span className="signup">Sign up</span>
                 </div>
             </Link>}
 

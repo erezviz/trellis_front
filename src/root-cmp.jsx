@@ -8,11 +8,13 @@ import {Screen} from './cmps/dynamic-cmps/screen'
 import { Hero } from './pages/hero'
 import { HomePage } from './pages/home-page'
 import { LoginSignup } from './cmps/board/login-signup';
+import { MuiPickersUtilsProvider } from '@material-ui/pickers';
+import MomentUtils from '@date-io/moment';
 // import { BoardApp } from './pages/board-app';
 
 function App() {
   return (
-
+    <MuiPickersUtilsProvider utils={MomentUtils}>
     <div className="App">
       <AppHeader />
       <main className="app-container">
@@ -33,7 +35,7 @@ function App() {
       </main>
     </div>
 
-
+    </MuiPickersUtilsProvider>
   );
 }
 
