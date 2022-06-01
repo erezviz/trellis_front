@@ -19,12 +19,14 @@ export const TaskDate = (props) => {
         newTask.dueDate = newDate
         console.log(newTask);
         dispatch(updateTask(boardId, groupId, newTask))
+        props.onToggleDates(false)
     }
 
     const onRemoveDate = () =>{
         const newTask = utilService.getDeepCopy(props.task)
         newTask.dueDate = null
         dispatch(updateTask(boardId, groupId, newTask))
+        props.onToggleDates(false)
     }
 
     return (
