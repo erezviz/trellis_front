@@ -91,6 +91,7 @@ export function addBoard(board) {
             const savedBoard = await boardService.save(board)
             console.log('Added Board', savedBoard);
             dispatch(getActionAddBoard(savedBoard))
+            return savedBoard
         } catch (err) {
             console.log('Cannot add board', err)
         }

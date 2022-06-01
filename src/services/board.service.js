@@ -62,6 +62,8 @@ async function save(board) {
 
     } else {
         board.labels = _getBoardLabels()
+            //! FOR NOW, LATER ID IS CREATED IN MONGODB
+        board._id = utilService.makeId()
             // Later, owner is set by the backend
             // board.owner = userService.getLoggedinUser()
         savedBoard = await storageService.post(STORAGE_KEY, board)

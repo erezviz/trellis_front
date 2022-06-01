@@ -26,7 +26,7 @@ export const Attachments = ({ task }) => {
             createdAt: Date.now(),
             url: null
         }
-        console.log('resetting attachment...');
+      
         setAttachment(emptyAttach)
     }
 
@@ -53,7 +53,6 @@ export const Attachments = ({ task }) => {
 
     const onSaveAttachment  = ev => {
         ev.preventDefault()
-        console.log('attachment in onSaveAttachment', attachment);
 
         if (!attachment.title) {
             attachment.title = utilService.getFilename(attachment.url)
@@ -61,12 +60,10 @@ export const Attachments = ({ task }) => {
         }
         const newTask = utilService.getDeepCopy(task)
         attachment.id = utilService.makeId()
-        console.log('attachment.id in on save', attachment.id);
         // setAttachments(prevAttachments => ([...prevAttachments, attachment]))
         if (newTask.attachments) newTask.attachments = [...newTask.attachments, attachment]
         else newTask.attachments = [attachment]
 
-        console.log('attachment in onSaveAttachment before dispatch', attachment);
         dispatch(updateTask(boardId, groupId, newTask))
         toggleAdd()
         resetAttachment()
@@ -74,10 +71,10 @@ export const Attachments = ({ task }) => {
     }
 
     const onRemoveAttachment = (attachmentId) => {
-        console.log('attach id in onremove', attachmentId);
+     
         const newTask = utilService.getDeepCopy(task)
         const newAttachments = newTask.attachments.filter(attachment => attachment.id !== attachmentId)
-        console.log('newAttachments in onRemove', newAttachments);
+    
         newTask.attachments = newAttachments
         dispatch(updateTask(boardId, groupId, newTask))
 
@@ -89,19 +86,17 @@ export const Attachments = ({ task }) => {
         const newTitle = prompt('Edit attachment', 'Link name')
        
         const newTask = utilService.getDeepCopy(task)
-        console.log('the newTask in editTitle', newTask);
+   
         if (!newTitle) return
         const newAttachments = newTask.attachments.map(attachment => {
             if (attachment.id === attachId) attachment.title = newTitle
             return attachment
         })
         newTask.attachments = newAttachments
-        console.log('the newTask after adding new attachments', newTask);
-    
         dispatch(updateTask(boardId, groupId, newTask))
     }
 
-    console.log('attachment before return', attachment);
+   
     if (!task) return <TrellisSpinner />
     return (
         <section className="attachments">
