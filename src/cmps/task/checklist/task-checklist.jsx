@@ -62,7 +62,7 @@ export const TaskChecklist = (props) => {
 }
 
 const onCheck=(todoId)=>{
-    const newTask = {...task}
+    const newTask = JSON.parse(JSON.stringify(task))
     const newTodos= newTask.checklist.todos.map(todo=>{
         if (todo.id === todoId){
             todo.isDone =!todo.isDone
@@ -78,15 +78,16 @@ const onDeleteTodo=(todoId)=>{
     const todoIdx = task.checklist.todos.findIndex(todo=>{
         return todo.id ===todoId
     })
-    const newTask = {...task}
+    const newTask = JSON.parse(JSON.stringify(task))
     newTask.checklist.todos.splice(todoIdx, 1)
     dispatchTask(newTask)
+    setDeleteModal(false)
 }
 
-const onAddTodo=()=>{
+const onAddTodo=(ev)=>{
     if(!itemTitle)return
      setIsAddingItem(false)
-    const newTask = {...task}
+     const newTask = JSON.parse(JSON.stringify(task))
     const newTodo = {
         title: itemTitle,
         id: utilService.makeId(),
@@ -99,7 +100,7 @@ const onAddTodo=()=>{
  }
 
  const onSaveName=(todoId)=>{
-    const newTask = {...task}
+    const newTask = JSON.parse(JSON.stringify(task))
     const newTodos= newTask.checklist.todos.map(todo=>{
         if (todo.id === todoId){
             todo.title = itemTitle
@@ -142,33 +143,39 @@ const onAddTodo=()=>{
                { task.checklist.todos.map(todo=>{
                  return <div className='checklist-item'>
                  {!isEditTitle && <>
-                 <img src={threeDotsMenu} alt="more" onClick={()=>setDeleteModal(true)}/>
+                 <div>
                   <input type="checkbox" id={todo.id} name={todo.title} checked={todo.isDone} onChange={(ev) => onCheck(todo.id)}/>
-                 <label value={todo.title} onClick={()=>setIsEditTitle(todo.id)} htmlFor={todo.title}>{todo.title}</label></>
+                 <label value={todo.title} onClick={()=>setIsEditTitle(todo.id)} htmlFor={todo.title}>{todo.title}</label>
+                 </div>
+                 <img src={threeDotsMenu} alt="more" onClick={()=>setDeleteModal(todo)}/></>
                  }
                  
-               {isDeleteModalOpen && <div className="delete-modal">
-                   Are you sure you want to delete {todo.title}?
-                   <button onClick={()=>onDeleteTodo(todo.id)}>Yes</button>
-                   <button onClick={()=>setDeleteModal(false)}>Cancel</button>
-                   </div>}
-                   {isEditTitle === todo.id && <>
+                   {isEditTitle === todo.id && <div className='input-checklist'>
                        <input value={todo.title} onChange={(ev) => onHandleChange(ev, todo.id)} id={todo.id} />
-                       <button onClick={(ev) => {onSaveName(todo.id)
-                    setIsEditTitle(null)
-                    }}>Save</button>
-                       <button onClick={()=>setIsEditTitle(null)}>Cancel</button>
-                   </>
+                       <div>
+                       <button onClick={(ev) =>setIsEditTitle(null)}>Save</button>
+                       <span className='x' onClick={()=>setIsEditTitle(null)}>X</span>
+                       </div>
+                   </div>
                    }
                    </div>
                })}
         
                </div>
                }
-            {!isAddingItem && <button onClick={toggleAddItem}>Add an item</button>}
-            {isAddingItem &&<div>
-            <input onChange={(ev)=>onHandleChange(ev)}/>
-            <button onClick={onAddTodo}>Add</button><button onClick={toggleAddItem}>Cancel</button>
+               {isDeleteModalOpen && <div className="delete-modal">
+                   Are you sure you want to delete {isDeleteModalOpen.title}?
+                   <div>
+                   <button onClick={()=>onDeleteTodo(isDeleteModalOpen.id)}>Yes</button>
+                   <button onClick={()=>setDeleteModal(false)}>Cancel</button>
+                   </div>
+                   </div>}
+            {!isAddingItem && <button className='add-todo' onClick={toggleAddItem}>Add an item</button>}
+            {isAddingItem &&<div className='add-input'>
+            <input onSubmit={(ev)=>onAddTodo(ev)} onChange={(ev)=>onHandleChange(ev)}/>
+            <div>
+            <button onClick={onAddTodo}>Add</button><span onClick={toggleAddItem}>Cancel</span>
+            </div>
             </div>
             }
             

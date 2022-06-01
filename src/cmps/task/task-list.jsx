@@ -19,7 +19,7 @@ export const TaskList = (props) => {
         // {...provided.draggableProps}
         // ref={provided.innerRef}
         // >
-        <Droppable type='task' index={idx} droppableId={props.groupId+'1'}>
+        <Droppable type='task' index={idx} droppableId={`${props.groupId}`}>
             {(provided) => {
                 return <section className="task-list" {...provided.droppableProps} ref={provided.innerRef}>
 

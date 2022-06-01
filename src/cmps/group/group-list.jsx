@@ -9,9 +9,7 @@ import { useEffect } from "react"
 export const GroupList = ({ groups, onDeleteGroup, boardId, onToggleDetails }) => {
     let { currBoard } = useSelector(state => state.boardModule)
     const dispatch = useDispatch()
-    useEffect(()=>{
-
-    },[currBoard])
+   
 
     const onDragEnd = async (res) => {
         const board = JSON.parse(JSON.stringify(currBoard))
@@ -21,11 +19,8 @@ export const GroupList = ({ groups, onDeleteGroup, boardId, onToggleDetails }) =
         // moving groups 
         else if (type === 'column') {
             const group = board.groups.find(currGroup => currGroup.id === draggableId)
-            // console
             board.groups.splice(source.index, 1)
             board.groups.splice(destination.index, 0, group)
-            currBoard = board
-            // dispatch(updateWholeBoard(board))
         }
         else if (type === 'task') {
             const groupStart = board.groups.find(currGroup => currGroup.id === source.droppableId)
@@ -50,42 +45,27 @@ export const GroupList = ({ groups, onDeleteGroup, boardId, onToggleDetails }) =
                 board.groups.splice(groupFinishIdx, 0, groupFinish)
             }
         }
-        // currBoard = board
-        try {
-            await dispatch(updateWholeBoard(board))
-            // console.log('uodated board', board)
-            // currBoard = newBoard
-        } catch (err) {
-            console.log('error', err)
-        }
+         dispatch(updateWholeBoard(board))
+
     }
 
     if(!groups || !currBoard) return <TrellisSpinner/>
-    // console.log(currBoard._id)
- 
-    return (
-        <DragDropContext onDragEnd={onDragEnd} id={currBoard._id}>
-            <Droppable droppableId="group-list" direction="horizontal" type="column">
-                {(provided) => {
-                    return <section className="group-list"
-                        {...provided.droppableProps}
-                        ref={provided.innerRef}
-                    >
-                        {groups.map((group, idx) => {
-                            const props = {
-                                boardId,
-                                onToggleDetails,
-                                onDeleteGroup,
-                                group
-                            }
-                            return <GroupPreview {...props} key={group.id} />
-                        }
-                        )}
-                        {provided.placeholder}
-                    </section>
-                }}
-            </Droppable>
-        </DragDropContext>
-    )
 
+        return(
+            <DragDropContext onDragEnd={onDragEnd} id={currBoard._id}>
+                <section className="group-list">
+            {groups.map((group, idx)=>{
+               return <Droppable droppableId="group-list" direction="horizontal" type="column">
+                    {(provided)=>{
+                        return <div {...provided.droppableProps} ref={provided.innerRef}>
+                        
+                             <GroupPreview boardId={boardId} onToggleDetails={onToggleDetails} onDeleteGroup={onDeleteGroup} group={group} key={group.id} />
+                        </div>
+                    }}
+                </Droppable>
+            })}
+            </section>
+            </DragDropContext>
+        )
+    
 }
