@@ -126,7 +126,7 @@ class _BoardApp extends React.Component {
     render() {
         const { currBoard } = this.props
         if (!currBoard) return <></>
-        const { labels } = currBoard
+        const { labels, members} = currBoard
         const { boardId } = this.props.match.params
         const { groups, isModalOpen, isShown, isLabelOpen: islabelOpen, isSideBarOpen } = this.state
         let status = (isSideBarOpen)? 'open':''
@@ -152,7 +152,7 @@ class _BoardApp extends React.Component {
                     <>
                         <Route path='/board/:boardId/:groupId/:taskId' >
                             <Screen key={'Screen'} isOpen={isModalOpen}   >
-                                <TaskDetails labels={labels} onToggleLabels={this.onToggleLabels} key={'TaskDetails'} isOpen={isModalOpen} onCloseDetails={this.onCloseDetails} />
+                                <TaskDetails members={members} labels={labels} onToggleLabels={this.onToggleLabels} key={'TaskDetails'} isOpen={isModalOpen} onCloseDetails={this.onCloseDetails} />
 
                             </Screen>
 

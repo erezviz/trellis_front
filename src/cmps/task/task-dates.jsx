@@ -1,4 +1,5 @@
-import { DatePicker } from '@material-ui/pickers'
+import { DatePicker, TimePicker } from '@material-ui/pickers'
+
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useRouteMatch } from 'react-router-dom';
@@ -14,7 +15,7 @@ export const TaskDate = (props) => {
 
     const onSaveDate = () => {
         const newTask = utilService.getDeepCopy(props.task)
-        const newDate = date._d.toString()
+        const newDate = date._d.toString().substring(0, 10)
         console.log(typeof date._d.toString());
         newTask.dueDate = newDate
         console.log(newTask);
@@ -53,6 +54,7 @@ export const TaskDate = (props) => {
                     <button className="save-date" onClick={() => onSaveDate()}>Save</button>
                     <button className="remove-date" onClick={() => onRemoveDate()}>Remove</button>
                 </div>
+
             </section>
         </section>
     )
