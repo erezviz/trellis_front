@@ -7,7 +7,7 @@ import pen from '../../assets/icon/pen.svg'
 
 
 export const Labels = (props) => {
-    let { params: { boardId, groupId, taskId } } = useRouteMatch();
+    let { params: { boardId, groupId } } = useRouteMatch();
     const dispatch = useDispatch()
 
 

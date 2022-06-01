@@ -32,23 +32,25 @@ class _BoardApp extends React.Component {
 
     loadGroups = async (board) => {
         //###  What is this line for?  ###
-        this.setState({ groups: [] })
-        const boardId = this.getBoardId()
-        if (!board) {
-            try {
-                const board = await this.props.loadBoard(boardId)
-                this.setState({ groups: board.groups })
+        this.setState(prevState=>({...prevState, groups: [] }),async()=>{
 
-            } catch (err) {
-                throw err
+            const boardId = this.getBoardId()
+            if (!board) {
+                try {
+                    const board = await this.props.loadBoard(boardId)
+                    this.setState(prevState=>({...prevState, groups: board.groups }))
+                    
+                } catch (err) {
+                    throw err
+                }
+            } else {
+                try {
+                    await this.setState(prevState=>({...prevState, groups: board.groups }))
+                } catch (err) {
+                    throw err
+                }
             }
-        } else {
-            try {
-                await this.setState({ groups: board.groups })
-            } catch (err) {
-                throw err
-            }
-        }
+        })
     }
 
     getBoardId = () => {
@@ -142,6 +144,7 @@ class _BoardApp extends React.Component {
                           
                         </Route>
                     </>
+                   
                     <div className="add-group">
                         {!isShown && <button className="add-group-btn" onClick={this.onToggleGroup}><span className="plus">+</span> Add another list</button>}
                         {isShown && <form onSubmit={(ev) => this.onAddGroup(ev)}>
