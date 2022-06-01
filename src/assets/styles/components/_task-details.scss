@@ -81,9 +81,8 @@
             }
         }
     }
-
-    .show-date{
-        .date{
+    .show-date {
+        .date {
             display: flex;
             font-size: 1rem;
         }
@@ -186,6 +185,10 @@ textarea#description {
         display: flex;
         width: 100%;
         margin-inline-start: 12px;
+    }
+    .task-title-icon {
+        height: 25px;
+        width: 25px;
     }
     .details-title {
         background: #0000;
