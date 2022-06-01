@@ -45,6 +45,7 @@ class _HomePage extends React.Component {
                 <Link to='/board'><BoardPreview/></Link>
                  */}
                 </section>
+                <div className="create-board"></div>
             </section>
         )
     }
