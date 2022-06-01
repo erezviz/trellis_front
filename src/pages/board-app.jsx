@@ -142,6 +142,7 @@ class _BoardApp extends React.Component {
                           
                         </Route>
                     </>
+                   
                     <div className="add-group">
                         {!isShown && <button className="add-group-btn" onClick={this.onToggleGroup}><span className="plus">+</span> Add another list</button>}
                         {isShown && <form onSubmit={(ev) => this.onAddGroup(ev)}>
