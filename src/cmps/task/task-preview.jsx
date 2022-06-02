@@ -5,7 +5,7 @@ import { useSelector } from "react-redux"
 export const TaskPreview = (props) => {
     const { task, idx } = props
     const board = useSelector(state => state.boardModule.currBoard)
-
+    if(!board) return <></>
     return (
         <Draggable key={task.id} draggableId={task.id} index={idx}>
             {(provided) => {
