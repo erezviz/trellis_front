@@ -113,7 +113,8 @@ export const TaskDetails = (props) => {
                         <div className="main-members">
                             {task.memberIds && props.members.map(member => {
                                 return task.memberIds.map(memberId => {
-                                    if (member.id === memberId) {
+                                    if (member._id === memberId) {
+                                        console.log('helo from if Shani is an officer');
                                         return <div key={memberId} className="member-task">
                                             <img src={require(`../../assets/img/${member.imgUrl}`)} alt="" />
                                         </div>
@@ -133,7 +134,6 @@ export const TaskDetails = (props) => {
                             {task.labelIds && props.labels.map(label => {
                                 return task.labelIds.map(labelId => {
                                     if (label.id === labelId) {
-
                                         return <div key={labelId} className="label-task" style={{ backgroundColor: label.color }}>
                                             <span>{label.title}</span>
                                         </div>
@@ -161,7 +161,7 @@ export const TaskDetails = (props) => {
 
                             </div>} */}
 
-                            <form onSubmit={onSave}>
+                            <form className="edit-description" onSubmit={onSave}>
                                 <textarea
                                     onInput={onDescResize}
                                     onFocus={() => setIsDesc(true)}

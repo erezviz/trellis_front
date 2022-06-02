@@ -1,4 +1,5 @@
 .board-app {
+    margin-inline-end: 5px;
     padding-top: 40px;
     background-size: cover !important;
     height: 100vh;
@@ -25,22 +26,64 @@
         align-items: center;
         margin-block-start: 15px;
         .show-menu-btn {
-            margin-right: 5px;
-            align-items: center;
-            background-color: hsla(0, 0%, 100%, .239);
+            padding: 8px;
+            background-color: #0000001a;
             border-radius: 3px;
-            color: #fff;
+            box-shadow: none;
+            border: none;
+            cursor: pointer;
             display: flex;
-            height: 30px;
+            align-items: center;
             justify-content: center;
-            padding: 5px;
-            text-decoration: none;
-            width: fit-content;
+            color: #fff;
+            background-color: #ffffff3d;
+            align-items: flex-start;
+            &:hover{
+                background-color: transparentize($color: lighten($color: $clr5, $amount: 20%), $amount: 0.75);
+            }
+        
+            // margin-right: 5px;
+            // align-items: center;
+            // background-color: hsla(0, 0%, 100%, .239);
+            // border-radius: 3px;
+            // color: #fff;
+            // display: flex;
+            // height: 30px;
+            // justify-content: center;
+            // padding: 5px;
+            // text-decoration: none;
+            // width: fit-content;
         }
     }
     .add-group {
-        padding: 16px 4px;
-        width: 272px;
+        margin-block-start: 16px;
+        background-color: #0000001a;
+        border-radius: 3px;
+        box-shadow: none;
+        border: none;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        color: #fff;
+        width: fit-content;
+        display: inline-flex;
+        padding: 10px;
+        background-color: #00000014;
+        margin-left: 10px;
+        height: 30px;
+        min-width: 272px;
+        max-width: 272px;
+        justify-content: flex-start;
+        align-items: center;
+        line-height: 20px;
+        height: 100%;
+        background-color: #ffffff3d;
+        font-weight: 400;
+        &:hover {
+            background-color: transparentize($color: lighten($color: $clr5, $amount: 20%), $amount: 0.75);
+        }
+        // padding: 16px 4px;
+        // width: 272px;
         form {
             display: grid;
             grid-template: 1fr 1fr/2fr 1fr;
@@ -79,7 +122,7 @@
     }
     .add-group-btn {
         margin-inline-start: 15px;
-        padding: 6px 8px;
+        // padding: 6px 8px;
         width: 250px;
         height: fit-content;
         display: flex;
@@ -90,6 +133,7 @@
         border-radius: 2px;
         transition: background-color, 0.25s;
         text-shadow: 0 0 0.3px;
+        background-color:transparent;
         .plus {
             font-size: 18px;
             padding-right: 5px;
