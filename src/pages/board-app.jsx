@@ -97,7 +97,7 @@ class _BoardApp extends React.Component {
     }
 
     onToggleDetails = (ev) => {
-        ev.stopPropagation()
+        // ev.stopPropagation()
         const { boardId } = this.props.match.params
 
         this.setState(prevState => ({

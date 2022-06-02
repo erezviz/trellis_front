@@ -27,7 +27,7 @@ export const TaskPreview = (props) => {
                     {task.memberIds && board.members.map(member => {
                         return task.memberIds.map(memberId => {
                             if (member._id === memberId) {
-                                console.log('helo from if Shani is an officer');
+                                // console.log('helo from if Shani is an officer');
                                 return <div  key={memberId} className="member-task-preview">
                                     <img src={require(`../../assets/img/${member.imgUrl}`)} alt="" />
                                 </div>
