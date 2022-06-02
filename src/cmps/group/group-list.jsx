@@ -60,7 +60,7 @@ export const GroupList = ({ groups, onDeleteGroup, boardId, onToggleDetails }) =
                     {(provided)=>{
                         return <div {...provided.droppableProps} ref={provided.innerRef}>
                         
-                             <GroupPreview setIsLabelOpen={setIsLabelOpen} boardId={boardId} onToggleDetails={onToggleDetails} onDeleteGroup={onDeleteGroup} group={group} key={group.id} />
+                             <GroupPreview isLabelOpen={isLabelOpen} setIsLabelOpen={setIsLabelOpen} boardId={boardId} onToggleDetails={onToggleDetails} onDeleteGroup={onDeleteGroup} group={group} key={group.id} />
                         </div>
                     }}
                 </Droppable>

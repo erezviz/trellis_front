@@ -55,7 +55,7 @@ export const GroupPreview = (props) => {
             <button onClick={()=>props.onDeleteGroup(group.id)}>X</button>
             </div>
             <div className="task-list-container">
-            <TaskList idx={groupIdx} setIsLabelOpen={props.setIsLabelOpen} groupId={props.group.id} boardId={boardId} tasks={group.tasks} onToggleDetails={props.onToggleDetails}/>
+            <TaskList isLabelOpen={props.isLabelOpen} idx={groupIdx} setIsLabelOpen={props.setIsLabelOpen} groupId={props.group.id} boardId={boardId} tasks={group.tasks} onToggleDetails={props.onToggleDetails}/>
             </div>
             <div className="task-footer-container">
                 <GroupFooter boardId={boardId} groupId={props.group.id} />
