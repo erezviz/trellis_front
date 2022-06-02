@@ -66,19 +66,35 @@
         background-position: 50%;
         background-repeat: no-repeat;
         position: relative;
-        // background-color: $clr2;
-        // border-radius: 3px;
-        // box-shadow: 0 1px 0 #091e4240;
-        // cursor: pointer;
-        // display: block;
-        // margin-bottom: 8px;
-        // max-width: 300px;
-        // min-height: 20px;
-        // position: relative;
-        // text-decoration: none;
-        // z-index: 0;
-        // transition: background-color, .25s;
-
+        .labels-task-preview{
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-inline-start: 6px;
+            .label-task-preview{
+                min-height: 8px;
+                min-width: 40px;
+                border-radius: 25px;
+                margin-block-start: 6px;
+                span{
+                    color: white;
+                    font-size: 12px;
+                }
+            }
+        }
+        .members-task-preview{
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            justify-content: flex-end;
+            margin-inline-start: 6px;
+            .member-task-preview{
+                height: 20px;
+                width: 20px;
+                border-radius: 50%;
+                margin-block-start: 6px;
+            }
+        }
         h5 {
             color: darken($color: $clr2, $amount: 55%);
             font-weight: 400;
