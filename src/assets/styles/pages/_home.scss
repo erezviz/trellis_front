@@ -15,19 +15,34 @@
         box-shadow: none;
         color: #172b4d;
         font-weight: 400;
+        // height: 100px;
+        // text-align: center;
+        // transition-duration: 85ms;
+        // transition-property: background-color, border-color, box-shadow;
+        // transition-timing-function: ease;
+        // align-items: center;
+        // background-color: lighten($color: $clr1, $amount: 15%);
+        // border-radius: 3px;
+        // font-size: 16px;
+        line-height: 20px;
+        // color: #FFFFFF;
+        display: block;
+        position: relative;
+        text-decoration: none;
+        // padding: 2rem 3rem 2rem 0.5rem;
+        padding: 0.1rem 10rem 2rem 0.5rem;
+        margin: 0 1rem 1rem 0;
+        transition: background-color, .25s;
+        width: 150px;
         height: 100px;
-        text-align: center;
-        transition-duration: 85ms;
-        transition-property: background-color, border-color, box-shadow;
-        transition-timing-function: ease;
-        align-items: center;
         >p {
             margin: 0;
-            font-size: 16px;
+            font-size: 14px;
             padding: 0 12px;
         }
         &:hover {
             background-color: #091e4214;
+            font-weight: bold;
             border: none;
             box-shadow: none;
             color: #172b4d;
@@ -65,7 +80,7 @@
             position: relative;
             text-decoration: none;
             // padding: 2rem 3rem 2rem 0.5rem;
-            padding: 0.1rem 2.8rem 2rem 0.5rem;
+            padding: 0.1rem 10rem 2rem 0.5rem;
             margin: 0 1rem 1rem 0;
             transition: background-color, .25s;
             width: 150px;
@@ -73,7 +88,7 @@
         }
         a:hover {
             background-color: $clr1;
-            box-shadow: -5px -3px 6px black;
+            box-shadow: -0.2px 1px 3px 0px black;
         }
     }
 }
