@@ -4,10 +4,11 @@ import { TrellisSpinner } from "../util-cmps/trellis-spinner"
 import { DragDropContext, Droppable } from "react-beautiful-dnd"
 import { useDispatch, useSelector } from "react-redux"
 import { updateWholeBoard } from "../../store/board.action"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 
 export const GroupList = ({ groups, onDeleteGroup, boardId, onToggleDetails }) => {
     let { currBoard } = useSelector(state => state.boardModule)
+    let [isLabelOpen , setIsLabelOpen] = useState(false)
     const dispatch = useDispatch()
    
 
@@ -59,7 +60,7 @@ export const GroupList = ({ groups, onDeleteGroup, boardId, onToggleDetails }) =
                     {(provided)=>{
                         return <div {...provided.droppableProps} ref={provided.innerRef}>
                         
-                             <GroupPreview boardId={boardId} onToggleDetails={onToggleDetails} onDeleteGroup={onDeleteGroup} group={group} key={group.id} />
+                             <GroupPreview setIsLabelOpen={setIsLabelOpen} boardId={boardId} onToggleDetails={onToggleDetails} onDeleteGroup={onDeleteGroup} group={group} key={group.id} />
                         </div>
                     }}
                 </Droppable>

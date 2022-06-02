@@ -1,6 +1,6 @@
 // import React from 'react';
 // import { Hero } from './pages/hero';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route} from 'react-router-dom';
 import routes from './routes'
 import { AppHeader } from './cmps/app-header'
 import { BoardApp } from './pages/board-app';
@@ -13,10 +13,22 @@ import MomentUtils from '@date-io/moment';
 // import { BoardApp } from './pages/board-app';
 
 function App() {
+  let pageStyle = ''
+  const location = window.location.href
+
+  // if (location.includes('home')){
+  //   console.log('home!')
+  //   pageStyle = 'homePage'
+  // }
+  // if (location.includes('board')){
+  //   console.log('board!')
+  //   pageStyle = 'boardPage'
+  // }
+
   return (
     <MuiPickersUtilsProvider utils={MomentUtils}>
     <div className="App">
-      <main className="app-container">
+      <main className={`app-container ${pageStyle}`}>
       <AppHeader />
         {/* <Hero/> */}
 

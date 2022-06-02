@@ -48,9 +48,6 @@ class _LoginSignup extends Component {
         return (
            
             <div className="login-page">
-                <p>
-                    <a href="#" onClick={(ev)=>this.toggleSignup(ev)}>{!isSignup ? 'Signup' : 'Login'}</a>
-                </p>
                 {!isSignup && <form className="login-form" onSubmit={this.onLogin}>
                     <input
                         type="text"
@@ -101,7 +98,9 @@ class _LoginSignup extends Component {
                         <button onClick={() => {onSignup(this.state.credentials) }} >Signup!</button>
                     </form>}
                 </div>
-
+                <p className="login-signup-btn">
+                    <a href="#" onClick={(ev)=>this.toggleSignup(ev)}>{!isSignup ? 'Signup' : 'Login'}</a>
+                </p>
             </div>
         )
     }
