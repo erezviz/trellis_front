@@ -17,31 +17,25 @@
     padding-bottom: 8px;
     box-shadow: 1px 7px 5px -4px #00000026;
     padding: 8px;
-  
-    .task-list-container{
+    .task-list-container {
         display: flex;
         flex-direction: column;
     }
-
     .header-container {
         cursor: pointer;
         display: flex;
         justify-content: space-between;
         margin-bottom: 5px;
-
-
-        h3{
+        h3 {
             width: 217px;
             height: 15px;
             margin-inline-start: 7px;
         }
-
         .group-header {
             color: darken($color: $clr2, $amount: 60%);
             font-size: 14px;
             padding-top: 7px;
         }
-
         button {
             border-radius: 2px;
             cursor: pointer;
@@ -49,12 +43,10 @@
             background-color: darken($color: $clr2, $amount: 3%);
             transition: background-color, .25s;
         }
-
         button:hover {
             background-color: darken($color: $clr2, $amount: 10%);
         }
     }
-
     .task-preview {
         cursor: pointer;
         background-color: #fff;
@@ -66,29 +58,29 @@
         background-position: 50%;
         background-repeat: no-repeat;
         position: relative;
-        .labels-task-preview{
+        .labels-task-preview {
             display: flex;
             flex-wrap: wrap;
             gap: 5px;
             margin-inline-start: 6px;
-            .label-task-preview{
+            .label-task-preview {
                 min-height: 8px;
                 min-width: 40px;
                 border-radius: 25px;
                 margin-block-start: 6px;
-                span{
+                span {
                     color: white;
                     font-size: 12px;
                 }
             }
         }
-        .members-task-preview{
+        .members-task-preview {
             display: flex;
             flex-wrap: wrap;
             gap: 5px;
             justify-content: flex-end;
             margin-inline-start: 6px;
-            .member-task-preview{
+            .member-task-preview {
                 height: 20px;
                 width: 20px;
                 border-radius: 50%;
@@ -101,11 +93,9 @@
             padding: 7px;
         }
     }
-
     .task-preview:hover {
         background-color: darken($color: $clr2, $amount: 5%);
     }
-
     .group-footer {
         cursor: pointer;
         margin-left: 8px;
@@ -124,9 +114,7 @@
             border-style: none;
         }
     }
-
     .group-footer:hover {
         background-color: darken($color: $clr2, $amount: 10%);
     }
-
 }
