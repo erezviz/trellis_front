@@ -1,12 +1,26 @@
 .hero {
+    margin-top: 31px;
     display: flex;
     justify-content: center;
-    background: linear-gradient(rgb(229 229 255), rgba(229, 229, 255, 0.688));
+    margin-bottom: 155px;
     .hero-container {
         width: 50%;
         margin-inline-start: 50px;
+        .hero-h1{
+            font-size: 45px;
+            line-height: 55px;
+            height: 3ch;
+            width: 35vw;
+        }
+        .hero-p{
+            width: 32vw;
+            font-size: 20px;
+            line-height: 35px;
+            margin-bottom: 40px 0;
+        }
     }
     .hero-img-container {
+        margin: -65px 90px;
         height: 50vh;
     }
     .hero-img {

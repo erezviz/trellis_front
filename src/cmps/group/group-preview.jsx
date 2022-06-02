@@ -1,67 +1,52 @@
-import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from "react-redux"
-import {Droppable, Draggable} from "react-beautiful-dnd"
+import { Draggable } from "react-beautiful-dnd"
 
 import { GroupHeader } from "./group-header"
 import { TaskList } from "../task/task-list"
 import { GroupFooter } from "./group-footer"
-import { onUpdateGroup} from "../../store/board.action"
+import { onUpdateGroup } from "../../store/board.action"
 
 
-export const GroupPreview = (props) => {
+export const GroupPreview = ({ group, boardId, onToggleDetails,setIsLabelOpen, isLabelOpen, onDeleteGroup }) => {
     const dispatch = useDispatch()
-  const [group, setGroup] = useState(props.group)
-  const { currBoard } = useSelector(state => state.boardModule)
-  const groupIdx = currBoard.groups.findIndex(currGroup=> currGroup.id === group.id)
-  
-  useEffect(()=>{
-      
-      (async=>{
+    const { currBoard } = useSelector(state => state.boardModule)
+    const groupIdx = currBoard.groups.findIndex(currGroup => currGroup.id === group.id)
 
-        try{ 
-            const currGroup = currBoard.groups.find(boardGroup=>{
-                return boardGroup.id === group.id
-              })
-              if (!currGroup) return
-              setGroup(currGroup)
-
-        }catch(err){
-            throw err
-        }
-    })();
-  },[currBoard])
-
-    const {boardId} = props
-
-    const onChangeName=async()=>{
+    const onChangeName = async () => {
         const newName = prompt('new Name?')
-        try{
+        try {
             dispatch(onUpdateGroup(boardId, group.id, newName))
-        }catch(err){
+        } catch (err) {
             throw err
         }
     }
 
     return (
-        <Draggable draggableId={group.id} index={groupIdx}>
-            {(provided)=>{
-           return  <section {...provided.dragHandleProps} 
-        {...provided.draggableProps}
-        ref={provided.innerRef}
-         className="group-preview" key={group.id}>
-            
-            <div className="header-container">
-            <GroupHeader key={group.id} onChangeName={onChangeName} title={group.title}/>
-            <button onClick={()=>props.onDeleteGroup(group.id)}>X</button>
-            </div>
-            <div className="task-list-container">
-            <TaskList isLabelOpen={props.isLabelOpen} idx={groupIdx} setIsLabelOpen={props.setIsLabelOpen} groupId={props.group.id} boardId={boardId} tasks={group.tasks} onToggleDetails={props.onToggleDetails}/>
-            </div>
-            <div className="task-footer-container">
-                <GroupFooter boardId={boardId} groupId={props.group.id} />
-            </div>
-            {provided.placeholder}
-        </section>
+        <Draggable draggableId={group.id} index={groupIdx} key={group.id}>
+            {(provided) => {
+                return <section {...provided.dragHandleProps}
+                    {...provided.draggableProps}
+                    ref={provided.innerRef}
+                    className="group-preview" key={group.id}>
+
+                    <div className="header-container">
+                        <GroupHeader key={group.id} onChangeName={onChangeName} 
+                        title={group.title} />
+                        <button onClick={() => onDeleteGroup(group.id)}>X</button>
+                    </div>
+                    <div className="task-list-container">
+                        <TaskList isLabelOpen={isLabelOpen} idx={groupIdx}
+                            setIsLabelOpen={setIsLabelOpen}
+                            groupId={group.id}
+                            boardId={boardId}
+                            tasks={group.tasks}
+                            onToggleDetails={onToggleDetails} />
+                    </div>
+                    <div className="task-footer-container">
+                        <GroupFooter boardId={boardId} groupId={group.id} />
+                    </div>
+                    {provided.placeholder}
+                </section>
             }}
         </Draggable>
     )

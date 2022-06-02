@@ -1,23 +1,20 @@
 import React from "react";
 import { connect } from "react-redux"
+import { Route } from "react-router-dom";
+import { DragDropContext } from "react-beautiful-dnd";
+
 import TextField from '@mui/material/TextField';
-
-
 import { BoardHeader } from "../cmps/board/board-header";
 import { SideMenu } from "../cmps/dynamic-cmps/side-menu";
 import { TaskDetails } from "../cmps/task/task-details";
 import { GroupList } from "../cmps/group/group-list"
-import { boardService } from "../services/board.service";
 import { utilService } from "../services/util.service";
-import { loadBoard, onDeleteGroup, onAddGroup } from '../store/board.action'
+import { loadBoard, onDeleteGroup, onAddGroup, updateWholeBoard } from '../store/board.action'
 import { Screen } from '../cmps/dynamic-cmps/screen'
-import { Route } from "react-router-dom";
-import { Labels } from '../cmps/task/labels'
 import { TrellisSpinner } from "../cmps/util-cmps/trellis-spinner";
 
+
 class _BoardApp extends React.Component {
-
-
     state = {
         groups: [],
         isModalOpen: false,
@@ -29,30 +26,19 @@ class _BoardApp extends React.Component {
 
     componentDidMount = () => {
         this.loadGroups()
-
-
     }
 
     loadGroups = async (board) => {
-        //###  What is this line for?  ###
         this.setState(prevState => ({ ...prevState, groups: [] }), async () => {
-
             const boardId = this.getBoardId()
             if (!board) {
                 try {
                     const board = await this.props.loadBoard(boardId)
                     this.setState(prevState => ({ ...prevState, groups: board.groups }))
-
                 } catch (err) {
                     throw err
                 }
-            } else {
-                try {
-                    await this.setState(prevState => ({ ...prevState, groups: board.groups }))
-                } catch (err) {
-                    throw err
-                }
-            }
+            } else this.setState(prevState => ({ ...prevState, groups: board.groups }))
         })
     }
 
@@ -80,7 +66,6 @@ class _BoardApp extends React.Component {
         newGroup.id = utilService.makeId()
         try {
             const board = await this.props.onAddGroup(boardId, newGroup)
-            // console.log('board after update', board)
             this.loadGroups(board)
         } catch (err) {
             throw err
@@ -103,7 +88,6 @@ class _BoardApp extends React.Component {
             isModalOpen: !prevState.isModalOpen
         }));
         this.props.history.push(`/board/${boardId}`)
-
     }
 
     onCloseDetails = (ev) => {
@@ -123,7 +107,31 @@ class _BoardApp extends React.Component {
         this.setState({ isSideBarOpen: !this.state.isSideBarOpen })
     }
 
-
+    onDragEnd =(res) => {
+        const board = JSON.parse(JSON.stringify(this.props.currBoard))
+        const { destination, source, draggableId, type } = res
+        console.log('res', res)
+        if (!destination) return
+        // moving groups 
+        else if (type === 'column') {
+            const group = board.groups.splice(source.index, 1)[0]
+            board.groups.splice(destination.index, 0, group)
+        }
+        else if (type === 'task') {
+            const groupStart = board.groups.find(currGroup => currGroup.id === source.droppableId)
+            const groupFinish = board.groups.find(currGroup => currGroup.id === destination.droppableId)
+            const draggableTask =  groupStart.tasks.splice(source.index, 1)[0]
+            // moving tasks on the same group
+            if (groupStart === groupFinish) {
+                groupStart.tasks.splice(destination.index, 0, draggableTask)
+            }
+            // moving tasks on different groups
+            else if (groupStart !== groupFinish) {
+                groupFinish.tasks.splice(destination.index, 0, draggableTask)
+            }
+        }
+        this.props.updateWholeBoard(board)
+    }
     render() {
 
         const { currBoard } = this.props
@@ -149,15 +157,14 @@ class _BoardApp extends React.Component {
                     <SideMenu props={currBoard} />
                     {(!groups?.length) && <TrellisSpinner isLarge={true} />}
                   {  groups?.length > 0 &&
-
                       <div className="list-container">
+                           <DragDropContext onDragEnd={this.onDragEnd} id={currBoard._id}>
                         <GroupList
-                        
                             boardId={boardId}
                             onToggleDetails={this.onToggleDetails}
                             onDeleteGroup={this.onDeleteGroup}
                             groups={groups} />
-
+                        </DragDropContext>
                     </div>
                         }  
                     <>
@@ -170,12 +177,9 @@ class _BoardApp extends React.Component {
                                     onToggleLabels={this.onToggleLabels}
                                     isOpen={isModalOpen}
                                     onCloseDetails={this.onCloseDetails} />
-
                             </Screen>
-
                         </Route>
                     </>
-
                     <div className="add-group">
                         {!isShown && <button className="add-group-btn" onClick={this.onToggleGroup}><span className="plus">+</span> Add another list</button>}
                         {isShown && <form onSubmit={(ev) => this.onAddGroup(ev)}>
@@ -190,7 +194,6 @@ class _BoardApp extends React.Component {
     }
 }
 
-
 function mapStateToProps(state) {
     return {
         currBoard: state.boardModule.currBoard
@@ -200,7 +203,7 @@ const mapDispatchToProps = {
     loadBoard,
     onDeleteGroup,
     onAddGroup,
+    updateWholeBoard,
 }
-
 
 export const BoardApp = connect(mapStateToProps, mapDispatchToProps)(_BoardApp)
