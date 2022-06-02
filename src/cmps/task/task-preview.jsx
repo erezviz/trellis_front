@@ -15,8 +15,8 @@ export const TaskPreview = (props) => {
                         {task.labelIds && board.labels.map(label => {
                             return task.labelIds.map(labelId => {
                                 if (label.id === labelId) {
-                                    return <div  key={labelId} className="label-task-preview" style={{ backgroundColor: label.color }}>
-                                        {/* {isLabelOpen && <span>{label.title}</span>} */}
+                                    return <div onClick={()=>props.setIsLabelOpen(!props.isLabelOpen)}  key={labelId} className="label-task-preview" style={{ backgroundColor: label.color }}>
+                                        {props.isLabelOpen && <span>{label.title}</span>}
                                     </div>
                                 }
                             })

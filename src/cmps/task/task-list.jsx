@@ -30,7 +30,7 @@ export const TaskList = (props) => {
 
                             <div id={task.id} key={task.id}>
                                 <Link key={task.id + idx} to={`/board/${props.boardId}/${props.groupId}/${task.id}`}>
-                                    <TaskPreview setIsLabelOpen={props.setIsLabelOpen} idx={idx} boardId={props.boardId} onToggleDetails={props.onToggleDetails} key={task.id} task={task} />
+                                    <TaskPreview isLabelOpen={props.isLabelOpen} setIsLabelOpen={props.setIsLabelOpen} idx={idx} boardId={props.boardId} onToggleDetails={props.onToggleDetails} key={task.id} task={task} />
                                 </Link>
                             </div>
                         )
