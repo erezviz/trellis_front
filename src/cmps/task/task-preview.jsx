@@ -10,7 +10,7 @@ export const TaskPreview = (props) => {
         <Draggable key={task.id} draggableId={task.id} index={idx}>
             {(provided) => {
                 return <section {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}
-                    onClick={() => props.onToggleDetails()} className="task-preview">
+                     className="task-preview">
                     <section className="labels-task-preview">
                         {task.labelIds && board.labels.map(label => {
                             return task.labelIds.map(labelId => {
@@ -22,7 +22,10 @@ export const TaskPreview = (props) => {
                             })
                         })}
                     </section>
+                    <section onClick={() => props.onToggleDetails()} className="main-preview">
+
                     <h5>{task.title}</h5>
+                        </section>
                     <section className="members-task-preview">
                     {task.memberIds && board.members.map(member => {
                         return task.memberIds.map(memberId => {
