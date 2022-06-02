@@ -1,6 +1,20 @@
+.Hero{
+    background-color: transparent !important
+}
+.homeBgc{
+    background-color: $clr1 !important;
+}
+.homeTxtClr{
+    color: $clr2 !important
+    
+}
+.logoHero{
+    color: $clr2 !important
+    
+}
 .app-header {
     z-index: 30;
-    // background-color: rgb(229 229 255);
+    background-color: transparentize($color: $clr5, $amount: .8);
     position: absolute;
     top: 0;
     color: $clr2;
@@ -12,6 +26,9 @@
     .header-link {
         margin: 0;
         color: $clr2;
+    }
+    .Hero{
+        background-color: transparent;
     }
     .user-link {
         cursor: pointer;
