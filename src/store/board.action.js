@@ -103,7 +103,6 @@ export function updateGroupTask(boardId, groupId, task) {
         try {
             const updatedBoard = await boardService.saveTask(boardId, groupId, task)
             dispatch(getActionUpdateBoard(updatedBoard))
-                // return reducerBoard.board
         } catch (err) {
             console.log('Cannot save board', err)
             throw err
@@ -113,11 +112,8 @@ export function updateGroupTask(boardId, groupId, task) {
 export function updateWholeBoard(board) {
     return async(dispatch) => {
         try {
-            // console.log(boardId)
-            await boardService.save(board)
             dispatch(getActionUpdateBoard(board))
-                // console.log('reducer board', reducerBoard)
-                // return reducerBoard.board
+            await boardService.save(board)
         } catch (err) {
             console.log('Cannot save board', err)
             throw err

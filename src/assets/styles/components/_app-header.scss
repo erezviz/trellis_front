@@ -1,17 +1,23 @@
-.Hero{
-    background-color: transparent !important
+.Hero {
+    background-color: white !important
 }
-.homeBgc{
-    background-color: $clr1 !important;
+
+.homeBgc {
+    height: 45px;
+    background-color: $clr1  !important;
+    .user-link .signup {
+    background-color: transparent !important;
+    }
 }
-.homeTxtClr{
-    color: $clr2 !important
-    
+
+.homeTxtClr {
+    color: $clr2  !important
 }
-.logoHero{
-    color: $clr2 !important
-    
+
+.logoHero {
+    color: $clr2  !important
 }
+
 .app-header {
     z-index: 30;
     background-color: transparentize($color: $clr5, $amount: .8);
@@ -20,57 +26,74 @@
     color: $clr2;
     // height: rem(32px);
     width: 100%;
-    padding: rem(6px) rem(4px);
+    // padding: 1rem 0;
     justify-content: space-between;
     align-items: center;
+    transition: box-shadow, .25s;
+
     .header-link {
         margin: 0;
         color: $clr2;
     }
-    .Hero{
+
+    .Hero {
         background-color: transparent;
     }
+
     .user-link {
         cursor: pointer;
-        font-weight: 600;
-        span{
+        -webkit-box-align: stretch;
+        align-items: stretch;
+        display: flex;
+        margin-left: auto;
+
+        span {
             color: $clr2;
+            font-weight: 500;
         }
+
         .login {
-            color: $clr1;
-            padding-right: 10px;
-            padding-bottom: 1px;
+            color: darken($color: $clr2, $amount: 45%);
+            padding: 1rem 1.7rem;
         }
-        .login:hover {
-            text-decoration: underline;
-        }
+
         .signup {
             background-color: $clr1;
-            padding: 0.25rem 0.5rem;
-            border-radius: 0.2rem;
+            padding: 1rem 2rem;
             transition: background-color, 0.15s;
         }
+
         .signup:hover {
             background-color: darken($color: $clr1, $amount: 8%)
         }
     }
+
     .logo-container {
         align-items: center;
         display: flex;
-        margin-inline-start: 15px;
+        margin-inline-start: 5px;
+
         &:hover {
             cursor: pointer;
         }
+
         h3 {
+            line-height: normal;
             font-family: Secular, sans-serif;
             font-weight: 500;
             font-size: 2rem;
             margin: 0;
             color: $clr5;
         }
+
         img {
-            height: 2.75vh;
-            margin: 0 5px;
+            height: 23px;
+            margin: 0 10px;
+            width: 23px;
         }
     }
+}
+
+.Hero:hover{
+    box-shadow: 0 0.2px 5px 0px rgb(99, 93, 93);
 }

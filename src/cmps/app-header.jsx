@@ -28,7 +28,7 @@ const _AppHeader = (props) => {
     return (
         <section className={`app-header flex ${status} ${bgc}`}>
 
-            <div onClick={onGoBack} className={`logo-container ${status}`}>
+            <div onClick={onGoBack} className='logo-container'>
             
                <img src={require(`../assets/img/trellis${status}.png`)} alt="" /> <h3 className={logoTxt}>Trellis</h3>
             </div>
@@ -37,7 +37,7 @@ const _AppHeader = (props) => {
             {!user && <Link to={'/login'}>
                 <div className="user-link">
                     <span className={`login ${txtClr}`}>Log in</span>
-                    <span className="signup">Sign up</span>
+                    <span className="signup">Sign up for free</span>
                 </div>
             </Link>}
 
