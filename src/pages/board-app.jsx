@@ -125,8 +125,9 @@ class _BoardApp extends React.Component {
 
 
     render() {
+
         const { currBoard } = this.props
-        if (!currBoard) return <></>
+        if (!currBoard?._id) return <></>
         const { labels, members } = currBoard
         const { boardId } = this.props.match.params
         const { groups, isModalOpen, isShown, isSideBarOpen } = this.state

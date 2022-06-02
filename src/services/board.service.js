@@ -1,11 +1,12 @@
 import { storageService } from './async-storage.service.js'
 import { utilService } from './util.service.js'
 import { userService } from './user.service.js'
+import { httpService } from './http.service.js'
 // import { getActionRemoveBoard, getActionAddBoard, getActionUpdateBoard } from '../store/board.actions.js'
 
 const STORAGE_KEY = 'board'
-    // const boardChannel = new BroadcastChannel('boardChannel')
-    // const listeners = []
+// const boardChannel = new BroadcastChannel('boardChannel')
+// const listeners = []
 
 export const boardService = {
     query,
@@ -30,7 +31,7 @@ window.cs = boardService;
 
 
 function query() {
-    return storageService.query(STORAGE_KEY)
+    return httpService.get('board')
 }
 
 // async function getTaskById(taskId,groupId,boardId){
@@ -42,32 +43,21 @@ function query() {
 // }
 
 function getById(boardId) {
-    return storageService.get(STORAGE_KEY, boardId)
-        // return axios.get(`/api/board/${boardId}`)
+    return httpService.get(`board/${boardId}`)
+
 }
 async function remove(boardId) {
-    // return new Promise((resolve, reject) => {
-    //     setTimeout(reject, 2000)
-    // })
-    // return Promise.reject('Not now!');
-    await storageService.remove(STORAGE_KEY, boardId)
-        // boardChannel.postMessage(getActionRemoveBoard(boardId))
+    httpService.delete(`board/${boardId}`)
+
 }
 async function save(board) {
     var savedBoard
     if (board._id) {
-        savedBoard = await storageService.put(STORAGE_KEY, board)
-            // console.log('save (board)', savedBoard)
-            // boardChannel.postMessage(getActionUpdateBoard(savedBoard))
-
+        return httpService.put(`board/:${board._id}`, board)
     } else {
         board.labels = _getBoardLabels()
-            //! FOR NOW, LATER ID IS CREATED IN MONGODB
-        board._id = utilService.makeId()
-            // Later, owner is set by the backend
-            // board.owner = userService.getLoggedinUser()
-        savedBoard = await storageService.post(STORAGE_KEY, board)
-            // boardChannel.postMessage(getActionAddBoard(savedBoard))
+        savedBoard = await httpService.post('board', board)
+       
     }
 
     return savedBoard
@@ -180,7 +170,7 @@ async function updateTask(boardId, groupId, taskToSave) {
             return group
         })
 
-        const updatedBoard = {...board, groups: updatedGroups }
+        const updatedBoard = { ...board, groups: updatedGroups }
 
         save(updatedBoard)
         return updatedBoard
@@ -243,35 +233,35 @@ function getAttachmentTitle(urlStr) {
 
 function _getBoardLabels() {
     return [{
-            id: "l101",
-            title: "Done",
-            color: "#519839"
-        },
-        {
-            id: "l102",
-            title: "Progress",
-            color: "#f2d600"
-        },
-        {
-            id: "l103",
-            title: "Open",
-            color: " #eb5a46"
-        },
-        {
-            id: "l104",
-            title: "Urgent",
-            color: "#ff9f1a"
-        },
-        {
-            id: "l105",
-            title: "Irrelevant",
-            color: "#055a8c"
-        },
-        {
-            id: "l106",
-            title: "Assigned",
-            color: "#c377e0"
-        }
+        id: "l101",
+        title: "Done",
+        color: "#519839"
+    },
+    {
+        id: "l102",
+        title: "Progress",
+        color: "#f2d600"
+    },
+    {
+        id: "l103",
+        title: "Open",
+        color: " #eb5a46"
+    },
+    {
+        id: "l104",
+        title: "Urgent",
+        color: "#ff9f1a"
+    },
+    {
+        id: "l105",
+        title: "Irrelevant",
+        color: "#055a8c"
+    },
+    {
+        id: "l106",
+        title: "Assigned",
+        color: "#c377e0"
+    }
     ]
 }
 

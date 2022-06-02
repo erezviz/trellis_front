@@ -10,7 +10,7 @@ export const CreateBoardModal = ({ isShown }) => {
         title: '',
         createdBy: '',
         style: {},
-        groups: [{title: ''}]
+        groups: [{ title: '' }]
 
     })
     const onHandleChange = ev => {
@@ -20,19 +20,18 @@ export const CreateBoardModal = ({ isShown }) => {
 
     }
 
-    const onAddBoard = async ev => {
+
+    const onAddBoard = ev => {
         ev.preventDefault()
         board.createdAt = Date.now()
-        const addedBoard = await dispatch(addBoard(board))
-        history.push(`/board/${addedBoard._id}`)
-
+        dispatch(addBoard(board))
+            .then(res => history.push(`/board/${res.insertedId}`))
     }
 
     const onTyping = ev => {
         const { length } = ev.target.value
         if (length === 0) setIsTyping(false)
         else if (length > 0) setIsTyping(true)
-
 
     }
     return (
@@ -50,8 +49,8 @@ export const CreateBoardModal = ({ isShown }) => {
                     required
                 />
                 <div className="required-badge-container flex">
-                <span>👋</span>
-                <p>Board title is required</p>
+                    <span>👋</span>
+                    <p>Board title is required</p>
                 </div>
                 <button className={`btn btn${isTyping ? '-blue' : '-light'}`}>Create</button>
             </form>
