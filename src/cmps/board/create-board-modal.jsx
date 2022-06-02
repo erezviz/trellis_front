@@ -9,7 +9,8 @@ export const CreateBoardModal = ({ isShown }) => {
     const [board, setBoard] = useState({
         title: '',
         createdBy: '',
-        style: {}
+        style: {},
+        groups: [{title: ''}]
 
     })
     const onHandleChange = ev => {
@@ -40,6 +41,7 @@ export const CreateBoardModal = ({ isShown }) => {
             <form onSubmit={onAddBoard} className="create-board-title flex">
                 <label htmlFor="title">Board title<span>*</span></label>
                 <input
+                    autoFocus={true}
                     onInput={onTyping}
                     onChange={onHandleChange}
                     type="text"
@@ -47,6 +49,10 @@ export const CreateBoardModal = ({ isShown }) => {
                     id="title"
                     required
                 />
+                <div className="required-badge-container flex">
+                <span>👋</span>
+                <p>Board title is required</p>
+                </div>
                 <button className={`btn btn${isTyping ? '-blue' : '-light'}`}>Create</button>
             </form>
         </section>

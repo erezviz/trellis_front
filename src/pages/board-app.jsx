@@ -30,6 +30,7 @@ class _BoardApp extends React.Component {
     componentDidMount = () => {
         this.loadGroups()
 
+
     }
 
     loadGroups = async (board) => {
@@ -115,7 +116,7 @@ class _BoardApp extends React.Component {
     }
 
     onToggleLabels = () => {
-        this.setState({ islabelOpen: !this.state.isLabelOpen })
+        this.setState({ isLabelOpen: !this.state.isLabelOpen })
     }
 
     onToggleStatus = () => {
@@ -128,10 +129,10 @@ class _BoardApp extends React.Component {
         if (!currBoard) return <></>
         const { labels, members } = currBoard
         const { boardId } = this.props.match.params
-        const { groups, isModalOpen, isShown, isLabelOpen: islabelOpen, isSideBarOpen } = this.state
+        const { groups, isModalOpen, isShown, isSideBarOpen } = this.state
         let status = (isSideBarOpen) ? 'open' : ''
         const background = {
-            background: `url(${currBoard.style.imgUrl})`,
+            backgroundImage: `url(${currBoard.style.imgUrl})`,
             backgroundSize: 'cover',
             top: '0px'
         }
@@ -145,16 +146,19 @@ class _BoardApp extends React.Component {
                 </div>
                 <section className="main-board">
                     <SideMenu props={currBoard} />
-                    {(!groups || !groups.length) && <TrellisSpinner isLarge={true} />}
-                    <div className="list-container">
+                    {(!groups?.length) && <TrellisSpinner isLarge={true} />}
+                  {  groups?.length > 0 &&
+
+                      <div className="list-container">
                         <GroupList
-                            key={'GroupList'}
+                        
                             boardId={boardId}
                             onToggleDetails={this.onToggleDetails}
                             onDeleteGroup={this.onDeleteGroup}
                             groups={groups} />
 
                     </div>
+                        }  
                     <>
                         <Route path='/board/:boardId/:groupId/:taskId' >
                             <Screen key={'Screen'} isOpen={isModalOpen}   >

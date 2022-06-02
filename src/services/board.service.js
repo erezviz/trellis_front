@@ -85,10 +85,11 @@ function getEmptyBoard() {
 async function addGroup(boardId, newGroup) {
     try {
         const board = await getById(boardId)
-        board.groups = [...board.groups, newGroup]
+        board.groups = (board.groups.length) ? [...board.groups, newGroup] : [newGroup]
         save(board)
         return board
     } catch (err) {
+        console.log('Cannot add group', err)
         throw err
     }
 }
@@ -99,6 +100,7 @@ async function updateGroup(boardId, groupId, newName) {
         groupToUpdate.title = newName
         return save(board)
     } catch (err) {
+        console.log('Cannot update group', err)
         throw err
     }
 }
@@ -109,6 +111,7 @@ async function deleteGroup(boardId, groupId) {
         board.groups = newGroups
         return save(board)
     } catch (err) {
+        console.log('Cannot delete group', err)
         throw err
     }
 }
@@ -154,6 +157,7 @@ async function saveTask(boardId, groupId, taskToSave) {
         board.groups = groups
         return save(board)
     } catch (err) {
+        console.log('Cannot save task', err)
         throw err
     }
 
@@ -270,7 +274,6 @@ function _getBoardLabels() {
         }
     ]
 }
-// }).then(x => console.log(x))
 
 
 // storageService.post(STORAGE_KEY, { _id: utilService.makeId(), title: 'Board 2' }).then(x => console.log(x))

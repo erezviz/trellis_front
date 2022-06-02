@@ -55,7 +55,7 @@ export const GroupList = ({ groups, onDeleteGroup, boardId, onToggleDetails }) =
             <DragDropContext onDragEnd={onDragEnd} id={currBoard._id}>
                 <section className="group-list">
             {groups.map((group, idx)=>{
-               return <Droppable droppableId="group-list" direction="horizontal" type="column">
+               return <Droppable key={group.id} droppableId="group-list" direction="horizontal" type="column">
                     {(provided)=>{
                         return <div {...provided.droppableProps} ref={provided.innerRef}>
                         

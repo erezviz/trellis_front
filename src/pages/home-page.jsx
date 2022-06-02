@@ -43,7 +43,7 @@ class _HomePage extends React.Component {
                     {boards && boards.map((board, idx) => <Link style={{ backgroundImage: `url(${board.style.imgUrl})` }} key={board._id + idx} to={`/board/${board._id}`}><BoardPreview board={board} /></Link>)}
 
                     <div onClick={() => this.onToggleModal()} className="create-board flex">
-                        <span className="create-board-icon" ></span>
+                        <p>Create new board</p>
                     </div>
                 </section>
                 <PopOver cb={this.onToggleModal} isShown={isModalShown} title={'Create board'}>
