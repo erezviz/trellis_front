@@ -1,11 +1,22 @@
 .group-preview {
-    width: 272px;
-    background-color: darken($color: $clr2, $amount: 3%);
-    padding: 5px 8px;
+    // width: 272px;
+    // background-color: darken($color: $clr2, $amount: 3%);
+    // padding: 5px 8px;
+    // margin-block-start: 15px;
+    // border-radius: 5px;
+    // height: 100%;
+    // padding-block-end: 10px;
     margin-block-start: 15px;
-    border-radius: 5px;
-    height: 100%;
-    padding-block-end: 10px;
+    display: flex;
+    flex-direction: column;
+    max-height: calc(100vh - 132px);
+    width: 272px;
+    background-color: #ebecf0;
+    border-radius: 3px;
+    margin-left: 8px;
+    padding-bottom: 8px;
+    box-shadow: 1px 7px 5px -4px #00000026;
+    padding: 8px;
   
     .task-list-container{
         display: flex;
@@ -45,18 +56,28 @@
     }
 
     .task-preview {
-        background-color: $clr2;
-        border-radius: 3px;
-        box-shadow: 0 1px 0 #091e4240;
         cursor: pointer;
-        display: block;
-        margin-bottom: 8px;
-        max-width: 300px;
-        min-height: 20px;
+        background-color: #fff;
+        margin: 0 4px 8px 8px;
+        border-radius: 3px;
+        box-shadow: 0 1px #091e4240;
+        line-height: 20px;
+        background-size: cover;
+        background-position: 50%;
+        background-repeat: no-repeat;
         position: relative;
-        text-decoration: none;
-        z-index: 0;
-        transition: background-color, .25s;
+        // background-color: $clr2;
+        // border-radius: 3px;
+        // box-shadow: 0 1px 0 #091e4240;
+        // cursor: pointer;
+        // display: block;
+        // margin-bottom: 8px;
+        // max-width: 300px;
+        // min-height: 20px;
+        // position: relative;
+        // text-decoration: none;
+        // z-index: 0;
+        // transition: background-color, .25s;
 
         h5 {
             color: darken($color: $clr2, $amount: 55%);
@@ -70,11 +91,18 @@
     }
 
     .group-footer {
-        transition: background-color, 0.25s;
-        border-radius: 3px;
+        cursor: pointer;
+        margin-left: 8px;
+        margin-right: 8px;
+        padding: 4px 3px 2px;
         display: flex;
-        font-size: 15px;
         color: #5e6c84;
+        font-size: 15px;
+        // margin-inline: 5px;
+        // transition: background-color, 0.25s;
+        // border-radius: 3px;
+        // display: flex;
+        // color: #5e6c84;
         .btn-save {
             font-size: 20px;
             border-style: none;

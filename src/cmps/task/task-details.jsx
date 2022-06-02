@@ -161,7 +161,7 @@ export const TaskDetails = (props) => {
 
                             </div>} */}
 
-                            <form onSubmit={onSave}>
+                            <form className="edit-description" onSubmit={onSave}>
                                 <textarea
                                     onInput={onDescResize}
                                     onFocus={() => setIsDesc(true)}
