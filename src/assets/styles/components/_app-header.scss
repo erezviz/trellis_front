@@ -26,7 +26,57 @@
 .logoHero {
     color: $clr2  !important
 }
-
+.user-modal{
+    background: #fff;
+    border-radius: 3px;
+    padding: 10px;
+    box-shadow: 0 8px 16px -4px #091e4240, 0 0 0 1px #091e4214;
+    width: 280px;
+    position: absolute;
+    right: 1px;
+    top: 45px;
+    font-size: 9px;
+    color: #5e6c84;
+    
+    header {
+        border-bottom: 1px solid #091e4221;
+        box-sizing: border-box;
+        // color: #5e6c84;
+        display: block;
+        line-height: 40px;
+        // margin: 0 12px;
+        overflow: hidden;
+        padding: 0 32px;
+        position: relative;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        z-index: 1;
+        text-align: center;
+        .close-user {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 12px;
+            height: 12px;
+        }
+    }
+    .user-profile{
+        display: flex;
+        margin-block: 5px;
+        border-bottom: 1px solid #e2dbdbb5;
+        padding: 10px;
+        .account-img{
+            cursor:context-menu;
+        }
+        h2{
+            align-self: center;
+        }
+    }
+    .logout{
+        cursor: pointer;
+        padding: 8px 15px 0;
+    }
+}
 .app-header {
     height: 45px;
     z-index: 30;
@@ -109,7 +159,9 @@
     margin-inline-end: 15px;
     img{
         border-radius: 50%;
+        cursor: pointer;
     }
+  
     }
 }
 
