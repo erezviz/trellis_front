@@ -87,8 +87,13 @@
                     min-height: 80px;
                     padding: 8px 8px 8px 128px;
                     z-index: 0;
+                    .thumbnail-edit {
+                        >span:not(:nth-child(2)) {
+                            text-decoration: underline;
+                            font-size: 14px;
+                        }
+                    }
                 }
             }
-     
         }
     }

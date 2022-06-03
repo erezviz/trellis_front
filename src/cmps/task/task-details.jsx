@@ -212,9 +212,8 @@ export const TaskDetails = (props) => {
                     </section>
                 </div>
             </div>
-            {/* <PopOver isShown={isAttachOpen} title={'Attach from...'} cb={setIsAttachOpen(false)} >
-                <CreateAttachment task={task}/>
-            </PopOver> */}
+                <CreateAttachment cb={onToggleAttach} isShown={isAttachOpen} task={task}/>
+            
             {(currBoard.labels && isLabelOpen) && <Labels onToggleLabels={setIsLabelOpen} task={task} labels={currBoard.labels} />}
             {isDatesOpen && <TaskDate onToggleDates={setIsDatesOpen} task={task} />}
             {isMembersOpen && <TaskMembers onToggleMembers={setIsMembersOpen} task={task} members={currBoard.members} />}

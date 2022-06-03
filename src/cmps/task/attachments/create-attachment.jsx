@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
 import { useRouteMatch } from "react-router-dom"
 import { uploadService } from "../../../services/upload.service"
@@ -6,50 +6,58 @@ import { utilService } from "../../../services/util.service"
 import { updateTask } from "../../../store/board.action"
 import { TrellisSpinner } from "../../util-cmps/trellis-spinner"
 
-import {ReactComponent as Close} from '../../../assets/icon/close.svg'
+import { ReactComponent as Close } from '../../../assets/icon/close.svg'
 
 export const CreateAttachment = ({ task, isShown, cb }) => {
-    let { params: { boardId, groupId, taskId } } = useRouteMatch()
+    let { params: { boardId, groupId } } = useRouteMatch()
     const dispatch = useDispatch()
     const [isTyping, setIsTyping] = useState(false)
     let [isUploading, setIsUploading] = useState(false)
     let [attachment, setAttachment] = useState({
-        title: null,
+        title: '',
         createdAt: Date.now(),
-        url: null
+        url: ''
     })
 
     const resetAttachment = () => {
         const emptyAttach = {
-            title: null,
+            title: '',
             createdAt: Date.now(),
-            url: null
+            url: ''
         }
 
-        setAttachment(emptyAttach)
+        setAttachment(prevAttachment => prevAttachment = emptyAttach)
     }
-
+    
+ 
     const handleChange = ev => {
         ev.preventDefault()
         const { value, name } = ev.target
         setAttachment(prevAttachment => ({ ...prevAttachment, [name]: value }))
 
     }
+    useEffect(() => {
+        if (isUploading && attachment.url) onSaveAttachment()
+
+
+    }, [isUploading])
+
 
     const uploadImg = async (ev) => {
         if (!ev.target.files[0] || !ev.target.files.length) return
         attachment.title = utilService.getFilename(ev.target.value)
-        setIsUploading(prevUploading => prevUploading = true)
         const url = await uploadService.uploadImg(ev)
-        setIsUploading(prevUploading => prevUploading = false)
+        setIsUploading(prevUploading => prevUploading = true)
+        // setIsUploading(prevUploading => prevUploading = false)
 
         setAttachment(prevAttachment => ({ ...prevAttachment, url }))
+        // onSaveAttachment()
     }
 
     const onSaveAttachment = ev => {
-        ev.preventDefault()
+        if (ev) ev.preventDefault()
 
-        if (!attachment.title) {
+        if (attachment.title.includes('\\fakepath\\')) {
             attachment.title = utilService.getFilename(attachment.url)
 
         }
@@ -58,10 +66,12 @@ export const CreateAttachment = ({ task, isShown, cb }) => {
         // setAttachments(prevAttachments => ([...prevAttachments, attachment]))
         if (newTask.attachments) newTask.attachments = [...newTask.attachments, attachment]
         else newTask.attachments = [attachment]
+        console.log(newTask);
 
         dispatch(updateTask(boardId, groupId, newTask))
         // toggleAdd()
         resetAttachment()
+        cb()
 
     }
 
@@ -77,7 +87,7 @@ export const CreateAttachment = ({ task, isShown, cb }) => {
         top: "285px"
     }
     if (!task) return <TrellisSpinner />
-
+    console.log(attachment);
     return (
 
         <div className={`pop-over ${isShown ? 'shown' : ''} `} style={pos}>
@@ -94,7 +104,12 @@ export const CreateAttachment = ({ task, isShown, cb }) => {
 
 
                 <section className="create-attachment">
-                    <form className="col" >
+                    <form className="form-upload" onSubmit={onSaveAttachment}>
+                        <label htmlFor="imgUpload">Computer</label>
+                        <input type="file" onChange={uploadImg} tabIndex="-1" accept="img/*" id="imgUpload" hidden />
+
+                    </form>
+                    <form onSubmit={onSaveAttachment} className="col" >
                         <label htmlFor="link">Attach a link</label>
                         <input
                             onChange={handleChange}
@@ -102,7 +117,9 @@ export const CreateAttachment = ({ task, isShown, cb }) => {
                             type="text"
                             name="url"
                             id="link"
+                            placeholder="Paste any link here..."
                             autoFocus
+                            value={attachment.url}
 
                         />
                         {isTyping &&
@@ -116,7 +133,7 @@ export const CreateAttachment = ({ task, isShown, cb }) => {
                                 />
                             </>
                         }
-                        <button className="btn-light">Attach</button>
+                        <input type="submit" value="Attach" />
                     </form>
                 </section>
             </div>
