@@ -97,3 +97,32 @@
             }
         }
     }
+    
+    .title-edit {
+        label[for=title] {
+            color: #5e6c84;
+            display: block;
+            font-size: 12px;
+            font-weight: 700;
+            line-height: 16px;
+            margin-bottom: 4px;
+            margin-top: 4px;
+        }
+        input[type=text] {
+            margin: 4px 0 12px;
+            width: 100%;
+            background-color: #fafbfc;
+            border: none;
+            border-radius: 3px;
+            box-shadow: inset 0 0 0 2px #dfe1e6;
+            box-sizing: border-box;
+            display: block;
+            line-height: 20px;
+            margin-bottom: 12px;
+            outline: none;
+            padding: 8px 12px;
+            transition-duration: 85ms;
+            transition-property: background-color, border-color, box-shadow;
+            transition-timing-function: ease;
+        }
+    }

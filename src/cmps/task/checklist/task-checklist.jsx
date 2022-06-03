@@ -141,7 +141,7 @@ const onAddTodo=(ev)=>{
             {task.checklist.todos &&
             <div>
                { task.checklist.todos.map(todo=>{
-                 return <div className='checklist-item'>
+                 return <div key={todo.id} className='checklist-item'>
                  {!isEditTitle && <>
                  <div>
                   <input type="checkbox" id={todo.id} name={todo.title} checked={todo.isDone} onChange={(ev) => onCheck(todo.id)}/>

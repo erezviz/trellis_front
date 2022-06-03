@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { useDispatch } from "react-redux"
 import { useRouteMatch } from "react-router-dom"
 import { boardService } from "../../services/board.service"
@@ -11,12 +11,12 @@ import { ReactComponent as Close } from '../../assets/icon/close.svg'
 
 
 export const Attachments = ({ task }) => {
-    let { params: { boardId, groupId, taskId } } = useRouteMatch()
+
+    let { params: { boardId, groupId } } = useRouteMatch()
     const dispatch = useDispatch()
     let [isEdit, setIsEdit] = useState(false)
-    // let [isAdded, setIsAdded] = useState(false)
-    // let [attachments, setAttachments] = useState([])
     let [isUploading, setIsUploading] = useState(false)
+    const [attachmentId, setAttachmentId] = useState(null)
     let [attachment, setAttachment] = useState({
         title: null,
         createdAt: Date.now(),
@@ -35,7 +35,8 @@ export const Attachments = ({ task }) => {
 
     const handleChange = ev => {
         ev.preventDefault()
-        const { value, name, id } = ev.target
+
+        const { value, name } = ev.target
         // const attachment = boardService.createAttachment(id, value)
         setAttachment(prevAttachment => ({ ...prevAttachment, [name]: value }))
 
@@ -51,9 +52,8 @@ export const Attachments = ({ task }) => {
         setAttachment(prevAttachment => ({ ...prevAttachment, url }))
         onSaveAttachment()
     }
-    const toggleEdit = () => {
+    const toggleEdit = (id) => {
         setIsEdit(prevIsEdit => prevIsEdit = !isEdit)
-        console.log('isEdit?', isEdit);
     }
 
     const onSaveAttachment = ev => {
@@ -70,35 +70,50 @@ export const Attachments = ({ task }) => {
         else newTask.attachments = [attachment]
 
         dispatch(updateTask(boardId, groupId, newTask))
-        toggleEdit()
         resetAttachment()
 
+    }
+    const toggleTitle = (attachmentId) => {
+        setAttachmentId(attachmentId)
+        toggleEdit()
     }
 
     const onRemoveAttachment = (attachmentId) => {
 
         const newTask = utilService.getDeepCopy(task)
         const newAttachments = newTask.attachments.filter(attachment => attachment.id !== attachmentId)
-
         newTask.attachments = newAttachments
         dispatch(updateTask(boardId, groupId, newTask))
+    }
+
+    const onEditTitle = (ev, attachId) => {
+        console.log('hi from before ev', attachment);
+        if (ev) ev.preventDefault()
+        //TODO  Change prompt to a nice modal -- preferably something dynamic you can use again and again
+        // const newTitle = prompt('Edit attachment', 'Link name')
+
+        const newTask = utilService.getDeepCopy(task)
+        const newTitle = attachment.title
+        const attachToUpdate = newTask.attachments.find(attachment => attachment.id === attachId)
+        attachToUpdate.title = newTitle
+  
+        if (!attachment.title) return
+        const newAttachments = newTask.attachments.map(prevAttachment => {
+        
+            return (prevAttachment.id === attachToUpdate.id) ? attachToUpdate : prevAttachment
+        })
+        console.log('newAttachments', newAttachments);
+        newTask.attachments = newAttachments
+        dispatch(updateTask(boardId, groupId, newTask))
+        resetAttachment()
+        toggleEdit()
+    
 
     }
 
-    const onEditTitle = (attachId) => {
-
-        //TODO  Change prompt to a nice modal -- preferably something dynamic you can use again and again
-        const newTitle = prompt('Edit attachment', 'Link name')
-
-        const newTask = utilService.getDeepCopy(task)
-
-        if (!newTitle) return
-        const newAttachments = newTask.attachments.map(attachment => {
-            if (attachment.id === attachId) attachment.title = newTitle
-            return attachment
-        })
-        newTask.attachments = newAttachments
-        dispatch(updateTask(boardId, groupId, newTask))
+    const getId = (id) => {
+        
+        return id
     }
 
 
@@ -112,11 +127,11 @@ export const Attachments = ({ task }) => {
             <div className="attachment-main" >
                 {isUploading && <TrellisSpinner />}
                 {task.attachments && task.attachments.map(attachment => {
-
+                    console.log('attach id in map', attachment);
                     return <div className="attachment-thumbnail" key={attachment.id}>
 
                         <div className="attachment-img-container">
-                            <img key={attachment.id + 'im'} src={`${attachment.url}`} alt="new attachment" />
+                            <img key={attachment.id + 'im'} src={`${attachment.url}`} alt="new attachment"/>
                         </div>
                         <div className="attachment-thumbnail-details">
 
@@ -125,15 +140,15 @@ export const Attachments = ({ task }) => {
 
                                 <span onClick={() => onRemoveAttachment(attachment.id)}>Delete</span>
                                 <span> - </span>
-                                <span onClick={() => toggleEdit()}>Edit</span>
+                                <span onClick={() => toggleTitle(attachment.id)}>Edit</span>
                             </div>
                             {/* <button className="  btn-danger">Delete</button>
                             <button onClick={() => onEditTitle(attachment.id)} className="btn-blue">Edit</button> */}
 
                         </div>
-                            <TitleEdit cb={toggleEdit} onEditTitle={onEditTitle} id={attachment.id} isShown={isEdit} handleChange={handleChange} />
                     </div>
                 })}
+                <TitleEdit cb={toggleEdit} onEditTitle={onEditTitle} isShown={isEdit} handleChange={handleChange} id={attachmentId} />
 
                 <button onClick={() => toggleEdit()} className="btn-light" >Add an attachment</button>
                 {/* {isAdd && <div className="attachment-form-container">
@@ -160,8 +175,8 @@ export const Attachments = ({ task }) => {
 function TitleEdit({ isShown, cb, onEditTitle, handleChange, id }) {
     const [isTyping, setIsTyping] = useState(false)
     const pos = {
-        left: '433px',
-        top: '285px'
+        left: '284px',
+        top: '88px'
     }
 
     const onTyping = ev => {
@@ -170,8 +185,8 @@ function TitleEdit({ isShown, cb, onEditTitle, handleChange, id }) {
         else if (length > 0) setIsTyping(true)
 
     }
-
-
+    console.log('this is the id in the title edit',id);
+    if (!id) return <></>
     return (
         <div className={`pop-over ${isShown ? 'shown' : ''} `} style={pos}>
             <header className="pop-over-header flex">
@@ -183,22 +198,19 @@ function TitleEdit({ isShown, cb, onEditTitle, handleChange, id }) {
 
                 </button>
             </header>
-            <div className="children-container">
-                {/* <form onSubmit={() => onEditTitle(id)} className="col" >
-                    <label htmlFor="link">Attach a link</label>
+            <div className=" children-container">
+                <form onSubmit={(ev) => onEditTitle(ev, id)} className=" title-edit flex-col" >
+                    <label htmlFor="title">Link name</label>
                     <input
                         onChange={handleChange}
                         onInput={onTyping}
                         type="text"
-                        name="url"
-                        id="link"
-                        placeholder="Paste any link here..."
-                        autoFocus
-                        
-
+                        name="title"
+                        id="title"
+                        autoFocus={true}
                     />
-                    <input className={`btn${isTyping ? '-btn' : '-light'}`} type="submit" value="Update" />
-                </form> */}
+                    <input className={`btn btn${isTyping ? '-btn' : '-light'}`} type="submit" value="Update" />
+                </form>
             </div>
         </div>
     )
