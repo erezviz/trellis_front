@@ -40,7 +40,12 @@ const _AppHeader = (props) => {
                     <span className="signup">Sign up for free</span>
                 </div>
             </Link>}
-
+            
+        { user &&   <div className="user-img">
+                {user.imgUrl && <img src={require(`../assets/img/shabi.jpg`)} alt="" /> }
+                {!user.imgUrl && <img src={require(`../assets/icon/member-icon.svg`)} alt="" /> }
+            </div>
+}
         </section>
     )
 }
