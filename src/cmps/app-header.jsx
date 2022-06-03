@@ -24,7 +24,7 @@ const _AppHeader = (props) => {
         bgc = 'homeBgc'
         txtClr = 'homeTxtClr'
     }
-
+    console.log('from header',user);
     return (
         <section className={`app-header flex ${status} ${bgc}`}>
 

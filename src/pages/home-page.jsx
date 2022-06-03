@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-
+import {ReactComponent as Clock} from '../assets/icon/dates-icon.svg'
 import {
     loadBoards,
     removeBoard,
@@ -12,7 +12,6 @@ import {
 import { BoardPreview } from '../cmps/board/board-preview'
 import { PopOver } from "../cmps/dynamic-cmps/pop-over";
 import { CreateBoardModal } from "../cmps/board/create-board-modal";
-import { ReactComponent as Clock } from '../assets/icon/dates-icon.svg'
 import { ReactComponent as Star } from '../assets/icon/star.svg'
 
 class _HomePage extends React.Component {

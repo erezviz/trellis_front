@@ -12,7 +12,7 @@ export const Attachments = ({ task }) => {
     const dispatch = useDispatch()
     let [isAdd, setIsAdd] = useState(false)
     let [isAdded, setIsAdded] = useState(false)
-    let [attachments, setAttachments] = useState([])
+    // let [attachments, setAttachments] = useState([])
     let [isUploading, setIsUploading] = useState(false)
     let [attachment, setAttachment] = useState({
         title: null,
