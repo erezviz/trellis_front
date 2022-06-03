@@ -20,10 +20,11 @@ export function onLogin(credentials) {
     return async (dispatch) => {
         try {
             const user = await userService.login(credentials)
-            dispatch({
+             dispatch({
                 type: 'SET_USER',
                 user
             })
+            return user
         } catch (err) {
             showErrorMsg('Cannot login')
             console.log('Cannot login', err)

@@ -1,5 +1,5 @@
 import { Component } from 'react'
-import { connect } from 'react-redux'  
+import { connect } from 'react-redux'
 import {
     onLogin,
     onSignup,
@@ -34,51 +34,29 @@ class _LoginSignup extends Component {
         this.setState({ credentials: { ...this.state.credentials, [field]: value } });
     }
 
-
-    toggleSignup = (ev) => {
+    onSubmitLogin = async (ev) => {
         ev.preventDefault()
-        this.setState({ isSignup: !this.state.isSignup })
+        const user = await this.props.onLogin(this.state.credentials)
+        if(user)this.onGoBack()
     }
 
+    onGoBack = () => {
+         this.props.history.push('/home')
+        }
+    
+    
+    toggleSignup = () => {
+        this.setState({ isSignup: !this.state.isSignup })
+    }
     render() {
-        console.log('hello from login');
+        const {user} = this.props
         const { username, password, fullname } = this.state.credentials;
         const { isSignup } = this.state;
-        const {onLogin, onSignup} = this.props
+        console.log('user from login', user);
         return (
-           
             <div className="login-page">
-                {!isSignup && <form className="login-form" onSubmit={this.onLogin}>
-                    <input
-                        type="text"
-                        name="username"
-                        value={username}
-                        placeholder="Username"
-                        onChange={this.handleChange}
-                        required
-                        autoFocus
-                    />
-                    <input
-                        type="password"
-                        name="password"
-                        value={password}
-                        placeholder="Password"
-                        onChange={this.handleChange}
-                        required
-                    />
-                    <button onClick={() => {onLogin(this.state.credentials) }} >Login!</button>
-                </form>}
-
-                <div className="signup-section">
-                    {isSignup && <form className="signup-form" onSubmit={this.onSignup}>
-                        <input
-                            type="text"
-                            name="fullname"
-                            value={fullname}
-                            placeholder="Fullname"
-                            onChange={this.handleChange}
-                            required
-                        />
+                {!user && < section className="login-signup">
+                    {!isSignup && <form className="login-form" onSubmit={(event) => { this.onSubmitLogin(event) }}>
                         <input
                             type="text"
                             name="username"
@@ -86,6 +64,7 @@ class _LoginSignup extends Component {
                             placeholder="Username"
                             onChange={this.handleChange}
                             required
+                            autoFocus
                         />
                         <input
                             type="password"
@@ -95,12 +74,44 @@ class _LoginSignup extends Component {
                             onChange={this.handleChange}
                             required
                         />
-                        <button onClick={() => {onSignup(this.state.credentials) }} >Signup!</button>
+                        <button >Login!</button>
                     </form>}
-                </div>
-                <p className="login-signup-btn">
-                    <a href="#" onClick={(ev)=>this.toggleSignup(ev)}>{!isSignup ? 'Signup' : 'Login'}</a>
-                </p>
+
+                    <div className="signup-section">
+                        {isSignup && <form className="signup-form" onSubmit={this.onSignup}>
+                            <input
+                                type="text"
+                                name="fullname"
+                                value={fullname}
+                                placeholder="Fullname"
+                                onChange={this.handleChange}
+                                required
+                            />
+                            <input
+                                type="text"
+                                name="username"
+                                value={username}
+                                placeholder="Username"
+                                onChange={this.handleChange}
+                                required
+                            />
+                            <input
+                                type="password"
+                                name="password"
+                                value={password}
+                                placeholder="Password"
+                                onChange={this.handleChange}
+                                required
+                            />
+                            <button onClick={() => { this.props.onSignup(this.state.credentials) }} >Signup!</button>
+                        </form>}
+                    </div>
+                    <p>
+                        <a href="#" onClick={this.toggleSignup}>{!isSignup ? 'Signup' : 'Login'}</a>
+                    </p>
+                </section>}
+
+                {user && <button onClick={()=>this.onGoBack()}>Enter Boards</button> }
             </div>
         )
     }
