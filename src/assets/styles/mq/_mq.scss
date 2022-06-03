@@ -1,0 +1,32 @@
+@media screen and (max-width: 1224px) {
+    .hero .hero-container .hero-h1 {
+        
+      
+        height: 7ch;
+        
+    }
+}
+@media screen and (max-width: 1024px) {
+    .home-page .board-list-container{
+        right: 0
+    }
+}
+@media screen and (max-width: 780px) {
+    .hero .hero-img-container {
+        display: none;
+    }
+    .hero-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr;
+        grid-gap: 20px
+    }
+}
+@media screen and (max-width: 664px) {
+    .home-page .board-list-container{
+        bottom: 6rem;
+        left: 1rem;
+        right: 0;
+    }
+
+}

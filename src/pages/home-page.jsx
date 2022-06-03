@@ -6,7 +6,7 @@ import {
     loadBoards,
     removeBoard,
     addBoard,
-    updateBoard,
+    updateWholeBoard,
 } from '../store/board.action'
 
 import { BoardPreview } from '../cmps/board/board-preview'
@@ -23,7 +23,7 @@ class _HomePage extends React.Component {
         this.onLoadBoards();
     }
 
-    onLoadBoards = async () => {
+    onLoadBoards =() => {
         this.props.loadBoards()
     }
 
@@ -35,13 +35,17 @@ class _HomePage extends React.Component {
     onMarkStar=(ev, board)=>{
         ev.preventDefault()
         const newBoard = JSON.parse(JSON.stringify(board))
-        
+        if (!newBoard.starred) newBoard.starred = true
+        else newBoard.starred = false
+        console.log(newBoard)
+        this.props.updateWholeBoard(newBoard)
     }
 
     render() {
         const { boards } = this.props
         const { isModalShown } = this.state
-
+        
+        if (!boards && !boards.length) return <div>Loading...</div>
         return (
             <section className="home-page">
                 <div className="board-list-container">
@@ -49,19 +53,39 @@ class _HomePage extends React.Component {
                 <Star/>
                 <h1>Starred boards</h1>
                     </div>
+                    <section className="previews-container">
+                    {boards && boards.map((board, idx) => 
+                    <>
+                         {board.starred && 
+                     <div key={board._id} className="board-preview" style={{ backgroundImage: `url(${board.style.imgUrl})` }}>
+                    <Link  key={board._id + idx} to={`/board/${board._id}`}>
+                        <BoardPreview board={board} />
+                        
+                         <span onClick={(ev)=>this.onMarkStar(ev, board)} className="starred">
+                        <Star/>
+                        </span>
+                        </Link> 
+                        </div>
+                        }
+                        </>
+                        )}
+                        </section>
                 <div className="flex">
                     <Clock/>
                 <h1> Recently viewed</h1>
                 </div>
                 <section className="previews-container">
-                    {(!boards && !boards.length) && <div>Loading...</div>}
                     {boards && boards.map((board, idx) => 
-                    <div className="board-preview" style={{ backgroundImage: `url(${board.style.imgUrl})` }}>
+                    
+                    <div key={board._id} className="board-preview" style={{ backgroundImage: `url(${board.style.imgUrl})` }}>
                     <Link  key={board._id + idx} to={`/board/${board._id}`}>
                         <BoardPreview board={board} />
-                        <span onClick={(ev)=>this.onMarkStar(ev, board)} className="star">
+                        {!board.starred && <span onClick={(ev)=>this.onMarkStar(ev, board)} className="star">
                         <Star/>
-                        </span>
+                        </span>}
+                        {board.starred && <span onClick={(ev)=>this.onMarkStar(ev, board)} className="starred">
+                        <Star/>
+                        </span>}
                         </Link> 
                         </div>
                         )}
@@ -88,7 +112,7 @@ const mapDispatchToProps = {
     loadBoards,
     removeBoard,
     addBoard,
-    updateBoard,
+    updateWholeBoard,
 }
 
 export const HomePage = connect(mapStateToProps, mapDispatchToProps)(_HomePage)

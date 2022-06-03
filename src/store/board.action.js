@@ -112,8 +112,8 @@ export function updateGroupTask(boardId, groupId, task) {
 export function updateWholeBoard(board) {
     return async(dispatch) => {
         try {
-            dispatch(getActionUpdateBoard(board))
             await boardService.save(board)
+            dispatch(getActionUpdateBoard(board))
         } catch (err) {
             console.log('Cannot save board', err)
             throw err
