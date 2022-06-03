@@ -1,11 +1,14 @@
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { NavLink, Link } from "react-router-dom"
-
+import member from '../assets/icon/member.svg'
+import { onLogout } from "../store/user.actions";
 
 
 const _AppHeader = (props) => {
     const { user } = useSelector((state) => state.userModule)
+    let [toggleAccount, setToggleAccount] = useState(false)
     let status = 'Hero'
     let bgc = ''
     let txtClr = ''
@@ -14,38 +17,79 @@ const _AppHeader = (props) => {
     const onGoBack = () => {
         props.history.push('/')
     }
-
+    if(!location.includes('board') || !location.includes('home')){
+        status = 'Hero'
+    }
     if(location.includes('board') || location.includes('home')){
         status = ''
         bgc = ''
-        logoTxt='logoHero'
+        logoTxt = 'logoHero'
     }
-    if(location.includes('home')){
+    if (location.includes('home')) {
         bgc = 'homeBgc'
         txtClr = 'homeTxtClr'
     }
-    console.log('from header',user);
+
+    const onToggleAccount = () => {
+        setToggleAccount(!toggleAccount)
+    }
+
+    const deleteAllCookies = () => {
+        var cookies = document.cookie.split(";");
+
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = cookies[i];
+            var eqPos = cookie.indexOf("=");
+            var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+            document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+        }
+    }
+
+    const onLogout = () => {
+        sessionStorage.clear();
+        deleteAllCookies()
+        onToggleAccount()
+        onGoBack()
+    }
+
+
+    console.log('from header', user);
     return (
         <section className={`app-header flex ${status} ${bgc}`}>
 
             <div onClick={onGoBack} className='logo-container'>
-            
-               <img src={require(`../assets/img/trellis${status}.png`)} alt="" /> <h3 className={logoTxt}>Trellis</h3>
+
+                <img src={require(`../assets/img/trellis${status}.png`)} alt="" /> <h3 className={logoTxt}>Trellis</h3>
             </div>
             <nav>
             </nav>
-            {!user && <Link to={'/login'}>
+            {(status === 'Hero' && !user) && <Link to={'/login'}>
                 <div className="user-link">
                     <span className={`login ${txtClr}`}>Log in</span>
                     <span className="signup">Sign up for free</span>
                 </div>
             </Link>}
-            
-        { user &&   <div className="user-img">
-                {user.imgUrl && <img src={require(`../assets/img/shabi.jpg`)} alt="" /> }
-                {!user.imgUrl && <img src={require(`../assets/icon/member-icon.svg`)} alt="" /> }
+
+            {user && <div className="user-img">
+                {user.imgUrl && <img onClick={() => onToggleAccount()} src={require(`../assets/img/shabi.jpg`)} alt="" />}
+                {!user.imgUrl && <img onClick={() => onToggleAccount()} src={member} alt="" />}
             </div>
-}
+            }
+
+            {toggleAccount && <div className="user-modal">
+                <header>
+                    <h2>Account</h2>
+                    <button className="close-btn close-user" onClick={() => onToggleAccount(false)}></button>
+                </header>
+                <div className="user-profile">
+                    <div className="user-img">
+                        {user.imgUrl && <img className="Account-img" src={require(`../assets/img/shabi.jpg`)} alt="" />}
+                        {!user.imgUrl && <img className="Account-img" src={member} alt="" />}
+                    </div>
+                    <h2>{user.fullname}</h2>
+                </div>
+                <h2 onClick={() => onLogout()} className="logout">Logout</h2>
+            </div>}
         </section>
     )
 }
