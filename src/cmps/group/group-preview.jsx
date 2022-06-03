@@ -12,7 +12,7 @@ export const GroupPreview = ({ group, boardId, onToggleDetails,setIsLabelOpen, i
     const { currBoard } = useSelector(state => state.boardModule)
     const groupIdx = currBoard.groups.findIndex(currGroup => currGroup.id === group.id)
 
-    const onChangeName = async () => {
+    const onChangeName = () => {
         const newName = prompt('new Name?')
         try {
             dispatch(onUpdateGroup(boardId, group.id, newName))

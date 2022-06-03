@@ -21,12 +21,18 @@ class _BoardApp extends React.Component {
         isShown: false,
         isLabelOpen: false,
         newGroup: { title: '' },
-        isSideBarOpen: false
+        isSideBarOpen: false,
+        isScrolling: false,
+        clientX: 0,
+        scrollX: 0
+
     }
+    ref = React.createRef();
 
     componentDidMount = () => {
         this.loadGroups()
     }
+
 
     loadGroups = async (board) => {
         this.setState(prevState => ({ ...prevState, groups: [] }), async () => {
@@ -107,7 +113,7 @@ class _BoardApp extends React.Component {
         this.setState({ isSideBarOpen: !this.state.isSideBarOpen })
     }
 
-    onDragEnd =(res) => {
+    onDragEnd = (res) => {
         const board = JSON.parse(JSON.stringify(this.props.currBoard))
         const { destination, source, draggableId, type } = res
         console.log('res', res)
@@ -120,7 +126,7 @@ class _BoardApp extends React.Component {
         else if (type === 'task') {
             const groupStart = board.groups.find(currGroup => currGroup.id === source.droppableId)
             const groupFinish = board.groups.find(currGroup => currGroup.id === destination.droppableId)
-            const draggableTask =  groupStart.tasks.splice(source.index, 1)[0]
+            const draggableTask = groupStart.tasks.splice(source.index, 1)[0]
             // moving tasks on the same group
             if (groupStart === groupFinish) {
                 groupStart.tasks.splice(destination.index, 0, draggableTask)
@@ -156,17 +162,17 @@ class _BoardApp extends React.Component {
                 <section className="main-board">
                     <SideMenu props={currBoard} />
                     {(!groups?.length) && <TrellisSpinner isLarge={true} />}
-                  {  groups?.length > 0 &&
-                      <div className="list-container">
-                           <DragDropContext onDragEnd={this.onDragEnd} id={currBoard._id}>
-                        <GroupList
-                            boardId={boardId}
-                            onToggleDetails={this.onToggleDetails}
-                            onDeleteGroup={this.onDeleteGroup}
-                            groups={groups} />
-                        </DragDropContext>
-                    </div>
-                        }  
+                    {groups?.length > 0 &&
+                        <div className="list-container">
+                            <DragDropContext onDragEnd={this.onDragEnd} id={currBoard._id}>
+                                <GroupList
+                                    boardId={boardId}
+                                    onToggleDetails={this.onToggleDetails}
+                                    onDeleteGroup={this.onDeleteGroup}
+                                    groups={groups} />
+                            </DragDropContext>
+                        </div>
+                    }
                     <>
                         <Route path='/board/:boardId/:groupId/:taskId' >
                             <Screen key={'Screen'} isOpen={isModalOpen}   >

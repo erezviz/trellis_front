@@ -1,0 +1,17 @@
+.create-attachment {
+    display: flex;
+    flex-direction: column;
+    >label {
+        color: #5e6c84;
+        display: block;
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px;
+        margin-bottom: 4px;
+        margin-top: 12px;
+    }
+    input[type=text] {
+        margin: 4px 0 12px;
+        width: 100%;
+    }
+}
