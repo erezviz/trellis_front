@@ -68,7 +68,7 @@ export const SideMenu = ({props}) => {
     return (
       <div className="feed">
           <div className="popover-header">
-              <button>{'<'}</button>
+              {/* <button>{'<'}</button> */}
             <span>Cover photos</span>
               {/* <button>X</button> */}
           </div>

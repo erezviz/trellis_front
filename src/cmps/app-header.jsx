@@ -14,7 +14,9 @@ const _AppHeader = (props) => {
     const onGoBack = () => {
         props.history.push('/')
     }
-
+    if(!location.includes('board') || !location.includes('home')){
+        status = 'Hero'
+    }
     if(location.includes('board') || location.includes('home')){
         status = ''
         bgc = ''
@@ -34,12 +36,13 @@ const _AppHeader = (props) => {
             </div>
             <nav>
             </nav>
-            {!user && <Link to={'/login'}>
+            {(status === 'Hero' && !user) && <Link to={'/login'}>
                 <div className="user-link">
                     <span className={`login ${txtClr}`}>Log in</span>
                     <span className="signup">Sign up for free</span>
                 </div>
             </Link>}
+            {(!user && !status) && <img src={require(`../assets/icon/member-icon.svg`)} alt="" />}
             
         { user &&   <div className="user-img">
                 {user.imgUrl && <img src={require(`../assets/img/shabi.jpg`)} alt="" /> }

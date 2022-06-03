@@ -30,6 +30,7 @@
             width: 217px;
             height: 15px;
             margin-inline-start: 7px;
+            font-weight: 500;
         }
         .group-header {
             color: darken($color: $clr2, $amount: 60%);
@@ -90,7 +91,7 @@
         h5 {
             color: darken($color: $clr2, $amount: 55%);
             font-weight: 400;
-            padding: 7px;
+            padding: 5px 2px;
         }
     }
     .task-preview:hover {
