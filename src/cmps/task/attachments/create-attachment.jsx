@@ -94,7 +94,7 @@ export const CreateAttachment = ({ task, isShown, cb }) => {
 
 
                 <section className="create-attachment">
-                    <form >
+                    <form className="col" >
                         <label htmlFor="link">Attach a link</label>
                         <input
                             onChange={handleChange}

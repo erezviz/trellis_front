@@ -1,6 +1,10 @@
 .create-attachment {
     display: flex;
     flex-direction: column;
+    form.col {
+        display: flex;
+        flex-direction: column;
+    }
     >label {
         color: #5e6c84;
         display: block;
