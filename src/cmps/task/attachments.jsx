@@ -7,6 +7,9 @@ import { utilService } from "../../services/util.service"
 import { updateTask } from "../../store/board.action"
 import { TrellisSpinner } from "../util-cmps/trellis-spinner"
 import { ReactComponent as Close } from '../../assets/icon/close.svg'
+
+
+
 export const Attachments = ({ task }) => {
     let { params: { boardId, groupId, taskId } } = useRouteMatch()
     const dispatch = useDispatch()
@@ -48,8 +51,9 @@ export const Attachments = ({ task }) => {
         setAttachment(prevAttachment => ({ ...prevAttachment, url }))
         onSaveAttachment()
     }
-    const toggleAdd = () => {
+    const toggleEdit = () => {
         setIsEdit(prevIsEdit => prevIsEdit = !isEdit)
+        console.log('isEdit?', isEdit);
     }
 
     const onSaveAttachment = ev => {
@@ -66,7 +70,7 @@ export const Attachments = ({ task }) => {
         else newTask.attachments = [attachment]
 
         dispatch(updateTask(boardId, groupId, newTask))
-        toggleAdd()
+        toggleEdit()
         resetAttachment()
 
     }
@@ -121,16 +125,17 @@ export const Attachments = ({ task }) => {
 
                                 <span onClick={() => onRemoveAttachment(attachment.id)}>Delete</span>
                                 <span> - </span>
-                                <span onClick={() => onEditTitle(attachment.id)}>Edit</span>
+                                <span onClick={() => toggleEdit()}>Edit</span>
                             </div>
                             {/* <button className="  btn-danger">Delete</button>
                             <button onClick={() => onEditTitle(attachment.id)} className="btn-blue">Edit</button> */}
 
                         </div>
+                            <TitleEdit cb={toggleEdit} onEditTitle={onEditTitle} id={attachment.id} isShown={isEdit} handleChange={handleChange} />
                     </div>
                 })}
 
-                <button onClick={() => toggleAdd()} className="btn-light" >Add an attachment</button>
+                <button onClick={() => toggleEdit()} className="btn-light" >Add an attachment</button>
                 {/* {isAdd && <div className="attachment-form-container">
                     <form className="link-form" onSubmit={onSaveAttachment} >
                         <label htmlFor="link">Add a link</label>
@@ -152,11 +157,11 @@ export const Attachments = ({ task }) => {
 }
 
 
-function TitleEdit({ isShown, cb, onEditTitle, handleChange }) {
+function TitleEdit({ isShown, cb, onEditTitle, handleChange, id }) {
     const [isTyping, setIsTyping] = useState(false)
     const pos = {
-        left: '750px',
-        top: '535px'
+        left: '433px',
+        top: '285px'
     }
 
     const onTyping = ev => {
@@ -165,8 +170,6 @@ function TitleEdit({ isShown, cb, onEditTitle, handleChange }) {
         else if (length > 0) setIsTyping(true)
 
     }
-
-  
 
 
     return (
@@ -181,7 +184,7 @@ function TitleEdit({ isShown, cb, onEditTitle, handleChange }) {
                 </button>
             </header>
             <div className="children-container">
-                <form onSubmit={onEditTitle} className="col" >
+                {/* <form onSubmit={() => onEditTitle(id)} className="col" >
                     <label htmlFor="link">Attach a link</label>
                     <input
                         onChange={handleChange}
@@ -195,7 +198,7 @@ function TitleEdit({ isShown, cb, onEditTitle, handleChange }) {
 
                     />
                     <input className={`btn${isTyping ? '-btn' : '-light'}`} type="submit" value="Update" />
-                </form>
+                </form> */}
             </div>
         </div>
     )
