@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-
+import {ReactComponent as Clock} from '../assets/icon/dates-icon.svg'
 import {
     loadBoards,
     removeBoard,
@@ -37,6 +37,9 @@ class _HomePage extends React.Component {
 
         return (
             <section className="home-page">
+                <span className="test">
+                    <Clock/>
+                </span>
                 <h1>Our most popular templates</h1>
                 <section className="previews-container">
                     {(!boards && !boards.length) && <div>Loading...</div>}

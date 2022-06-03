@@ -78,7 +78,7 @@ export const TaskDetails = (props) => {
         desc.style.height = desc.scrollHeight + "px"
 
     }
-
+   
 
     const handleFormChange = ev => {
         const { name, value } = ev.target
@@ -88,6 +88,10 @@ export const TaskDetails = (props) => {
 
     const goBack = () => {
         this.props.history.push(`/board/${boardId}`)
+    }
+
+    const onToggleAttach = () => {
+        setIsAttachOpen(prevAttachOpen => prevAttachOpen = !isAttachOpen)
     }
 
     if (!task) return <><TrellisSpinner isLarge={true} /></>
@@ -195,7 +199,7 @@ export const TaskDetails = (props) => {
                             <div onClick={() => setIsLabelOpen(true)} className="sidebar-btn">
                                 Labels
                             </div>
-                            <div onClick={() => setIsAttachOpen(prevAttachOpen => prevAttachOpen = !isAttachOpen)} className="sidebar-btn">
+                            <div onClick={() => onToggleAttach() } className="sidebar-btn">
                                 Attachments
                             </div>
                             <div className="sidebar-btn">

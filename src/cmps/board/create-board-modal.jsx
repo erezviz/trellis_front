@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
 import { useHistory } from 'react-router-dom'
+import { utilService } from "../../services/util.service"
 import { addBoard } from "../../store/board.action"
 export const CreateBoardModal = ({ isShown }) => {
     const dispatch = useDispatch()
@@ -10,7 +11,7 @@ export const CreateBoardModal = ({ isShown }) => {
         title: '',
         createdBy: '',
         style: {},
-        groups: [{ title: '' }]
+        groups: [{id: utilService.makeId(), title: '' }]
 
     })
     const onHandleChange = ev => {
