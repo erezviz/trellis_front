@@ -15,7 +15,7 @@ import { queryTask, updateTask } from '../../store/board.action';
 import { TrellisSpinner } from '../util-cmps/trellis-spinner';
 import { Attachments } from './attachments';
 import { TaskDate } from './task-dates';
-import { PopOver } from '../dynamic-cmps/pop-over';
+// import { PopOver } from '../dynamic-cmps/pop-over';
 import { CreateAttachment } from './attachments/create-attachment';
 
 
@@ -208,9 +208,9 @@ export const TaskDetails = (props) => {
                     </section>
                 </div>
             </div>
-            <PopOver isShown={isAttachOpen} title={'Attach from...'} cb={setIsAttachOpen(false)} >
+            {/* <PopOver isShown={isAttachOpen} title={'Attach from...'} cb={setIsAttachOpen(false)} >
                 <CreateAttachment task={task}/>
-            </PopOver>
+            </PopOver> */}
             {(currBoard.labels && isLabelOpen) && <Labels onToggleLabels={setIsLabelOpen} task={task} labels={currBoard.labels} />}
             {isDatesOpen && <TaskDate onToggleDates={setIsDatesOpen} task={task} />}
             {isMembersOpen && <TaskMembers onToggleMembers={setIsMembersOpen} task={task} members={currBoard.members} />}
