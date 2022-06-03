@@ -30,3 +30,33 @@
     }
 
 }
+@media screen and (max-width: 490px) {
+.hero-container{
+        position: relative;
+        top: 3rem;
+        display: flex;
+        flex-direction: column;
+        .hero-p {
+            margin-top: 130px;
+        }
+    }
+}
+@media screen and (max-height: 960px) {
+    .home-page .board-list-container{
+        bottom: 0
+    }
+    
+    .hero .hero-img {
+    position: relative;
+    height: 100%;
+    top: 5rem;
+}
+
+}
+@media screen and (max-height: 716px) {
+    .hero {
+        position: relative;
+        top: 5rem;
+    }
+
+}
