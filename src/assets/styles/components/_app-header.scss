@@ -1,17 +1,14 @@
 .Hero {
     background-color: white !important;
     height: 3.9rem !important;
-
     .user-link .signup {
         background-color: $clr1;
     }
-
     .logo-container {
         img {
             height: 25px !important;
             width: 25px !important;
         }
-
         h3 {
             font-size: 2rem !important;
             // position: relative;
@@ -21,67 +18,82 @@
 }
 
 .homeBgc {
-    background-color: $clr1  !important;
+    background-color: $clr1 !important;
 }
 
 .homeTxtClr {
-    color: $clr2  !important
+    color: $clr2 !important
 }
 
 .logoHero {
-    color: $clr2  !important
+    color: $clr2 !important
 }
-.user-modal{
+
+.user-modal {
     background: #fff;
     border-radius: 3px;
     padding: 10px;
     box-shadow: 0 8px 16px -4px #091e4240, 0 0 0 1px #091e4214;
-    width: 280px;
+    width: 304px;
     position: absolute;
     right: 1px;
     top: 45px;
     font-size: 9px;
     color: #5e6c84;
-    
     header {
-        border-bottom: 1px solid #091e4221;
+        border-bottom: 1px solid rgba(9, 30, 66, 0.1294117647);
         box-sizing: border-box;
-        // color: #5e6c84;
-        display: block;
-        line-height: 40px;
-        // margin: 0 12px;
+        color: #5e6c84;
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
         overflow: hidden;
-        padding: 0 32px;
-        position: relative;
-        text-overflow: ellipsis;
+        padding: 0 0 4px;
         white-space: nowrap;
         z-index: 1;
         text-align: center;
+        >h2 {
+            margin: 0 0px 2px 18px;
+            font-weight: 400;
+            padding: 0px 0;
+            flex: 1;
+            font-size: 14px;
+        }
         .close-user {
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 12px;
-            height: 12px;
+            border: none;
+            background-color: transparent;
+            color: #6b778c;
+            &:hover {
+                cursor: pointer;
+            }
+            span svg {
+                width: 10px;
+            }
         }
     }
-    .user-profile{
+    .user-profile {
+        width: 100%;
         display: flex;
-        margin-block: 5px;
-        border-bottom: 1px solid #e2dbdbb5;
-        padding: 10px;
-        .account-img{
-            cursor:context-menu;
-        }
-        h2{
-            align-self: center;
-        }
+        gap: 8px;
+        margin-block: 3px;
+        border-bottom: 1px solid rgba(226, 219, 219, 0.7098039216);
+        padding: 10px 3px 0px 2px;
     }
-    .logout{
+    .account-img {
+        cursor: context-menu;
+    }
+    h2 {
+        margin: 0;
+        font-weight: 400;
+        text-transform: capitalize;
+        flex: 1;
+    }
+    .logout {
         cursor: pointer;
         padding: 8px 15px 0;
     }
 }
+
 .app-header {
     height: 45px;
     z-index: 30;
@@ -95,52 +107,42 @@
     justify-content: space-between;
     align-items: center;
     transition: box-shadow, .25s;
-
     .header-link {
         margin: 0;
         color: $clr2;
     }
-
     .Hero {
         background-color: transparent;
     }
-
     .user-link {
         cursor: pointer;
         -webkit-box-align: stretch;
         align-items: stretch;
         display: flex;
         margin-left: auto;
-
         span {
             color: $clr2;
             font-weight: 500;
         }
-
         .login {
             color: darken($color: $clr2, $amount: 45%);
             padding: 1rem 1.7rem;
         }
-
         .signup {
             padding: 1rem 2rem;
             transition: background-color, 0.15s;
         }
-
         .signup:hover {
             background-color: darken($color: $clr1, $amount: 8%)
         }
     }
-
     .logo-container {
         align-items: center;
         display: flex;
         margin-inline-start: 5px;
-
         &:hover {
             cursor: pointer;
         }
-
         h3 {
             line-height: normal;
             font-family: Secular, sans-serif;
@@ -151,7 +153,6 @@
             position: relative;
             top: 1.8px;
         }
-
         img {
             height: 21px;
             margin: 0 10px;
@@ -160,21 +161,17 @@
             top: 1.8px;
         }
     }
-
     .user-img {
         height: 40px;
         width: 40px;
         border-radius: 50%;
-        margin-inline-end: 15px;
-
+        // margin-inline-end: 15px;
         img {
             border-radius: 50%;
         }
         cursor: pointer;
     }
-  
-    }
-
+}
 
 .Hero:hover {
     box-shadow: 0 0.2px 5px 0px rgb(99, 93, 93);

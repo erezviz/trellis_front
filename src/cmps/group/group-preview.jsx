@@ -6,6 +6,7 @@ import { TaskList } from "../task/task-list"
 import { GroupFooter } from "./group-footer"
 import { onUpdateGroup } from "../../store/board.action"
 
+import {ReactComponent as ThreeDots} from '../../assets/icon/three-dot-menu.svg'
 
 export const GroupPreview = ({ group, boardId, onToggleDetails,setIsLabelOpen, isLabelOpen, onDeleteGroup }) => {
     const dispatch = useDispatch()
@@ -32,7 +33,11 @@ export const GroupPreview = ({ group, boardId, onToggleDetails,setIsLabelOpen, i
                     <div className="header-container">
                         <GroupHeader key={group.id} onChangeName={onChangeName} 
                         title={group.title} />
-                        <button onClick={() => onDeleteGroup(group.id)}>X</button>
+                        <button onClick={() => onDeleteGroup(group.id)}>
+                            <span>
+                                <ThreeDots style={{width: '15px'}}/>
+                            </span>
+                        </button>
                     </div>
                     <div className="task-list-container">
                         <TaskList isLabelOpen={isLabelOpen} idx={groupIdx}

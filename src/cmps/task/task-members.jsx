@@ -4,6 +4,7 @@ import { updateTask } from '../../store/board.action';
 import pen from '../../assets/icon/pen.svg'
 import { utilService } from '../../services/util.service'
 
+import {ReactComponent as Close} from '../../assets/icon/close.svg'
 
 export const TaskMembers = (props) => {
     let { params: { boardId, groupId } } = useRouteMatch();
@@ -29,7 +30,11 @@ export const TaskMembers = (props) => {
         <section className="task-members">
             <header>
                 <h2>Members</h2>
-                <button className="close-btn close-members" onClick={() => props.onToggleMembers(false)}></button>
+                <button className="close-members" onClick={() => props.onToggleMembers(false)}>
+                    <span>
+                        <Close/>
+                    </span>
+                </button>
             </header>
             <section className="main-members">
                 <span>Members</span>

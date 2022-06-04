@@ -114,6 +114,22 @@
             font-size: 20px;
             border-style: none;
         }
+        .add-task {
+            display: flex;
+            align-items: center;
+            gap: 1px;
+            .plus-task {
+                width: 16px;
+                height: 21px;
+                &-title {
+                    font-size: 14px;
+                    margin-left: 2px;
+                }
+            }
+            .plus-task svg {
+                width: 16px;
+            }
+        }
     }
     .group-footer:hover {
         background-color: darken($color: $clr2, $amount: 10%);

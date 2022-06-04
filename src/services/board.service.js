@@ -5,8 +5,8 @@ import { httpService } from './http.service.js'
 // import { getActionRemoveBoard, getActionAddBoard, getActionUpdateBoard } from '../store/board.actions.js'
 
 const STORAGE_KEY = 'board'
-// const boardChannel = new BroadcastChannel('boardChannel')
-// const listeners = []
+    // const boardChannel = new BroadcastChannel('boardChannel')
+    // const listeners = []
 
 export const boardService = {
     query,
@@ -57,7 +57,7 @@ async function save(board) {
     } else {
         board.labels = _getBoardLabels()
         savedBoard = await httpService.post('board', board)
-       
+
     }
 
     return savedBoard
@@ -170,7 +170,7 @@ async function updateTask(boardId, groupId, taskToSave) {
             return group
         })
 
-        const updatedBoard = { ...board, groups: updatedGroups }
+        const updatedBoard = {...board, groups: updatedGroups }
 
         save(updatedBoard)
         return updatedBoard
@@ -233,35 +233,35 @@ function getAttachmentTitle(urlStr) {
 
 function _getBoardLabels() {
     return [{
-        id: "l101",
-        title: "Done",
-        color: "#519839"
-    },
-    {
-        id: "l102",
-        title: "Progress",
-        color: "#f2d600"
-    },
-    {
-        id: "l103",
-        title: "Open",
-        color: " #eb5a46"
-    },
-    {
-        id: "l104",
-        title: "Urgent",
-        color: "#ff9f1a"
-    },
-    {
-        id: "l105",
-        title: "Irrelevant",
-        color: "#055a8c"
-    },
-    {
-        id: "l106",
-        title: "Assigned",
-        color: "#c377e0"
-    }
+            id: "l101",
+            title: "Done",
+            color: "#61bd4f"
+        },
+        {
+            id: "l102",
+            title: "Progress",
+            color: "#f2d600"
+        },
+        {
+            id: "l104",
+            title: "Urgent",
+            color: "#ff9f1a"
+        },
+        {
+            id: "l103",
+            title: "Open",
+            color: " #eb5a46"
+        },
+        {
+            id: "l106",
+            title: "Assigned",
+            color: "#c377e0"
+        },
+        {
+            id: "l105",
+            title: "Irrelevant",
+            color: "#0079bf"
+        }
     ]
 }
 

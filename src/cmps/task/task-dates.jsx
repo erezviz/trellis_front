@@ -1,11 +1,12 @@
 import { DatePicker, TimePicker } from '@material-ui/pickers'
-
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useRouteMatch } from 'react-router-dom';
+
 import { utilService } from '../../services/util.service';
 import { updateTask } from '../../store/board.action'
 
+import { ReactComponent as Close} from '../../assets/icon/close.svg'
 
 export const TaskDate = (props) => {
     let { params: { boardId, groupId } } = useRouteMatch()
@@ -33,8 +34,12 @@ export const TaskDate = (props) => {
     return (
         <section className="task-dates">
             <header>
-                <h2 className="heder-title">Dates</h2>
-                <button className="close-btn close-labels" onClick={() => props.onToggleDates(false)}></button>
+                <h2 className="header-title">Dates</h2>
+                <button onClick={() => props.onToggleDates(false)}>
+                    <span>
+                        <Close/>
+                    </span>
+                </button>
             </header>
             <section className="main-dates">
                 <div className="date-board">

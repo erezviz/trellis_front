@@ -4,6 +4,7 @@ import { boardService } from "../../services/board.service"
 import { useDispatch, useSelector } from "react-redux"
 import { updateGroupTask } from "../../store/board.action"
 
+import { ReactComponent as Plus} from '../../assets/icon/plus-icon.svg'
 
 export const GroupFooter = (props) => {
     const dispatch = useDispatch()
@@ -45,8 +46,10 @@ export const GroupFooter = (props) => {
     return (
         <section className="group-footer">
             {isShown && <div onClick={onToggle} className="add-task">
-                <span className="plus-task">+</span>
-                <span>Add a card</span>
+                <span className="plus-task">
+                    <Plus/>
+                </span>
+                <span className="plus-task-title">Add a card</span>
             </div>}
             {!isShown && <form onSubmit={(ev) => onSaveTask(ev)}>
                 <TextField onBlur={(ev) => onSaveTask(ev)} name="title" id="outlined-basic" onChange={onHandleChange} 
