@@ -142,7 +142,7 @@ export const TaskDetails = (props) => {
                                 });
                             })}
                             <div className="add-member">
-                                <span>
+                                <span onClick={() => setIsMembersOpen(!isMembersOpen)} >
                                     <Plus />
                                 </span>
                             </div>
@@ -162,7 +162,7 @@ export const TaskDetails = (props) => {
                                     }
                                 });
                             })}
-                            <span>
+                            <span onClick={() => setIsLabelOpen(true)}>
                                 <Plus />
                             </span>
                         </div>
