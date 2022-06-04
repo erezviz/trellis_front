@@ -1,6 +1,6 @@
 import { TextField } from "@mui/material"
 import React, { useState } from "react"
-import { boardService } from "../../services/board.service"
+import { ReactComponent as Close } from '../../assets/icon/close.svg'
 import { useDispatch, useSelector } from "react-redux"
 import { updateGroupTask } from "../../store/board.action"
 
@@ -55,7 +55,7 @@ export const GroupFooter = (props) => {
                 <TextField name="title" id="outlined-basic" onChange={onHandleChange} 
                     size="small" placeholder="Enter a title for this card..." variant="outlined" />
                     <div className="flex">
-                <button className='btn-save'>Add card</button> <button className="btn-exit" onClick={onToggle}>X</button>
+                <button className='btn-save'>Add card</button> <span className="btn-exit" onClick={onToggle}><Close/></span>
 
                     </div>
             </form>}

@@ -16,24 +16,15 @@ export const GroupHeader = (props) => {
     const handleFormChange = ev => {
         const { value, name } = ev.target
         setHeader(value)
-        props.onChangeTitle(value)
+        props.onChangeName(value)
     }
 
 
     return (
-        <div onClick={() => setIsEdit(isEdit = !isEdit)} className="details-header group-title flex">
-                    <form onBlur={(ev)=>{props.onSave(ev)}} onSubmit={(ev)=>{props.onSave(ev)}}>
-                        <input style={isEdit ? { titleStyle } : {}} value={header} onChange={(ev)=>handleFormChange(ev)} className="details-title group-title" name="checklist"  />
-                        {/* {isEdit && <button>Save</button>} */}
+        <div onClick={() => setIsEdit(isEdit = !isEdit)} className="group-title flex">
+                    <form>
+                        <input style={isEdit ? { titleStyle } : {}} value={header} onChange={(ev)=>handleFormChange(ev)} className="group-title" name="checklist"  />
                     </form>
                 </div>
     )
-
-    // return(
-    //     <section className="group-header">
-    //         {/* {!props.isFocus && <h3>{props.title}</h3>} */}
-    //         {/* {props.isFocus && <input type='text' value='Hello'/>} */}
-    //         <h3 onClick={() => props.onChangeName()}>{props.title}</h3>
-    //     </section>
-    // )
 }

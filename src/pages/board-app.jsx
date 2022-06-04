@@ -156,7 +156,7 @@ class _BoardApp extends React.Component {
         return (
             <section style={background} className={`board-app ${status}`}>
                 <div className="board-name flex">
-                    <BoardHeader />
+                    <BoardHeader updateWholeBoard={this.props.updateWholeBoard} />
                     {isSideBarOpen && <button className="show-menu-btn" onClick={this.onToggleStatus}>Hide Menu</button>}
                     {!isSideBarOpen && <button className="show-menu-btn" onClick={this.onToggleStatus}>Show Menu</button>}
                 </div>
