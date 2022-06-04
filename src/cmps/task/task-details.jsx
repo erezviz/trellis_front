@@ -2,9 +2,14 @@ import * as React from 'react';
 import { useState, useEffect } from 'react'
 import { useRouteMatch } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux'
+
 import { boardService } from '../../services/board.service';
 import { ReactComponent as Close } from '../../assets/icon/close.svg'
+import { ReactComponent as LabelsIcon } from '../../assets/icon/labels-icon.svg'
 import { ReactComponent as TitleIcon } from '../../assets/icon/task-title-icon.svg'
+import { ReactComponent as DatesIcon } from '../../assets/icon/dates-icon.svg'
+
+import { ReactComponent as DescIcon } from '../../assets/icon/description-icon.svg'
 import { ReactComponent as Plus } from '../../assets/icon/plus-icon.svg'
 import member from '../../assets/icon/member.svg'
 
@@ -19,11 +24,11 @@ import { TaskDate } from './task-dates';
 // import { PopOver } from '../dynamic-cmps/pop-over';
 import { CreateAttachment } from './attachments/create-attachment';
 
-
 export const TaskDetails = (props) => {
 
     const { currBoard } = useSelector((storeState) => storeState.boardModule)
     const dispatch = useDispatch()
+    let { params: { boardId, groupId, taskId } } = useRouteMatch();
 
     const [task, setTask] = useState(null)
     const [isDesc, setIsDesc] = useState(false)
@@ -33,9 +38,6 @@ export const TaskDetails = (props) => {
     const [isMembersOpen, setIsMembersOpen] = useState(false)
     let [isDatesOpen, setIsDatesOpen] = useState(false)
 
-
-    // let { boardId, groupId, taskId } = useParams()
-    let { params: { boardId, groupId, taskId } } = useRouteMatch();
     useEffect(() => {
         (async () => {
             const task = boardService.getTask(currBoard, groupId, taskId)
@@ -140,7 +142,7 @@ export const TaskDetails = (props) => {
                                 });
                             })}
                             <div className="add-member">
-                                <span>
+                                <span onClick={() => setIsMembersOpen(!isMembersOpen)} >
                                     <Plus />
                                 </span>
                             </div>
@@ -160,7 +162,7 @@ export const TaskDetails = (props) => {
                                     }
                                 });
                             })}
-                            <span>
+                            <span onClick={() => setIsLabelOpen(true)}>
                                 <Plus />
                             </span>
                         </div>
@@ -209,20 +211,32 @@ export const TaskDetails = (props) => {
                         <div className="main-add-actions">
                             <h6 className="sidebar-add-heading">Add to card</h6>
                             <div className="sidebar-btn flex" onClick={() => setIsMembersOpen(!isMembersOpen)} >
-                                <span className="sidebar-icon-members"></span>
+                                <span className="sidebar-icon members"></span>
                                 <span>Members</span>
                             </div>
-                            <div onClick={() => setIsLabelOpen(true)} className="sidebar-btn">
-                                Labels
+                            <div onClick={() => setIsLabelOpen(true)} className="sidebar-btn flex">
+
+                                <span className="sidebar-icon svg-icon flex ">
+                                    <LabelsIcon />
+                                </span>
+                                <span>Labels</span>
+
                             </div>
-                            <div onClick={() => onToggleAttach()} className="sidebar-btn">
-                                Attachments
+                            <div onClick={() => onToggleAttach()} className="sidebar-btn flex">
+                                <span className="sidebar-icon attachment-icon"></span>
+                                <span>Attachments</span>
                             </div>
-                            <div className="sidebar-btn">
-                                Checklist
+                            <div className="sidebar-btn flex">
+                                <span className="sidebar-icon checklist-icon"></span>
+                                <span>Checklist</span>
                             </div>
-                            <div onClick={() => setIsDatesOpen(true)} className="sidebar-btn">
-                                Dates
+                            <div onClick={() => setIsDatesOpen(true)} className="sidebar-btn flex">
+                                <span className="siderbar-icon dates-icon flex">
+                                    <DatesIcon style={{width: '12px'}} />
+                                    <span>
+                                        Dates
+                                    </span>
+                                </span>
                             </div>
                         </div>
                     </section>
@@ -236,14 +250,3 @@ export const TaskDetails = (props) => {
         </section>
     )
 }
-
-
-
-
-
-
-
-
-
-
-
