@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useRouteMatch } from 'react-router-dom';
 import { updateTask } from '../../store/board.action';
 import pen from '../../assets/icon/pen.svg'
-
+import {ReactComponent as Close} from '../../assets/icon/close.svg'
 
 
 export const Labels = (props) => {
@@ -31,7 +31,11 @@ export const Labels = (props) => {
         <section className="labels">
             <header>
                 <h2>Labels</h2>
-                <button className="close-btn close-labels" onClick={() => props.onToggleLabels(false)}></button>
+                <button className="close-labels" onClick={() => props.onToggleLabels(false)}>
+                    <span>
+                    <Close style={{width: '10px'}}/>
+                    </span>
+                </button>
             </header>
             <section className="main-labels">
                 <span>Labels</span>

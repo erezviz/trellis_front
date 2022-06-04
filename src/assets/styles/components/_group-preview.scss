@@ -144,6 +144,22 @@
             display: flex;
             flex-direction: column;
         }
+        .add-task {
+            display: flex;
+            align-items: center;
+            gap: 1px;
+            .plus-task {
+                width: 16px;
+                height: 21px;
+                &-title {
+                    font-size: 14px;
+                    margin-left: 2px;
+                }
+            }
+            .plus-task svg {
+                width: 16px;
+            }
+        }
     }
     input#outlined-basic {
         width: 250px;

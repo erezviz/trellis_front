@@ -4,7 +4,7 @@ import { withRouter } from "react-router-dom";
 import { NavLink, Link } from "react-router-dom"
 import member from '../assets/icon/member.svg'
 import { onLogout } from "../store/user.actions";
-
+import { ReactComponent as Close} from '../assets/icon/close.svg'
 
 const _AppHeader = (props) => {
     const { user } = useSelector((state) => state.userModule)
@@ -79,7 +79,11 @@ const _AppHeader = (props) => {
             {toggleAccount && <div className="user-modal">
                 <header>
                     <h2>Account</h2>
-                    <button className="close-btn close-user" onClick={() => onToggleAccount(false)}></button>
+                    <button className="close-user" onClick={() => onToggleAccount(false)}>
+                        <span>
+                            <Close/>
+                        </span>
+                    </button>
                 </header>
                 <div className="user-profile">
                     <div className="user-img">

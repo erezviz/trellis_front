@@ -3,8 +3,9 @@ import { useState, useEffect } from 'react'
 import { useRouteMatch } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux'
 import { boardService } from '../../services/board.service';
-
+import { ReactComponent as Close } from '../../assets/icon/close.svg'
 import { ReactComponent as TitleIcon } from '../../assets/icon/task-title-icon.svg'
+import { ReactComponent as Plus } from '../../assets/icon/plus-icon.svg'
 import member from '../../assets/icon/member.svg'
 
 import { TaskMembers } from './task-members';
@@ -78,7 +79,7 @@ export const TaskDetails = (props) => {
         desc.style.height = desc.scrollHeight + "px"
 
     }
-   
+
 
     const handleFormChange = ev => {
         const { name, value } = ev.target
@@ -101,13 +102,24 @@ export const TaskDetails = (props) => {
                 <button onClick={(ev) => {
                     // return goBack()
                     return props.onCloseDetails()
-                }} className="close-details-btn">X</button>
+                }} className="close-details-btn">
+                    <span>
+                        <Close style={{ width: '14px' }} />
+                    </span>
+                </button>
                 <div onClick={() => setIsEdit(isEdit = !isEdit)} className="details-header flex">
                     <span className="task-title-icon">
                         <TitleIcon />
                     </span>
                     <form onSubmit={(ev) => onSave(ev)} >
-                        <input onBlur={(ev) => onSave(ev)} style={isEdit ? { titleStyle } : {}} value={task.title} onChange={handleFormChange} className="details-title" name="title" />
+                        <input
+                            onBlur={(ev) => onSave(ev)}
+                            style={isEdit ? { titleStyle } : {}}
+                            value={task.title}
+                            onChange={handleFormChange}
+                            className="details-title"
+                            name="title"
+                        />
                     </form>
                     {/* <div contentEditable="true" className="details-title">
                     This is the Title
@@ -128,7 +140,9 @@ export const TaskDetails = (props) => {
                                 });
                             })}
                             <div className="add-member">
-                                <span>+</span>
+                                <span>
+                                    <Plus />
+                                </span>
                             </div>
 
                         </div>
@@ -146,7 +160,9 @@ export const TaskDetails = (props) => {
                                     }
                                 });
                             })}
-                            <span>+</span>
+                            <span>
+                                <Plus />
+                            </span>
                         </div>
                     </section>}
                     {task.dueDate && <section className="show-date">
@@ -199,7 +215,7 @@ export const TaskDetails = (props) => {
                             <div onClick={() => setIsLabelOpen(true)} className="sidebar-btn">
                                 Labels
                             </div>
-                            <div onClick={() => onToggleAttach() } className="sidebar-btn">
+                            <div onClick={() => onToggleAttach()} className="sidebar-btn">
                                 Attachments
                             </div>
                             <div className="sidebar-btn">
@@ -212,8 +228,8 @@ export const TaskDetails = (props) => {
                     </section>
                 </div>
             </div>
-                <CreateAttachment cb={onToggleAttach} isShown={isAttachOpen} task={task}/>
-            
+            <CreateAttachment cb={onToggleAttach} isShown={isAttachOpen} task={task} />
+
             {(currBoard.labels && isLabelOpen) && <Labels onToggleLabels={setIsLabelOpen} task={task} labels={currBoard.labels} />}
             {isDatesOpen && <TaskDate onToggleDates={setIsDatesOpen} task={task} />}
             {isMembersOpen && <TaskMembers onToggleMembers={setIsMembersOpen} task={task} members={currBoard.members} />}

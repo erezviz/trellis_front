@@ -1,4 +1,4 @@
-.task-dates{
+.task-dates {
     background: #fff;
     border-radius: 3px;
     padding: 10px;
@@ -6,58 +6,61 @@
     position: absolute;
     right: 4%;
     top: 25%;
-    width: 292px;
+    width: 302px;
     z-index: 70;
-    header{
-        border-bottom: 1px solid #091e4221;
+    header {
+        border-bottom: 1px solid rgba(9, 30, 66, 0.1294117647);
         box-sizing: border-box;
         color: #5e6c84;
-        display: block;
+        display: flex;
+        justify-content: space-between;
         line-height: 40px;
-        // margin: 0 12px;
+        width: 100%;
         overflow: hidden;
-        padding: 0 32px;
-        position: relative;
-        text-overflow: ellipsis;
+        padding: 0 0 4px;
         white-space: nowrap;
         z-index: 1;
         text-align: center;
-        button{
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 12px;
-            height: 12px;
+        button {
+            border: none;
+            background-color: transparent;
+            color: #6b778c;
+            padding: 0;
+            &:hover {
+                cursor: pointer;
+            }
+            span svg {
+                width: 10px;
+            }
         }
-        h2{
+        .header-title {
+            flex: 1;
+            font-weight: 400;
             font-size: 15px;
+            margin: 2px 0px 0px 11px;
         }
     }
-    .main-dates{
-        
-        .btns{
+    .main-dates {
+        .btns {
             display: flex;
             flex-direction: column;
             gap: 5px;
-            button{
+            button {
                 height: 30px;
                 border: none;
             }
-            .save-date{
+            .save-date {
                 background-color: #0079bf;
                 padding: 0.25rem 0.5rem;
                 border-radius: 0.2rem;
                 transition: background-color, 0.15s;
                 color: white;
                 &:hover {
-                    background-color: darken($color:#0079bf, $amount: 8%)
+                    background-color: darken($color: #0079bf, $amount: 8%)
                 }
             }
-
         }
     }
-
-    
     .MuiPickersStaticWrapper-staticWrapperRoot {
         min-width: 270px;
         width: 270px;
@@ -66,5 +69,20 @@
             width: 270px;
         }
     }
+}
 
+.MuiTypography-body1 {
+    font-size: 15px;
+    margin-top: 7px;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-weight: 900;
+    line-height: 1.5;
+    letter-spacing: 0.00938em;
+    margin-left: 12px;
+}
+
+.MuiPickersCalendar-transitionContainer {
+    margin-top: 12px;
+    min-height: 216px;
+    max-width: 250px;
 }
