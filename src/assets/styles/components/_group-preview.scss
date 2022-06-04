@@ -1,11 +1,4 @@
 .group-preview {
-    // width: 272px;
-    // background-color: darken($color: $clr2, $amount: 3%);
-    // padding: 5px 8px;
-    // margin-block-start: 15px;
-    // border-radius: 5px;
-    // height: 100%;
-    // padding-block-end: 10px;
     margin-block-start: 15px;
     display: flex;
     flex-direction: column;
@@ -25,17 +18,37 @@
         cursor: pointer;
         display: flex;
         justify-content: space-between;
-        margin-bottom: 5px;
         h3 {
             width: 217px;
             height: 15px;
-            margin-inline-start: 7px;
+            font-size: 15px;
+            margin-bottom: 0px;
+            // margin-inline-start: 7px;
             font-weight: 500;
+            position: relative;
+            bottom: 0.5rem;
         }
         .group-header {
             color: darken($color: $clr2, $amount: 60%);
             font-size: 14px;
-            padding-top: 7px;
+            padding: 12px 5px 4px 6px;
+            .group-title{
+                color: #42526e;
+                background: rgba(0, 0, 0, 0);
+                border-style: none;
+                box-shadow: none;
+                /* font-size: 20px; */
+                font-weight: 500;
+                height: 32px;
+                line-height: 24px;
+                margin: 0px -8px;
+                min-height: 24px;
+                padding: 4px 8px;
+                width: 100%;
+                position: relative;
+                padding-inline-start: 1rem;
+                right: 15px;
+            }
         }
         button {
             border-radius: 2px;
@@ -43,6 +56,7 @@
             border-style: none;
             background-color: darken($color: $clr2, $amount: 3%);
             transition: background-color, .25s;
+            padding-bottom: 7px;
         }
         button:hover {
             background-color: darken($color: $clr2, $amount: 10%);
@@ -50,8 +64,9 @@
     }
     .task-preview {
         cursor: pointer;
+        width: 256px;
         background-color: #fff;
-        margin: 0 4px 8px 8px;
+        margin: 2px 4px 8px 0px;
         border-radius: 3px;
         box-shadow: 0 1px #091e4240;
         line-height: 20px;
@@ -85,13 +100,16 @@
                 height: 20px;
                 width: 20px;
                 border-radius: 50%;
-                margin-block-start: 6px;
+                position: relative;
+                bottom: 10px;
+                right: 10px;
+                margin-right: 4px;
             }
         }
         h5 {
             color: darken($color: $clr2, $amount: 55%);
             font-weight: 400;
-            padding: 5px 2px;
+            padding: 6px 0px 2px 5px;
         }
     }
     .task-preview:hover {
@@ -99,23 +117,43 @@
     }
     .group-footer {
         cursor: pointer;
-        margin-left: 8px;
-        margin-right: 8px;
         padding: 4px 3px 2px;
         display: flex;
         color: #5e6c84;
         font-size: 15px;
-        // margin-inline: 5px;
-        // transition: background-color, 0.25s;
-        // border-radius: 3px;
-        // display: flex;
-        // color: #5e6c84;
         .btn-save {
-            font-size: 20px;
+            cursor: pointer;
+            font-size: 15px;
             border-style: none;
+            background-color: $clr1;
+            text-align: inherit;
+            width: 80px;
+            border-radius: 3px;
+            color: white;
+            padding: 7px 4px;
+            margin: 8px 1px;
+            text-align: center;
+        }
+        .btn-exit{
+            border-style: none;
+            font-size: 20px;
+            margin-left: 5px;
+            background-color: transparent;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
         }
     }
-    .group-footer:hover {
-        background-color: darken($color: $clr2, $amount: 10%);
+    input#outlined-basic {
+        width: 250px;
+        padding: 7px 0px 37px 5px;
+        background-color: #fff;
+        box-shadow:0px 1px 0px rgb(9 30 66 / 25%);
+        line-height: 20px;
+        background-size: cover;
+        background-position: 50%;
+        background-repeat: no-repeat;
+        position: relative;
     }
 }

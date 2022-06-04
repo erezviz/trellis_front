@@ -35,7 +35,7 @@ export const GroupFooter = (props) => {
 
 
     const onToggle = () => {
-        setIsShown(false)
+        setIsShown(!isShown)
     }
 
 
@@ -48,10 +48,13 @@ export const GroupFooter = (props) => {
                 <span className="plus-task">+</span>
                 <span>Add a card</span>
             </div>}
-            {!isShown && <form onSubmit={(ev) => onSaveTask(ev)}>
-                <TextField onBlur={(ev) => onSaveTask(ev)} name="title" id="outlined-basic" onChange={onHandleChange} 
+            {!isShown && <form onBlur={onToggle} onSubmit={(ev) => onSaveTask(ev)}>
+                <TextField name="title" id="outlined-basic" onChange={onHandleChange} 
                     size="small" placeholder="Enter a title for this card..." variant="outlined" />
-                <button className='btn-save'>+</button>
+                    <div className="flex">
+                <button className='btn-save'>Add card</button> <button className="btn-exit" onClick={onToggle}>X</button>
+
+                    </div>
             </form>}
 
         </section>
