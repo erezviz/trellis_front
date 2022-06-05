@@ -44,7 +44,7 @@ class _HomePage extends React.Component {
 
     onSendBoard = (boardId) => {
         socketService.emit(SOCKET_EMIT_SET_BOARD, boardId)
-    } 
+    }
 
     render() {
         const { boards } = this.props
@@ -55,24 +55,23 @@ class _HomePage extends React.Component {
             <section className="home-page">
                 <div className="board-list-container">
                     <div className="starred-boards flex">
-                <Star/>
-                <h1>Starred boards</h1>
+                        <Star />
+                        <h1>Starred boards</h1>
                     </div>
                     <section className="previews-container">
-                        {boards && boards.map((board, idx) =>
-                            
-                                {board.starred &&
-                                    <div key={board._id} className="board-preview" style={{ backgroundImage: `url(${board.style.imgUrl})` }}>
-                                        <Link onClick={()=> this.onSendBoard(board._id)} key={board._id + idx} to={`/board/${board._id}`}>
-                                            <BoardPreview board={board} />
+                        {boards && boards.map((board, idx) => {
+                            if (board.starred) {
+                                return <div key={board._id} className="board-preview" style={{ backgroundImage: `url(${board.style.imgUrl})` }}>
+                                    <Link onClick={() => this.onSendBoard(board._id)} key={board._id + idx} to={`/board/${board._id}`}>
+                                        <BoardPreview board={board} />
 
-                                            <span onClick={(ev) => this.onMarkStar(ev, board)} className="starred">
-                                                <Star />
-                                            </span>
-                                        </Link>
-                                    </div>
-                                }
-                            
+                                        <span onClick={(ev) => this.onMarkStar(ev, board)} className="starred">
+                                            <Star />
+                                        </span>
+                                    </Link>
+                                </div>
+                            }
+                        }
                         )}
                     </section>
                     <div className="flex">

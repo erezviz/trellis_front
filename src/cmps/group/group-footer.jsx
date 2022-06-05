@@ -9,12 +9,12 @@ import { ReactComponent as Plus} from '../../assets/icon/plus-icon.svg'
 export const GroupFooter = (props) => {
     const dispatch = useDispatch()
     const [isShown, setIsShown] = useState(true)
-    var task = { title: '' }
+    const [task, setTask]= useState({ title: '' })
     const { currBoard } = useSelector(state => state.boardModule)
 
 
     const onHandleChange = ({ target }) => {
-        task = { title: target.value }
+        setTask({ title: target.value })
     }
     
     const onSaveTask =(ev) => {
@@ -38,12 +38,12 @@ export const GroupFooter = (props) => {
                 </span>
                 <span className="plus-task-title">Add a card</span>
             </div>}
-            {!isShown && <form onBlur={onToggle} onSubmit={(ev) => onSaveTask(ev)}>
-                <TextField name="title" id="outlined-basic" onChange={onHandleChange} 
+            {!isShown && <form onBlur={(ev) => onSaveTask(ev)} onSubmit={(ev) => onSaveTask(ev)}>
+                <TextField required name="title" id="outlined-basic" onChange={onHandleChange} 
                     size="small" placeholder="Enter a title for this card..." variant="outlined" />
                     <div className="flex">
-                <button className='btn-save' >Add card</button> <span className="btn-exit" onClick={onToggle}><Close/></span>
-
+                <button className='btn-save' >Add card</button> 
+                <span className="btn-exit" onClick={onToggle}><Close/></span>
                     </div>
             </form>}
 
