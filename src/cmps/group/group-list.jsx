@@ -12,12 +12,20 @@ export const GroupList = ({ groups, onDeleteGroup, boardId, onToggleDetails }) =
 
     return (
         <section>
-             <Droppable key={currBoard._id} droppableId="group-list" direction="horizontal" type="column">
+            <Droppable key={currBoard._id} droppableId="group-list" direction="horizontal" type="column">
                 {(provided) => {
-                   return <div className="group-list" {...provided.droppableProps} ref={provided.innerRef}>
+                    return <div className="group-list" {...provided.droppableProps} ref={provided.innerRef}>
                         {currBoard.groups.map((group, idx) => {
                             return <div key={group.id} >
-                                <GroupPreview isLabelOpen={isLabelOpen} setIsLabelOpen={setIsLabelOpen} boardId={boardId} onToggleDetails={onToggleDetails} onDeleteGroup={onDeleteGroup} group={group} key={group.id} />
+                                <GroupPreview
+                                    isLabelOpen={isLabelOpen}
+                                    setIsLabelOpen={setIsLabelOpen}
+                                    boardId={boardId}
+                                    onToggleDetails={onToggleDetails}
+                                    onDeleteGroup={onDeleteGroup}
+                                    group={group}
+                                    key={group.id}
+                                />
                             </div>
                         })}
                         {provided.placeholder}

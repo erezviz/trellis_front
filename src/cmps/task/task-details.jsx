@@ -101,19 +101,19 @@ export const TaskDetails = (props) => {
         setIsChecklistOpen(prevChecklistOpen => prevChecklistOpen = val)
     }
 
-    const onToggleCover=()=>{
+    const onToggleCover = () => {
         setCoverModal(!coverModal)
     }
 
     if (!task) return <><TrellisSpinner isLarge={true} /></>
-    return ( <>
+    return (<>
         <section style={modalStyle} className="task-details">
-        {task.cover && <div className='task-cover' style={{backgroundColor:`${task.cover}`}}></div>}
+            {task.cover && <div className='task-cover' style={{ backgroundColor: `${task.cover}` }}></div>}
             <div className="details-container flex">
                 <button onClick={(ev) => {
                     // return goBack()
                     return props.onCloseDetails()
-                }} className={`close-details-btn ${ 'btn-cover'}`}>
+                }} className={`close-details-btn ${'btn-cover'}`}>
                     <span>
                         <Close style={{ width: '14px' }} />
                     </span>
@@ -208,7 +208,7 @@ export const TaskDetails = (props) => {
                                 </div>}
                             </form>
                         </div>
-                        <Attachments  task={task} handleChange={handleFormChange} />
+                        <Attachments task={task} handleChange={handleFormChange} />
                         {(isChecklistOpen || task.checklist) && <div className='checklist'><TaskChecklist checklistName={isChecklistOpen} onSave={onSave} task={task} handleFormChange={handleFormChange} /></div>}
 
                     </section>
@@ -244,7 +244,7 @@ export const TaskDetails = (props) => {
                                     </span>
                                 </span>
                             </div>
-                            <div onClick={()=>onToggleCover()} className="sidebar-btn flex">
+                            <div onClick={() => onToggleCover()} className="sidebar-btn flex">
                                 <span className="sidebar-icon cover-icon"></span>
                                 <span>Cover</span>
                             </div>
@@ -256,13 +256,13 @@ export const TaskDetails = (props) => {
                 <ChecklistModal onClose={onToggleChecklistModal} onOpenChecklist={onOpenChecklist} />
             </PopOver>
             <PopOver cb={onToggleCover} isShown={coverModal} title={'Add cover'}>
-                <CoverModal boardId={boardId} groupId={groupId} task={task}/>
+                <CoverModal boardId={boardId} groupId={groupId} task={task} />
             </PopOver>
             <CreateAttachment cb={onToggleAttach} isShown={isAttachOpen} task={task} />
             {(currBoard.labels && isLabelOpen) && <Labels onToggleLabels={setIsLabelOpen} task={task} labels={currBoard.labels} />}
             {isDatesOpen && <TaskDate onToggleDates={setIsDatesOpen} task={task} />}
             {isMembersOpen && <TaskMembers onToggleMembers={setIsMembersOpen} task={task} members={currBoard.members} />}
         </section>
-        </>
+    </>
     )
 }

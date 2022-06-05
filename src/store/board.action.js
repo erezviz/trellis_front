@@ -148,7 +148,7 @@ export function onDeleteGroup(boardId, groupId) {
         try {
             const updatedBoard = await boardService.deleteGroup(boardId, groupId)
             dispatch(getActionUpdateBoard(updatedBoard))
-            // return updatedBoard
+                // return updatedBoard
         } catch (err) {
             console.log('Cannot save board', err)
             throw err
@@ -172,7 +172,7 @@ export function onUpdateGroup(boardId, groupId, newName) {
         try {
             const updatedBoard = await boardService.updateGroup(boardId, groupId, newName)
             dispatch(getActionUpdateBoard(updatedBoard))
-            // return reducerBoard.board
+                // return reducerBoard.board
         } catch (err) {
             console.log('Cannot save board', err)
             throw err

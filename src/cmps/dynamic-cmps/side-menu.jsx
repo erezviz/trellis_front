@@ -27,13 +27,13 @@ const PhotoComp = ({ photo }) => {
   );
 };
 
-export const SideMenu = ({props}) => {
+export const SideMenu = ({ props }) => {
   const [data, setPhotosResponse] = useState(null);
   const [search, setSearch] = useState('colors')
   const dispatch = useDispatch()
 
   useEffect(() => {
-      if(!search) setSearch('cool')
+    if (!search) setSearch('cool')
     api.search
       .getPhotos({ query: search, orientation: "landscape" })
       .then(result => {
@@ -44,15 +44,15 @@ export const SideMenu = ({props}) => {
       });
   }, [search]);
 
-  const getPhotos=(ev)=>{
-      const {value} = ev.target
-      setSearch(value)
+  const getPhotos = (ev) => {
+    const { value } = ev.target
+    setSearch(value)
   }
 
-  const updateBackground=(url)=>{
-      const board = JSON.parse(JSON.stringify(props))
-      board.style.imgUrl = url
-      dispatch(updateWholeBoard(board))
+  const updateBackground = (url) => {
+    const board = JSON.parse(JSON.stringify(props))
+    board.style.imgUrl = url
+    dispatch(updateWholeBoard(board))
   }
 
   if (data === null) {
@@ -67,18 +67,18 @@ export const SideMenu = ({props}) => {
   } else {
     return (
       <div className="feed">
-          <div className="popover-header">
-              {/* <button>{'<'}</button> */}
-            <span>Cover photos</span>
-              {/* <button>X</button> */}
-          </div>
-          <hr />
-          <input onChange={(ev)=>{getPhotos(ev)}} type="text" placeholder="Search" />
+        <div className="popover-header">
+          {/* <button>{'<'}</button> */}
+          <span>Cover photos</span>
+          {/* <button>X</button> */}
+        </div>
+        <hr />
+        <input onChange={(ev) => { getPhotos(ev) }} type="text" placeholder="Search" />
         <ul className="columnUl">
           {data.response.results.map(photo => (
-            <li key={photo.id} className="li" onClick={()=>updateBackground(photo.urls.full)}>
+            <li key={photo.id} className="li" onClick={() => updateBackground(photo.urls.full)}>
               <PhotoComp photo={photo} />
-              
+
             </li>
           ))}
         </ul>

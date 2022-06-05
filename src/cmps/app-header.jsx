@@ -4,7 +4,7 @@ import { withRouter } from "react-router-dom";
 import { NavLink, Link } from "react-router-dom"
 import member from '../assets/icon/member.svg'
 import { onLogout } from "../store/user.actions";
-import { ReactComponent as Close} from '../assets/icon/close.svg'
+import { ReactComponent as Close } from '../assets/icon/close.svg'
 
 const _AppHeader = (props) => {
     const { user } = useSelector((state) => state.userModule)
@@ -17,10 +17,10 @@ const _AppHeader = (props) => {
     const onGoBack = () => {
         props.history.push('/home')
     }
-    if(!location.includes('board') || !location.includes('home')){
+    if (!location.includes('board') || !location.includes('home')) {
         status = 'Hero'
     }
-    if(location.includes('board') || location.includes('home')){
+    if (location.includes('board') || location.includes('home')) {
         status = ''
         bgc = ''
         logoTxt = 'logoHero'
@@ -81,7 +81,7 @@ const _AppHeader = (props) => {
                     <h2>Account</h2>
                     <button className="close-user" onClick={() => onToggleAccount(false)}>
                         <span>
-                            <Close/>
+                            <Close />
                         </span>
                     </button>
                 </header>

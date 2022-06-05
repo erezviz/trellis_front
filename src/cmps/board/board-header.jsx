@@ -50,11 +50,11 @@ export const BoardHeader = (props) => {
                 <Star onClick={onStar} />
             </div>
             <div className="board-members flex">
-            {currBoard.members && currBoard.members.map(member => {
-                return <div key={member._id} className="board-member">
-                    <img src={require(`../../assets/img/${member.imgUrl}`)} alt="" />
-                </div>
-            })}
+                {currBoard.members && currBoard.members.map(member => {
+                    return <div key={member._id} className="board-member">
+                        <img src={require(`../../assets/img/${member.imgUrl}`)} alt="" />
+                    </div>
+                })}
             </div>
         </section>
     )

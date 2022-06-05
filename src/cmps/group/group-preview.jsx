@@ -6,9 +6,9 @@ import { TaskList } from "../task/task-list"
 import { GroupFooter } from "./group-footer"
 import { onUpdateGroup } from "../../store/board.action"
 
-import {ReactComponent as ThreeDots} from '../../assets/icon/three-dot-menu.svg'
+import { ReactComponent as ThreeDots } from '../../assets/icon/three-dot-menu.svg'
 
-export const GroupPreview = ({ group, boardId, onToggleDetails,setIsLabelOpen, isLabelOpen, onDeleteGroup }) => {
+export const GroupPreview = ({ group, boardId, onToggleDetails, setIsLabelOpen, isLabelOpen, onDeleteGroup }) => {
     const dispatch = useDispatch()
     const { currBoard } = useSelector(state => state.boardModule)
     const groupIdx = currBoard.groups.findIndex(currGroup => currGroup.id === group.id)
@@ -21,7 +21,7 @@ export const GroupPreview = ({ group, boardId, onToggleDetails,setIsLabelOpen, i
         }
     }
 
-    const deleteGroup=(ev)=>{
+    const deleteGroup = (ev) => {
         ev.preventDefault()
         onDeleteGroup(group.id)
     }
@@ -35,11 +35,11 @@ export const GroupPreview = ({ group, boardId, onToggleDetails,setIsLabelOpen, i
                     className="group-preview" key={group.id}>
 
                     <div className="header-container">
-                        <GroupHeader key={group.id} onChangeName={onChangeName} 
-                        title={group.title} />
-                        <button onClick={(ev) => deleteGroup(ev,group.id)}>
+                        <GroupHeader key={group.id} onChangeName={onChangeName}
+                            title={group.title} />
+                        <button onClick={(ev) => deleteGroup(ev, group.id)}>
                             <span>
-                                <ThreeDots style={{width: '15px'}}/>
+                                <ThreeDots style={{ width: '15px' }} />
                             </span>
                         </button>
                     </div>

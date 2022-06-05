@@ -96,10 +96,10 @@ export const Attachments = ({ task }) => {
         const newTitle = attachment.title
         const attachToUpdate = newTask.attachments.find(attachment => attachment.id === attachId)
         attachToUpdate.title = newTitle
-  
+
         if (!attachment.title) return
         const newAttachments = newTask.attachments.map(prevAttachment => {
-        
+
             return (prevAttachment.id === attachToUpdate.id) ? attachToUpdate : prevAttachment
         })
         console.log('newAttachments', newAttachments);
@@ -107,12 +107,12 @@ export const Attachments = ({ task }) => {
         dispatch(updateTask(boardId, groupId, newTask))
         resetAttachment()
         toggleEdit()
-    
+
 
     }
 
     const getId = (id) => {
-        
+
         return id
     }
 
@@ -131,7 +131,7 @@ export const Attachments = ({ task }) => {
                     return <div className="attachment-thumbnail" key={attachment.id}>
 
                         <div className="attachment-img-container">
-                            <img key={attachment.id + 'im'} src={`${attachment.url}`} alt="new attachment"/>
+                            <img key={attachment.id + 'im'} src={`${attachment.url}`} alt="new attachment" />
                         </div>
                         <div className="attachment-thumbnail-details">
 
@@ -185,7 +185,7 @@ function TitleEdit({ isShown, cb, onEditTitle, handleChange, id }) {
         else if (length > 0) setIsTyping(true)
 
     }
-    console.log('this is the id in the title edit',id);
+    console.log('this is the id in the title edit', id);
     if (!id) return <></>
     return (
         <div className={`pop-over ${isShown ? 'shown' : ''} `} style={pos}>

@@ -9,7 +9,7 @@ import { SideMenu } from "../cmps/dynamic-cmps/side-menu";
 import { TaskDetails } from "../cmps/task/task-details";
 import { GroupList } from "../cmps/group/group-list"
 import { utilService } from "../services/util.service";
-import { loadBoard, onDeleteGroup, onAddGroup, updateWholeBoard,updateBoardForSockets } from '../store/board.action'
+import { loadBoard, onDeleteGroup, onAddGroup, updateWholeBoard, updateBoardForSockets } from '../store/board.action'
 import { Screen } from '../cmps/dynamic-cmps/screen'
 import { TrellisSpinner } from "../cmps/util-cmps/trellis-spinner";
 import { socketService, SOCKET_EMIT_SEND_BOARD, SOCKET_EMIT_SET_BOARD, SOCKET_EVENT_ADD_BOARD } from "../services/socket.service";
@@ -31,7 +31,7 @@ class _BoardApp extends React.Component {
     ref = React.createRef();
 
     componentDidMount = () => {
-  
+
         this.loadGroups()
 
         //* This is to remove the last-listener

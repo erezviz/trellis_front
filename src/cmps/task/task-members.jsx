@@ -4,7 +4,7 @@ import { updateTask } from '../../store/board.action';
 import pen from '../../assets/icon/pen.svg'
 import { utilService } from '../../services/util.service'
 
-import {ReactComponent as Close} from '../../assets/icon/close.svg'
+import { ReactComponent as Close } from '../../assets/icon/close.svg'
 
 export const TaskMembers = (props) => {
     let { params: { boardId, groupId } } = useRouteMatch();
@@ -32,7 +32,7 @@ export const TaskMembers = (props) => {
                 <h2>Members</h2>
                 <button className="close-members" onClick={() => props.onToggleMembers(false)}>
                     <span>
-                        <Close/>
+                        <Close />
                     </span>
                 </button>
             </header>
@@ -45,7 +45,7 @@ export const TaskMembers = (props) => {
                                 <div className="member-img">
                                     <img src={require(`../../assets/img/${member.imgUrl}`)} alt="" />
                                 </div>
-                                <p  className="card-member mod-selectable" >{member.fullname}</p>
+                                <p className="card-member mod-selectable" >{member.fullname}</p>
                             </li>
                         )
                     })}

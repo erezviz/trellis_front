@@ -37,19 +37,19 @@ class _LoginSignup extends Component {
     onSubmitLogin = async (ev) => {
         ev.preventDefault()
         const user = await this.props.onLogin(this.state.credentials)
-        if(user)this.onGoBack()
+        if (user) this.onGoBack()
     }
 
     onGoBack = () => {
-         this.props.history.push('/home')
-        }
-    
-    
+        this.props.history.push('/home')
+    }
+
+
     toggleSignup = () => {
         this.setState({ isSignup: !this.state.isSignup })
     }
     render() {
-        const {user} = this.props
+        const { user } = this.props
         const { username, password, fullname } = this.state.credentials;
         const { isSignup } = this.state;
         console.log('user from login', user);
@@ -57,47 +57,8 @@ class _LoginSignup extends Component {
             <div className="login-page">
                 {!user && < section className="login-signup">
                     {!isSignup && <form className="login-form" onSubmit={(event) => { this.onSubmitLogin(event) }}>
-                    <div className='flex-col'>
-                        <label htmlFor="username">Username</label>
-                        <input
-                            type="text"
-                            name="username"
-                            value={username}
-                            placeholder="Username"
-                            onChange={this.handleChange}
-                            required
-                            autoFocus
-                            />
-                           </div> 
-                            <div className='flex-col'>
-                        <label htmlFor="password">Password</label>
-                        <input
-                            type="password"
-                            name="password"
-                            value={password}
-                            placeholder="Password"
-                            onChange={this.handleChange}
-                            required
-                        />
-                        </div>
-                        <button >Login!</button>
-                    </form>}
-
-                    <div className="signup-section">
-                        {isSignup && <form className="signup-form" onSubmit={this.onSignup}>
-                            <div className='flex-col'>
-                        <label htmlFor="fullname">Full name</label>
-                            <input
-                                type="text"
-                                name="fullname"
-                                value={fullname}
-                                placeholder="Fullname"
-                                onChange={this.handleChange}
-                                required
-                                />
-                                </div>
-                                <div className='flex-col'>
-                             <label htmlFor="username">Username</label>
+                        <div className='flex-col'>
+                            <label htmlFor="username">Username</label>
                             <input
                                 type="text"
                                 name="username"
@@ -105,9 +66,10 @@ class _LoginSignup extends Component {
                                 placeholder="Username"
                                 onChange={this.handleChange}
                                 required
-                                />
-                                </div>
-                                <div className='flex-col'>
+                                autoFocus
+                            />
+                        </div>
+                        <div className='flex-col'>
                             <label htmlFor="password">Password</label>
                             <input
                                 type="password"
@@ -117,6 +79,44 @@ class _LoginSignup extends Component {
                                 onChange={this.handleChange}
                                 required
                             />
+                        </div>
+                        <button >Login!</button>
+                    </form>}
+
+                    <div className="signup-section">
+                        {isSignup && <form className="signup-form" onSubmit={this.onSignup}>
+                            <div className='flex-col'>
+                                <label htmlFor="fullname">Full name</label>
+                                <input
+                                    type="text"
+                                    name="fullname"
+                                    value={fullname}
+                                    placeholder="Fullname"
+                                    onChange={this.handleChange}
+                                    required
+                                />
+                            </div>
+                            <div className='flex-col'>
+                                <label htmlFor="username">Username</label>
+                                <input
+                                    type="text"
+                                    name="username"
+                                    value={username}
+                                    placeholder="Username"
+                                    onChange={this.handleChange}
+                                    required
+                                />
+                            </div>
+                            <div className='flex-col'>
+                                <label htmlFor="password">Password</label>
+                                <input
+                                    type="password"
+                                    name="password"
+                                    value={password}
+                                    placeholder="Password"
+                                    onChange={this.handleChange}
+                                    required
+                                />
                             </div>
                             <button onClick={() => { this.props.onSignup(this.state.credentials) }} >Signup!</button>
                         </form>}
@@ -126,7 +126,7 @@ class _LoginSignup extends Component {
                     </p>
                 </section>}
 
-                {user && <button onClick={()=>this.onGoBack()}>Enter Boards</button> }
+                {user && <button onClick={() => this.onGoBack()}>Enter Boards</button>}
             </div>
         )
     }

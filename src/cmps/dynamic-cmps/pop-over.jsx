@@ -1,5 +1,5 @@
 import React from "react";
-import {ReactComponent as Close} from '../../assets/icon/close.svg'
+import { ReactComponent as Close } from '../../assets/icon/close.svg'
 
 
 export const PopOver = ({ children, isShown, title, cb, pos }) => {
@@ -11,9 +11,9 @@ export const PopOver = ({ children, isShown, title, cb, pos }) => {
                 <h5 className="popover-title">{title}</h5>
                 <button className="pop-over-btn" onClick={() => cb()}>
                     <span>
-                    <Close/>
+                        <Close />
                     </span>
-              
+
                 </button>
             </header>
             <div className="children-container">

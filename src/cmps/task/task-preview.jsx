@@ -9,8 +9,8 @@ export const TaskPreview = (props) => {
         <Draggable key={task.id} draggableId={task.id} index={idx}>
             {(provided) => {
                 return <section {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}
-                className="task-preview">
-                        {task.cover && <div className='task-preview-cover' style={{backgroundColor:`${task.cover}`}}></div>}
+                    className="task-preview">
+                    {task.cover && <div className='task-preview-cover' style={{ backgroundColor: `${task.cover}` }}></div>}
                     <section className="labels-task-preview">
                         {task.labelIds && board.labels.map(label => {
                             return task.labelIds.map(labelId => {

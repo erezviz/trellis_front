@@ -28,8 +28,8 @@ export const CreateAttachment = ({ task, isShown, cb }) => {
 
         setAttachment(prevAttachment => prevAttachment = emptyAttach)
     }
-    
- 
+
+
     const handleChange = ev => {
         ev.preventDefault()
         const { value, name } = ev.target
