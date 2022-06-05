@@ -95,13 +95,14 @@
             margin-inline-start: 6px;
 
             .member-task-preview {
-                height: 20px;
-                width: 20px;
-                border-radius: 50%;
+                height: 30px;
+                width: 30px;
                 position: relative;
                 bottom: 10px;
                 right: 10px;
-                margin-right: 4px;
+                img{
+                    border-radius: 50%;
+                }
             }
         }
 
@@ -198,4 +199,12 @@ input.group-title {
     bottom: 2px;
     font-weight: 600;
     height: 32px;
+}
+
+.icon-previews{
+    .icon-preview, svg{
+        height: 14px !important;
+        width: 14px;
+            margin: 3px;
+        }
 }

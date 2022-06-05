@@ -43,7 +43,7 @@ export const TaskMembers = (props) => {
                         return (
                             <li onClick={() => onToggleMember(member._id)} key={member._id}>
                                 <div className="member-img">
-                                    <img src={require(`../../assets/img/${member.imgUrl}`)} alt="" />
+                                    <img src={member.imgUrl} alt="" />
                                 </div>
                                 <p className="card-member mod-selectable" >{member.fullname}</p>
                             </li>

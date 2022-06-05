@@ -72,13 +72,10 @@
         }
     }
     .member-img {
-        border-radius: 25em;
-        height: 40px;
+        height: 30px;
         width: 40px;
-        object-fit: cover;
-        background-color: rgba(146, 145, 145, 0.683);
         img {
-            width: 72%;
+        border-radius: 50%;            
         }
     }
     h2 {
