@@ -2,6 +2,7 @@ import { storageService } from './async-storage.service.js'
 import { utilService } from './util.service.js'
 import { userService } from './user.service.js'
 import { httpService } from './http.service.js'
+import { socketService, SOCKET_EMIT_SEND_BOARD, SOCKET_EVENT_ADD_BOARD } from './socket.service.js'
 // import { getActionRemoveBoard, getActionAddBoard, getActionUpdateBoard } from '../store/board.actions.js'
 
 const STORAGE_KEY = 'board'
@@ -53,10 +54,13 @@ async function remove(boardId) {
 async function save(board) {
     var savedBoard
     if (board._id) {
+        socketService.emit(SOCKET_EMIT_SEND_BOARD, board)
         return httpService.put(`board/:${board._id}`, board)
     } else {
+        // socketService.emit(SOCKET_EMIT_SEND_BOARD, board)
         board.labels = _getBoardLabels()
         savedBoard = await httpService.post('board', board)
+
 
     }
 
@@ -173,6 +177,7 @@ async function updateTask(boardId, groupId, taskToSave) {
         const updatedBoard = {...board, groups: updatedGroups }
 
         save(updatedBoard)
+
         return updatedBoard
     } catch (err) {
         console.log('ERROR: Cannot update task', err);

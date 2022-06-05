@@ -71,7 +71,6 @@ export const TaskDetails = (props) => {
         if (ev) {
             ev.preventDefault()
         }
-
         dispatch(updateTask(boardId, groupId, task))
         setIsDesc(false)
 

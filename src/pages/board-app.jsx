@@ -9,9 +9,10 @@ import { SideMenu } from "../cmps/dynamic-cmps/side-menu";
 import { TaskDetails } from "../cmps/task/task-details";
 import { GroupList } from "../cmps/group/group-list"
 import { utilService } from "../services/util.service";
-import { loadBoard, onDeleteGroup, onAddGroup, updateWholeBoard } from '../store/board.action'
+import { loadBoard, onDeleteGroup, onAddGroup, updateWholeBoard,updateBoardForSockets } from '../store/board.action'
 import { Screen } from '../cmps/dynamic-cmps/screen'
 import { TrellisSpinner } from "../cmps/util-cmps/trellis-spinner";
+import { socketService, SOCKET_EMIT_SEND_BOARD, SOCKET_EMIT_SET_BOARD, SOCKET_EVENT_ADD_BOARD } from "../services/socket.service";
 
 
 class _BoardApp extends React.Component {
@@ -30,9 +31,48 @@ class _BoardApp extends React.Component {
     ref = React.createRef();
 
     componentDidMount = () => {
+        // const boardId = this.getBoardId()
+        // const { currBoard } = this.props
         this.loadGroups()
+        const { currBoard } = this.props
+
+
+
+        //* This is to remove the last-listener
+        socketService.off(SOCKET_EVENT_ADD_BOARD)
+        //* This is to add the new-listener
+        socketService.on(SOCKET_EVENT_ADD_BOARD, this.changeCurrBoard)
+
+
     }
 
+
+
+    componentDidUpdate(prevProps) {
+        const { currBoard } = this.props
+        // console.log('this is the prevProps currBoard in cdu', prevProps.currBoard._id);
+        // console.log('this is the  currBoard in cdu', currBoard._id);
+
+        // if(currBoard?._id){
+        //     console.log('This is prevProps in cdu',prevProps.currBoard._id);
+        //     const {boardId} = this.props.match.params
+        //     if (prevProps.currBoard._id !== currBoard._id) this.changeCurrBoard()
+        // socketService.emit(SOCKET_EMIT_SET_BOARD, currBoard._id)
+        // socketService.off(SOCKET_EMIT_SEND_BOARD)
+        // socketService.on(SOCKET_EMIT_SEND_BOARD, currBoard)
+        // }
+    }
+
+    componentWillUnmount() {
+        const { currBoard } = this.props
+        socketService.off(SOCKET_EVENT_ADD_BOARD, currBoard)
+    }
+
+    changeCurrBoard = (board) => {
+        this.props.updateBoardForSockets(board)
+        console.log('updating store with new board...', board);
+
+    }
 
     loadGroups = async (board) => {
         this.setState(prevState => ({ ...prevState, groups: [] }), async () => {
@@ -40,7 +80,8 @@ class _BoardApp extends React.Component {
             if (!board) {
                 try {
                     const board = await this.props.loadBoard(boardId)
-                    this.setState(prevState => ({ ...prevState, groups: board.groups }))
+                    this.setState(prevState => ({ ...prevState, groups: board.groups }), () =>
+                        socketService.emit(SOCKET_EMIT_SET_BOARD, board._id))
                 } catch (err) {
                     throw err
                 }
@@ -211,6 +252,7 @@ const mapDispatchToProps = {
     onDeleteGroup,
     onAddGroup,
     updateWholeBoard,
+    updateBoardForSockets
 }
 
 export const BoardApp = connect(mapStateToProps, mapDispatchToProps)(_BoardApp)

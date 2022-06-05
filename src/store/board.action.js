@@ -109,7 +109,16 @@ export function updateGroupTask(boardId, groupId, task) {
             throw err
         }
     }
+
 }
+
+export function updateBoardForSockets(board) {
+    return (dispatch) => {
+        dispatch(getActionUpdateBoard(board))
+    }
+
+}
+
 export function updateWholeBoard(board) {
     return async(dispatch) => {
         try {
