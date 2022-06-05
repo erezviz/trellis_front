@@ -10,6 +10,7 @@
 @import './pages/hero';
 @import './pages/home';
 @import './pages/board';
+@import './pages/login-signup';
 // UTIL-COMPONENTS
 @import './components/trellis-spinner';
 @import './components/pop-over';
@@ -28,6 +29,7 @@
 // MODAL COMPONENTS
 @import './components/modals/create-attachment';
 @import './components/modals/create-board-modal';
+@import './components/modals/cover-modal';
 @import './components/unsplash';
 // MEDIA QUERY
 @import './mq/mq'

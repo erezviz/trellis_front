@@ -99,6 +99,7 @@ export function addBoard(board) {
 }
 
 export function updateGroupTask(boardId, groupId, task) {
+    console.log(task)
     return async(dispatch) => {
         try {
             const updatedBoard = await boardService.saveTask(boardId, groupId, task)
@@ -112,8 +113,8 @@ export function updateGroupTask(boardId, groupId, task) {
 export function updateWholeBoard(board) {
     return async(dispatch) => {
         try {
-            await boardService.save(board)
             dispatch(getActionUpdateBoard(board))
+            await boardService.save(board)
         } catch (err) {
             console.log('Cannot save board', err)
             throw err
@@ -138,7 +139,7 @@ export function onDeleteGroup(boardId, groupId) {
         try {
             const updatedBoard = await boardService.deleteGroup(boardId, groupId)
             dispatch(getActionUpdateBoard(updatedBoard))
-            return updatedBoard
+            // return updatedBoard
         } catch (err) {
             console.log('Cannot save board', err)
             throw err
@@ -161,8 +162,8 @@ export function onUpdateGroup(boardId, groupId, newName) {
     return async(dispatch) => {
         try {
             const updatedBoard = await boardService.updateGroup(boardId, groupId, newName)
-            const reducerBoard = dispatch(getActionUpdateBoard(updatedBoard))
-            return reducerBoard.board
+            dispatch(getActionUpdateBoard(updatedBoard))
+            // return reducerBoard.board
         } catch (err) {
             console.log('Cannot save board', err)
             throw err

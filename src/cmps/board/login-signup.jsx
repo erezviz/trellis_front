@@ -57,6 +57,8 @@ class _LoginSignup extends Component {
             <div className="login-page">
                 {!user && < section className="login-signup">
                     {!isSignup && <form className="login-form" onSubmit={(event) => { this.onSubmitLogin(event) }}>
+                    <div className='flex-col'>
+                        <label htmlFor="username">Username</label>
                         <input
                             type="text"
                             name="username"
@@ -65,7 +67,10 @@ class _LoginSignup extends Component {
                             onChange={this.handleChange}
                             required
                             autoFocus
-                        />
+                            />
+                           </div> 
+                            <div className='flex-col'>
+                        <label htmlFor="password">Password</label>
                         <input
                             type="password"
                             name="password"
@@ -74,11 +79,14 @@ class _LoginSignup extends Component {
                             onChange={this.handleChange}
                             required
                         />
+                        </div>
                         <button >Login!</button>
                     </form>}
 
                     <div className="signup-section">
                         {isSignup && <form className="signup-form" onSubmit={this.onSignup}>
+                            <div className='flex-col'>
+                        <label htmlFor="fullname">Full name</label>
                             <input
                                 type="text"
                                 name="fullname"
@@ -86,7 +94,10 @@ class _LoginSignup extends Component {
                                 placeholder="Fullname"
                                 onChange={this.handleChange}
                                 required
-                            />
+                                />
+                                </div>
+                                <div className='flex-col'>
+                             <label htmlFor="username">Username</label>
                             <input
                                 type="text"
                                 name="username"
@@ -94,7 +105,10 @@ class _LoginSignup extends Component {
                                 placeholder="Username"
                                 onChange={this.handleChange}
                                 required
-                            />
+                                />
+                                </div>
+                                <div className='flex-col'>
+                            <label htmlFor="password">Password</label>
                             <input
                                 type="password"
                                 name="password"
@@ -103,11 +117,12 @@ class _LoginSignup extends Component {
                                 onChange={this.handleChange}
                                 required
                             />
+                            </div>
                             <button onClick={() => { this.props.onSignup(this.state.credentials) }} >Signup!</button>
                         </form>}
                     </div>
                     <p>
-                        <a href="#" onClick={this.toggleSignup}>{!isSignup ? 'Signup' : 'Login'}</a>
+                        <a href="#" onClick={this.toggleSignup}>{!isSignup ? 'Not a member? Signup!' : 'Already a member? Login!'}</a>
                     </p>
                 </section>}
 

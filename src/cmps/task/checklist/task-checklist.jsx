@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { utilService } from '../../../services/util.service.js'
 import checklistIcon from '../../../assets/icon/checklist-icon.png'
 import threeDotsMenu from '../../../assets/icon/three-dot-menu.svg'
@@ -16,6 +16,11 @@ export const TaskChecklist = (props) => {
     const [isEditTitle, setIsEditTitle] = useState(null)
     const [itemTitle, setItemTitle] = useState('')
     const [isDeleteModalOpen, setDeleteModal] = useState(false)
+    const [initialTitle, setTitle] = useState(props.checklistName)
+
+    useEffect(()=>{
+        if (initialTitle === false) setTitle(task.checklist.title)
+    },[])
 
 
     const titleStyle = {
@@ -43,19 +48,20 @@ export const TaskChecklist = (props) => {
     }
     
  const onHandleChange=(ev,todoId)=>{
+     const newTask = {...task}
+     const {value} = ev.target
+     setItemTitle(value)
+     newTask.checklist.todos.map(todo=>{
+         if (todo.id === todoId){
+             todo.title = value
+            }
+            return todo
+        })
+    }
+    const onHandleChangeTitle=(ev)=>{
     const newTask = {...task}
     const {value} = ev.target
-    setItemTitle(value)
-    newTask.checklist.todos.map(todo=>{
-        if (todo.id === todoId){
-            todo.title = value
-        }
-        return todo
-    })
-}
- const onHandleChangeTitle=(ev)=>{
-    const newTask = {...task}
-    const {value} = ev.target
+    console.log(value)
     setItemTitle(value)
     newTask.checklist.title = value
 
@@ -134,7 +140,7 @@ const onAddTodo=(ev)=>{
             <div onClick={() => setIsEditTitle('header')} className="details-header flex cl-header">
             <img src={checklistIcon} alt="" className='checklist-icon'/>
                     <form onBlur={onSaveHeader} onSubmit={(ev)=>onSaveHeader()}>
-                        <input style={isEditTitle==='header' ? { titleStyle } : {}} value={task.checklist.title} onChange={(ev)=>onHandleChangeTitle(ev)} className="details-title cl-header" name="checklist"  />
+                        <input style={isEditTitle==='header' ? { titleStyle } : {}} value={initialTitle} onChange={(ev)=>onHandleChangeTitle(ev)} className="details-title cl-header" name="checklist"  />
                     </form>
                 </div>
             <ProgressBar completed={getPrecentage()} />

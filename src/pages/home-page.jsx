@@ -49,7 +49,7 @@ class _HomePage extends React.Component {
         return (
             <section className="home-page">
                 <div className="board-list-container">
-                    <div className="flex">
+                    <div className="starred-boards flex">
                 <Star/>
                 <h1>Starred boards</h1>
                     </div>

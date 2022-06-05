@@ -13,6 +13,11 @@
         position: relative;
         bottom: 15rem;
         right: 10rem;
+        .starred-boards{
+            svg{path{
+                stroke: $clr5;
+            }}
+        }
     }
 
     .create-board {

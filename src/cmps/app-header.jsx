@@ -15,7 +15,7 @@ const _AppHeader = (props) => {
     let logoTxt = ''
     const location = (props.location.pathname)
     const onGoBack = () => {
-        props.history.push('/')
+        props.history.push('/home')
     }
     if(!location.includes('board') || !location.includes('home')){
         status = 'Hero'

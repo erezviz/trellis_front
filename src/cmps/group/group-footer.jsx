@@ -1,5 +1,5 @@
 import { TextField } from "@mui/material"
-import React, { useState } from "react"
+import {React,  useState } from "react"
 import { ReactComponent as Close } from '../../assets/icon/close.svg'
 import { useDispatch, useSelector } from "react-redux"
 import { updateGroupTask } from "../../store/board.action"
@@ -16,32 +16,19 @@ export const GroupFooter = (props) => {
     const onHandleChange = ({ target }) => {
         task = { title: target.value }
     }
-
-    const onSaveTask = async (ev) => {
+    
+    const onSaveTask =(ev) => {
         ev.preventDefault()
         const boardId = props.boardId
         const groupId = props.groupId
-
-        try{
-            const updatedBoard = await dispatch(updateGroupTask(boardId, groupId, task))
+        if (task.title === '')return
+            dispatch(updateGroupTask(boardId, groupId, task))
             setIsShown(true)
-        }catch(err){
-            throw err
-        }
-
-
-
     }
-
-
 
     const onToggle = () => {
         setIsShown(!isShown)
     }
-
-
-
-
 
     return (
         <section className="group-footer">
@@ -55,7 +42,7 @@ export const GroupFooter = (props) => {
                 <TextField name="title" id="outlined-basic" onChange={onHandleChange} 
                     size="small" placeholder="Enter a title for this card..." variant="outlined" />
                     <div className="flex">
-                <button className='btn-save'>Add card</button> <span className="btn-exit" onClick={onToggle}><Close/></span>
+                <button className='btn-save' >Add card</button> <span className="btn-exit" onClick={onToggle}><Close/></span>
 
                     </div>
             </form>}

@@ -21,8 +21,11 @@ import { queryTask, updateTask } from '../../store/board.action';
 import { TrellisSpinner } from '../util-cmps/trellis-spinner';
 import { Attachments } from './attachments';
 import { TaskDate } from './task-dates';
-// import { PopOver } from '../dynamic-cmps/pop-over';
+import { PopOver } from '../dynamic-cmps/pop-over';
 import { CreateAttachment } from './attachments/create-attachment';
+import { ChecklistModal } from './checklist/create-checklist-modal'
+import { CoverModal } from './cover-modal.jsx'
+import { Popover } from 'bootstrap';
 
 export const TaskDetails = (props) => {
 
@@ -35,14 +38,16 @@ export const TaskDetails = (props) => {
     let [isEdit, setIsEdit] = useState(false)
     let [isLabelOpen, setIsLabelOpen] = useState(false)
     const [isAttachOpen, setIsAttachOpen] = useState(false)
+    const [isChecklistOpen, setIsChecklistOpen] = useState(false)
+    const [isChecklistModalOpen, setIsChecklistModalOpen] = useState(false)
     const [isMembersOpen, setIsMembersOpen] = useState(false)
     let [isDatesOpen, setIsDatesOpen] = useState(false)
+    const [coverModal, setCoverModal] = useState(false)
 
     useEffect(() => {
         (async () => {
             const task = boardService.getTask(currBoard, groupId, taskId)
-            // console.log('task from details', task);
-            // const newtask = await dispatch(queryTask(boardId, groupId, taskId))
+
             setTask(task)
         })();
         return () => {
@@ -61,12 +66,12 @@ export const TaskDetails = (props) => {
         height: '33px'
     }
 
+
     function onSave(ev) {
         if (ev) {
             ev.preventDefault()
         }
 
-        // console.log('task before dispatch', task)
         dispatch(updateTask(boardId, groupId, task))
         setIsDesc(false)
 
@@ -76,8 +81,6 @@ export const TaskDetails = (props) => {
     const onDescResize = ev => {
         let desc = ev.target
         desc.style.height = ''
-        //     textarea.style.height = "";
-        //     /* textarea.style.height = Math.min(textarea.scrollHeight, 300) + "px"; */
         desc.style.height = desc.scrollHeight + "px"
 
     }
@@ -86,25 +89,32 @@ export const TaskDetails = (props) => {
     const handleFormChange = ev => {
         const { name, value } = ev.target
         setTask(prevTask => ({ ...prevTask, [name]: value }))
-        // console.log('saveTask task-details', task)
-    }
-
-    const goBack = () => {
-        this.props.history.push(`/board/${boardId}`)
     }
 
     const onToggleAttach = () => {
         setIsAttachOpen(prevAttachOpen => prevAttachOpen = !isAttachOpen)
     }
+    const onToggleChecklistModal = () => {
+        setIsChecklistModalOpen(prevChecklistModalOpen => prevChecklistModalOpen = !isChecklistModalOpen)
+    }
+    const onOpenChecklist = (val) => {
+        console.log(val)
+        setIsChecklistOpen(prevChecklistOpen => prevChecklistOpen = val)
+    }
+
+    const onToggleCover=()=>{
+        setCoverModal(!coverModal)
+    }
 
     if (!task) return <><TrellisSpinner isLarge={true} /></>
-    return (
+    return ( <>
         <section style={modalStyle} className="task-details">
+        {task.cover && <div className='task-cover' style={{backgroundColor:`${task.cover}`}}></div>}
             <div className="details-container flex">
                 <button onClick={(ev) => {
                     // return goBack()
                     return props.onCloseDetails()
-                }} className="close-details-btn">
+                }} className={`close-details-btn ${ 'btn-cover'}`}>
                     <span>
                         <Close style={{ width: '14px' }} />
                     </span>
@@ -123,9 +133,7 @@ export const TaskDetails = (props) => {
                             name="title"
                         />
                     </form>
-                    {/* <div contentEditable="true" className="details-title">
-                    This is the Title
-                </div> */}
+
                 </div>
                 <header className="task-header">
                     {task.memberIds?.length > 0 && <div className="members">
@@ -134,7 +142,6 @@ export const TaskDetails = (props) => {
                             {task.memberIds && props.members.map(member => {
                                 return task.memberIds.map(memberId => {
                                     if (member._id === memberId) {
-                                        console.log('helo from if Shani is an officer');
                                         return <div key={memberId} className="member-task">
                                             <img src={require(`../../assets/img/${member.imgUrl}`)} alt="" />
                                         </div>
@@ -152,19 +159,23 @@ export const TaskDetails = (props) => {
 
                     {task.labelIds?.length > 0 && <section className="labels-section">
                         <p>Labels</p>
-                        <div className="labels-list">
-                            {task.labelIds && props.labels.map(label => {
-                                return task.labelIds.map(labelId => {
-                                    if (label.id === labelId) {
-                                        return <div key={labelId} className="label-task" style={{ backgroundColor: label.color }}>
-                                            <span>{label.title}</span>
-                                        </div>
-                                    }
-                                });
-                            })}
-                            <span onClick={() => setIsLabelOpen(true)}>
-                                <Plus />
-                            </span>
+                        <div className='flex'>
+                            <div className="labels-list">
+                                {task.labelIds && props.labels.map(label => {
+                                    return task.labelIds.map(labelId => {
+                                        if (label.id === labelId) {
+                                            return <div key={labelId} className="label-task" style={{ backgroundColor: label.color }}>
+                                                <span>{label.title}</span>
+                                            </div>
+                                        }
+                                    });
+                                })}
+                            </div>
+                            <div className="add-label">
+                                <span onClick={() => setIsLabelOpen(true)} >
+                                    <Plus />
+                                </span>
+                            </div>
                         </div>
                     </section>}
                     {task.dueDate && <section className="show-date">
@@ -180,11 +191,6 @@ export const TaskDetails = (props) => {
                     <section className="details-main-col flex">
                         <div className="desc-container">
                             <label className="description" htmlFor="description">Description</label>
-                            {/* {isDesc && <div onClick={() => setIsDesc(true)} className="details-desc">
-                                {task.description && <p>{task.description}</p>}
-
-                            </div>} */}
-
                             <form className="edit-description" onSubmit={onSave}>
                                 <textarea
                                     onInput={onDescResize}
@@ -204,8 +210,8 @@ export const TaskDetails = (props) => {
                             </form>
                         </div>
                         <Attachments task={task} handleChange={handleFormChange} />
+                        {(isChecklistOpen || task.checklist) && <div className='checklist'><TaskChecklist checklistName={isChecklistOpen} onSave={onSave} task={task} handleFormChange={handleFormChange} /></div>}
 
-                        <div className='checklist'><TaskChecklist onSave={onSave} task={task} handleFormChange={handleFormChange} /></div>
                     </section>
                     <section className="details-sidebar">
                         <div className="main-add-actions">
@@ -226,27 +232,38 @@ export const TaskDetails = (props) => {
                                 <span className="sidebar-icon attachment-icon"></span>
                                 <span>Attachments</span>
                             </div>
-                            <div className="sidebar-btn flex">
+                            <div onClick={() => onToggleChecklistModal()} className="sidebar-btn flex">
                                 <span className="sidebar-icon checklist-icon"></span>
                                 <span>Checklist</span>
+                                {/* {isChecklistModalOpen && */}
                             </div>
                             <div onClick={() => setIsDatesOpen(true)} className="sidebar-btn flex">
                                 <span className="siderbar-icon dates-icon flex">
-                                    <DatesIcon style={{width: '12px'}} />
+                                    <DatesIcon style={{ width: '12px' }} />
                                     <span>
                                         Dates
                                     </span>
                                 </span>
                             </div>
+                            <div onClick={()=>onToggleCover()} className="sidebar-btn flex">
+                                <span className="sidebar-icon cover-icon"></span>
+                                <span>Cover</span>
+                            </div>
                         </div>
                     </section>
                 </div>
             </div>
+            <PopOver cb={onToggleChecklistModal} isShown={isChecklistModalOpen} title={'Create checklist'}>
+                <ChecklistModal onClose={onToggleChecklistModal} onOpenChecklist={onOpenChecklist} />
+            </PopOver>
+            <PopOver cb={onToggleCover} isShown={coverModal} title={'Add cover'}>
+                <CoverModal boardId={boardId} groupId={groupId} task={task}/>
+            </PopOver>
             <CreateAttachment cb={onToggleAttach} isShown={isAttachOpen} task={task} />
-
             {(currBoard.labels && isLabelOpen) && <Labels onToggleLabels={setIsLabelOpen} task={task} labels={currBoard.labels} />}
             {isDatesOpen && <TaskDate onToggleDates={setIsDatesOpen} task={task} />}
             {isMembersOpen && <TaskMembers onToggleMembers={setIsMembersOpen} task={task} members={currBoard.members} />}
         </section>
+        </>
     )
 }

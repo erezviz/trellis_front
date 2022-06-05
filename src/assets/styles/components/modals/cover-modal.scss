@@ -1,0 +1,46 @@
+.color-palette {
+    -webkit-transform: translate3d(0, 0, 0);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    padding: 4px;
+    margin: 0 -4px;
+    overflow-x: hidden;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+
+    .color-to-choose {
+        border: none;
+        box-sizing: border-box;
+        display: inline-block;
+        line-height: 20px;
+        padding: 6px 12px;
+        position: relative;
+        text-decoration: none;
+        margin: 0;
+        border-radius: 3px;
+        height: 72px;
+        width: 100%;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        box-shadow: none;
+        width: 50px;
+        height: 32px;
+        cursor: pointer;
+    }
+
+    .color-to-choose:hover{
+        filter: saturate(85%) brightness(85%);
+    }
+    .chosen{
+        border: 2px solid $clr1;
+    }
+}
+
+.task-cover{
+    height: 10rem;
+}
+.task-preview-cover{
+    height: 32px;
+    border-radius: 3px 3px 0 0;
+}
