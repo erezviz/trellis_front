@@ -14,7 +14,7 @@ export const GroupPreview = ({ group, boardId, onToggleDetails, setIsLabelOpen, 
     const groupIdx = currBoard.groups.findIndex(currGroup => currGroup.id === group.id)
 
     const onChangeName = (val) => {
-        try {
+        try { 
             dispatch(onUpdateGroup(boardId, group.id, val))
         } catch (err) {
             throw err
@@ -37,7 +37,7 @@ export const GroupPreview = ({ group, boardId, onToggleDetails, setIsLabelOpen, 
                     <div className="header-container">
                         <GroupHeader key={group.id} onChangeName={onChangeName}
                             title={group.title} />
-                        <button onClick={(ev) => deleteGroup(ev, group.id)}>
+                        <button onClick={() => onDeleteGroup(group.id)}>
                             <span>
                                 <ThreeDots style={{ width: '15px' }} />
                             </span>
