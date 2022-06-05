@@ -185,12 +185,14 @@ svg{path{
     top: 6px;
     margin-left: 30px;
     .board-member{
-        height: 20px;
-        width: 20px;
-        border-radius: 50%;
+        height: 30px;
+        width: 30px;
         position: relative;
         bottom: 10px;
         right: 10px;
         margin-right: 5px;
+        img{
+            border-radius: 50%;
+        }
     }
 }

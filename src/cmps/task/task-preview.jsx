@@ -1,5 +1,9 @@
 import { Draggable } from "react-beautiful-dnd"
 import { useSelector } from "react-redux"
+import { ReactComponent as Date } from '../../assets/icon/dates-icon.svg'
+// import { ReactComponent as Attachment } from '../../assets/icon/attachment-icon.png'
+// import { ReactComponent as Checklist } from '../../assets/icon/checklist-icon.png'
+// import { ReactComponent as Description } from '../../assets/icon/description-icon.png'
 
 export const TaskPreview = (props) => {
     const { task, idx } = props
@@ -27,17 +31,26 @@ export const TaskPreview = (props) => {
                     <section onClick={() => props.onToggleDetails()} className="main-preview">
                         <h5>{task.title}</h5>
                     </section>
+                    <div className="flex-space-between">
+                    <section className="icon-previews">
+                        {task.dueDate && <span><Date/></span>}
+                        {task.attachments && <span><img className="icon-preview" src={require('../../assets/icon/attachment-icon.png')} alt="" /></span>}
+                        {task.checklist && <span><img className="icon-preview" src={require('../../assets/icon/checklist-icon.png')} alt="" /></span>}
+                        {task.description && <span><img className="icon-preview" src={require('../../assets/icon/description-icon.png')} alt="" /></span>}
+                    </section>
                     <section className="members-task-preview">
                         {task.memberIds && board.members.map(member => {
                             return task.memberIds.map(memberId => {
                                 if (member._id === memberId) {
                                     return <div key={memberId} className="member-task-preview">
-                                        <img src={require(`../../assets/img/${member.imgUrl}`)} alt="" />
+                                        <img src={member.imgUrl} alt="" />
                                     </div>
                                 }
                             });
                         })}
                     </section>
+                    
+                </div>
                     {provided.placeholder}
                 </section>
             }}

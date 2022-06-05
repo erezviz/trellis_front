@@ -71,6 +71,7 @@ export const TaskDetails = (props) => {
         if (ev) {
             ev.preventDefault()
         }
+        if(!task.title) return
         dispatch(updateTask(boardId, groupId, task))
         setIsDesc(false)
 
@@ -141,7 +142,7 @@ export const TaskDetails = (props) => {
                                 return task.memberIds.map(memberId => {
                                     if (member._id === memberId) {
                                         return <div key={memberId} className="member-task">
-                                            <img src={require(`../../assets/img/${member.imgUrl}`)} alt="" />
+                                            <img src={member.imgUrl} alt="" />
                                         </div>
                                     }
                                 });
