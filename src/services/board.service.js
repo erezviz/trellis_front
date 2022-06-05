@@ -54,7 +54,7 @@ async function remove(boardId) {
 async function save(board) {
     var savedBoard
     if (board._id) {
-        // socketService.emit(SOCKET_EMIT_SEND_BOARD, board)
+        socketService.emit(SOCKET_EMIT_SEND_BOARD, board)
         return httpService.put(`board/:${board._id}`, board)
     } else {
         // socketService.emit(SOCKET_EMIT_SEND_BOARD, board)
