@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux"
 import { useState } from "react"
-import { ReactComponent as Star } from '../assets/icon/star.svg'
+import { ReactComponent as Star } from '../../assets/icon/star.svg'
 
 
 export const BoardHeader = (props) => {

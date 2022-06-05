@@ -65,7 +65,7 @@ export const TaskDetails = (props) => {
         if (ev) {
             ev.preventDefault()
         }
-
+        
         // console.log('task before dispatch', task)
         dispatch(updateTask(boardId, groupId, task))
         setIsDesc(false)

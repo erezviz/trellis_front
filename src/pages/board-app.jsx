@@ -12,6 +12,7 @@ import { utilService } from "../services/util.service";
 import { loadBoard, onDeleteGroup, onAddGroup, updateWholeBoard } from '../store/board.action'
 import { Screen } from '../cmps/dynamic-cmps/screen'
 import { TrellisSpinner } from "../cmps/util-cmps/trellis-spinner";
+import { socketService, SOCKET_EMIT_SEND_BOARD, SOCKET_EMIT_SET_BOARD } from "../services/socket.service";
 
 
 class _BoardApp extends React.Component {
@@ -30,9 +31,49 @@ class _BoardApp extends React.Component {
     ref = React.createRef();
 
     componentDidMount = () => {
+        // const boardId = this.getBoardId()
+        // const { currBoard } = this.props
+        const { currBoard } = this.props
+        if(currBoard){
+
+            //* This is sending the topic
+            socketService.emit(SOCKET_EMIT_SET_BOARD, currBoard._id)
+            //* This is to remove the last-listener
+            socketService.off(SOCKET_EMIT_SEND_BOARD)
+            //* This is to add the new-listener
+            socketService.on(SOCKET_EMIT_SEND_BOARD, currBoard)
+        }
+
+
+        console.log('This is currBoard in cdu',currBoard);
         this.loadGroups()
+      
     }
 
+    componentDidUpdate(prevProps) {
+        const { currBoard } = this.props
+        // console.log('this is the prevProps currBoard in cdu', prevProps.currBoard._id);
+        // console.log('this is the  currBoard in cdu', currBoard._id);
+        
+        // if(currBoard?._id){
+            //     console.log('This is prevProps in cdu',prevProps.currBoard._id);
+            //     const {boardId} = this.props.match.params
+            //     if (prevProps.currBoard._id !== currBoard._id) this.changeCurrBoard()
+            // socketService.emit(SOCKET_EMIT_SET_BOARD, currBoard._id)
+            // socketService.off(SOCKET_EMIT_SEND_BOARD)
+            // socketService.on(SOCKET_EMIT_SEND_BOARD, currBoard)
+            // }
+        }
+        
+        componentWillUnmount() {
+            const { currBoard } = this.props
+        socketService.off(SOCKET_EMIT_SEND_BOARD, currBoard)
+    }
+
+    changeCurrBoard = (board) => {
+   
+        socketService.emit(SOCKET_EMIT_SET_BOARD, board)
+    }
 
     loadGroups = async (board) => {
         this.setState(prevState => ({ ...prevState, groups: [] }), async () => {
@@ -139,7 +180,7 @@ class _BoardApp extends React.Component {
         this.props.updateWholeBoard(board)
     }
     render() {
-
+        
         const { currBoard } = this.props
         if (!currBoard?._id) return <></>
         const { labels, members } = currBoard
