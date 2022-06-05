@@ -31,12 +31,8 @@ class _BoardApp extends React.Component {
     ref = React.createRef();
 
     componentDidMount = () => {
-        // const boardId = this.getBoardId()
-        // const { currBoard } = this.props
+  
         this.loadGroups()
-        const { currBoard } = this.props
-
-
 
         //* This is to remove the last-listener
         socketService.off(SOCKET_EVENT_ADD_BOARD)
@@ -44,23 +40,6 @@ class _BoardApp extends React.Component {
         socketService.on(SOCKET_EVENT_ADD_BOARD, this.changeCurrBoard)
 
 
-    }
-
-
-
-    componentDidUpdate(prevProps) {
-        const { currBoard } = this.props
-        // console.log('this is the prevProps currBoard in cdu', prevProps.currBoard._id);
-        // console.log('this is the  currBoard in cdu', currBoard._id);
-
-        // if(currBoard?._id){
-        //     console.log('This is prevProps in cdu',prevProps.currBoard._id);
-        //     const {boardId} = this.props.match.params
-        //     if (prevProps.currBoard._id !== currBoard._id) this.changeCurrBoard()
-        // socketService.emit(SOCKET_EMIT_SET_BOARD, currBoard._id)
-        // socketService.off(SOCKET_EMIT_SEND_BOARD)
-        // socketService.on(SOCKET_EMIT_SEND_BOARD, currBoard)
-        // }
     }
 
     componentWillUnmount() {

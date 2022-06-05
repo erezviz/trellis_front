@@ -208,7 +208,7 @@ export const TaskDetails = (props) => {
                                 </div>}
                             </form>
                         </div>
-                        <Attachments task={task} handleChange={handleFormChange} />
+                        <Attachments  task={task} handleChange={handleFormChange} />
                         {(isChecklistOpen || task.checklist) && <div className='checklist'><TaskChecklist checklistName={isChecklistOpen} onSave={onSave} task={task} handleFormChange={handleFormChange} /></div>}
 
                     </section>
