@@ -106,7 +106,7 @@ export const CreateAttachment = ({ task, isShown, cb }) => {
                 <section className="create-attachment">
                     <form className="form-upload" onSubmit={onSaveAttachment}>
                         <label htmlFor="imgUpload">Computer</label>
-                        <input type="file" onChange={uploadImg} tabIndex="-1" accept="img/*" id="imgUpload" hidden />
+                        <input type="file" onChange={uploadImg} tabIndex="-1"  id="imgUpload" hidden />
 
                     </form>
                     <form onSubmit={onSaveAttachment} className="col" >
