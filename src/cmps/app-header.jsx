@@ -20,7 +20,7 @@ const _AppHeader = (props) => {
     if (!location.includes('board') || !location.includes('home')) {
         status = 'Hero'
     }
-    if (location.includes('board') || location.includes('home')) {
+     if (location.includes('board') || location.includes('home')) {
         status = ''
         bgc = ''
         logoTxt = 'logoHero'

@@ -60,12 +60,12 @@ export const TaskDetails = (props) => {
         position: 'absolute',
         bgcolor: 'background.paper',
     }
+
     const titleStyle = {
         overflow: 'hidden',
         overflowWrap: 'break-word',
         height: '33px'
     }
-
 
     function onSave(ev) {
         if (ev) {
@@ -83,7 +83,6 @@ export const TaskDetails = (props) => {
         desc.style.height = desc.scrollHeight + "px"
 
     }
-
 
     const handleFormChange = ev => {
         const { name, value } = ev.target
@@ -189,7 +188,13 @@ export const TaskDetails = (props) => {
                 <div className="details-contents flex">
                     <section className="details-main-col flex">
                         <div className="desc-container">
+                            <div className="desc-label-container flex">
+
+                            <span className="task-description-icon">
+                                <DescIcon/>
+                            </span>
                             <label className="description" htmlFor="description">Description</label>
+                            </div>
                             <form className="edit-description" onSubmit={onSave}>
                                 <textarea
                                     onInput={onDescResize}
