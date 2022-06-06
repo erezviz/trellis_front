@@ -20,7 +20,7 @@ export const GroupPreview = ({ group, boardId, onToggleDetails, setIsLabelOpen, 
     const onChangeName = (val) => {
         let groupToUpdate = utilService.getDeepCopy(group)
         groupToUpdate.title = val
-        // console.log(groupToUpdate)
+
 
         dispatch(onUpdateGroup(boardId, groupToUpdate))
     }
@@ -46,12 +46,12 @@ export const GroupPreview = ({ group, boardId, onToggleDetails, setIsLabelOpen, 
     const onHandleTitleChange = ev => {
         const { value } = ev.target
         setGroupTitle(prevTitle => prevTitle = value)
-        console.log(groupTitle);
+
     }
-    const deleteGroup = (ev) => {
-        ev.preventDefault()
-        onDeleteGroup(group.id)
-    }
+    // const deleteGroup = (ev) => {
+    //     ev.preventDefault()
+    //     onDeleteGroup(group.id)
+    // }
 
     return (
 

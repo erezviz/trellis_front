@@ -1,3 +1,5 @@
+import { utilService } from "../services/util.service"
+
 const initialState = {
     boards: [],
     currBoard: null,
@@ -26,7 +28,7 @@ export function boardReducer(state = initialState, action) {
             break
 
         case 'UPDATE_BOARD':
-            board = {...action.board }
+            board = utilService.getDeepCopy(action.board)
                 // board = state.boards.map(board => (board._id === action.board._id) ? action.board : board)
             state = {...state, currBoard: board }
             break

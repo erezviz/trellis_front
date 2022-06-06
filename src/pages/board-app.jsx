@@ -23,14 +23,14 @@ class _BoardApp extends React.Component {
     state = {
         groups: [],
         isModalOpen: false,
-        isWarningOpen:false,
+        isWarningOpen: false,
         isShown: false,
         isLabelOpen: false,
         newGroup: { title: '' },
         groupToDelete: null,
         isSideBarOpen: false,
         isScrolling: false,
-        
+
         clientX: 0,
         scrollX: 0
 
@@ -39,17 +39,16 @@ class _BoardApp extends React.Component {
 
     componentDidMount = () => {
 
+        console.log('this happend');
         this.loadGroups()
-
         //* This is to remove the last-listener
         socketService.off(SOCKET_EVENT_ADD_BOARD)
         //* This is to add the new-listener
         socketService.on(SOCKET_EVENT_ADD_BOARD, this.changeCurrBoard)
 
-        eventBusService.on('open-group-modal' , (groupId) => {
-                this.onToggleWarning()
-                this.setState({groupToDelete: groupId})
-
+        eventBusService.on('open-group-modal', (groupId) => {
+            this.onToggleWarning()
+            this.setState({ groupToDelete: groupId })
         })
 
     }
@@ -61,51 +60,63 @@ class _BoardApp extends React.Component {
 
     changeCurrBoard = (board) => {
         this.props.updateBoardForSockets(board)
-        console.log('updating store with new board...', board);
+
 
     }
 
-    loadGroups = async (board) => {
-        if(board) return this.setState(prevState => ({...prevState, group: board.groups}))
+    // loadGroups = async (board) => {
+    loadGroups = (board) => {
 
-        const boardId = this.getBoardId()
-        try{
-            const updatedBoard = await this.props.loadBoard(boardId)
-            this.setState(prevState => ({...prevState, groups: updatedBoard.groups}))
-            socketService.emit(SOCKET_EMIT_SET_BOARD, board._id)
-
-        }catch (err){
-            console.log('ERROR: Cannot update board', err)
+        if (board) {
+            this.setState(prevState => ({ ...prevState, group: board.groups }))
+            return
         }
-        // this.setState(prevState => ({ ...prevState, groups: [] }), async () => {
-        //     const boardId = this.getBoardId()
-        //     if (!board) {
-        //         try {
-        //             const board = await this.props.loadBoard(boardId)
-        //             this.setState(prevState => ({ ...prevState, groups: board.groups }), () =>
-        //                 socketService.emit(SOCKET_EMIT_SET_BOARD, board._id))
-        //         } catch (err) {
-        //             throw err
-        //         }
-        //     } else this.setState(prevState => ({ ...prevState, groups: board.groups }))
-        // })
-    }
+         (async ()=>{
 
+             const boardId = this.getBoardId()
+             try {
+                 
+                 await this.props.loadBoard(boardId)
+                 this.setState(prevState => ({ ...prevState, groups: this.props.currBoard.groups }))
+                 console.log('updated board in klodaGroups', this.props.currBoard)
+                 socketService.emit(SOCKET_EMIT_SET_BOARD, this.props.currBoard._id)
+                 
+                } catch (err) {
+                    console.log('ERROR: Cannot update board', err)
+                }
+            })();
+
+        //     this.setState(prevState => ({ ...prevState, groups: [] }), async () => {
+        //         const boardId = this.getBoardId()
+        //         if (!board) {
+        //             try {
+        //                 const board = await this.props.loadBoard(boardId)
+
+        //                 this.setState(prevState => ({ ...prevState, groups: board.groups }), () =>
+        //                     socketService.emit(SOCKET_EMIT_SET_BOARD, board._id))
+        //             } catch (err) {
+            //                 throw err
+            //             }
+            //         } else this.setState(prevState => ({ ...prevState, groups: board.groups }))
+            //     })
+        }
+            
     getBoardId = () => {
         const { boardId } = (this.props.match.params)
         return boardId
     }
 
     onDeleteGroup = async (groupId) => {
-       
+
         const boardId = this.getBoardId()
+
         try {
             const board = await this.props.onDeleteGroup(boardId, groupId)
             this.loadGroups(board)
         } catch (err) {
             console.log('ERROR: Cannot delete group', err)
             throw err
-        } finally{
+        } finally {
             this.onToggleWarning()
         }
     }
@@ -142,8 +153,8 @@ class _BoardApp extends React.Component {
     }
 
     onToggleWarning = () => {
-        this.setState({isWarningOpen: !this.state.isWarningOpen})
-       
+        this.setState({ isWarningOpen: !this.state.isWarningOpen })
+
     }
 
     onCloseDetails = (ev) => {
@@ -166,7 +177,7 @@ class _BoardApp extends React.Component {
     onDragEnd = (res) => {
         const board = JSON.parse(JSON.stringify(this.props.currBoard))
         const { destination, source, draggableId, type } = res
-        console.log('res', res)
+
         if (!destination) return
         // moving groups 
         else if (type === 'column') {
@@ -183,8 +194,7 @@ class _BoardApp extends React.Component {
             }
             // moving tasks on different groups
             else if (groupStart !== groupFinish) {
-                if (!groupFinish.tasks) groupFinish.tasks = [draggableTask]
-                else groupFinish.tasks.splice(destination.index, 0, draggableTask)
+                groupFinish.tasks.splice(destination.index, 0, draggableTask)
             }
         }
         this.props.updateWholeBoard(board)
@@ -196,14 +206,14 @@ class _BoardApp extends React.Component {
         if (!currBoard?._id) return <></>
         const { labels, members } = currBoard
         const { boardId } = this.props.match.params
-        const { groups, isModalOpen, isShown, isSideBarOpen,isWarningOpen , groupToDelete} = this.state
+        const { groups, isModalOpen, isShown, isSideBarOpen, isWarningOpen, groupToDelete } = this.state
         let status = (isSideBarOpen) ? 'open' : ''
         const background = {
             backgroundImage: `url(${currBoard.style.imgUrl})`,
             backgroundSize: 'cover',
             top: '0px'
         }
-        console.log('the board in boardApp', currBoard);
+
         if (!labels) return <></>
         return (
             <section style={background} className={`board-app ${status}`}>
@@ -225,7 +235,7 @@ class _BoardApp extends React.Component {
                                     onDeleteGroup={this.onDeleteGroup}
                                     groups={groups} />
                             </DragDropContext>
-                            
+
                         </div>
                     }
                     <>
@@ -241,7 +251,7 @@ class _BoardApp extends React.Component {
                             </Screen>
                         </Route>
                         <PopOver isShown={isWarningOpen} title={'Delete list?'} cb={this.onToggleWarning}>
-                            <WarningModal groupId={groupToDelete} onDeleteGroup={this.onDeleteGroup}/>
+                            <WarningModal groupId={groupToDelete} onDeleteGroup={this.onDeleteGroup} />
                         </PopOver>
                     </>
                     <div className="add-group">
