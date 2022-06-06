@@ -1,27 +1,32 @@
-import { boardService } from "./src/services/board.service"
-import { eventBusService } from "./src/services/event-bus.service"
-import { getActionUpdateBoard } from "./src/store/board.action"
 
+const Modal = (props) => {
 
+    const onUpdateTask = (task, taskChanges) => {
 
+        const taskCopy = JSON.parse(JSON.stringify(task))
+        taskCopy.value = taskChanges
+        dispatch(updateTask(props.boardId, props.groupId, taskCopy))
+    }
 
+}
 
-
-
-
-
-
-export function updateTask(boardId, groupId, taskToSave) {
-    return async(dispatch) => {
+function updateTask(boardId, groupId, taskToUpdate) {
+    return async (dispatch) => {
         try {
 
-            const updatedBoard = await boardService.updateTask(boardId, groupId, taskToSave)
+            const updatedBoard = await boardService.updateTask(boardId, groupId, taskToUpdate)
             dispatch(getActionUpdateBoard(updatedBoard))
 
         } catch (err) {
             console.log('ERROR: cannot update task', err)
-            eventBusService.emit()
-            throw err
+            showErrorMsg('We can\'t seem to update your task, please try again later')
         }
+    }
+}
+
+function getActionUpdateBoard(board) {
+    return {
+        type: 'UPDATE_BOARD',
+        board
     }
 }
