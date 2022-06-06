@@ -8,10 +8,7 @@ import { onUpdateGroup } from "../../store/board.action"
 
 import { ReactComponent as ThreeDots } from '../../assets/icon/three-dot-menu.svg'
 import { useState } from "react"
-<<<<<<< HEAD
-=======
 import { eventBusService } from "../../services/event-bus.service"
->>>>>>> dacf6d033fa48e881642bcfd72b76d157c2929d9
 
 
 

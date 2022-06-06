@@ -7,13 +7,14 @@ export const TaskList = (props) => {
      if (!tasks || !tasks.length ) return (
      <Droppable type='task' index={idx} droppableId={`${props.groupId}`}>
             {(provided) => {
-               return <div  {...provided.droppableProps} ref={provided.innerRef}>
+               return <div key={idx} {...provided.droppableProps} ref={provided.innerRef}>
                     No tasks
                     {provided.placeholder}
                 </div>
                 }}
             </Droppable>)
-    return (
+    // if (!tasks || !tasks.length ) return <p>No tasks</p>
+    if (tasks || tasks.length ) return (
         <Droppable type='task' index={idx} droppableId={`${props.groupId}`}>
             {(provided) => {
                 return <section className="task-list" {...provided.droppableProps} ref={provided.innerRef}>
