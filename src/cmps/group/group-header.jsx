@@ -23,7 +23,12 @@ export const GroupHeader = (props) => {
     return (
         <div onClick={() => setIsEdit(isEdit = !isEdit)} className="group-title flex">
             <form>
-                <input style={isEdit ? { titleStyle } : {}} value={header} onChange={(ev) => handleFormChange(ev)} className="group-title" name="checklist" />
+                <input
+                    style={isEdit ? { titleStyle } : {}}
+                    value={header}
+                    onChange={(ev) => handleFormChange(ev)}
+                    className="group-title"
+                    name="checklist" />
             </form>
         </div>
     )

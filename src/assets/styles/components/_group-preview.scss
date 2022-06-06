@@ -10,17 +10,14 @@
     padding-bottom: 8px;
     box-shadow: 1px 7px 5px -4px #00000026;
     padding: 8px;
-
     .task-list-container {
         display: flex;
         flex-direction: column;
     }
-
     .header-container {
         cursor: pointer;
         display: flex;
         justify-content: space-between;
-
         h3 {
             width: 217px;
             height: 15px;
@@ -31,13 +28,11 @@
             position: relative;
             bottom: 0.5rem;
         }
-
         .group-header {
             color: darken($color: $clr2, $amount: 60%);
             font-size: 14px;
             padding: 12px 5px 4px 6px;
         }
-
         button {
             border-radius: 2px;
             cursor: pointer;
@@ -46,12 +41,10 @@
             transition: background-color, .25s;
             padding-bottom: 7px;
         }
-
         button:hover {
             background-color: darken($color: $clr2, $amount: 10%);
         }
     }
-
     .task-preview {
         cursor: pointer;
         width: 256px;
@@ -64,19 +57,16 @@
         background-position: 50%;
         background-repeat: no-repeat;
         position: relative;
-
         .labels-task-preview {
             display: flex;
             flex-wrap: wrap;
             gap: 5px;
             margin-inline-start: 6px;
-
             .label-task-preview {
                 min-height: 8px;
                 min-width: 40px;
                 border-radius: 10px;
                 margin-block-start: 6px;
-
                 span {
                     color: white;
                     font-size: 12px;
@@ -86,44 +76,38 @@
                 }
             }
         }
-
         .members-task-preview {
             display: flex;
             flex-wrap: wrap;
             gap: 5px;
             justify-content: flex-end;
             margin-inline-start: 6px;
-
             .member-task-preview {
                 height: 30px;
                 width: 30px;
                 position: relative;
                 bottom: 10px;
                 right: 10px;
-                img{
+                img {
                     border-radius: 50%;
                 }
             }
         }
-
         h5 {
             color: darken($color: $clr2, $amount: 55%);
             font-weight: 400;
             padding: 6px 0px 2px 5px;
         }
     }
-
     .task-preview:hover {
         background-color: darken($color: $clr2, $amount: 5%);
     }
-
     .group-footer {
         cursor: pointer;
         padding: 4px 3px 2px;
         display: flex;
         color: #5e6c84;
         font-size: 15px;
-
         .btn-save {
             cursor: pointer;
             font-size: 15px;
@@ -137,7 +121,6 @@
             margin: 8px 1px;
             text-align: center;
         }
-
         span.btn-exit {
             width: 14px;
             border-style: none;
@@ -147,29 +130,23 @@
             background-color: transparent;
             top: 8px;
         }
-
     }
-
     form {
         display: flex;
         flex-direction: column;
     }
-
     .add-task {
         display: flex;
         align-items: center;
         gap: 1px;
-
         .plus-task {
             width: 16px;
             height: 21px;
-
             &-title {
                 font-size: 14px;
                 margin-left: 2px;
             }
         }
-
         .plus-task svg {
             width: 16px;
         }
@@ -188,7 +165,6 @@ input#outlined-basic {
     position: relative;
 }
 
-
 input.group-title {
     color: #42526e;
     background: rgba(0, 0, 0, 0);
@@ -201,10 +177,11 @@ input.group-title {
     height: 32px;
 }
 
-.icon-previews{
-    .icon-preview, svg{
+.icon-previews {
+    .icon-preview,
+    svg {
         height: 14px !important;
         width: 14px;
-            margin: 3px;
-        }
+        margin: 3px;
+    }
 }

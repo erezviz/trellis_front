@@ -75,14 +75,12 @@ export const TaskDetails = (props) => {
         dispatch(updateTask(boardId, groupId, task))
         setIsDesc(false)
 
-
     }
 
     const onDescResize = ev => {
         let desc = ev.target
         desc.style.height = ''
         desc.style.height = desc.scrollHeight + "px"
-
     }
 
     const handleFormChange = ev => {
@@ -155,7 +153,7 @@ export const TaskDetails = (props) => {
 
                         </div>
                     </div>}
-
+                            
                     {task.labelIds?.length > 0 && <section className="labels-section">
                         <p>Labels</p>
                         <div className='flex'>
