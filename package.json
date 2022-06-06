@@ -17,6 +17,7 @@
     "font-awesome": "^4.7.0",
     "fs": "^0.0.1-security",
     "immer": "^9.0.14",
+    "lodash.debounce": "^4.0.8",
     "material-ui": "^0.20.2",
     "moment": "^2.29.3",
     "node-fetch": "^3.2.4",

@@ -167,18 +167,31 @@ export function onAddGroup(boardId, group) {
         }
     }
 }
-export function onUpdateGroup(boardId, groupId, newName) {
+export function onUpdateGroup(boardId, groupToSave) {
     return async(dispatch) => {
         try {
-            const updatedBoard = await boardService.updateGroup(boardId, groupId, newName)
+            const updatedBoard = await boardService.updateGroup(boardId, groupToSave)
             dispatch(getActionUpdateBoard(updatedBoard))
-                // return reducerBoard.board
+            // return reducerBoard.board
         } catch (err) {
-            console.log('Cannot save board', err)
+            console.log('Cannot update group', err)
             throw err
         }
     }
 }
+
+// export function onUpdateGroup(boardId, groupId, newName) {
+    //     return async(dispatch) => {
+        //         try {
+            //             const updatedBoard = await boardService.updateGroup(boardId, groupId, newName)
+            //             dispatch(getActionUpdateBoard(updatedBoard))
+//                 // return reducerBoard.board
+//         } catch (err) {
+//             console.log('Cannot save board', err)
+//             throw err
+//         }
+//     }
+// }
 
 
 export function queryTask(boardId, groupId, taskId) {

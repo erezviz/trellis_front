@@ -21,7 +21,7 @@ export const GroupFooter = (props) => {
         ev.preventDefault()
         const boardId = props.boardId
         const groupId = props.groupId
-        if (task.title === '') return
+        if (!task.title) return
         dispatch(updateGroupTask(boardId, groupId, task))
         setIsShown(true)
     }

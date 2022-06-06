@@ -6,8 +6,8 @@ import { socketService, SOCKET_EMIT_SEND_BOARD, SOCKET_EVENT_ADD_BOARD } from '.
 // import { getActionRemoveBoard, getActionAddBoard, getActionUpdateBoard } from '../store/board.actions.js'
 
 const STORAGE_KEY = 'board'
-    // const boardChannel = new BroadcastChannel('boardChannel')
-    // const listeners = []
+// const boardChannel = new BroadcastChannel('boardChannel')
+// const listeners = []
 
 export const boardService = {
     query,
@@ -87,17 +87,34 @@ async function addGroup(boardId, newGroup) {
         throw err
     }
 }
-async function updateGroup(boardId, groupId, newName) {
+async function updateGroup(boardId, groupToSave) {
     try {
-        const board = await getById(boardId)
-        const groupToUpdate = board.groups.find(group => group.id === groupId)
-        groupToUpdate.title = newName
-        return save(board)
+        const board = await boardService.getById(boardId)
+
+        const updatedGroups = board.groups.map(group => {
+            if (group.id === groupToSave.id) return groupToSave
+        })
+        const updatedBoard = { ...board, groups: updatedGroups }
+        save(updatedBoard)
+        return updatedBoard
     } catch (err) {
         console.log('Cannot update group', err)
         throw err
     }
 }
+
+
+// async function updateGroup(boardId, groupId, newName) {
+//     try {
+//         const board = await getById(boardId)
+//         const groupToUpdate = board.groups.find(group => group.id === groupId)
+//         groupToUpdate.title = newName
+//         return save(board)
+//     } catch (err) {
+//         console.log('Cannot update group', err)
+//         throw err
+//     }
+// }
 async function deleteGroup(boardId, groupId) {
     try {
         const board = await getById(boardId)
@@ -167,17 +184,13 @@ async function updateTask(boardId, groupId, taskToSave) {
                 const newTasks = group.tasks.map(task => {
                     if (task.id === taskToSave.id) task = taskToSave
                     return task
-
                 })
                 group.tasks = newTasks
             }
             return group
         })
-
-        const updatedBoard = {...board, groups: updatedGroups }
-
+        const updatedBoard = { ...board, groups: updatedGroups }
         save(updatedBoard)
-
         return updatedBoard
     } catch (err) {
         console.log('ERROR: Cannot update task', err);
@@ -238,35 +251,35 @@ function getAttachmentTitle(urlStr) {
 
 function _getBoardLabels() {
     return [{
-            id: "l101",
-            title: "Done",
-            color: "#61bd4f"
-        },
-        {
-            id: "l102",
-            title: "Progress",
-            color: "#f2d600"
-        },
-        {
-            id: "l104",
-            title: "Urgent",
-            color: "#ff9f1a"
-        },
-        {
-            id: "l103",
-            title: "Open",
-            color: " #eb5a46"
-        },
-        {
-            id: "l106",
-            title: "Assigned",
-            color: "#c377e0"
-        },
-        {
-            id: "l105",
-            title: "Irrelevant",
-            color: "#0079bf"
-        }
+        id: "l101",
+        title: "Done",
+        color: "#61bd4f"
+    },
+    {
+        id: "l102",
+        title: "Progress",
+        color: "#f2d600"
+    },
+    {
+        id: "l104",
+        title: "Urgent",
+        color: "#ff9f1a"
+    },
+    {
+        id: "l103",
+        title: "Open",
+        color: " #eb5a46"
+    },
+    {
+        id: "l106",
+        title: "Assigned",
+        color: "#c377e0"
+    },
+    {
+        id: "l105",
+        title: "Irrelevant",
+        color: "#0079bf"
+    }
     ]
 }
 
