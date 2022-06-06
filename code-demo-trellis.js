@@ -1,11 +1,11 @@
 
-const Modal = (props) => {
-
+const Modal = ({boardId, groupId}) => {
+ 
     const onUpdateTask = (task, taskChanges) => {
 
         const taskCopy = JSON.parse(JSON.stringify(task))
         taskCopy.value = taskChanges
-        dispatch(updateTask(props.boardId, props.groupId, taskCopy))
+        dispatch(updateTask(boardId, groupId, taskCopy))
     }
 
 }
@@ -13,7 +13,6 @@ const Modal = (props) => {
 function updateTask(boardId, groupId, taskToUpdate) {
     return async (dispatch) => {
         try {
-
             const updatedBoard = await boardService.updateTask(boardId, groupId, taskToUpdate)
             dispatch(getActionUpdateBoard(updatedBoard))
 
