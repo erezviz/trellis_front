@@ -53,6 +53,7 @@ export function loadBoard(boardId) {
         try {
             const board = await boardService.getById(boardId)
 
+
             dispatch({
                 type: 'SET_BOARD',
                 board
@@ -99,17 +100,20 @@ export function addBoard(board) {
 }
 
 export function updateGroupTask(boardId, groupId, task) {
-    console.log(task)
+
+    console.log('ytask', task)
+    console.log('boardId', boardId)
+    console.log('groupId', groupId)
     return async(dispatch) => {
         try {
             const updatedBoard = await boardService.saveTask(boardId, groupId, task)
+            console.log('updatedBoard', updatedBoard);
             dispatch(getActionUpdateBoard(updatedBoard))
         } catch (err) {
             console.log('Cannot save board', err)
             throw err
         }
     }
-
 }
 
 export function updateBoardForSockets(board) {
@@ -147,6 +151,7 @@ export function onDeleteGroup(boardId, groupId) {
     return async(dispatch) => {
         try {
             const updatedBoard = await boardService.deleteGroup(boardId, groupId)
+            console.log('updatedBoard in onDeleteGroup', updatedBoard);
             dispatch(getActionUpdateBoard(updatedBoard))
                 // return updatedBoard
         } catch (err) {
@@ -172,7 +177,7 @@ export function onUpdateGroup(boardId, groupToSave) {
         try {
             const updatedBoard = await boardService.updateGroup(boardId, groupToSave)
             dispatch(getActionUpdateBoard(updatedBoard))
-            // return reducerBoard.board
+                // return reducerBoard.board
         } catch (err) {
             console.log('Cannot update group', err)
             throw err
@@ -181,10 +186,10 @@ export function onUpdateGroup(boardId, groupToSave) {
 }
 
 // export function onUpdateGroup(boardId, groupId, newName) {
-    //     return async(dispatch) => {
-        //         try {
-            //             const updatedBoard = await boardService.updateGroup(boardId, groupId, newName)
-            //             dispatch(getActionUpdateBoard(updatedBoard))
+//     return async(dispatch) => {
+//         try {
+//             const updatedBoard = await boardService.updateGroup(boardId, groupId, newName)
+//             dispatch(getActionUpdateBoard(updatedBoard))
 //                 // return reducerBoard.board
 //         } catch (err) {
 //             console.log('Cannot save board', err)

@@ -45,11 +45,8 @@ export const TaskDetails = (props) => {
     const [coverModal, setCoverModal] = useState(false)
 
     useEffect(() => {
-        (async () => {
-            const task = await boardService.getTask(currBoard, groupId, taskId)
-
-            setTask(task)
-        })();
+        const task = boardService.getTask(currBoard, groupId, taskId)
+        setTask(task)
         return () => {
             setTask(null)
         }
@@ -72,7 +69,7 @@ export const TaskDetails = (props) => {
         if (ev) {
             ev.preventDefault()
         }
-        if(!task.title) return
+        if (!task.title) return
         dispatch(updateTask(boardId, groupId, task))
         setIsDesc(false)
 
@@ -154,7 +151,7 @@ export const TaskDetails = (props) => {
 
                         </div>
                     </div>}
-                            
+
                     {task.labelIds?.length > 0 && <section className="labels-section">
                         <p>Labels</p>
                         <div className='flex'>
@@ -190,10 +187,10 @@ export const TaskDetails = (props) => {
                         <div className="desc-container">
                             <div className="desc-label-container flex">
 
-                            <span className="task-description-icon">
-                                <DescIcon/>
-                            </span>
-                            <label className="description" htmlFor="description">Description</label>
+                                <span className="task-description-icon">
+                                    <DescIcon />
+                                </span>
+                                <label className="description" htmlFor="description">Description</label>
                             </div>
                             <form className="edit-description" onSubmit={onSave}>
                                 <textarea
