@@ -2,15 +2,15 @@ import { TextField } from "@mui/material"
 import { React, useState } from "react"
 import { ReactComponent as Close } from '../../assets/icon/close.svg'
 import { useDispatch, useSelector } from "react-redux"
-import { updateGroupTask } from "../../store/board.action"
-
+import { onUpdateGroup } from "../../store/board.action"
+import { utilService } from "../../services/util.service"
 import { ReactComponent as Plus } from '../../assets/icon/plus-icon.svg'
 
 export const GroupFooter = (props) => {
     const dispatch = useDispatch()
     const [isShown, setIsShown] = useState(true)
     const [task, setTask] = useState({ title: '' })
-    const { currBoard } = useSelector(state => state.boardModule)
+    // const { currBoard } = useSelector(state => state.boardModule)
 
 
     const onHandleChange = ({ target }) => {
@@ -19,10 +19,19 @@ export const GroupFooter = (props) => {
 
     const onSaveTask = (ev) => {
         ev.preventDefault()
+
         const boardId = props.boardId
-        const groupId = props.groupId
-        if (!task.title) return
-        dispatch(updateGroupTask(boardId, groupId, task))
+        const groupId = props.group.id
+        let groupToSave = utilService.getDeepCopy(props.group)
+        let taskToSave = utilService.getDeepCopy(task)
+        taskToSave.id = utilService.makeId()
+        console.log('befor submit', task);
+        if (!taskToSave.title) return
+        if (!groupToSave.tasks){ 
+            groupToSave.tasks = [taskToSave]
+        }else groupToSave.tasks = [...groupToSave.tasks, taskToSave]
+        console.log('after submit', groupToSave);
+        dispatch(onUpdateGroup(boardId, groupToSave))
         setIsShown(true)
     }
 

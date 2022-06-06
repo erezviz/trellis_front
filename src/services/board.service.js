@@ -92,7 +92,8 @@ async function updateGroup(boardId, groupToSave) {
         const board = await boardService.getById(boardId)
 
         const updatedGroups = board.groups.map(group => {
-            if (group.id === groupToSave.id) return groupToSave
+            if (group.id === groupToSave.id) group = groupToSave
+            return group
         })
         const updatedBoard = { ...board, groups: updatedGroups }
         save(updatedBoard)
@@ -134,23 +135,10 @@ function getEmptyTask() {
 }
 //? THIS FUNCTION WORKS -- DO NOT DELETE
 function getTask(board, groupId, taskId) {
-
-    try {
-        const group = board.groups.find(group => group.id === groupId)
-        const task = group.tasks.find(task => task.id === taskId)
-
-        // const task = board.groups.find(group => {
-        //     if (group.id === groupId) {
-        //         return group.tasks.find(task => task.id === taskId)
-        //     }
-        // })
-
-        return task
-
-    } catch (err) {
-        console.log('Cannot load task', err)
-        throw err
-    }
+    const group = board.groups.find(group => group.id === groupId)
+    const task = group.tasks.find(task => task.id === taskId)
+    console.log('from get task', task);
+    return task
 }
 
 async function saveTask(boardId, groupId, taskToSave) {
