@@ -46,7 +46,7 @@ export const TaskDetails = (props) => {
 
     useEffect(() => {
         (async () => {
-            const task = boardService.getTask(currBoard, groupId, taskId)
+            const task = await boardService.getTask(currBoard, groupId, taskId)
 
             setTask(task)
         })();
@@ -54,6 +54,7 @@ export const TaskDetails = (props) => {
             setTask(null)
         }
     }, [currBoard])
+
 
     const modalStyle = {
         display: props.isOpen ? 'block' : 'none',

@@ -71,7 +71,7 @@ const _AppHeader = (props) => {
             </Link>}
 
             {user && <div className="user-img">
-                {user.imgUrl && <img onClick={() => onToggleAccount()} src={require(`../assets/img/shabi.jpg`)} alt="" />}
+                {user.imgUrl && <img onClick={() => onToggleAccount()} src={user.imgUrl} alt="" />}
                 {!user.imgUrl && <img onClick={() => onToggleAccount()} src={member} alt="" />}
             </div>
             }
@@ -87,7 +87,7 @@ const _AppHeader = (props) => {
                 </header>
                 <div className="user-profile">
                     <div className="user-img">
-                        {user.imgUrl && <img className="Account-img" src={require(`../assets/img/shabi.jpg`)} alt="" />}
+                        {user.imgUrl && <img className="Account-img" src={user.imgUrl} alt="" />}
                         {!user.imgUrl && <img className="Account-img" src={member} alt="" />}
                     </div>
                     <h2>{user.fullname}</h2>
