@@ -23,6 +23,11 @@ class _HomePage extends React.Component {
     componentDidMount() {
         this.onLoadBoards();
     }
+    
+    componentDidUpdate(){
+        this.onLoadBoards();
+
+    }
 
     onLoadBoards = () => {
         this.props.loadBoards()

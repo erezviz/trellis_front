@@ -153,7 +153,8 @@ class _BoardApp extends React.Component {
             }
             // moving tasks on different groups
             else if (groupStart !== groupFinish) {
-                groupFinish.tasks.splice(destination.index, 0, draggableTask)
+                if (!groupFinish.tasks) groupFinish.tasks = [draggableTask]
+                else groupFinish.tasks.splice(destination.index, 0, draggableTask)
             }
         }
         this.props.updateWholeBoard(board)

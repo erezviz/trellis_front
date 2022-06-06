@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useDispatch } from 'react-redux';
 import { updateTask } from '../../store/board.action'
 
@@ -19,7 +19,11 @@ export const CoverModal = (props) => {
         { name: 'clr10', color: "#172B4D" },
     ]
 
-    const onChooseColor = (color) => {
+    useEffect(()=>{
+        if (props.task.cover) setColor(props.task.cover)
+    },[])
+
+    const onChooseColor = async (color) => {
         if (color === chosenColor) {
             setColor(null)
         }
@@ -27,14 +31,13 @@ export const CoverModal = (props) => {
             setColor(color)
         }
         const updatedTask = JSON.parse(JSON.stringify(props.task))
-        updatedTask.cover = chosenColor
+        updatedTask.cover = color
         dispatch(updateTask(props.boardId, props.groupId, updatedTask))
     }
 
     return (
         <div className="color-palette">
             {colors.map(currColor => {
-
                 return <button onClick={() => onChooseColor(currColor.color)} key={currColor.color}
                     className={`color-to-choose ${(props.task.cover === currColor.color) && 'chosen'}`}
                     style={{ backgroundColor: currColor.color }}></button>

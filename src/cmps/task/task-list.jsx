@@ -4,7 +4,15 @@ import { Droppable } from "react-beautiful-dnd"
 
 export const TaskList = (props) => {
     const { tasks, idx } = props
-    if (!tasks) return (<p>No tasks</p>)
+     if (!tasks || !tasks.length ) return (
+     <Droppable type='task' index={idx} droppableId={`${props.groupId}`}>
+            {(provided) => {
+               return <div  {...provided.droppableProps} ref={provided.innerRef}>
+                    No tasks
+                    {provided.placeholder}
+                </div>
+                }}
+            </Droppable>)
     return (
         <Droppable type='task' index={idx} droppableId={`${props.groupId}`}>
             {(provided) => {
@@ -27,6 +35,6 @@ export const TaskList = (props) => {
                     {provided.placeholder}
                 </section>
             }}
-        </Droppable>
+            </Droppable>
     )
 }

@@ -34,7 +34,7 @@ export const TaskChecklist = (props) => {
     }
 
     if (!task.checklist) {
-        const newTask = { ...task }
+        const newTask = utilService.getDeepCopy(task)
         newTask.checklist = {
             title: 'Checklist',
             id: utilService.makeId(),
@@ -48,9 +48,10 @@ export const TaskChecklist = (props) => {
     }
 
     const onHandleChange = (ev, todoId) => {
-        const newTask = { ...task }
+        const newTask = utilService.getDeepCopy(task)
         const { value } = ev.target
         setItemTitle(value)
+        console.log('checklist title', value)
         newTask.checklist.todos.map(todo => {
             if (todo.id === todoId) {
                 todo.title = value
@@ -59,7 +60,7 @@ export const TaskChecklist = (props) => {
         })
     }
     const onHandleChangeTitle = (ev) => {
-        const newTask = { ...task }
+        const newTask = utilService.getDeepCopy(task)
         const { value } = ev.target
         console.log(value)
         setItemTitle(value)
