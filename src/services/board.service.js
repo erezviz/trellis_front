@@ -176,6 +176,7 @@ async function saveTask(boardId, groupId, taskToSave) {
 
 async function updateTask(boardId, groupId, taskToSave) {
     // const updatedBoard
+    console.log('task to save', taskToSave)
     try {
         const board = await boardService.getById(boardId)
 
