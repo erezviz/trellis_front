@@ -10,19 +10,19 @@ import { ReactComponent as ThreeDots } from '../../assets/icon/three-dot-menu.sv
 import { useState } from "react"
 import { eventBusService } from "../../services/event-bus.service"
 
-
-
-export const GroupPreview = ({ group, boardId, onToggleDetails, setIsLabelOpen, isLabelOpen, onDeleteGroup, }) => {
+export const GroupPreview = ({ group, boardId, onToggleDetails, setIsLabelOpen, isLabelOpen, onDeleteGroup }) => {
     const dispatch = useDispatch()
     const { currBoard } = useSelector(state => state.boardModule)
     const groupIdx = currBoard.groups.findIndex(currGroup => currGroup.id === group.id)
-    const [groupTitle, setGroupTitle] = useState()
+    const [groupTitle, setGroupTitle] = useState('')
+
     const onChangeName = (val) => {
         let groupToUpdate = utilService.getDeepCopy(group)
         groupToUpdate.title = val
 
 
         dispatch(onUpdateGroup(boardId, groupToUpdate))
+
     }
     // const onChangeName = (val) => {
 
@@ -32,29 +32,18 @@ export const GroupPreview = ({ group, boardId, onToggleDetails, setIsLabelOpen, 
     //         throw err
     //     }
     // }
-    const onSubmitTitle = ev => {
-        if (ev) ev.preventDefault()
-        let groupToUpdate = utilService.getDeepCopy(group)
-        groupToUpdate.title = groupTitle
-        dispatch(onUpdateGroup(boardId, groupToUpdate))
 
-    }
+
     const onSendToOpen = (groupId) => {
         eventBusService.emit('open-group-modal', groupId)
-    }
-
-    const onHandleTitleChange = ev => {
-        const { value } = ev.target
-        setGroupTitle(prevTitle => prevTitle = value)
-
     }
     // const deleteGroup = (ev) => {
     //     ev.preventDefault()
     //     onDeleteGroup(group.id)
     // }
 
-    return (
 
+    return (
         <Draggable draggableId={group.id} index={groupIdx} key={group.id}>
             {(provided) => {
                 return <section {...provided.dragHandleProps}
@@ -63,13 +52,8 @@ export const GroupPreview = ({ group, boardId, onToggleDetails, setIsLabelOpen, 
                     className="group-preview" key={group.id}>
 
                     <div className="header-container">
-                        <GroupHeader
-                            key={group.id}
-                            onSubmit={onSubmitTitle}
-                            onHandleChange={onHandleTitleChange}
-                            onChangeName={onChangeName}
-                            title={groupTitle}
-                        />
+                        <GroupHeader key={group.id} onChangeName={onChangeName}
+                            title={group.title} />
                         <button onClick={() => onSendToOpen(group.id)}>
                             <span>
                                 <ThreeDots style={{ width: '15px' }} />
@@ -85,14 +69,11 @@ export const GroupPreview = ({ group, boardId, onToggleDetails, setIsLabelOpen, 
                             onToggleDetails={onToggleDetails} />
                     </div>
                     <div className="task-footer-container">
-                        <GroupFooter boardId={boardId} groupId={group.id} />
+                        <GroupFooter boardId={boardId} group={group} />
                     </div>
-
                     {provided.placeholder}
                 </section>
             }}
         </Draggable>
     )
 }
-
-
