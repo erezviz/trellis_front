@@ -8,6 +8,7 @@ import { onUpdateGroup } from "../../store/board.action"
 
 import { ReactComponent as ThreeDots } from '../../assets/icon/three-dot-menu.svg'
 import { useState } from "react"
+import { eventBusService } from "../../services/event-bus.service"
 
 export const GroupPreview = ({ group, boardId, onToggleDetails, setIsLabelOpen, isLabelOpen, onDeleteGroup }) => {
     const dispatch = useDispatch()
@@ -36,10 +37,12 @@ export const GroupPreview = ({ group, boardId, onToggleDetails, setIsLabelOpen, 
         setGroupTitle(value)
         console.log(groupTitle);
     }
-    const deleteGroup = (ev) => {
-        ev.preventDefault()
-        onDeleteGroup(group.id)
+
+
+    const onSendToOpen = (groupId) => {
+        eventBusService.emit('open-group-modal', groupId)
     }
+
 
     return (
         <Draggable draggableId={group.id} index={groupIdx} key={group.id}>
@@ -52,7 +55,7 @@ export const GroupPreview = ({ group, boardId, onToggleDetails, setIsLabelOpen, 
                     <div className="header-container">
                         <GroupHeader key={group.id} onChangeName={onChangeName}
                             title={group.title} />
-                        <button onClick={() => onDeleteGroup(group.id)}>
+                        <button onClick={() => onSendToOpen(group.id)}>
                             <span>
                                 <ThreeDots style={{ width: '15px' }} />
                             </span>
