@@ -70,7 +70,7 @@ export const GroupPreview = ({ group, boardId, onToggleDetails, setIsLabelOpen, 
                             onChangeName={onChangeName}
                             title={groupTitle}
                         />
-                        <button onClick={() => onDeleteGroup(group.id)}>
+                        <button onClick={() => onSendToOpen(group.id)}>
                             <span>
                                 <ThreeDots style={{ width: '15px' }} />
                             </span>
