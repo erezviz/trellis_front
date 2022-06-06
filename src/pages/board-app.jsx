@@ -2,28 +2,35 @@ import React from "react";
 import { connect } from "react-redux"
 import { Route } from "react-router-dom";
 import { DragDropContext } from "react-beautiful-dnd";
-
 import TextField from '@mui/material/TextField';
+
+import { socketService, SOCKET_EMIT_SEND_BOARD, SOCKET_EMIT_SET_BOARD, SOCKET_EVENT_ADD_BOARD } from "../services/socket.service";
+import { loadBoard, onDeleteGroup, onAddGroup, updateWholeBoard, updateBoardForSockets } from '../store/board.action'
+import { utilService } from "../services/util.service";
+
 import { BoardHeader } from "../cmps/board/board-header";
 import { SideMenu } from "../cmps/dynamic-cmps/side-menu";
 import { TaskDetails } from "../cmps/task/task-details";
 import { GroupList } from "../cmps/group/group-list"
-import { utilService } from "../services/util.service";
-import { loadBoard, onDeleteGroup, onAddGroup, updateWholeBoard, updateBoardForSockets } from '../store/board.action'
 import { Screen } from '../cmps/dynamic-cmps/screen'
 import { TrellisSpinner } from "../cmps/util-cmps/trellis-spinner";
-import { socketService, SOCKET_EMIT_SEND_BOARD, SOCKET_EMIT_SET_BOARD, SOCKET_EVENT_ADD_BOARD } from "../services/socket.service";
+import { PopOver } from "../cmps/dynamic-cmps/pop-over";
+import { WarningModal } from "../cmps/util-cmps/warning-modal";
+import { eventBusService } from "../services/event-bus.service";
 
 
 class _BoardApp extends React.Component {
     state = {
         groups: [],
         isModalOpen: false,
+        isWarningOpen:false,
         isShown: false,
         isLabelOpen: false,
         newGroup: { title: '' },
+        groupToDelete: null,
         isSideBarOpen: false,
         isScrolling: false,
+        
         clientX: 0,
         scrollX: 0
 
@@ -39,6 +46,11 @@ class _BoardApp extends React.Component {
         //* This is to add the new-listener
         socketService.on(SOCKET_EVENT_ADD_BOARD, this.changeCurrBoard)
 
+        eventBusService.on('open-group-modal' , (groupId) => {
+                this.onToggleWarning()
+                this.setState({groupToDelete: groupId})
+
+        })
 
     }
 
@@ -54,18 +66,29 @@ class _BoardApp extends React.Component {
     }
 
     loadGroups = async (board) => {
-        this.setState(prevState => ({ ...prevState, groups: [] }), async () => {
-            const boardId = this.getBoardId()
-            if (!board) {
-                try {
-                    const board = await this.props.loadBoard(boardId)
-                    this.setState(prevState => ({ ...prevState, groups: board.groups }), () =>
-                        socketService.emit(SOCKET_EMIT_SET_BOARD, board._id))
-                } catch (err) {
-                    throw err
-                }
-            } else this.setState(prevState => ({ ...prevState, groups: board.groups }))
-        })
+        if(board) return this.setState(prevState => ({...prevState, group: board.groups}))
+
+        const boardId = this.getBoardId()
+        try{
+            const updatedBoard = await this.props.loadBoard(boardId)
+            this.setState(prevState => ({...prevState, groups: updatedBoard.groups}))
+            socketService.emit(SOCKET_EMIT_SET_BOARD, board._id)
+
+        }catch (err){
+            console.log('ERROR: Cannot update board', err)
+        }
+        // this.setState(prevState => ({ ...prevState, groups: [] }), async () => {
+        //     const boardId = this.getBoardId()
+        //     if (!board) {
+        //         try {
+        //             const board = await this.props.loadBoard(boardId)
+        //             this.setState(prevState => ({ ...prevState, groups: board.groups }), () =>
+        //                 socketService.emit(SOCKET_EMIT_SET_BOARD, board._id))
+        //         } catch (err) {
+        //             throw err
+        //         }
+        //     } else this.setState(prevState => ({ ...prevState, groups: board.groups }))
+        // })
     }
 
     getBoardId = () => {
@@ -74,14 +97,16 @@ class _BoardApp extends React.Component {
     }
 
     onDeleteGroup = async (groupId) => {
+       
         const boardId = this.getBoardId()
         try {
             const board = await this.props.onDeleteGroup(boardId, groupId)
             this.loadGroups(board)
         } catch (err) {
+            console.log('ERROR: Cannot delete group', err)
             throw err
-        } finally {
-
+        } finally{
+            this.onToggleWarning()
         }
     }
 
@@ -114,6 +139,11 @@ class _BoardApp extends React.Component {
             isModalOpen: !prevState.isModalOpen
         }));
         this.props.history.push(`/board/${boardId}`)
+    }
+
+    onToggleWarning = () => {
+        this.setState({isWarningOpen: !this.state.isWarningOpen})
+       
     }
 
     onCloseDetails = (ev) => {
@@ -159,13 +189,14 @@ class _BoardApp extends React.Component {
         }
         this.props.updateWholeBoard(board)
     }
+
     render() {
 
         const { currBoard } = this.props
         if (!currBoard?._id) return <></>
         const { labels, members } = currBoard
         const { boardId } = this.props.match.params
-        const { groups, isModalOpen, isShown, isSideBarOpen } = this.state
+        const { groups, isModalOpen, isShown, isSideBarOpen,isWarningOpen , groupToDelete} = this.state
         let status = (isSideBarOpen) ? 'open' : ''
         const background = {
             backgroundImage: `url(${currBoard.style.imgUrl})`,
@@ -189,10 +220,12 @@ class _BoardApp extends React.Component {
                             <DragDropContext onDragEnd={this.onDragEnd} id={currBoard._id}>
                                 <GroupList
                                     boardId={boardId}
+                                    onToggleWarning={this.onToggleWarning}
                                     onToggleDetails={this.onToggleDetails}
                                     onDeleteGroup={this.onDeleteGroup}
                                     groups={groups} />
                             </DragDropContext>
+                            
                         </div>
                     }
                     <>
@@ -207,6 +240,9 @@ class _BoardApp extends React.Component {
                                     onCloseDetails={this.onCloseDetails} />
                             </Screen>
                         </Route>
+                        <PopOver isShown={isWarningOpen} title={'Delete list?'} cb={this.onToggleWarning}>
+                            <WarningModal groupId={groupToDelete} onDeleteGroup={this.onDeleteGroup}/>
+                        </PopOver>
                     </>
                     <div className="add-group">
                         {!isShown && <button className="add-group-btn" onClick={this.onToggleGroup}><span className="plus">+</span> Add another list</button>}

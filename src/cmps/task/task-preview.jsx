@@ -30,7 +30,6 @@ export const TaskPreview = (props) => {
                     </section>
                     <section onClick={() => props.onToggleDetails()} className="main-preview">
                         <h5>{task.title}</h5>
-                    </section>
                     <div className="flex-space-between">
                     <section className="icon-previews">
                         {task.dueDate && <span><Date/></span>}
@@ -51,6 +50,7 @@ export const TaskPreview = (props) => {
                     </section>
                     
                 </div>
+                        </section>
                     {provided.placeholder}
                 </section>
             }}

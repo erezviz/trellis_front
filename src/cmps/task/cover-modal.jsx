@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react"
 import { useDispatch } from 'react-redux';
+import { utilService } from "../../services/util.service";
 import { updateTask } from '../../store/board.action'
 
 export const CoverModal = (props) => {
     const dispatch = useDispatch()
     const [chosenColor, setColor] = useState(null)
-
+  
     const colors = [
         { name: 'clr1', color: "#7BC86C" },
         { name: 'clr2', color: "#F5DD29" },
