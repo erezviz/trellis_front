@@ -28,7 +28,8 @@
             position: fixed;
             right: 5px;
             padding: 8px;
-            background-color: #0000001a;
+            background-color: rgba(255, 255, 255, 0.2);
+            text-shadow: 0 0 0.3px;
             border-radius: 3px;
             box-shadow: none;
             border: none;
@@ -151,6 +152,7 @@
     padding: 5px;
     color: white;
     font-size: 20px;
+    text-shadow: 0.1px 0.1px 0px black;
 }
 
 .board-preview {
@@ -171,7 +173,7 @@ svg{path{
 }
 .board-header-starred{
     margin: auto;
-    background-color: rgba(46, 87, 156, 0.25);
+    background-color: rgba(91, 91, 91, 0.2392156863);
     color: white;
     padding: 5px 5px 0px 5px;
     cursor: pointer;

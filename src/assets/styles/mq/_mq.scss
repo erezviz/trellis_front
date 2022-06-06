@@ -8,7 +8,8 @@
 }
 @media screen and (max-width: 1024px) {
     .home-page .board-list-container{
-        right: 0
+        // right: 0;
+        bottom: 5rem
     }
 }
 @media screen and (max-width: 780px) {
@@ -24,9 +25,9 @@
 }
 @media screen and (max-width: 664px) {
     .home-page .board-list-container{
-        bottom: 6rem;
-        left: 1rem;
-        right: 0;
+        // top: 10rem;
+        bottom: 3rem;
+        margin-left: 6rem;
     }
 
 }
