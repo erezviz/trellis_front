@@ -83,15 +83,18 @@
             justify-content: flex-end;
             margin-inline-start: 6px;
             .member-task-preview {
-                height: 30px;
-                width: 30px;
-                position: relative;
-                bottom: 10px;
-                right: 10px;
+                height: 28px;
+                width: 28px;
+                // position: relative;
+                // bottom: 8px;
+                // right: 8px;
                 img {
                     border-radius: 50%;
                 }
             }
+        }
+        &-title {
+            min-height: 45px;
         }
         h5 {
             color: darken($color: $clr2, $amount: 55%);
@@ -175,6 +178,16 @@ input.group-title {
     bottom: 2px;
     font-weight: 600;
     height: 32px;
+}
+
+section.main-preview {
+    >div.functions-previews.flex-space-between {
+        padding: 2px 4px 9px 3px;
+        >section.icon-previews {
+            flex: 1;
+            padding-top: 3px;
+        }
+    }
 }
 
 .icon-previews {

@@ -29,28 +29,30 @@ export const TaskPreview = (props) => {
                         })}
                     </section>
                     <section onClick={() => props.onToggleDetails()} className="main-preview">
-                        <h5>{task.title}</h5>
-                    <div className="flex-space-between">
-                    <section className="icon-previews">
-                        {task.dueDate && <span><Date/></span>}
-                        {task.attachments && <span><img className="icon-preview" src={require('../../assets/icon/attachment-icon.png')} alt="" /></span>}
-                        {task.checklist && <span><img className="icon-preview" src={require('../../assets/icon/checklist-icon.png')} alt="" /></span>}
-                        {task.description && <span><img className="icon-preview" src={require('../../assets/icon/description-icon.png')} alt="" /></span>}
+                        <div className="task-preview-title">
+                            <h5>{task.title}</h5>
+                        </div>
+                        <div className="functions-previews flex-space-between">
+                            <section className="icon-previews">
+                                {task.dueDate && <span><Date /></span>}
+                                {task.attachments && <span><img className="icon-preview" src={require('../../assets/icon/attachment-icon.png')} alt="" /></span>}
+                                {task.checklist && <span><img className="icon-preview" src={require('../../assets/icon/checklist-icon.png')} alt="" /></span>}
+                                {task.description && <span><img className="icon-preview" src={require('../../assets/icon/description-icon.png')} alt="" /></span>}
+                            </section>
+                            <section className="members-task-preview">
+                                {task.memberIds && board.members.map(member => {
+                                    return task.memberIds.map(memberId => {
+                                        if (member._id === memberId) {
+                                            return <div key={memberId} className="member-task-preview">
+                                                <img src={member.imgUrl} alt="" />
+                                            </div>
+                                        }
+                                    });
+                                })}
+                            </section>
+
+                        </div>
                     </section>
-                    <section className="members-task-preview">
-                        {task.memberIds && board.members.map(member => {
-                            return task.memberIds.map(memberId => {
-                                if (member._id === memberId) {
-                                    return <div key={memberId} className="member-task-preview">
-                                        <img src={member.imgUrl} alt="" />
-                                    </div>
-                                }
-                            });
-                        })}
-                    </section>
-                    
-                </div>
-                        </section>
                     {provided.placeholder}
                 </section>
             }}

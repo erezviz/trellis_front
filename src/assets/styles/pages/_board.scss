@@ -17,6 +17,22 @@
     white-space: nowrap;
     // background: url('../../img/background-fall.jpg');
     background-size: cover;
+    &::-webkit-scrollbar {
+        height: 12px;
+        width: 12px;
+    }
+    &::-webkit-scrollbar-thumb {
+        background: #ffffffa3;
+        border-radius: 10px;
+    }
+    &::-webkit-scrollbar-track-piece {
+        background: #00000026;
+    }
+    &::-webkit-scrollbar-button {
+        display: block;
+        height: 4px;
+        width: 4px;
+    }
     .main-board {
         display: flex;
     }
@@ -158,7 +174,8 @@
 .board-preview {
     text-shadow: 1px 1px black;
 }
-.board-header-star{
+
+.board-header-star {
     border-radius: 5px;
     margin: auto;
     background-color: rgba(46, 87, 156, 0.25);
@@ -166,34 +183,41 @@
     padding: 5px 5px 0px 5px;
     cursor: pointer;
 }
-.board-header-star:hover{
-svg{path{
-    fill: yellow;
-}}
+
+.board-header-star:hover {
+    svg {
+        path {
+            fill: yellow;
+        }
+    }
 }
-.board-header-starred{
+
+.board-header-starred {
     margin: auto;
     background-color: rgba(91, 91, 91, 0.2392156863);
     color: white;
     padding: 5px 5px 0px 5px;
     cursor: pointer;
-svg{path{
-    fill: yellow;
-}}
+    svg {
+        path {
+            fill: yellow;
+        }
+    }
 }
-.board-members{
+
+.board-members {
     position: relative;
     margin: auto;
-    top: 6px;
+    top: 11px;
     margin-left: 30px;
-    .board-member{
+    .board-member {
         height: 30px;
         width: 30px;
         position: relative;
         bottom: 10px;
         right: 10px;
         margin-right: 5px;
-        img{
+        img {
             border-radius: 50%;
         }
     }

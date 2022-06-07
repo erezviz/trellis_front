@@ -1,6 +1,22 @@
 .create-attachment {
     display: flex;
     flex-direction: column;
+    .upload-btn {
+        cursor: pointer;
+        display: block;
+        font-weight: 400;
+        text-align: left;
+        margin: 0 -12px;
+        padding: 6px 12px;
+        position: relative;
+        text-decoration: none;
+        background: transparent;
+        border: 0;
+        color: #172b4d;
+        &:hover {
+            background-color: #091e420a;
+        }
+    }
     form.col {
         display: flex;
         flex-direction: column;
