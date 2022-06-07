@@ -13,30 +13,37 @@
     user-select: none;
     white-space: nowrap;
     background-size: cover;
+
     &::-webkit-scrollbar {
         height: 12px;
         width: 12px;
     }
+
     &::-webkit-scrollbar-thumb {
         background: #ffffffa3;
         border-radius: 10px;
     }
+
     &::-webkit-scrollbar-track-piece {
         background: #00000026;
     }
+
     &::-webkit-scrollbar-button {
         display: block;
         height: 4px;
         width: 4px;
     }
+
     .main-board {
         width: fit-content;
         display: flex;
     }
+
     .board-name {
         justify-content: space-between;
         align-items: center;
         margin-block-start: 15px;
+
         .show-menu-btn {
             position: fixed;
             right: 5px;
@@ -53,11 +60,13 @@
             color: #fff;
             background-color: #5b5b5b3d;
             align-items: flex-start;
+
             &:hover {
                 background-color: transparentize($color: lighten($color: $clr5, $amount: 20%), $amount: 0.75);
             }
         }
     }
+
     .add-group {
         margin-block-start: 16px;
         background-color: #5b5b5b3d;
@@ -78,24 +87,28 @@
         line-height: 20px;
         height: 100%;
         font-weight: 400;
+
         &:hover {
             background-color: transparentize($color: lighten($color: $clr5, $amount: 20%), $amount: 0.75);
         }
-    
+
         form {
             display: grid;
             grid-template: 1fr 1fr/2fr 1fr;
             gap: 5px;
         }
     }
+
     .add-group-field {
         color: dimgray;
         text-shadow: 0 0 0.5px;
         font-size: rem(16px);
     }
+
     .css-1u3bzj6-MuiFormControl-root-MuiTextField-root {
         grid-column: 1/3;
     }
+
     .css-dpjnhs-MuiInputBase-root-MuiOutlinedInput-root {
         &:focus {
             border-radius: 5px;
@@ -103,9 +116,11 @@
             background-color: #fff;
             box-shadow: inset 0 0 0 2px #0079bf;
         }
+
         height: 20px;
         background-color: #fff;
     }
+
     .save-group-btn {
         grid-row: 2;
         grid-column: 1/2;
@@ -113,11 +128,13 @@
         color: #fff;
         border: none;
     }
+
     .back-to-board-btn {
         grid-row: 2;
         grid-column: 2;
         border: none;
     }
+
     .add-group-btn {
         margin-inline-start: 15px;
         width: 250px;
@@ -132,6 +149,7 @@
         transition: background-color, 0.25s;
         text-shadow: 0 0 0.3px;
         background-color: transparent;
+
         .plus {
             font-size: 18px;
             padding-right: 5px;
@@ -140,11 +158,12 @@
 }
 
 .board-title {
+    width: 210px;
     margin-left: 27px;
     font-family: Secular, sans-serif;
     border-style: none;
     background-color: transparent;
-    padding: 5px;
+    padding: 10px;
     color: white;
     font-size: 20px;
     text-shadow: 0.1px 0.1px 0px black;
@@ -172,11 +191,12 @@
 }
 
 .board-header-starred {
-    margin: auto;
+    margin: 6px 10px;
     background-color: rgba(91, 91, 91, 0.2392156863);
     color: white;
     padding: 5px 5px 0px 5px;
     cursor: pointer;
+
     svg {
         path {
             fill: yellow;
@@ -189,6 +209,7 @@
     margin: auto;
     top: 11px;
     margin-left: 30px;
+
     .board-member {
         height: 30px;
         width: 30px;
@@ -196,6 +217,7 @@
         bottom: 10px;
         right: 10px;
         margin-right: 5px;
+
         img {
             border-radius: 50%;
         }

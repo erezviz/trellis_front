@@ -138,6 +138,7 @@
     .logo-container {
         align-items: center;
         display: flex;
+        margin-inline-start: 1rem;
         &:hover {
             cursor: pointer;
         }

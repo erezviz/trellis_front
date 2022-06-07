@@ -49,9 +49,9 @@
 
 .teaser-container {
     text-align: center;
-    margin: auto;
     
     .teaser-p {
+        margin: auto;
         width: 900px;
     }
     .enter-link {
@@ -70,4 +70,8 @@
     .enter-link:hover {
         background-color: darken($color: $clr1, $amount: 10%);
     }
+
+    .teaser-img{svg{
+        width: 850px;
+    }}
 }

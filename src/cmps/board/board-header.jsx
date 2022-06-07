@@ -45,10 +45,12 @@ export const BoardHeader = (props) => {
                 <form>
                     <input style={isEdit ? { titleStyle } : {}} value={header} onChange={(ev) => handleFormChange(ev)} className="board-title" name="checklist" />
                 </form>
+                <p className="vr">|</p>
             </div>
             <div className={`board-header-${star}`}>
                 <Star onClick={onStar} />
             </div>
+                <p className="vr">|</p>
             <div className="board-members flex">
                 {currBoard.members && currBoard.members.map(member => {
                     return <div key={member._id} className="board-member">
