@@ -5,7 +5,6 @@ import { boardService } from "../services/board.service"
 import { useState } from "react"
 
 export const GroupPreview = (props) => {
-    console.log(props.onDeleteGroup);
     const [group, setGroup] = useState(props.group)
 
     const { boardId } = props

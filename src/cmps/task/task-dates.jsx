@@ -17,9 +17,7 @@ export const TaskDate = (props) => {
     const onSaveDate = () => {
         const newTask = utilService.getDeepCopy(props.task)
         const newDate = date._d.toString().substring(0, 10)
-        console.log(typeof date._d.toString());
         newTask.dueDate = newDate
-        console.log(newTask);
         dispatch(updateTask(boardId, groupId, newTask))
         props.onToggleDates(false)
     }

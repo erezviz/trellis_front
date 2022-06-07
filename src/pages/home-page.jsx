@@ -24,8 +24,8 @@ class _HomePage extends React.Component {
     componentDidMount() {
         this.onLoadBoards();
     }
-    
-    componentDidUpdate(){
+
+    componentDidUpdate() {
         this.onLoadBoards();
 
     }
@@ -44,7 +44,6 @@ class _HomePage extends React.Component {
         const newBoard = JSON.parse(JSON.stringify(board))
         if (!newBoard.starred) newBoard.starred = true
         else newBoard.starred = false
-        console.log(newBoard)
         this.props.updateWholeBoard(newBoard)
     }
 

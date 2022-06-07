@@ -52,7 +52,6 @@ class _LoginSignup extends Component {
         const { user } = this.props
         const { username, password, fullname } = this.state.credentials;
         const { isSignup } = this.state;
-        console.log('user from login', user);
         return (
             <div className="login-page">
                 {!user && < section className="login-signup">

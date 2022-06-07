@@ -19,9 +19,7 @@ export const CreateBoardModal = ({ isShown }) => {
 
     })
 
-    // useEffect(()=>{
-    //     console.log('coverImg changed!')
-    // },[])
+
 
     const onHandleChange = ev => {
         const { value, name } = ev.target

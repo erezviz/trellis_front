@@ -51,7 +51,6 @@ export const CreateAttachment = ({ task, isShown, cb }) => {
 
         if (!ev.target.files[0] || !ev.target.files.length) return
         const title = utilService.getFilename(ev.target.value)
-        // setIsUploading(prevUploading => prevUploading = true)
         const url = await uploadService.uploadImg(ev)
         setIsUploading(true)
 

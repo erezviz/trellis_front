@@ -52,8 +52,8 @@ export const TaskDetails = (props) => {
             setTask(null)
         }
     }, [currBoard])
- 
-    
+
+
 
     const modalStyle = {
         display: props.isOpen ? 'block' : 'none',
@@ -94,7 +94,6 @@ export const TaskDetails = (props) => {
         setIsChecklistModalOpen(prevChecklistModalOpen => prevChecklistModalOpen = !isChecklistModalOpen)
     }
     const onOpenChecklist = (val) => {
-        console.log(val)
         setIsChecklistOpen(prevChecklistOpen => prevChecklistOpen = val)
     }
 
@@ -201,12 +200,12 @@ export const TaskDetails = (props) => {
                                 className={`desc-empty btn btn-light `}
                                 style={{ display: `${isDescEdit ? 'none' : 'flex'}` }}
                             >
-                               <span> Add a more detailed description...</span>
+                                <span> Add a more detailed description...</span>
                             </div>}
                             <form className="edit-description" onSubmit={onSave}>
                                 <textarea
                                     onFocus={() => setIsDesc(true)}
-                                 
+
                                     onInput={onDescResize}
                                     onChange={handleFormChange}
                                     name="description"
@@ -222,14 +221,14 @@ export const TaskDetails = (props) => {
                                         className="desc-send-btn"
                                         type="submit"
                                         value="Send"
-                                        />
+                                    />
                                     <input
                                         type="button"
                                         className="btn btn-light"
                                         onClick={() => setIsDesc(!isDesc)}
                                         value="Cancel"
-                                       />
-                                        
+                                    />
+
                                 </div>}
                             </form>
                         </div>

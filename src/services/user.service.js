@@ -52,7 +52,7 @@ function remove(userId) {
 async function update(user) {
     // await storageService.put('user', user)
     user = await httpService.put(`user/${user._id}`, user)
-        // Handle case in which admin updates other user's details
+    // Handle case in which admin updates other user's details
     if (getLoggedinUser()._id === user._id) saveLocalUser(user)
     return user;
 }
@@ -62,7 +62,6 @@ async function login(userCred) {
     // const user = users.find(user => user.username === userCred.username)
     const user = await httpService.post('auth/login', userCred)
     if (user) {
-        console.log('user from service', user);
         socketService.login(user._id)
         return saveLocalUser(user)
     }
@@ -84,7 +83,6 @@ async function logout() {
 
 
 function saveLocalUser(user) {
-    console.log('user from service', user);
     sessionStorage.setItem(STORAGE_KEY_LOGGEDIN_USER, JSON.stringify(user))
     return user
 }

@@ -6,8 +6,8 @@ import { socketService, SOCKET_EMIT_SEND_BOARD, SOCKET_EVENT_ADD_BOARD } from '.
 // import { getActionRemoveBoard, getActionAddBoard, getActionUpdateBoard } from '../store/board.actions.js'
 
 const STORAGE_KEY = 'board'
-    // const boardChannel = new BroadcastChannel('boardChannel')
-    // const listeners = []
+// const boardChannel = new BroadcastChannel('boardChannel')
+// const listeners = []
 
 export const boardService = {
     query,
@@ -56,7 +56,7 @@ async function save(board) {
     if (board._id) {
         socketService.emit(SOCKET_EMIT_SEND_BOARD, board)
         savedBoard = await httpService.put(`board/:${board._id}`, board)
-            // return 
+        // return 
     } else {
         // socketService.emit(SOCKET_EMIT_SEND_BOARD, board)
         board.labels = _getBoardLabels()
@@ -96,7 +96,7 @@ async function updateGroup(boardId, groupToSave) {
             if (group.id === groupToSave.id) group = groupToSave
             return group
         })
-        const updatedBoard = {...board, groups: updatedGroups }
+        const updatedBoard = { ...board, groups: updatedGroups }
         save(updatedBoard)
         return updatedBoard
     } catch (err) {
@@ -139,7 +139,6 @@ function getEmptyTask() {
 function getTask(board, groupId, taskId) {
     const group = board.groups.find(group => group.id === groupId)
     const task = group.tasks.find(task => task.id === taskId)
-    console.log('from get task', task);
     return task
 }
 
@@ -148,7 +147,6 @@ async function saveTask(boardId, groupId, taskToSave) {
     try {
         const board = await getById(boardId)
         const groups = board.groups.map(group => {
-            // console.log('my group id', group.id);
             if (group.id === groupId) {
                 if (group.tasks) group.tasks.push(taskToSave)
                 else group.tasks = [taskToSave]
@@ -165,8 +163,6 @@ async function saveTask(boardId, groupId, taskToSave) {
 }
 
 async function updateTask(boardId, groupId, taskToSave) {
-    // const updatedBoard
-    console.log('task to save', taskToSave)
     try {
         const board = await boardService.getById(boardId)
 
@@ -180,7 +176,7 @@ async function updateTask(boardId, groupId, taskToSave) {
             }
             return group
         })
-        const updatedBoard = {...board, groups: updatedGroups }
+        const updatedBoard = { ...board, groups: updatedGroups }
         save(updatedBoard)
         return updatedBoard
     } catch (err) {
@@ -210,7 +206,6 @@ function createAttachment(attachmentType, str) {
 
 function getAttachmentTitle(urlStr) {
     let url = new URL(urlStr)
-    console.log(url);
 }
 
 // function subscribe(listener) {
@@ -242,35 +237,35 @@ function getAttachmentTitle(urlStr) {
 
 function _getBoardLabels() {
     return [{
-            id: "l101",
-            title: "Done",
-            color: "#61bd4f"
-        },
-        {
-            id: "l102",
-            title: "Progress",
-            color: "#f2d600"
-        },
-        {
-            id: "l104",
-            title: "Urgent",
-            color: "#ff9f1a"
-        },
-        {
-            id: "l103",
-            title: "Open",
-            color: " #eb5a46"
-        },
-        {
-            id: "l106",
-            title: "Assigned",
-            color: "#c377e0"
-        },
-        {
-            id: "l105",
-            title: "Irrelevant",
-            color: "#0079bf"
-        }
+        id: "l101",
+        title: "Done",
+        color: "#61bd4f"
+    },
+    {
+        id: "l102",
+        title: "Progress",
+        color: "#f2d600"
+    },
+    {
+        id: "l104",
+        title: "Urgent",
+        color: "#ff9f1a"
+    },
+    {
+        id: "l103",
+        title: "Open",
+        color: " #eb5a46"
+    },
+    {
+        id: "l106",
+        title: "Assigned",
+        color: "#c377e0"
+    },
+    {
+        id: "l105",
+        title: "Irrelevant",
+        color: "#0079bf"
+    }
     ]
 }
 

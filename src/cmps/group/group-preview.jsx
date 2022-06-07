@@ -24,24 +24,10 @@ export const GroupPreview = ({ group, boardId, onToggleDetails, setIsLabelOpen, 
         dispatch(onUpdateGroup(boardId, groupToUpdate))
 
     }
-    // const onChangeName = (val) => {
-
-    //     try {
-    //         dispatch(onUpdateGroup(boardId, group.id, val))
-    //     } catch (err) {
-    //         throw err
-    //     }
-    // }
-
 
     const onSendToOpen = (groupId) => {
         eventBusService.emit('open-group-modal', groupId)
     }
-    // const deleteGroup = (ev) => {
-    //     ev.preventDefault()
-    //     onDeleteGroup(group.id)
-    // }
-
 
     return (
         <Draggable draggableId={group.id} index={groupIdx} key={group.id}>

@@ -45,14 +45,12 @@ window.util = getFilename()
 function getFilename(strUrl) {
     let filename
     if (isValidUrl(strUrl)) {
-        console.log('strUrl in if', strUrl);
         const URLObj = new URL(strUrl)
         const { pathname } = URLObj
         filename = pathname.split('/').pop()
         if (!filename.includes('.')) filename += '.jpeg'
         if (filename.includes('fakepath'))
             filename = pathname.match(/[^\\/]*$/)[0]
-        console.log('filename in if', filename);
     } else {
         filename = 'http://' + strUrl
     }

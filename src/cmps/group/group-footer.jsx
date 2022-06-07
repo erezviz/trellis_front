@@ -10,7 +10,6 @@ export const GroupFooter = (props) => {
     const dispatch = useDispatch()
     const [isShown, setIsShown] = useState(true)
     const [task, setTask] = useState({ title: '' })
-    // const { currBoard } = useSelector(state => state.boardModule)
 
 
     const onHandleChange = ({ target }) => {
@@ -25,12 +24,10 @@ export const GroupFooter = (props) => {
         let groupToSave = utilService.getDeepCopy(props.group)
         let taskToSave = utilService.getDeepCopy(task)
         taskToSave.id = utilService.makeId()
-        console.log('befor submit', task);
         if (!taskToSave.title) return
-        if (!groupToSave.tasks){ 
+        if (!groupToSave.tasks) {
             groupToSave.tasks = [taskToSave]
-        }else groupToSave.tasks = [...groupToSave.tasks, taskToSave]
-        console.log('after submit', groupToSave);
+        } else groupToSave.tasks = [...groupToSave.tasks, taskToSave]
         dispatch(onUpdateGroup(boardId, groupToSave))
         setIsShown(true)
     }

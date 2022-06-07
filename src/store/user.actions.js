@@ -16,8 +16,7 @@ import { showErrorMsg } from '../services/event-bus.service.js'
 // }
 
 export function onLogin(credentials) {
-    console.log('Welcome Noya To our lovly app!');
-    return async(dispatch) => {
+    return async (dispatch) => {
         try {
             const user = await userService.login(credentials)
             dispatch({
@@ -34,8 +33,7 @@ export function onLogin(credentials) {
 
 
 export function onSignup(credentials) {
-    console.log('Welcome green Noya To our lovly app!');
-    return async(dispatch) => {
+    return async (dispatch) => {
         try {
             const user = await userService.signup(credentials)
             dispatch({
@@ -51,7 +49,7 @@ export function onSignup(credentials) {
 }
 
 export function onLogout() {
-    return async(dispatch) => {
+    return async (dispatch) => {
         try {
             await userService.logout()
             dispatch({

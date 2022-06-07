@@ -29,9 +29,9 @@ export const GroupList = ({ groups, onDeleteGroup, boardId, onToggleDetails, onT
                                     onDeleteGroup={onDeleteGroup}
                                     group={group}
                                     key={group.id}
-                                    />
-                            // </div>
-                                    )
+                                />
+                                // </div>
+                            )
                         })}
                         {provided.placeholder}
                     </div>

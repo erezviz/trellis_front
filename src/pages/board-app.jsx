@@ -38,8 +38,6 @@ class _BoardApp extends React.Component {
     ref = React.createRef();
 
     componentDidMount = () => {
-
-        console.log('this happend');
         this.loadGroups()
         //* This is to remove the last-listener
         socketService.off(SOCKET_EVENT_ADD_BOARD)
@@ -71,20 +69,18 @@ class _BoardApp extends React.Component {
             this.setState(prevState => ({ ...prevState, group: board.groups }))
             return
         }
-         (async ()=>{
+        (async () => {
 
-             const boardId = this.getBoardId()
-             try {
-                 
-                 await this.props.loadBoard(boardId)
-                 this.setState(prevState => ({ ...prevState, groups: this.props.currBoard.groups }))
-                 console.log('updated board in klodaGroups', this.props.currBoard)
-                 socketService.emit(SOCKET_EMIT_SET_BOARD, this.props.currBoard._id)
-                 
-                } catch (err) {
-                    console.log('ERROR: Cannot update board', err)
-                }
-            })();
+            const boardId = this.getBoardId()
+            try {
+
+                await this.props.loadBoard(boardId)
+                this.setState(prevState => ({ ...prevState, groups: this.props.currBoard.groups }))
+                socketService.emit(SOCKET_EMIT_SET_BOARD, this.props.currBoard._id)
+
+            } catch (err) {
+            }
+        })();
 
         //     this.setState(prevState => ({ ...prevState, groups: [] }), async () => {
         //         const boardId = this.getBoardId()
@@ -95,12 +91,12 @@ class _BoardApp extends React.Component {
         //                 this.setState(prevState => ({ ...prevState, groups: board.groups }), () =>
         //                     socketService.emit(SOCKET_EMIT_SET_BOARD, board._id))
         //             } catch (err) {
-            //                 throw err
-            //             }
-            //         } else this.setState(prevState => ({ ...prevState, groups: board.groups }))
-            //     })
-        }
-            
+        //                 throw err
+        //             }
+        //         } else this.setState(prevState => ({ ...prevState, groups: board.groups }))
+        //     })
+    }
+
     getBoardId = () => {
         const { boardId } = (this.props.match.params)
         return boardId
@@ -114,7 +110,6 @@ class _BoardApp extends React.Component {
             const board = await this.props.onDeleteGroup(boardId, groupId)
             this.loadGroups(board)
         } catch (err) {
-            console.log('ERROR: Cannot delete group', err)
             throw err
         } finally {
             this.onToggleWarning()

@@ -12,7 +12,6 @@ export const TaskMembers = (props) => {
 
 
     const onToggleMember = async (memberId) => {
-        console.log(props.task)
         const newTask = utilService.getDeepCopy(props.task)
         const newMemberId = props.task.memberIds ? props.task.memberIds.find(currMemberId => currMemberId === memberId) : null
         if (newMemberId) {
@@ -22,7 +21,6 @@ export const TaskMembers = (props) => {
             if (!newTask.memberIds) newTask.memberIds = [memberId]
             else newTask.memberIds = [...newTask.memberIds, memberId]
         }
-        console.log('newTask', newTask)
         dispatch(updateTask(boardId, groupId, newTask))
     }
     console.log('members', props.members);

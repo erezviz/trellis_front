@@ -75,7 +75,6 @@ export const Attachments = ({ task }) => {
     }
 
     const onEditTitle = (ev, attachId) => {
-        console.log('hi from before ev', attachment);
         if (ev) ev.preventDefault()
 
         const newTask = utilService.getDeepCopy(task)
@@ -86,93 +85,89 @@ export const Attachments = ({ task }) => {
         if (!attachment.title) return
         const newAttachments = newTask.attachments.map(prevAttachment => {
             return (prevAttachment.id === attachToUpdate.id) ? attachToUpdate : prevAttachment
-        })
-        console.log('newAttachments', newAttachments);
-        newTask.attachments = newAttachments
-        dispatch(updateTask(boardId, groupId, newTask))
-        resetAttachment()
-        toggleEdit()
+            newTask.attachments = newAttachments
+            dispatch(updateTask(boardId, groupId, newTask))
+            resetAttachment()
+            toggleEdit()
 
-    }
+        }
 
 
     if (!task) return <TrellisSpinner />
-    return (
-        <section className="attachments">
-            <div className="attachment-header">
-                <span className='icon-attachment'></span>
-                <h3 className="inline-title">Attachments</h3>
-            </div>
-            <div className="attachment-main" >
-                {isUploading && <TrellisSpinner />}
-                {task.attachments && task.attachments.map(attachment => {
-                    console.log('attach id in map', attachment);
-                    return <div className="attachment-thumbnail" key={attachment.id}>
+        return (
+            <section className="attachments">
+                <div className="attachment-header">
+                    <span className='icon-attachment'></span>
+                    <h3 className="inline-title">Attachments</h3>
+                </div>
+                <div className="attachment-main" >
+                    {isUploading && <TrellisSpinner />}
+                    {task.attachments && task.attachments.map(attachment => {
+                        return <div className="attachment-thumbnail" key={attachment.id}>
 
-                        <div className="attachment-img-container">
-                            <img key={attachment.id + 'im'} src={`${attachment.url}`} alt="new attachment" />
-                        </div>
-                        <div className="attachment-thumbnail-details">
-
-                            <h5>{attachment.title ? attachment.title : 'Your Attachment'}</h5>
-                            <div className="thumbnail-edit">
-                                <span onClick={() => onRemoveAttachment(attachment.id)}>Delete</span>
-                                <span> - </span>
-                                <span onClick={() => toggleTitle(attachment.id)}>Edit</span>
+                            <div className="attachment-img-container">
+                                <img key={attachment.id + 'im'} src={`${attachment.url}`} alt="new attachment" />
                             </div>
-                        
+                            <div className="attachment-thumbnail-details">
+
+                                <h5>{attachment.title ? attachment.title : 'Your Attachment'}</h5>
+                                <div className="thumbnail-edit">
+                                    <span onClick={() => onRemoveAttachment(attachment.id)}>Delete</span>
+                                    <span> - </span>
+                                    <span onClick={() => toggleTitle(attachment.id)}>Edit</span>
+                                </div>
+
+                            </div>
                         </div>
-                    </div>
-                })}
-                <TitleEdit cb={toggleEdit} onEditTitle={onEditTitle} isShown={isEdit} handleChange={handleChange} id={attachmentId} />
+                    })}
+                    <TitleEdit cb={toggleEdit} onEditTitle={onEditTitle} isShown={isEdit} handleChange={handleChange} id={attachmentId} />
 
-                <button onClick={() => toggleEdit()} className="btn-light" >Add an attachment</button>
-            </div>
-        </section>
-    )
-}
-
-
-function TitleEdit({ isShown, cb, onEditTitle, handleChange, id }) {
-    const [isTyping, setIsTyping] = useState(false)
-    const pos = {
-        left: '284px',
-        top: '88px'
+                    <button onClick={() => toggleEdit()} className="btn-light" >Add an attachment</button>
+                </div>
+            </section>
+        )
     }
 
-    const onTyping = ev => {
-        const { length } = ev.target.value
-        if (length === 0) setIsTyping(false)
-        else if (length > 0) setIsTyping(true)
 
-    }
-    console.log('this is the id in the title edit', id);
-    if (!id) return <></>
-    return (
-        <div className={`pop-over ${isShown ? 'shown' : ''} `} style={pos}>
-            <header className="pop-over-header flex">
-                <h5 className="popover-title">Edit attachment</h5>
-                <button className="pop-over-btn" onClick={() => cb()}>
-                    <span>
-                        <Close />
-                    </span>
+    function TitleEdit({ isShown, cb, onEditTitle, handleChange, id }) {
+        const [isTyping, setIsTyping] = useState(false)
+        const pos = {
+            left: '284px',
+            top: '88px'
+        }
 
-                </button>
-            </header>
-            <div className=" children-container">
-                <form onSubmit={(ev) => onEditTitle(ev, id)} className=" title-edit flex-col" >
-                    <label htmlFor="title">Link name</label>
-                    <input
-                        onChange={handleChange}
-                        onInput={onTyping}
-                        type="text"
-                        name="title"
-                        id="title"
-                        autoFocus={true}
-                    />
-                    <input className={`btn btn${isTyping ? '-btn' : '-light'}`} type="submit" value="Update" />
-                </form>
+        const onTyping = ev => {
+            const { length } = ev.target.value
+            if (length === 0) setIsTyping(false)
+            else if (length > 0) setIsTyping(true)
+
+        }
+        if (!id) return <></>
+        return (
+            <div className={`pop-over ${isShown ? 'shown' : ''} `} style={pos}>
+                <header className="pop-over-header flex">
+                    <h5 className="popover-title">Edit attachment</h5>
+                    <button className="pop-over-btn" onClick={() => cb()}>
+                        <span>
+                            <Close />
+                        </span>
+
+                    </button>
+                </header>
+                <div className=" children-container">
+                    <form onSubmit={(ev) => onEditTitle(ev, id)} className=" title-edit flex-col" >
+                        <label htmlFor="title">Link name</label>
+                        <input
+                            onChange={handleChange}
+                            onInput={onTyping}
+                            type="text"
+                            name="title"
+                            id="title"
+                            autoFocus={true}
+                        />
+                        <input className={`btn btn${isTyping ? '-btn' : '-light'}`} type="submit" value="Update" />
+                    </form>
+                </div>
             </div>
-        </div>
-    )
-}
+        )
+    }

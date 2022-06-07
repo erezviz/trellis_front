@@ -6,7 +6,7 @@ import { updateTask } from '../../store/board.action'
 export const CoverModal = (props) => {
     const dispatch = useDispatch()
     const [chosenColor, setColor] = useState(null)
-  
+
     const colors = [
         { name: 'clr1', color: "#7BC86C" },
         { name: 'clr2', color: "#F5DD29" },
@@ -20,9 +20,9 @@ export const CoverModal = (props) => {
         { name: 'clr10', color: "#172B4D" },
     ]
 
-    useEffect(()=>{
+    useEffect(() => {
         if (props.task.cover) setColor(props.task.cover)
-    },[])
+    }, [])
 
     const onChooseColor = async (color) => {
         if (color === chosenColor) {
