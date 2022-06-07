@@ -193,16 +193,16 @@ export const TaskDetails = (props) => {
                                 </span>
                                 <label className="description" htmlFor="description">Description</label>
                             </div>
-                            {!task.description && <button
+                            {!task.description && <div
                                 onClick={() => {
                                     setIsDescEdit(!isDescEdit)
                                     setIsDesc(!isDesc)
                                 }}
                                 className={`desc-empty btn btn-light `}
-                                style={{ display: `${isDescEdit ? 'none' : 'initial'}` }}
+                                style={{ display: `${isDescEdit ? 'none' : 'flex'}` }}
                             >
-                                Add a more detailed description...
-                            </button>}
+                               <span> Add a more detailed description...</span>
+                            </div>}
                             <form className="edit-description" onSubmit={onSave}>
                                 <textarea
                                     onFocus={() => setIsDesc(true)}

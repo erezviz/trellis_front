@@ -38,7 +38,7 @@ export const CreateAttachment = ({ task, isShown, cb }) => {
 
     }
     useEffect(() => {
-        if (attachment.url) onSaveAttachment()
+        if (attachment.url && isUploading) onSaveAttachment()
 
 
     }, [attachment])
@@ -53,7 +53,7 @@ export const CreateAttachment = ({ task, isShown, cb }) => {
         const title = utilService.getFilename(ev.target.value)
         // setIsUploading(prevUploading => prevUploading = true)
         const url = await uploadService.uploadImg(ev)
-        // setIsUploading(prevUploading => prevUploading = false)
+        setIsUploading(true)
 
         setAttachment(prevAttachment => ({ ...prevAttachment, url, title }))
 
@@ -115,6 +115,7 @@ export const CreateAttachment = ({ task, isShown, cb }) => {
                         tabIndex="-1"
                         id="imgUpload"
                         style={{ display: 'none' }}
+                        accept="image/*"
                     />
 
                     <form onSubmit={onSaveAttachment} className="col" >
