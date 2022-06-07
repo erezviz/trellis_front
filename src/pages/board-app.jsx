@@ -36,8 +36,6 @@ class _BoardApp extends React.Component {
     ref = React.createRef();
 
     componentDidMount = () => {
-
-        console.log('this happend');
         this.loadGroups()
         //* This is to remove the last-listener
         socketService.off(SOCKET_EVENT_ADD_BOARD)
@@ -98,7 +96,6 @@ class _BoardApp extends React.Component {
             const board = await this.props.onDeleteGroup(boardId, groupId)
             this.loadGroups(board)
         } catch (err) {
-            console.log('ERROR: Cannot delete group', err)
             throw err
         } finally {
             this.onToggleWarning()

@@ -70,7 +70,6 @@ export const Attachments = ({ task }) => {
     }
 
     const onEditTitle = (ev, attachId) => {
-        console.log('hi from before ev', attachment);
         if (ev) ev.preventDefault()
 
         const newTask = utilService.getDeepCopy(task)
@@ -82,7 +81,6 @@ export const Attachments = ({ task }) => {
         const newAttachments = newTask.attachments.map(prevAttachment => {
             return (prevAttachment.id === attachToUpdate.id) ? attachToUpdate : prevAttachment
         })
-        console.log('newAttachments', newAttachments);
         newTask.attachments = newAttachments
         dispatch(updateTask(boardId, groupId, newTask))
         resetAttachment()
@@ -99,7 +97,6 @@ export const Attachments = ({ task }) => {
             <div className="attachment-main" >
                 {isUploading && <TrellisSpinner />}
                 {task.attachments && task.attachments.map(attachment => {
-                    console.log('attach id in map', attachment);
                     return <div className="attachment-thumbnail" key={attachment.id}>
 
                         <div className="attachment-img-container">
@@ -138,7 +135,6 @@ function TitleEdit({ isShown, cb, onEditTitle, handleChange, id }) {
         else if (length > 0) setIsTyping(true)
 
     }
-    console.log('this is the id in the title edit', id);
     if (!id) return <></>
     return (
         <div className={`pop-over ${isShown ? 'shown' : ''} `} style={pos}>

@@ -1,7 +1,7 @@
 import { TextField } from "@mui/material"
 import { React, useState } from "react"
 import { ReactComponent as Close } from '../../assets/icon/close.svg'
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
 import { onUpdateGroup } from "../../store/board.action"
 import { utilService } from "../../services/util.service"
 import { ReactComponent as Plus } from '../../assets/icon/plus-icon.svg'
@@ -10,6 +10,8 @@ export const GroupFooter = (props) => {
     const dispatch = useDispatch()
     const [isShown, setIsShown] = useState(true)
     const [task, setTask] = useState({ title: '' })
+
+
     const onHandleChange = ({ target }) => {
         setTask({ title: target.value })
     }
@@ -21,12 +23,10 @@ export const GroupFooter = (props) => {
         let groupToSave = utilService.getDeepCopy(props.group)
         let taskToSave = utilService.getDeepCopy(task)
         taskToSave.id = utilService.makeId()
-
         if (!taskToSave.title) return
         if (!groupToSave.tasks) {
             groupToSave.tasks = [taskToSave]
         } else groupToSave.tasks = [...groupToSave.tasks, taskToSave]
-
         dispatch(onUpdateGroup(boardId, groupToSave))
         setIsShown(true)
     }

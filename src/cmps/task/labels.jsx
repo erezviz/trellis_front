@@ -13,7 +13,6 @@ export const Labels = (props) => {
     const dispatch = useDispatch()
 
     const onToggleLabel = async (labelId) => {
-        console.log(props.task);
         const newTask = { ...props.task }
         const newLabelId = props.task.labelIds ? props.task.labelIds.find(currLabelId => currLabelId === labelId) : null
         if (newLabelId) {
@@ -23,7 +22,6 @@ export const Labels = (props) => {
             if (!newTask.labelIds) newTask.labelIds = [labelId]
             else newTask.labelIds = [...newTask.labelIds, labelId]
         }
-        console.log('newTask', newTask);
         dispatch(updateTask(boardId, groupId, newTask))
     }
 

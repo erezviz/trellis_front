@@ -1,5 +1,5 @@
-.open{
-    .feed{
+.open {
+    .feed {
         transform: translateX(0%);
     }
 }
@@ -21,7 +21,7 @@
     transition: all .5s;
     width: 340px;
     z-index: 30;
-    
+
 
     .popover-header {
 
@@ -34,7 +34,7 @@
         text-overflow: ellipsis;
     }
 
-    button{
+    button {
         background-color: inherit;
         border: none;
         font-size: 20px;
@@ -44,19 +44,19 @@
         top: 25px;
         transition: -webkit-transform .12s ease-in;
         transition: transform .12s ease-in;
-        transition: transform .12s ease-in,-webkit-transform .12s ease-in;
+        transition: transform .12s ease-in, -webkit-transform .12s ease-in;
     }
 
-    .columnUl{
+    .columnUl {
         padding: 10px;
         grid-gap: 8px;
         display: grid;
         gap: 8px;
-        grid-template-columns: repeat(2,1fr);
+        grid-template-columns: repeat(2, 1fr);
         list-style-type: none;
     }
 
-    input{
+    input {
         background: #fafbfc;
         border: none;
         border-radius: 3px;
@@ -67,7 +67,7 @@
         outline: none;
         padding: 8px 12px 8px 32px;
         transition-duration: 85ms;
-        transition-property: background-color,border-color,box-shadow;
+        transition-property: background-color, border-color, box-shadow;
         transition-timing-function: ease;
         width: 100%;
     }

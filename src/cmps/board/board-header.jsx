@@ -51,10 +51,12 @@ export const BoardHeader = (props) => {
                         name="checklist"
                     />
                 </form>
+                <p className="vr">|</p>
             </div>
             <div className={`board-header-${star}`}>
                 <Star onClick={onStar} />
             </div>
+                <p className="vr">|</p>
             <div className="board-members flex">
                 {currBoard.members && currBoard.members.map(member => {
                     return <div key={member._id} className="board-member">

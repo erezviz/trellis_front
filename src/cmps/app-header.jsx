@@ -52,7 +52,6 @@ const _AppHeader = (props) => {
         onGoBack()
     }
 
-    console.log('from header', user);
     return (
         <section className={`app-header flex ${status} ${bgc}`}>
 

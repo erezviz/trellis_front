@@ -15,6 +15,9 @@ import { BoardPreview } from '../cmps/board/board-preview'
 import { PopOver } from "../cmps/dynamic-cmps/pop-over";
 import { CreateBoardModal } from "../cmps/board/create-board-modal";
 import { ReactComponent as Star } from '../assets/icon/star.svg'
+import { TrellisSpinner } from '../cmps/util-cmps/trellis-spinner';
+import { socketService, SOCKET_EMIT_SET_BOARD } from "../services/socket.service";
+
 class _HomePage extends React.Component {
     state = {
         isModalShown: false
@@ -43,7 +46,6 @@ class _HomePage extends React.Component {
         const newBoard = JSON.parse(JSON.stringify(board))
         if (!newBoard.starred) newBoard.starred = true
         else newBoard.starred = false
-        console.log(newBoard)
         this.props.updateWholeBoard(newBoard)
     }
 
@@ -54,8 +56,7 @@ class _HomePage extends React.Component {
     render() {
         const { boards } = this.props
         const { isModalShown } = this.state
-
-        if (!boards && !boards.length) return <div>Loading...</div>
+        if (!boards?.length) return <div><TrellisSpinner isLarge={true} /></div>
         return (
             <section className="home-page">
                 <div className="board-list-container">

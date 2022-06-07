@@ -38,7 +38,6 @@ async function save(board) {
     if (board._id) {
         socketService.emit(SOCKET_EMIT_SEND_BOARD, board)
         savedBoard = await httpService.put(`board/:${board._id}`, board)
-
     } else {
         board.labels = _getBoardLabels()
         savedBoard = await httpService.post('board', board)
@@ -105,7 +104,6 @@ function getEmptyTask() {
 function getTask(board, groupId, taskId) {
     const group = board.groups.find(group => group.id === groupId)
     const task = group.tasks.find(task => task.id === taskId)
-    console.log('from get task', task);
     return task
 }
 
@@ -130,7 +128,6 @@ async function saveTask(boardId, groupId, taskToSave) {
 }
 
 async function updateTask(boardId, groupId, taskToSave) {
-    console.log('task to save', taskToSave)
     try {
         const board = await boardService.getById(boardId)
 
@@ -173,7 +170,6 @@ function createAttachment(attachmentType, str) {
 
 function getAttachmentTitle(urlStr) {
     let url = new URL(urlStr)
-    console.log(url);
 }
 
 

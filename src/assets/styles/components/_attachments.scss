@@ -3,6 +3,7 @@
         clear: both;
         margin-bottom: 24px;
         position: relative;
+
         .icon-attachment {
             left: -40px;
             position: absolute;
@@ -19,14 +20,17 @@
             vertical-align: bottom;
             background-image: url('../../icon/attachment-icon.png');
         }
+
         .attachment-header {
             margin: 0 0 4px 40px;
             padding: 8px 0;
             position: relative;
             border-bottom: 1px solid #091e4221;
+
             &.no-divider {
                 border-bottom: none;
             }
+
             h3.inline-title {
                 font-size: 1rem;
                 font-weight: 600;
@@ -37,6 +41,7 @@
                 color: #42526e;
             }
         }
+
         .attachment-img-container {
             background-color: #091e420a;
             background-position: 50%;
@@ -53,17 +58,21 @@
             width: 112px;
             z-index: 1;
         }
+
         .attachment-main {
             margin-left: 40px;
-            .btn-light{
+
+            .btn-light {
                 margin-block-start: 8px;
             }
+
             .attachment-thumbnail {
                 border-radius: 3px;
                 margin: 0 0 8px;
                 min-height: 80px;
                 overflow: hidden;
                 position: relative;
+
                 &-preview {
                     background-color: #091e420a;
                     background-position: 50%;
@@ -79,11 +88,13 @@
                     top: 50%;
                     width: 112px;
                     z-index: 1;
+
                     &-name {
                         word-wrap: break-word;
                         font-weight: 700;
                     }
                 }
+
                 &-details {
                     box-sizing: border-box;
                     cursor: pointer;
@@ -91,6 +102,7 @@
                     min-height: 80px;
                     padding: 8px 8px 8px 128px;
                     z-index: 0;
+
                     .thumbnail-edit {
                         >span:not(:nth-child(2)) {
                             text-decoration: underline;
@@ -101,7 +113,7 @@
             }
         }
     }
-    
+
     .title-edit {
         label[for=title] {
             color: #5e6c84;
@@ -112,6 +124,7 @@
             margin-bottom: 4px;
             margin-top: 4px;
         }
+
         input[type=text] {
             margin: 4px 0 12px;
             width: 100%;

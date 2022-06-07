@@ -9,7 +9,7 @@ export function userReducer(state = initialState, action) {
     var newState = state;
     switch (action.type) {
         case 'SET_USER':
-            newState = {...state, user: action.user }
+            newState = { ...state, user: action.user }
             break;
         case 'REMOVE_USER':
             newState = {
@@ -18,10 +18,10 @@ export function userReducer(state = initialState, action) {
             }
             break;
         case 'SET_USERS':
-            newState = {...state, users: action.users }
+            newState = { ...state, users: action.users }
             break;
         case 'SET_SCORE':
-            newState = {...state, user: {...state.user, score: action.score } }
+            newState = { ...state, user: { ...state.user, score: action.score } }
             break;
         default:
     }

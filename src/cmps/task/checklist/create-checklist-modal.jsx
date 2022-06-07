@@ -6,7 +6,6 @@ export const ChecklistModal = (props) => {
     const onChangeTitle = (ev) => {
         const { value } = ev.target
         setTitle(value)
-        console.log(value)
     }
 
     const onAddChecklist = () => {

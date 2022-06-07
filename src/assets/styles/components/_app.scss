@@ -2,6 +2,7 @@
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+
     .app-container {
         flex: 1;
         display: flex;
@@ -11,12 +12,8 @@
     }
 }
 
-.homePage{
+.homePage {
     align-items: flex-start !important;
     padding-top: 130px;
-    background: $clr2 !important;
-}
-
-.boardPage{
-    
+    background: $clr2  !important;
 }

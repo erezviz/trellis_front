@@ -8,17 +8,20 @@
     top: 25%;
     width: 280px;
     z-index: 70;
+
     .main-members {
         margin-block-start: 5px;
-        // padding: 0 12px 12px;
+
         span {
             font-size: 13px;
         }
     }
+
     ul {
         list-style: none;
         margin: 0;
         padding: 0;
+
         li {
             display: flex;
             gap: 10px;
@@ -28,10 +31,12 @@
             height: 55px;
             align-items: center;
             order: 1;
+
             &:hover {}
+
             border-bottom: 0.5px solid rgba(216, 213, 213, 0.463);
+
             .card-member {
-                /* border-radius: 3px; */
                 display: block;
                 height: 40px;
                 line-height: 40px;
@@ -46,6 +51,7 @@
             }
         }
     }
+
     header {
         border-bottom: 1px solid rgba(9, 30, 66, 0.1294117647);
         box-sizing: border-box;
@@ -59,25 +65,31 @@
         white-space: nowrap;
         z-index: 1;
         text-align: center;
+
         .close-members {
             border: none;
             background-color: transparent;
             color: #6b778c;
+
             &:hover {
                 cursor: pointer;
             }
+
             span svg {
                 width: 10px;
             }
         }
     }
+
     .member-img {
         height: 30px;
         width: 40px;
+
         img {
-        border-radius: 50%;            
+            border-radius: 50%;
         }
     }
+
     h2 {
         font-size: 14px;
         font-weight: 400;

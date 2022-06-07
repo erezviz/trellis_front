@@ -1,32 +1,34 @@
 .Hero {
     background-color: white !important;
     height: 3.9rem !important;
+
     .user-link .signup {
         background-color: $clr1;
     }
+
     .logo-container {
         img {
             height: 25px !important;
             width: 25px !important;
         }
+
         h3 {
             font-size: 2rem !important;
-            // position: relative;
             top: 2.8px !important;
         }
     }
 }
 
 .homeBgc {
-    background-color: $clr1 !important;
+    background-color: $clr1  !important;
 }
 
 .homeTxtClr {
-    color: $clr2 !important
+    color: $clr2  !important
 }
 
 .logoHero {
-    color: $clr2 !important
+    color: $clr2  !important
 }
 
 .user-modal {
@@ -40,6 +42,7 @@
     top: 45px;
     font-size: 9px;
     color: #5e6c84;
+
     header {
         border-bottom: 1px solid rgba(9, 30, 66, 0.1294117647);
         box-sizing: border-box;
@@ -52,6 +55,7 @@
         white-space: nowrap;
         z-index: 1;
         text-align: center;
+
         >h2 {
             margin: 0 0px 2px 18px;
             font-weight: 400;
@@ -59,18 +63,22 @@
             flex: 1;
             font-size: 14px;
         }
+
         .close-user {
             border: none;
             background-color: transparent;
             color: #6b778c;
+
             &:hover {
                 cursor: pointer;
             }
+
             span svg {
                 width: 10px;
             }
         }
     }
+
     .user-profile {
         width: 100%;
         display: flex;
@@ -79,15 +87,18 @@
         border-bottom: 1px solid rgba(226, 219, 219, 0.7098039216);
         padding: 10px 3px 0px 2px;
     }
+
     .account-img {
         cursor: context-menu;
     }
+
     h2 {
         margin: 0;
         font-weight: 400;
         text-transform: capitalize;
         flex: 1;
     }
+
     .logout {
         cursor: pointer;
         padding: 8px 15px 0;
@@ -106,41 +117,52 @@
     justify-content: space-between;
     align-items: center;
     transition: box-shadow, .25s;
+
     .header-link {
         margin: 0;
         color: $clr2;
     }
+
     .Hero {
         background-color: transparent;
     }
+
     .user-link {
         cursor: pointer;
         -webkit-box-align: stretch;
         align-items: stretch;
         display: flex;
         margin-left: auto;
+
         span {
             color: $clr2;
             font-weight: 500;
         }
+
         .login {
             color: darken($color: $clr2, $amount: 45%);
             padding: 1rem 1.7rem;
         }
+
         .signup {
             padding: 1rem 2rem;
             transition: background-color, 0.15s;
         }
+
         .signup:hover {
             background-color: darken($color: $clr1, $amount: 8%)
         }
     }
+
     .logo-container {
         align-items: center;
         display: flex;
+        margin-inline-start: 1rem;
+
         &:hover {
             cursor: pointer;
         }
+
         h3 {
             line-height: normal;
             font-family: Secular, sans-serif;
@@ -151,6 +173,7 @@
             position: relative;
             top: 2.5px;
         }
+
         img {
             height: 21px;
             margin: 0 10px;
@@ -159,14 +182,17 @@
             top: 0.8px;
         }
     }
+
     .user-img {
         height: 40px;
         width: 40px;
         border-radius: 50%;
         margin-inline-end: 8px;
+
         img {
             border-radius: 50%;
         }
+
         cursor: pointer;
     }
 }

@@ -51,6 +51,7 @@ export const TaskDetails = (props) => {
         }
     }, [currBoard])
 
+
     const modalStyle = {
         display: props.isOpen ? 'block' : 'none',
         position: 'absolute',
@@ -90,7 +91,6 @@ export const TaskDetails = (props) => {
         setIsChecklistModalOpen(prevChecklistModalOpen => prevChecklistModalOpen = !isChecklistModalOpen)
     }
     const onOpenChecklist = (val) => {
-        console.log(val)
         setIsChecklistOpen(prevChecklistOpen => prevChecklistOpen = val)
     }
 
