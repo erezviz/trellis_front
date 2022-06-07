@@ -25,6 +25,7 @@
     border-radius: 3px;
     font-size: 13px;
     cursor: pointer;
+    width: rem(146px);
     &:hover{
         background-color: rgba(9, 30, 66, 0.0784313725);
         border: none;
@@ -43,13 +44,12 @@
         height: 3vh;
     }
 
-    .btn-section {
+   
+    
+    div {
         display: flex;
         margin-inline-start: 35px;
     }
-    // div {
-    //     display: flex;
-    // }
 
     button {
         margin-right: 5px;
@@ -58,7 +58,8 @@
         color: $clr2;
         padding: 7px 12px;
         transition: background-color, .25s;
-        width: 100px;
+        width: 95px;
+        height: 35px;
         border-radius: 3px;
     }
 
