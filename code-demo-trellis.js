@@ -18,7 +18,7 @@ function updateTask(boardId, groupId, taskToUpdate) {
 
         } catch (err) {
             console.log('ERROR: cannot update task', err)
-            showErrorMsg('We can\'t seem to update your task, please try again later')
+            showErrorMsg('Cannot update the task, please try again later')
         }
     }
 }
