@@ -54,6 +54,9 @@
         }
         .attachment-main {
             margin-left: 40px;
+            .btn-light{
+                margin-block-start: 8px;
+            }
             .attachment-thumbnail {
                 border-radius: 3px;
                 margin: 0 0 8px;
