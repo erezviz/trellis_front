@@ -147,6 +147,8 @@ textarea#description {
     text-shadow: 0 0 0.5px;
     resize: none;
     padding: 8px 12px;
+    width: 500px;
+    height: 100px;
     &:focus {
         border-radius: 3px;
         outline: 0;
@@ -270,6 +272,10 @@ textarea#description {
         padding: 4px 8px;
         width: 100%;
         padding-inline-start: 1rem;
+        &.checklist{
+            font-size: 1rem;
+            font-weight: 600;
+        }
         h3 {
             margin: rem(-4px) rem(-8px);
             padding: rem(4px) rem(8px);
