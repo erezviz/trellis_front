@@ -68,17 +68,13 @@ export const SideMenu = ({ props }) => {
     return (
       <div className="feed">
         <div className="popover-header">
-          {/* <button>{'<'}</button> */}
           <span>Cover photos</span>
-          {/* <button>X</button> */}
         </div>
-        <hr />
         <input onChange={(ev) => { getPhotos(ev) }} type="text" placeholder="Search" />
         <ul className="columnUl">
           {data.response.results.map(photo => (
             <li key={photo.id} className="li" onClick={() => updateBackground(photo.urls.full)}>
               <PhotoComp photo={photo} />
-
             </li>
           ))}
         </ul>

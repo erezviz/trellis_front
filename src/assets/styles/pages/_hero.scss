@@ -1,30 +1,36 @@
 .hero {
-    margin-top: 31px;
+    margin-top:170px;
     display: flex;
     margin-bottom: 155px;
+
     .hero-container {
         width: 50%;
         margin-inline-start: 50px;
-        .hero-h1{
+
+        .hero-h1 {
             font-size: 45px;
             line-height: 55px;
             height: 3ch;
             width: 35vw;
         }
-        .hero-p{
+
+        .hero-p {
             width: 32vw;
             font-size: 20px;
             line-height: 35px;
             margin-bottom: 40px 0;
         }
     }
+
     .hero-img-container {
         margin: -65px 90px;
         height: 50vh;
     }
+
     .hero-img {
         height: 100%;
     }
+
     .enter-link {
         font-weight: 600;
         color: $clr2;
@@ -35,6 +41,32 @@
         background-color: $clr1;
         transition: background-color, 0.25s;
     }
+
+    .enter-link:hover {
+        background-color: darken($color: $clr1, $amount: 10%);
+    }
+}
+
+.teaser-container {
+    text-align: center;
+    margin: auto;
+    
+    .teaser-p {
+        width: 900px;
+    }
+    .enter-link {
+        margin: auto;
+        margin-top: 25px;
+        font-weight: 600;
+        color: $clr2;
+        width: 155px;
+        text-align: center;
+        padding: 10px 30px;
+        border-radius: 0.2rem;
+        background-color: $clr1;
+        transition: background-color, 0.25s;
+    }
+    
     .enter-link:hover {
         background-color: darken($color: $clr1, $amount: 10%);
     }
