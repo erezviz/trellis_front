@@ -1,6 +1,7 @@
 .create-attachment {
     display: flex;
     flex-direction: column;
+
     .upload-btn {
         cursor: pointer;
         display: block;
@@ -13,13 +14,16 @@
         background: transparent;
         border: 0;
         color: #172b4d;
+
         &:hover {
             background-color: #091e420a;
         }
     }
+
     form.col {
         display: flex;
         flex-direction: column;
+
         >label {
             color: #5e6c84;
             display: block;
@@ -30,6 +34,7 @@
             margin-top: 12px;
         }
     }
+
     label[for=imgUpload] {
         cursor: pointer;
         display: block;
@@ -39,6 +44,7 @@
         position: relative;
         text-decoration: none;
     }
+
     input[type=text] {
         margin: 4px 0 12px;
         outline: none;
@@ -58,11 +64,13 @@
         background-color: #fafbfc;
         width: 100%;
         margin-bottom: 0;
+
         &:focus {
             background-color: #ffffff;
             box-shadow: inset 0 0 0 2px #0079bf;
         }
     }
+
     input[type=submit] {
         background-color: #091e420a;
         border: none;
@@ -74,6 +82,7 @@
         margin: 8px 4px 0 0;
         padding: 6px 12px;
         text-align: center;
+
         &:hover {
             background-color: #091e4214;
             border: none;

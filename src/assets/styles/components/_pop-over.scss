@@ -10,9 +10,11 @@
     -webkit-transform: translateZ(0);
     width: 304px;
     z-index: 70;
+
     &.shown {
         display: block;
     }
+
     .pop-over-header {
         margin-bottom: 8px;
         padding: 0 12px;
@@ -20,6 +22,7 @@
         text-align: center;
         display: grid;
         grid-template-columns: 12px 1fr 12px;
+
         .popover-title {
             color: #172b4d;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Noto Sans', 'Ubuntu', 'Droid Sans', 'Helvetica Neue', sans-serif;
@@ -40,6 +43,7 @@
             grid-column: 1 / span 3;
             grid-row: 1;
         }
+
         .pop-over-btn {
             background: transparent;
             border: none;
@@ -53,6 +57,7 @@
             outline: none;
         }
     }
+
     .children-container {
         overflow-x: hidden;
         overflow-y: auto;

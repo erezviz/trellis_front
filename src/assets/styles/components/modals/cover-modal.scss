@@ -29,18 +29,20 @@
         cursor: pointer;
     }
 
-    .color-to-choose:hover{
+    .color-to-choose:hover {
         filter: saturate(85%) brightness(85%);
     }
-    .chosen{
+
+    .chosen {
         border: 2px solid $clr1;
     }
 }
 
-.task-cover{
+.task-cover {
     height: 8rem;
 }
-.task-preview-cover{
+
+.task-preview-cover {
     height: 32px;
     border-radius: 3px 3px 0 0;
 }

@@ -1,5 +1,5 @@
 .hero {
-    margin-top:170px;
+    margin-top: 170px;
     display: flex;
     margin-bottom: 155px;
 
@@ -49,11 +49,12 @@
 
 .teaser-container {
     text-align: center;
-    
+
     .teaser-p {
         margin: auto;
         width: 900px;
     }
+
     .enter-link {
         margin: auto;
         margin-top: 25px;
@@ -66,12 +67,14 @@
         background-color: $clr1;
         transition: background-color, 0.25s;
     }
-    
+
     .enter-link:hover {
         background-color: darken($color: $clr1, $amount: 10%);
     }
 
-    .teaser-img{svg{
-        width: 850px;
-    }}
+    .teaser-img {
+        svg {
+            width: 850px;
+        }
+    }
 }

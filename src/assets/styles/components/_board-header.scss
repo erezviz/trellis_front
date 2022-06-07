@@ -1,15 +1,17 @@
-.board-header{
+.board-header {
     align-items: center;
-    h1{
+
+    h1 {
         margin: 0;
         margin-inline-start: 25px;
     }
 
-    .vr{
+    .vr {
         margin: 9px 15px;
         color: $clr2;
     }
 }
-.white{
+
+.white {
     color: $clr2;
 }
