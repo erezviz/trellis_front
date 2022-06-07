@@ -34,6 +34,7 @@
         width: 4px;
     }
     .main-board {
+        width: fit-content;
         display: flex;
     }
     .board-name {
@@ -74,8 +75,7 @@
     }
     .add-group {
         margin-block-start: 16px;
-        background-color: #5b5b5b3d;
-        ;
+        background-color: rgba(91, 91, 91, 0.2392156863);
         border-radius: 3px;
         box-shadow: none;
         border: none;
@@ -83,11 +83,12 @@
         display: flex;
         justify-content: center;
         color: #fff;
+        width: -moz-fit-content;
         width: fit-content;
         display: inline-flex;
-        padding: 10px;
-        // background-color: #00000014;
-        margin-left: 10px;
+        padding: 6px;
+        /* margin-left: 10px; */
+        margin: 16px 15px 0px 10px;
         height: 30px;
         min-width: 272px;
         max-width: 272px;
@@ -95,7 +96,7 @@
         align-items: center;
         line-height: 20px;
         height: 100%;
-        // background-color: #ffffff3d;
+        font-weight: 400;
         font-weight: 400;
         &:hover {
             background-color: transparentize($color: lighten($color: $clr5, $amount: 20%), $amount: 0.75);

@@ -17,7 +17,9 @@ export const GroupList = ({ groups, onDeleteGroup, boardId, onToggleDetails, onT
                 {(provided) => {
                     return <div className="group-list" {...provided.droppableProps} ref={provided.innerRef}>
                         {currBoard.groups.map((group, idx) => {
-                            return <div key={group.id} >
+                            return (
+
+                                // <div key={group.id} >
                                 <GroupPreview
                                     onToggleWarning={onToggleWarning}
                                     isLabelOpen={isLabelOpen}
@@ -27,8 +29,9 @@ export const GroupList = ({ groups, onDeleteGroup, boardId, onToggleDetails, onT
                                     onDeleteGroup={onDeleteGroup}
                                     group={group}
                                     key={group.id}
-                                />
-                            </div>
+                                    />
+                            // </div>
+                                    )
                         })}
                         {provided.placeholder}
                     </div>
