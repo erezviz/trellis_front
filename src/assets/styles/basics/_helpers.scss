@@ -5,12 +5,15 @@
         display: flex;
         flex-direction: column;
     }
-    &-space-between{
+    &-space-between {
         display: flex;
         justify-content: space-between;
     }
 }
 
+.shown {
+    display: initial;
+}
 
 .inline-flex {
     display: inline-flex;
