@@ -17,9 +17,19 @@
 }
 
 .add-todo {
-    background-color: darken($color: $clr2, $amount: 10%);
+    background-color: #eaecf0;
     border-style: none;
     padding: 7px;
+    margin-inline-start: 2.2rem;
+    margin-block-start: 0.55rem;
+    border-radius: 3px;
+    font-size: 13px;
+    cursor: pointer;
+    &:hover{
+        background-color: rgba(9, 30, 66, 0.0784313725);
+        border: none;
+        box-shadow: none;
+    }
 }
 
 .add-input {
@@ -65,6 +75,8 @@
     flex-direction: column;
     box-shadow: 0 0 5.5px grey;
     right: 120px;
+    right: 229px;
+    bottom: 10rem;
     p {
         margin: 0;
     }

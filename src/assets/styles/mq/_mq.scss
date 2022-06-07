@@ -6,10 +6,29 @@
         
     }
 }
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1677px) {
     .home-page .board-list-container{
-        // right: 0;
-        bottom: 5rem
+        margin: 300px;
+    }
+}
+@media screen and (max-width: 1450px) {
+    .home-page .board-list-container{
+        margin: 200px;
+    }
+}
+@media screen and (max-width: 1254px) {
+    .home-page .board-list-container{
+        margin: 100px;
+    }
+}
+@media screen and (max-width: 1048px) {
+    .home-page .board-list-container{
+        margin: 120px 50px;
+    }
+}
+@media screen and (max-width: 948px) {
+    .home-page .board-list-container{
+        margin: auto;
     }
 }
 @media screen and (max-width: 780px) {

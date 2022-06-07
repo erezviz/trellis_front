@@ -7,7 +7,7 @@ export const ProgressBar = (props) => {
     width: '100%',
     backgroundColor: "#e0e0de",
     borderRadius: 50,
-    // margin: 50
+    marginInlineStart: '1rem'
   }
 
   const fillerStylesIncomplete = {

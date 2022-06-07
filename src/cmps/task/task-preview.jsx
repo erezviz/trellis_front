@@ -29,10 +29,9 @@ export const TaskPreview = (props) => {
                         })}
                     </section>
                     <section onClick={() => props.onToggleDetails()} className="main-preview">
-                        <div className="task-preview-title">
-                            <h5>{task.title}</h5>
-                        </div>
-                        <div className="functions-previews flex-space-between">
+                        <h5>{task.title}</h5>
+                        {task.attachments?.length && <img className="attachment-img" src={`${task.attachments[0].url}`} alt=""></img>}
+                        <div className="flex-space-between">
                             <section className="icon-previews">
                                 {task.dueDate && <span><Date /></span>}
                                 {task.attachments && <span><img className="icon-preview" src={require('../../assets/icon/attachment-icon.png')} alt="" /></span>}
@@ -50,7 +49,6 @@ export const TaskPreview = (props) => {
                                     });
                                 })}
                             </section>
-
                         </div>
                     </section>
                     {provided.placeholder}
@@ -58,4 +56,5 @@ export const TaskPreview = (props) => {
             }}
         </Draggable>
     )
+
 }
