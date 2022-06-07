@@ -76,7 +76,7 @@
         }
     }
     .labels-section {
-        p{
+        p {
             margin-top: 3px;
             margin-bottom: 11px;
         }
@@ -137,6 +137,17 @@
         width: 100%;
         padding-right: 15px;
     }
+    .desc-container {
+        .desc-empty {
+            width: 520px;
+            align-items: flex-start;
+            justify-content: flex-start;
+            margin-inline-start: 46px;
+            height: 60px;
+            padding-left: 12px;
+            padding-top: 8px;
+        }
+    }
 }
 
 textarea#description {
@@ -147,6 +158,8 @@ textarea#description {
     text-shadow: 0 0 0.5px;
     resize: none;
     padding: 8px 12px;
+    width: 500px;
+    height: 100px;
     &:focus {
         border-radius: 3px;
         outline: 0;
@@ -232,13 +245,22 @@ textarea#description {
         form {
             display: flex;
             flex-direction: column;
-            input {
+            input[type=submit] {
                 background-color: #0079bf;
                 border: none;
                 box-shadow: none;
+                cursor: pointer;
                 color: #fff;
                 width: rem(65px);
                 padding: rem(10px);
+                &:hover {
+                    background-color: #026aa7;
+                }
+            }
+            input[type=button] {
+                width: rem(65px);
+                padding: rem(10px);
+                margin-inline-start: 8px;
             }
         }
     }
@@ -270,6 +292,10 @@ textarea#description {
         padding: 4px 8px;
         width: 100%;
         padding-inline-start: 1rem;
+        &.checklist {
+            font-size: 1rem;
+            font-weight: 600;
+        }
         h3 {
             margin: rem(-4px) rem(-8px);
             padding: rem(4px) rem(8px);

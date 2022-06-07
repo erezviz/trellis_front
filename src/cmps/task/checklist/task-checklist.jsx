@@ -138,10 +138,10 @@ export const TaskChecklist = (props) => {
 
     if (task.checklist) return (
         <div>
-            <div onClick={() => setIsEditTitle('header')} className="details-header flex cl-header">
+            <div onClick={() => setIsEditTitle('header')} className="details-header  flex cl-header">
                 <img src={checklistIcon} alt="" className='checklist-icon' />
                 <form onBlur={onSaveHeader} onSubmit={(ev) => onSaveHeader()}>
-                    <input style={isEditTitle === 'header' ? { titleStyle } : {}} value={initialTitle} onChange={(ev) => onHandleChangeTitle(ev)} className="details-title cl-header" name="checklist" />
+                    <input style={isEditTitle === 'header' ? { titleStyle } : {}} value={initialTitle} onChange={(ev) => onHandleChangeTitle(ev)} className="details-title checklist cl-header" name="checklist" />
                 </form>
             </div>
             <ProgressBar completed={getPrecentage()} />
@@ -151,15 +151,15 @@ export const TaskChecklist = (props) => {
                         return <div key={todo.id} className='checklist-item'>
                             {!isEditTitle && <>
                                 <div>
-                                    <input type="checkbox" id={todo.id} name={todo.title} checked={todo.isDone} onChange={(ev) => onCheck(todo.id)} />
-                                    <label value={todo.title} onClick={() => setIsEditTitle(todo.id)} htmlFor={todo.title}>{todo.title}</label>
+                                    <input className="todo-input" type="checkbox" id={todo.id} name={todo.title} checked={todo.isDone} onChange={(ev) => onCheck(todo.id)} />
+                                    <label className="todo-item" value={todo.title} onClick={() => setIsEditTitle(todo.id)} htmlFor={todo.title}>{todo.title}</label>
                                 </div>
                                 <img src={threeDotsMenu} alt="more" onClick={() => setDeleteModal(todo)} /></>
                             }
 
                             {isEditTitle === todo.id && <div className='input-checklist'>
                                 <input value={todo.title} onChange={(ev) => onHandleChange(ev, todo.id)} id={todo.id} />
-                                <div>
+                                <div className="btn-section">
                                     <button onClick={(ev) => setIsEditTitle(null)}>Save</button>
                                     <span className='x' onClick={() => setIsEditTitle(null)}>X</span>
                                 </div>

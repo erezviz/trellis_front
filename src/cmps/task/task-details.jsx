@@ -36,6 +36,7 @@ export const TaskDetails = (props) => {
     const [task, setTask] = useState(null)
     const [isDesc, setIsDesc] = useState(false)
     let [isEdit, setIsEdit] = useState(false)
+    const [isDescEdit, setIsDescEdit] = useState(false)
     let [isLabelOpen, setIsLabelOpen] = useState(false)
     const [isAttachOpen, setIsAttachOpen] = useState(false)
     const [isChecklistOpen, setIsChecklistOpen] = useState(false)
@@ -51,7 +52,8 @@ export const TaskDetails = (props) => {
             setTask(null)
         }
     }, [currBoard])
-
+ 
+    
 
     const modalStyle = {
         display: props.isOpen ? 'block' : 'none',
@@ -72,7 +74,6 @@ export const TaskDetails = (props) => {
         if (!task.title) return
         dispatch(updateTask(boardId, groupId, task))
         setIsDesc(false)
-
     }
 
     const onDescResize = ev => {
@@ -192,11 +193,21 @@ export const TaskDetails = (props) => {
                                 </span>
                                 <label className="description" htmlFor="description">Description</label>
                             </div>
+                            {!task.description && <div
+                                onClick={() => {
+                                    setIsDescEdit(!isDescEdit)
+                                    setIsDesc(!isDesc)
+                                }}
+                                className={`desc-empty btn btn-light `}
+                                style={{ display: `${isDescEdit ? 'none' : 'flex'}` }}
+                            >
+                               <span> Add a more detailed description...</span>
+                            </div>}
                             <form className="edit-description" onSubmit={onSave}>
                                 <textarea
-                                    onInput={onDescResize}
                                     onFocus={() => setIsDesc(true)}
-                                    onBlur={(ev) => onSave(ev)}
+                                 
+                                    onInput={onDescResize}
                                     onChange={handleFormChange}
                                     name="description"
                                     id="description"
@@ -204,15 +215,37 @@ export const TaskDetails = (props) => {
                                     rows="10"
                                     value={task.description}
                                     placeholder="Add a more detailed description..."
+                                    style={{ display: `${(task.description || isDescEdit) ? 'initial' : 'none'}` }}
                                 />
                                 {isDesc && <div className="desc-controls">
-                                    <input className='desc-send-btn' type="submit" value="Send" />
+                                    <input
+                                        className="desc-send-btn"
+                                        type="submit"
+                                        value="Send"
+                                        />
+                                    <input
+                                        type="button"
+                                        className="btn btn-light"
+                                        onClick={() => setIsDesc(!isDesc)}
+                                        value="Cancel"
+                                       />
+                                        
                                 </div>}
                             </form>
                         </div>
-                        <Attachments task={task} handleChange={handleFormChange} />
-                        {(isChecklistOpen || task.checklist) && <div className='checklist'><TaskChecklist checklistName={isChecklistOpen} onSave={onSave} task={task} handleFormChange={handleFormChange} /></div>}
-
+                        <Attachments
+                            task={task}
+                            handleChange={handleFormChange}
+                        />
+                        {(isChecklistOpen || task.checklist) &&
+                            <div className='checklist'>
+                                <TaskChecklist
+                                    checklistName={isChecklistOpen}
+                                    onSave={onSave}
+                                    task={task}
+                                    handleFormChange={handleFormChange}
+                                />
+                            </div>}
                     </section>
                     <section className="details-sidebar">
                         <div className="main-add-actions">

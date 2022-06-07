@@ -38,39 +38,41 @@ export const CreateAttachment = ({ task, isShown, cb }) => {
 
     }
     useEffect(() => {
-        if (isUploading && attachment.url) onSaveAttachment()
+        if (attachment.url && isUploading) onSaveAttachment()
 
 
-    }, [isUploading])
+    }, [attachment])
 
     const handleUploadClick = ev => {
         hiddenFileInput.current.click()
     }
 
     const uploadImg = async (ev) => {
+
         if (!ev.target.files[0] || !ev.target.files.length) return
-        attachment.title = utilService.getFilename(ev.target.value)
+        const title = utilService.getFilename(ev.target.value)
         // setIsUploading(prevUploading => prevUploading = true)
         const url = await uploadService.uploadImg(ev)
-        // setIsUploading(prevUploading => prevUploading = false)
-       
-        setAttachment(prevAttachment => ({ ...prevAttachment, url }), onSaveAttachment)
-        
+        setIsUploading(true)
+
+        setAttachment(prevAttachment => ({ ...prevAttachment, url, title }))
+
+
     }
 
     const onSaveAttachment = ev => {
         if (ev) ev.preventDefault()
+        const newAttachment = utilService.getDeepCopy(attachment)
 
         if (attachment.title.includes('\\fakepath\\')) {
-            attachment.title = utilService.getFilename(attachment.url)
-
+            newAttachment.title = utilService.getFilename(attachment.url)
         }
         const newTask = utilService.getDeepCopy(task)
-        attachment.id = utilService.makeId()
- 
-        if (newTask.attachments) newTask.attachments = [...newTask.attachments, attachment]
-        else newTask.attachments = [attachment]
-        console.log(newTask);
+        newAttachment.id = utilService.makeId()
+
+        if (newTask.attachments) newTask.attachments = [...newTask.attachments, newAttachment]
+        else newTask.attachments = [newAttachment]
+
 
         dispatch(updateTask(boardId, groupId, newTask))
         resetAttachment()
@@ -104,16 +106,17 @@ export const CreateAttachment = ({ task, isShown, cb }) => {
             </header>
             <div className="children-container">
                 <section className="create-attachment">
-            
-                        <button className="upload-btn" onClick={handleUploadClick} >Computer</button>
-                        <input 
-                        type="file" 
+
+                    <button className="upload-btn" onClick={handleUploadClick} >Computer</button>
+                    <input
+                        type="file"
                         ref={hiddenFileInput}
-                        onChange={uploadImg} 
-                        tabIndex="-1" 
-                         id="imgUpload" 
-                         style={{display: 'none'}}
-                          />
+                        onChange={uploadImg}
+                        tabIndex="-1"
+                        id="imgUpload"
+                        style={{ display: 'none' }}
+                        accept="image/*"
+                    />
 
                     <form onSubmit={onSaveAttachment} className="col" >
                         <label htmlFor="link">Attach a link</label>
