@@ -9,14 +9,37 @@
     padding-bottom: 8px;
     box-shadow: 1px 7px 5px -4px #00000026;
     padding: 8px;
+
     .task-list-container {
         display: flex;
         flex-direction: column;
+        overflow-y: auto;
+        overflow-x: hidden;
+        max-height: 78vh;
+
+        &::-webkit-scrollbar {
+            // height: 1px;
+            color: #5e6c84;
+            width: 7px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background-color: #ffffffa3;
+            border-radius: 10px;
+
+        }
+
+        &::-webkit-scrollbar-track-piece {
+            background-color: #00000026;
+
+        }
     }
+
     .header-container {
         cursor: pointer;
         display: flex;
         justify-content: space-between;
+
         h3 {
             width: 217px;
             height: 15px;
@@ -27,11 +50,13 @@
             position: relative;
             bottom: 0.5rem;
         }
+
         .group-header {
             color: darken($color: $clr2, $amount: 60%);
             font-size: 14px;
             padding: 12px 5px 4px 6px;
         }
+
         button {
             border-radius: 2px;
             cursor: pointer;
@@ -41,10 +66,12 @@
             padding-top: 3px;
             padding-bottom: 7px;
         }
+
         button:hover {
             background-color: darken($color: $clr2, $amount: 10%);
         }
     }
+
     .task-preview {
         cursor: pointer;
         width: 256px;
@@ -57,16 +84,19 @@
         background-position: 50%;
         background-repeat: no-repeat;
         position: relative;
+
         .labels-task-preview {
             display: flex;
             flex-wrap: wrap;
             gap: 5px;
             margin-inline-start: 6px;
+
             .label-task-preview {
                 min-height: 8px;
                 min-width: 40px;
                 border-radius: 10px;
                 margin-block-start: 6px;
+
                 span {
                     color: white;
                     font-size: 12px;
@@ -76,15 +106,18 @@
                 }
             }
         }
+
         .members-task-preview {
             display: flex;
             flex-wrap: wrap;
             gap: 5px;
             justify-content: flex-end;
             margin-inline-start: 6px;
+
             .member-task-preview {
                 height: 28px;
                 width: 28px;
+
                 // position: relative;
                 // bottom: 8px;
                 // right: 8px;
@@ -93,24 +126,29 @@
                 }
             }
         }
+
         &-title {
             min-height: 45px;
         }
+
         h5 {
             color: darken($color: $clr2, $amount: 55%);
             font-weight: 400;
             padding: 6px 0px 2px 5px;
         }
     }
+
     .task-preview:hover {
         background-color: darken($color: $clr2, $amount: 5%);
     }
+
     .group-footer {
         cursor: pointer;
         padding: 4px 3px 2px;
         display: flex;
         color: #5e6c84;
         font-size: 15px;
+
         .btn-save {
             cursor: pointer;
             font-size: 15px;
@@ -124,6 +162,7 @@
             margin: 8px 1px;
             text-align: center;
         }
+
         span.btn-exit {
             width: 14px;
             border-style: none;
@@ -134,22 +173,27 @@
             top: 8px;
         }
     }
+
     form {
         display: flex;
         flex-direction: column;
     }
+
     .add-task {
         display: flex;
         align-items: center;
         gap: 1px;
+
         .plus-task {
             width: 16px;
             height: 21px;
+
             &-title {
                 font-size: 14px;
                 margin-left: 2px;
             }
         }
+
         .plus-task svg {
             width: 16px;
         }
@@ -183,6 +227,7 @@ input.group-title {
 section.main-preview {
     >div.functions-previews.flex-space-between {
         padding: 2px 4px 9px 3px;
+
         >section.icon-previews {
             flex: 1;
             padding-top: 3px;
@@ -191,6 +236,7 @@ section.main-preview {
 }
 
 .icon-previews {
+
     .icon-preview,
     svg {
         height: 14px !important;
