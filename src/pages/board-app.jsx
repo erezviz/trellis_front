@@ -4,9 +4,10 @@ import { Route } from "react-router-dom";
 import { DragDropContext } from "react-beautiful-dnd";
 import TextField from '@mui/material/TextField';
 
-import { socketService, SOCKET_EMIT_SEND_BOARD, SOCKET_EMIT_SET_BOARD, SOCKET_EVENT_ADD_BOARD } from "../services/socket.service";
+import { socketService, SOCKET_EMIT_SET_BOARD, SOCKET_EVENT_ADD_BOARD } from "../services/socket.service";
 import { loadBoard, onDeleteGroup, onAddGroup, updateWholeBoard, updateBoardForSockets } from '../store/board.action'
 import { utilService } from "../services/util.service";
+import { eventBusService } from "../services/event-bus.service";
 
 import { BoardHeader } from "../cmps/board/board-header";
 import { SideMenu } from "../cmps/dynamic-cmps/side-menu";
@@ -16,9 +17,6 @@ import { Screen } from '../cmps/dynamic-cmps/screen'
 import { TrellisSpinner } from "../cmps/util-cmps/trellis-spinner";
 import { PopOver } from "../cmps/dynamic-cmps/pop-over";
 import { WarningModal } from "../cmps/util-cmps/warning-modal";
-import { eventBusService } from "../services/event-bus.service";
-
-
 class _BoardApp extends React.Component {
     state = {
         groups: [],
@@ -64,43 +62,29 @@ class _BoardApp extends React.Component {
 
     }
 
-    // loadGroups = async (board) => {
     loadGroups = (board) => {
 
         if (board) {
             this.setState(prevState => ({ ...prevState, group: board.groups }))
             return
         }
-         (async ()=>{
+        (async () => {
 
-             const boardId = this.getBoardId()
-             try {
-                 
-                 await this.props.loadBoard(boardId)
-                 this.setState(prevState => ({ ...prevState, groups: this.props.currBoard.groups }))
-                 console.log('updated board in klodaGroups', this.props.currBoard)
-                 socketService.emit(SOCKET_EMIT_SET_BOARD, this.props.currBoard._id)
-                 
-                } catch (err) {
-                    console.log('ERROR: Cannot update board', err)
-                }
-            })();
+            const boardId = this.getBoardId()
+            try {
 
-        //     this.setState(prevState => ({ ...prevState, groups: [] }), async () => {
-        //         const boardId = this.getBoardId()
-        //         if (!board) {
-        //             try {
-        //                 const board = await this.props.loadBoard(boardId)
+                await this.props.loadBoard(boardId)
+                this.setState(prevState => ({ ...prevState, groups: this.props.currBoard.groups }))
+                console.log('updated board in klodaGroups', this.props.currBoard)
+                socketService.emit(SOCKET_EMIT_SET_BOARD, this.props.currBoard._id)
 
-        //                 this.setState(prevState => ({ ...prevState, groups: board.groups }), () =>
-        //                     socketService.emit(SOCKET_EMIT_SET_BOARD, board._id))
-        //             } catch (err) {
-            //                 throw err
-            //             }
-            //         } else this.setState(prevState => ({ ...prevState, groups: board.groups }))
-            //     })
-        }
-            
+            } catch (err) {
+                console.log('ERROR: Cannot update board', err)
+            }
+        })();
+
+    }
+
     getBoardId = () => {
         const { boardId } = (this.props.match.params)
         return boardId
@@ -176,7 +160,7 @@ class _BoardApp extends React.Component {
 
     onDragEnd = (res) => {
         const board = JSON.parse(JSON.stringify(this.props.currBoard))
-        const { destination, source, draggableId, type } = res
+        const { destination, source, type } = res
 
         if (!destination) return
         // moving groups 

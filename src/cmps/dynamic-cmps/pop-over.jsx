@@ -1,7 +1,6 @@
 import React from "react";
 import { ReactComponent as Close } from '../../assets/icon/close.svg'
 
-
 export const PopOver = ({ children, isShown, title, cb, pos }) => {
 
     return (
@@ -13,12 +12,10 @@ export const PopOver = ({ children, isShown, title, cb, pos }) => {
                     <span>
                         <Close />
                     </span>
-
                 </button>
             </header>
             <div className="children-container">
                 {children}
-
             </div>
         </div>
     )

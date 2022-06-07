@@ -4,7 +4,6 @@ export const utilService = {
     getRandomIntInclusive,
     delay,
     getFilename,
-    // getDate,
     getDeepCopy
 }
 
@@ -67,17 +66,3 @@ function isValidUrl(str) {
 function getDeepCopy(object) {
     return JSON.parse(JSON.stringify(object))
 }
-
-// function getDate(ts, separator = '') {
-//     const dateStyle = {
-//         month: 'short',
-
-//     }
-//     let formatter = new Intl.DateTimeFormat('en-US', { month: 'short' });
-//     let newDate = new Date(ts)
-//     let date = newDate.getDate();
-//     let month = ;
-//     let year = newDate.getFullYear();
-
-//     return `${year}${separator}${month<10?`0${month}`:`${month}`}${separator}${date}`
-//     }

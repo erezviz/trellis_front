@@ -1,12 +1,10 @@
 import { useState } from "react"
 
-
 export const GroupHeader = (props) => {
 
     const [header, setHeader] = useState(props.title)
     let [isEdit, setIsEdit] = useState(false)
     
-
     const titleStyle = {
         overflow: 'hidden',
         overflowWrap: 'break-word',
@@ -19,7 +17,6 @@ export const GroupHeader = (props) => {
         props.onChangeName(value)
     }
     
-
     return (
         <div onClick={() => setIsEdit(isEdit = !isEdit)} className="group-title flex">
             <form >

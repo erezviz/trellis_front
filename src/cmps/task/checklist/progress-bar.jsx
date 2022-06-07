@@ -27,7 +27,6 @@ export const ProgressBar = (props) => {
     transition: 'width 0.5s ease-in-out'
   }
 
-
   const labelStyles = {
     paddingRight: 5,
     fontSize: "10px",
@@ -49,5 +48,3 @@ export const ProgressBar = (props) => {
     </div>
   );
 };
-
-;

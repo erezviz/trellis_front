@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react'
+import { useRouteMatch } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+
 import { utilService } from '../../../services/util.service.js'
 import checklistIcon from '../../../assets/icon/checklist-icon.png'
 import threeDotsMenu from '../../../assets/icon/three-dot-menu.svg'
-import { useDispatch } from 'react-redux';
 import { updateTask } from '../../../store/board.action'
-import { useRouteMatch } from 'react-router-dom';
 import { ProgressBar } from './progress-bar'
     ;
 
@@ -134,8 +135,6 @@ export const TaskChecklist = (props) => {
         return (Math.floor((100 * done.length) / task.checklist.todos.length))
     }
 
-
-
     if (task.checklist) return (
         <div>
             <div onClick={() => setIsEditTitle('header')} className="details-header  flex cl-header">
@@ -187,9 +186,7 @@ export const TaskChecklist = (props) => {
             }
 
         </div>
-
     )
-
 }
 
 

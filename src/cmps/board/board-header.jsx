@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux"
 import { useEffect, useState } from "react"
-import { ReactComponent as Star } from '../../assets/icon/star.svg'
 
+import { ReactComponent as Star } from '../../assets/icon/star.svg'
 
 export const BoardHeader = (props) => {
     const { currBoard } = useSelector(state => state.boardModule)
@@ -11,7 +11,7 @@ export const BoardHeader = (props) => {
 
     useEffect(() => {
         if (currBoard.starred) setStar('starred')
-    })
+    },[])
 
     const titleStyle = {
         overflow: 'hidden',
@@ -43,7 +43,13 @@ export const BoardHeader = (props) => {
         <section onBlur={onSaveChanges} className="board-header flex">
             <div onClick={() => setIsEdit(isEdit = !isEdit)} className="board-title-section flex">
                 <form>
-                    <input style={isEdit ? { titleStyle } : {}} value={header} onChange={(ev) => handleFormChange(ev)} className="board-title" name="checklist" />
+                    <input
+                        style={isEdit ? { titleStyle } : {}}
+                        value={header}
+                        onChange={(ev) => handleFormChange(ev)}
+                        className="board-title"
+                        name="checklist"
+                    />
                 </form>
             </div>
             <div className={`board-header-${star}`}>

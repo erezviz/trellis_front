@@ -4,7 +4,6 @@ import MomentUtils from '@date-io/moment';
 
 import { AppHeader } from './cmps/app-header'
 import { BoardApp } from './pages/board-app';
-import { Screen } from './cmps/dynamic-cmps/screen'
 import { Hero } from './pages/hero'
 import { HomePage } from './pages/home-page'
 import { LoginSignup } from './cmps/board/login-signup';
