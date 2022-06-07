@@ -2,20 +2,16 @@
     padding-top: 40px;
     background-size: cover !important;
     height: 100vh;
-    // display: flex;
     gap: 5px;
     left: 0;
     margin-bottom: 8px;
     overflow-x: auto;
     overflow-y: hidden;
-    // padding-bottom: 8px;
     position: absolute;
     right: 0;
-    // top: 0;
     -webkit-user-select: none;
     user-select: none;
     white-space: nowrap;
-    // background: url('../../img/background-fall.jpg');
     background-size: cover;
     .main-board {
         display: flex;
@@ -43,34 +39,18 @@
             &:hover {
                 background-color: transparentize($color: lighten($color: $clr5, $amount: 20%), $amount: 0.75);
             }
-            // margin-right: 5px;
-            // align-items: center;
-            // background-color: hsla(0, 0%, 100%, .239);
-            // border-radius: 3px;
-            // color: #fff;
-            // display: flex;
-            // height: 30px;
-            // justify-content: center;
-            // padding: 5px;
-            // text-decoration: none;
-            // width: fit-content;
         }
     }
     .add-group {
         margin-block-start: 16px;
         background-color: #5b5b5b3d;
-        ;
         border-radius: 3px;
-        box-shadow: none;
-        border: none;
         cursor: pointer;
-        display: flex;
         justify-content: center;
         color: #fff;
         width: fit-content;
         display: inline-flex;
         padding: 10px;
-        // background-color: #00000014;
         margin-left: 10px;
         height: 30px;
         min-width: 272px;
@@ -79,13 +59,11 @@
         align-items: center;
         line-height: 20px;
         height: 100%;
-        // background-color: #ffffff3d;
         font-weight: 400;
         &:hover {
             background-color: transparentize($color: lighten($color: $clr5, $amount: 20%), $amount: 0.75);
         }
-        // padding: 16px 4px;
-        // width: 272px;
+    
         form {
             display: grid;
             grid-template: 1fr 1fr/2fr 1fr;
@@ -124,7 +102,6 @@
     }
     .add-group-btn {
         margin-inline-start: 15px;
-        // padding: 6px 8px;
         width: 250px;
         height: fit-content;
         display: flex;
