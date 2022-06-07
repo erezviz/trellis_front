@@ -98,12 +98,11 @@
     height: 45px;
     z-index: 30;
     background-color: transparentize($color: $clr5, $amount: .8);
+    padding: 6px 4px;
     position: absolute;
     top: 0;
     color: $clr2;
-    // height: rem(32px);
     width: 100%;
-    // padding: 1rem 0;
     justify-content: space-between;
     align-items: center;
     transition: box-shadow, .25s;
@@ -139,7 +138,6 @@
     .logo-container {
         align-items: center;
         display: flex;
-        margin-inline-start: 22px;
         &:hover {
             cursor: pointer;
         }
@@ -165,7 +163,6 @@
         height: 40px;
         width: 40px;
         border-radius: 50%;
-        // margin-inline-end: 15px;
         img {
             border-radius: 50%;
         }
