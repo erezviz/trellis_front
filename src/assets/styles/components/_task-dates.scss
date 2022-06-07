@@ -8,6 +8,7 @@
     top: 25%;
     width: 302px;
     z-index: 70;
+
     header {
         border-bottom: 1px solid rgba(9, 30, 66, 0.1294117647);
         box-sizing: border-box;
@@ -21,18 +22,22 @@
         white-space: nowrap;
         z-index: 1;
         text-align: center;
+
         button {
             border: none;
             background-color: transparent;
             color: #6b778c;
             padding: 0;
+
             &:hover {
                 cursor: pointer;
             }
+
             span svg {
                 width: 10px;
             }
         }
+
         .header-title {
             flex: 1;
             font-weight: 400;
@@ -40,30 +45,36 @@
             margin: 2px 0px 0px 11px;
         }
     }
+
     .main-dates {
         .btns {
             display: flex;
             flex-direction: column;
             gap: 5px;
+
             button {
                 height: 30px;
                 border: none;
             }
+
             .save-date {
                 background-color: #0079bf;
                 padding: 0.25rem 0.5rem;
                 border-radius: 0.2rem;
                 transition: background-color, 0.15s;
                 color: white;
+
                 &:hover {
                     background-color: darken($color: #0079bf, $amount: 8%)
                 }
             }
         }
     }
+
     .MuiPickersStaticWrapper-staticWrapperRoot {
         min-width: 270px;
         width: 270px;
+
         .MuiPickersBasePicker-pickerView {
             min-width: 270px;
             width: 270px;

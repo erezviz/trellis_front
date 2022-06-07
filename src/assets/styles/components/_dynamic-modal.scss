@@ -8,11 +8,14 @@
     top: 25%;
     width: 280px;
     z-index: 70;
+
     &.is-shown {
         display: block;
     }
+
     .main-labels {
         margin-block-start: 5px;
+
         span {
             font-size: 13px;
         }

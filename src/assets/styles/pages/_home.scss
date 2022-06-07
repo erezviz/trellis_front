@@ -7,8 +7,10 @@
     justify-content: center;
     min-width: 288px;
     width: 100%;
+
     .board-list-container {
         margin: 400px;
+
         .starred-boards {
             svg {
                 path {
@@ -17,6 +19,7 @@
             }
         }
     }
+
     .create-board {
         background-color: rgba(9, 30, 66, 0.0392156863);
         border: none;
@@ -34,6 +37,7 @@
         transition: background-color, .25s;
         width: 150px;
         height: 100px;
+
         >p {
             width: 175px;
             position: relative;
@@ -43,6 +47,7 @@
             padding: 0 12px;
             flex-direction: column;
         }
+
         &:hover {
             background-color: #091e4214;
             font-weight: bold;
@@ -51,17 +56,20 @@
             color: #172b4d;
         }
     }
+
     h1 {
         font-weight: 400;
         color: lighten($color: $clr5, $amount: 15%);
         font-size: 20px;
         line-height: 24px;
         margin-inline-start: 8px;
+
         img {
             height: 18px;
             width: 18px;
         }
     }
+
     .board-preview {
         >h2 {
             height: 50px;
@@ -71,10 +79,12 @@
             text-shadow: 0px 0.4px 1px rgb(58 57 57);
         }
     }
+
     .previews-container {
         display: flex;
         flex-wrap: wrap;
         margin-top: 24px;
+
         .board-preview {
             background-size: cover;
             border-radius: 3px;
@@ -83,15 +93,18 @@
             margin: 0 1.2rem 1rem 0;
             width: 150px;
             height: 100px;
+
             .star {
                 visibility: hidden;
             }
+
             .star,
             .starred {
                 position: relative;
                 bottom: 45px;
                 left: 150px;
             }
+
             .starred {
                 svg {
                     path {
@@ -100,10 +113,12 @@
                 }
             }
         }
+
         .board-preview:hover {
             .star {
                 visibility: visible !important;
             }
+
             .star:hover {
                 svg {
                     path {

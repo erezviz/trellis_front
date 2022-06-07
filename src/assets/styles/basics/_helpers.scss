@@ -1,10 +1,12 @@
 // Flex 
 .flex {
     display: flex;
+
     &-col {
         display: flex;
         flex-direction: column;
     }
+
     &-space-between {
         display: flex;
         justify-content: space-between;
