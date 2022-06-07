@@ -112,15 +112,14 @@
             flex-wrap: wrap;
             gap: 5px;
             justify-content: flex-end;
-            margin-inline-start: 6px;
+            margin: 5px 10px;
+            position: relative;
+            bottom: 10px;
 
             .member-task-preview {
                 height: 28px;
                 width: 28px;
 
-                // position: relative;
-                // bottom: 8px;
-                // right: 8px;
                 img {
                     border-radius: 50%;
                 }
@@ -225,6 +224,10 @@ input.group-title {
 }
 
 section.main-preview {
+    .previews{
+        margin-top: 14px;
+        height: 30px;
+    }
     >div.functions-previews.flex-space-between {
         padding: 2px 4px 9px 3px;
 
@@ -236,7 +239,7 @@ section.main-preview {
 }
 
 .icon-previews {
-
+    margin-left: 5px;
     .icon-preview,
     svg {
         height: 14px !important;

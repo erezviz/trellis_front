@@ -31,7 +31,7 @@ export const TaskPreview = (props) => {
                     <section onClick={() => props.onToggleDetails()} className="main-preview">
                         <h5>{task.title}</h5>
                         {task.attachments?.length && <img className="attachment-img" src={`${task.attachments[0].url}`} alt=""></img>}
-                        <div className="flex-space-between">
+                        <div className="flex-space-between previews">
                             <section className="icon-previews">
                                 {task.dueDate && <span><Date /></span>}
                                 {task.attachments && <span><img className="icon-preview" src={require('../../assets/icon/attachment-icon.png')} alt="" /></span>}
