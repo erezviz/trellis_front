@@ -16,7 +16,7 @@ import { PopOver } from "../cmps/dynamic-cmps/pop-over";
 import { CreateBoardModal } from "../cmps/board/create-board-modal";
 import { ReactComponent as Star } from '../assets/icon/star.svg'
 import { TrellisSpinner } from '../cmps/util-cmps/trellis-spinner';
-import { socketService, SOCKET_EMIT_SET_BOARD } from "../services/socket.service";
+
 
 class _HomePage extends React.Component {
     state = {
