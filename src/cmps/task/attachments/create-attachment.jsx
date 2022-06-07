@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { useDispatch } from "react-redux"
 import { useRouteMatch } from "react-router-dom"
 import { uploadService } from "../../../services/upload.service"
@@ -11,6 +11,7 @@ import { ReactComponent as Close } from '../../../assets/icon/close.svg'
 export const CreateAttachment = ({ task, isShown, cb }) => {
     let { params: { boardId, groupId } } = useRouteMatch()
     const dispatch = useDispatch()
+    const hiddenFileInput = useRef(null)
     const [isTyping, setIsTyping] = useState(false)
     let [isUploading, setIsUploading] = useState(false)
     let [attachment, setAttachment] = useState({
@@ -42,16 +43,19 @@ export const CreateAttachment = ({ task, isShown, cb }) => {
 
     }, [isUploading])
 
+    const handleUploadClick = ev => {
+        hiddenFileInput.current.click()
+    }
 
     const uploadImg = async (ev) => {
         if (!ev.target.files[0] || !ev.target.files.length) return
         attachment.title = utilService.getFilename(ev.target.value)
+        // setIsUploading(prevUploading => prevUploading = true)
         const url = await uploadService.uploadImg(ev)
-        setIsUploading(prevUploading => prevUploading = true)
         // setIsUploading(prevUploading => prevUploading = false)
-
-        setAttachment(prevAttachment => ({ ...prevAttachment, url }))
-        // onSaveAttachment()
+       
+        setAttachment(prevAttachment => ({ ...prevAttachment, url }), onSaveAttachment)
+        
     }
 
     const onSaveAttachment = ev => {
@@ -63,16 +67,14 @@ export const CreateAttachment = ({ task, isShown, cb }) => {
         }
         const newTask = utilService.getDeepCopy(task)
         attachment.id = utilService.makeId()
-        // setAttachments(prevAttachments => ([...prevAttachments, attachment]))
+ 
         if (newTask.attachments) newTask.attachments = [...newTask.attachments, attachment]
         else newTask.attachments = [attachment]
         console.log(newTask);
 
         dispatch(updateTask(boardId, groupId, newTask))
-        // toggleAdd()
         resetAttachment()
         cb()
-
     }
 
     const onTyping = ev => {
@@ -87,7 +89,7 @@ export const CreateAttachment = ({ task, isShown, cb }) => {
         top: "285px"
     }
     if (!task) return <TrellisSpinner />
-    console.log(attachment);
+
     return (
 
         <div className={`pop-over ${isShown ? 'shown' : ''} `} style={pos}>
@@ -101,14 +103,18 @@ export const CreateAttachment = ({ task, isShown, cb }) => {
                 </button>
             </header>
             <div className="children-container">
-
-
                 <section className="create-attachment">
-                    <form className="form-upload" onSubmit={onSaveAttachment}>
-                        <label htmlFor="imgUpload">Computer</label>
-                        <input type="file" onChange={uploadImg} tabIndex="-1"  id="imgUpload" hidden />
+            
+                        <button className="upload-btn" onClick={handleUploadClick} >Computer</button>
+                        <input 
+                        type="file" 
+                        ref={hiddenFileInput}
+                        onChange={uploadImg} 
+                        tabIndex="-1" 
+                         id="imgUpload" 
+                         style={{display: 'none'}}
+                          />
 
-                    </form>
                     <form onSubmit={onSaveAttachment} className="col" >
                         <label htmlFor="link">Attach a link</label>
                         <input

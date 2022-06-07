@@ -22,14 +22,13 @@ export const Attachments = ({ task }) => {
         createdAt: Date.now(),
         url: null
     })
-    window.t = attachment
+
     const resetAttachment = () => {
         const emptyAttach = {
             title: null,
             createdAt: Date.now(),
             url: null
         }
-
         setAttachment(emptyAttach)
     }
 
@@ -37,21 +36,10 @@ export const Attachments = ({ task }) => {
         ev.preventDefault()
 
         const { value, name } = ev.target
-        // const attachment = boardService.createAttachment(id, value)
         setAttachment(prevAttachment => ({ ...prevAttachment, [name]: value }))
 
     }
 
-    const uploadImg = async (ev) => {
-        if (!ev.target.files[0] || !ev.target.files.length) return
-        attachment.title = utilService.getFilename(ev.target.value)
-        setIsUploading(prevUploading => prevUploading = true)
-        const url = await uploadService.uploadImg(ev)
-        setIsUploading(prevUploading => prevUploading = false)
-
-        setAttachment(prevAttachment => ({ ...prevAttachment, url }))
-        onSaveAttachment()
-    }
     const toggleEdit = (id) => {
         setIsEdit(prevIsEdit => prevIsEdit = !isEdit)
     }
@@ -65,7 +53,7 @@ export const Attachments = ({ task }) => {
         }
         const newTask = utilService.getDeepCopy(task)
         attachment.id = utilService.makeId()
-        // setAttachments(prevAttachments => ([...prevAttachments, attachment]))
+
         if (newTask.attachments) newTask.attachments = [...newTask.attachments, attachment]
         else newTask.attachments = [attachment]
 
@@ -89,8 +77,6 @@ export const Attachments = ({ task }) => {
     const onEditTitle = (ev, attachId) => {
         console.log('hi from before ev', attachment);
         if (ev) ev.preventDefault()
-        //TODO  Change prompt to a nice modal -- preferably something dynamic you can use again and again
-        // const newTitle = prompt('Edit attachment', 'Link name')
 
         const newTask = utilService.getDeepCopy(task)
         const newTitle = attachment.title
@@ -99,7 +85,6 @@ export const Attachments = ({ task }) => {
 
         if (!attachment.title) return
         const newAttachments = newTask.attachments.map(prevAttachment => {
-
             return (prevAttachment.id === attachToUpdate.id) ? attachToUpdate : prevAttachment
         })
         console.log('newAttachments', newAttachments);
@@ -108,12 +93,6 @@ export const Attachments = ({ task }) => {
         resetAttachment()
         toggleEdit()
 
-
-    }
-
-    const getId = (id) => {
-
-        return id
     }
 
 
@@ -137,36 +116,18 @@ export const Attachments = ({ task }) => {
 
                             <h5>{attachment.title ? attachment.title : 'Your Attachment'}</h5>
                             <div className="thumbnail-edit">
-
                                 <span onClick={() => onRemoveAttachment(attachment.id)}>Delete</span>
                                 <span> - </span>
                                 <span onClick={() => toggleTitle(attachment.id)}>Edit</span>
                             </div>
-                            {/* <button className="  btn-danger">Delete</button>
-                            <button onClick={() => onEditTitle(attachment.id)} className="btn-blue">Edit</button> */}
-
+                        
                         </div>
                     </div>
                 })}
                 <TitleEdit cb={toggleEdit} onEditTitle={onEditTitle} isShown={isEdit} handleChange={handleChange} id={attachmentId} />
 
                 <button onClick={() => toggleEdit()} className="btn-light" >Add an attachment</button>
-                {/* {isAdd && <div className="attachment-form-container">
-                    <form className="link-form" onSubmit={onSaveAttachment} >
-                        <label htmlFor="link">Add a link</label>
-                        <input type="text" id="url" name="url" placeholder="Add a link here" onChange={handleChange} />
-                        <input className="btn-light" type="submit" value="Submit" />
-                    </form >
-                    <form className="link-form" onSubmit={onSaveAttachment}>
-                        <label htmlFor="file">Add a file</label>
-                        <input type="file" onChange={uploadImg} accept="img/*" id="imgUpload" />
-                        <input className="btn-light" type="submit" value="Submit" />
-                    </form>
-                </div>} */}
-                {/* <input type="file" name="file" tabindex="-1" multiple="multiple"/> */}
-
             </div>
-
         </section>
     )
 }
