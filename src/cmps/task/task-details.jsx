@@ -230,6 +230,7 @@ export const TaskDetails = (props) => {
                         <Attachments
                             task={task}
                             handleChange={handleFormChange}
+                            onToggle={onToggleAttach}
                         />
                         {(isChecklistOpen || task.checklist) &&
                             <div className='checklist'>
