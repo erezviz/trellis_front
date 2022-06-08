@@ -8,7 +8,7 @@ import { ReactComponent as Close } from '../../assets/icon/close.svg'
 
 
 
-export const Attachments = ({ task }) => {
+export const Attachments = ({ task, onToggle }) => {
 
     let { params: { boardId, groupId } } = useRouteMatch()
     const dispatch = useDispatch()
@@ -116,7 +116,7 @@ export const Attachments = ({ task }) => {
                 })}
                 <TitleEdit cb={toggleEdit} onEditTitle={onEditTitle} isShown={isEdit} handleChange={handleChange} id={attachmentId} />
 
-                <button onClick={() => toggleEdit()} className="btn-light" >Add an attachment</button>
+                <button onClick={() => onToggle()} className="btn-light" >Add an attachment</button>
             </div>
         </section>
     )
