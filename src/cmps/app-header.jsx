@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { NavLink, Link } from "react-router-dom"
+import { Link } from "react-router-dom"
+
 import member from '../assets/icon/member.svg'
-import { onLogout } from "../store/user.actions";
 import { ReactComponent as Close } from '../assets/icon/close.svg'
 
 const _AppHeader = (props) => {
+
     const { user } = useSelector((state) => state.userModule)
     let [toggleAccount, setToggleAccount] = useState(false)
     let status = 'Hero'
@@ -35,12 +36,11 @@ const _AppHeader = (props) => {
     }
 
     const deleteAllCookies = () => {
-        var cookies = document.cookie.split(";");
-
-        for (var i = 0; i < cookies.length; i++) {
-            var cookie = cookies[i];
-            var eqPos = cookie.indexOf("=");
-            var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+        const cookies = document.cookie.split(";");
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i];
+            const eqPos = cookie.indexOf("=");
+            const name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
             document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
         }
     }
@@ -52,12 +52,10 @@ const _AppHeader = (props) => {
         onGoBack()
     }
 
-
     return (
         <section className={`app-header flex ${status} ${bgc}`}>
 
             <div onClick={onGoBack} className='logo-container'>
-
                 <img src={require(`../assets/img/trellis${status}.png`)} alt="" /> <h3 className={logoTxt}>Trellis</h3>
             </div>
             <nav>

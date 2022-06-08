@@ -1,6 +1,4 @@
-// import { userService } from "../services/user.service.js";
 import { boardService } from "../services/board.service";
-
 
 // Action Creators:
 export function getActionRemoveBoard(boardId) {
@@ -22,10 +20,8 @@ export function getActionUpdateBoard(board) {
     }
 }
 
-var subscriber
-
 export function loadBoards() {
-    return async (dispatch) => {
+    return async(dispatch) => {
         try {
             const boards = await boardService.query()
 
@@ -40,16 +36,10 @@ export function loadBoards() {
             throw err
         }
 
-        // if (subscriber) boardService.unsubscribe(subscriber)
-        // subscriber = (ev) => {
-        //     console.log('Got notified', ev.data)
-        //     dispatch(ev.data)
-        // }
-        // boardService.subscribe(subscriber)
     }
 }
 export function loadBoard(boardId) {
-    return async (dispatch) => {
+    return async(dispatch) => {
         try {
             const board = await boardService.getById(boardId)
 
@@ -64,18 +54,11 @@ export function loadBoard(boardId) {
             console.log('Cannot load boards', err)
             throw err
         }
-
-        // if (subscriber) boardService.unsubscribe(subscriber)
-        // subscriber = (ev) => {
-        //     console.log('Got notified', ev.data)
-        //     dispatch(ev.data)
-        // }
-        // boardService.subscribe(subscriber)
     }
 }
 
 export function removeBoard(boardId) {
-    return async (dispatch) => {
+    return async(dispatch) => {
         try {
             await boardService.remove(boardId)
             console.log('Deleted Succesfully!');
@@ -87,7 +70,7 @@ export function removeBoard(boardId) {
 }
 
 export function addBoard(board) {
-    return async (dispatch) => {
+    return async(dispatch) => {
         try {
             const savedBoard = await boardService.save(board)
             dispatch(getActionAddBoard(savedBoard))
@@ -100,7 +83,7 @@ export function addBoard(board) {
 
 export function updateGroupTask(boardId, groupId, task) {
 
-    return async (dispatch) => {
+    return async(dispatch) => {
         try {
             const updatedBoard = await boardService.saveTask(boardId, groupId, task)
             dispatch(getActionUpdateBoard(updatedBoard))
@@ -115,11 +98,10 @@ export function updateBoardForSockets(board) {
     return (dispatch) => {
         dispatch(getActionUpdateBoard(board))
     }
-
 }
 
 export function updateWholeBoard(board) {
-    return async (dispatch) => {
+    return async(dispatch) => {
         try {
             dispatch(getActionUpdateBoard(board))
             await boardService.save(board)
@@ -129,8 +111,9 @@ export function updateWholeBoard(board) {
         }
     }
 }
+
 export function updateBoard(boardId, groupId, task) {
-    return async (dispatch) => {
+    return async(dispatch) => {
         try {
             const updatedBoard = await boardService.saveTask(boardId, groupId, task)
             const reducerBoard = dispatch(getActionUpdateBoard(updatedBoard))
@@ -143,11 +126,11 @@ export function updateBoard(boardId, groupId, task) {
 }
 // GROUP CRUDL
 export function onDeleteGroup(boardId, groupId) {
-    return async (dispatch) => {
+    return async(dispatch) => {
         try {
             const updatedBoard = await boardService.deleteGroup(boardId, groupId)
             dispatch(getActionUpdateBoard(updatedBoard))
-                // return updatedBoard
+
         } catch (err) {
             console.log('Cannot save board', err)
             throw err
@@ -156,7 +139,7 @@ export function onDeleteGroup(boardId, groupId) {
 }
 
 export function onAddGroup(boardId, group) {
-    return async (dispatch) => {
+    return async(dispatch) => {
         try {
             const updatedBoard = await boardService.addGroup(boardId, group)
             const reducerBoard = dispatch(getActionUpdateBoard(updatedBoard))
@@ -167,12 +150,12 @@ export function onAddGroup(boardId, group) {
         }
     }
 }
+
 export function onUpdateGroup(boardId, groupToSave) {
-    return async (dispatch) => {
+    return async(dispatch) => {
         try {
             const updatedBoard = await boardService.updateGroup(boardId, groupToSave)
             dispatch(getActionUpdateBoard(updatedBoard))
-            // return reducerBoard.board
         } catch (err) {
             console.log('Cannot update group', err)
             throw err
@@ -180,26 +163,10 @@ export function onUpdateGroup(boardId, groupToSave) {
     }
 }
 
-// export function onUpdateGroup(boardId, groupId, newName) {
-//     return async(dispatch) => {
-//         try {
-//             const updatedBoard = await boardService.updateGroup(boardId, groupId, newName)
-//             dispatch(getActionUpdateBoard(updatedBoard))
-//                 // return reducerBoard.board
-//         } catch (err) {
-//             console.log('Cannot save board', err)
-//             throw err
-//         }
-//     }
-// }
-
-
 export function queryTask(boardId, groupId, taskId) {
-    return async (dispatch) => {
+    return async(dispatch) => {
         try {
-
             const task = await boardService.getTask(boardId, groupId, taskId)
-
             dispatch({
                 type: 'SET_TASK',
                 task
@@ -213,37 +180,13 @@ export function queryTask(boardId, groupId, taskId) {
 }
 
 export function updateTask(boardId, groupId, taskToSave) {
-    return async (dispatch) => {
+    return async(dispatch) => {
         try {
             const updatedBoard = await boardService.updateTask(boardId, groupId, taskToSave)
             dispatch(getActionUpdateBoard(updatedBoard))
-            // return updatedBoard
         } catch (err) {
             console.log('ERROR: cannot update task', err)
             throw err
         }
     }
 }
-
-//? Demo for Optimistic Mutation (IOW - Assuming the server call will work, so updating the UI first)
-// export function onRemoveBoardOptimistic(boardId) {
-
-//     return (dispatch, getState) => {
-
-//         dispatch({
-//             type: 'REMOVE_CAR',
-//             boardId
-//         })
-
-//         boardService.remove(boardId)
-//             .then(() => {
-//                 console.log('Server Reported - Deleted Succesfully');
-//             })
-//             .catch(err => {
-//                 console.log('Cannot load boards', err)
-//                 dispatch({
-//                     type: 'UNDO_REMOVE_CAR',
-//                 })
-//             })
-//     }
-// }

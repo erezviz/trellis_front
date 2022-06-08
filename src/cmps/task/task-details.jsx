@@ -11,13 +11,11 @@ import { ReactComponent as DatesIcon } from '../../assets/icon/dates-icon.svg'
 
 import { ReactComponent as DescIcon } from '../../assets/icon/description-icon.svg'
 import { ReactComponent as Plus } from '../../assets/icon/plus-icon.svg'
-import member from '../../assets/icon/member.svg'
 
 import { TaskMembers } from './task-members';
 import { Labels } from './labels';
-
 import { TaskChecklist } from './checklist/task-checklist.jsx'
-import { queryTask, updateTask } from '../../store/board.action';
+import { updateTask } from '../../store/board.action';
 import { TrellisSpinner } from '../util-cmps/trellis-spinner';
 import { Attachments } from './attachments';
 import { TaskDate } from './task-dates';
@@ -25,7 +23,7 @@ import { PopOver } from '../dynamic-cmps/pop-over';
 import { CreateAttachment } from './attachments/create-attachment';
 import { ChecklistModal } from './checklist/create-checklist-modal'
 import { CoverModal } from './cover-modal.jsx'
-import { Popover } from 'bootstrap';
+
 
 export const TaskDetails = (props) => {
 
@@ -52,7 +50,6 @@ export const TaskDetails = (props) => {
             setTask(null)
         }
     }, [currBoard])
-
 
 
     const modalStyle = {
@@ -106,8 +103,8 @@ export const TaskDetails = (props) => {
         <section style={modalStyle} className="task-details">
             {task.cover && <div className='task-cover' style={{ backgroundColor: `${task.cover}` }}></div>}
             <div className="details-container flex">
-                <button onClick={(ev) => {
-                    // return goBack()
+                <button onClick={() => {
+
                     return props.onCloseDetails()
                 }} className={`close-details-btn ${'btn-cover'}`}>
                     <span>
@@ -128,7 +125,6 @@ export const TaskDetails = (props) => {
                             name="title"
                         />
                     </form>
-
                 </div>
                 <header className="task-header">
                     {task.memberIds?.length > 0 && <div className="members">
@@ -175,7 +171,6 @@ export const TaskDetails = (props) => {
                     </section>}
                     {task.dueDate && <section className="show-date">
                         <p>Date</p>
-
                         <div className="date">
                             <input type="checkBox" />
                             <span>{task.dueDate}</span>

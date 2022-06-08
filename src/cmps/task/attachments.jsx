@@ -1,8 +1,6 @@
-import { useEffect, useRef, useState } from "react"
+import { useState } from "react"
 import { useDispatch } from "react-redux"
 import { useRouteMatch } from "react-router-dom"
-import { boardService } from "../../services/board.service"
-import { uploadService } from "../../services/upload.service"
 import { utilService } from "../../services/util.service"
 import { updateTask } from "../../store/board.action"
 import { TrellisSpinner } from "../util-cmps/trellis-spinner"
@@ -49,18 +47,15 @@ export const Attachments = ({ task }) => {
 
         if (!attachment.title) {
             attachment.title = utilService.getFilename(attachment.url)
-
         }
         const newTask = utilService.getDeepCopy(task)
         attachment.id = utilService.makeId()
-
         if (newTask.attachments) newTask.attachments = [...newTask.attachments, attachment]
         else newTask.attachments = [attachment]
-
         dispatch(updateTask(boardId, groupId, newTask))
         resetAttachment()
-
     }
+
     const toggleTitle = (attachmentId) => {
         setAttachmentId(attachmentId)
         toggleEdit()
@@ -90,9 +85,7 @@ export const Attachments = ({ task }) => {
         dispatch(updateTask(boardId, groupId, newTask))
         resetAttachment()
         toggleEdit()
-
     }
-
 
     if (!task) return <TrellisSpinner />
     return (
@@ -128,7 +121,6 @@ export const Attachments = ({ task }) => {
         </section>
     )
 }
-
 
 function TitleEdit({ isShown, cb, onEditTitle, handleChange, id }) {
     const [isTyping, setIsTyping] = useState(false)

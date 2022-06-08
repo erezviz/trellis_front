@@ -1,7 +1,9 @@
 
 import { useDispatch } from 'react-redux';
 import { useRouteMatch } from 'react-router-dom';
-import { updateTask } from '../../store/board.action';
+
+import { updateTask } from '../../store/board.action'
+
 import pen from '../../assets/icon/pen.svg'
 import { ReactComponent as Close } from '../../assets/icon/close.svg'
 
@@ -9,7 +11,6 @@ import { ReactComponent as Close } from '../../assets/icon/close.svg'
 export const Labels = (props) => {
     let { params: { boardId, groupId } } = useRouteMatch();
     const dispatch = useDispatch()
-
 
     const onToggleLabel = async (labelId) => {
         const newTask = { ...props.task }
@@ -21,7 +22,6 @@ export const Labels = (props) => {
             if (!newTask.labelIds) newTask.labelIds = [labelId]
             else newTask.labelIds = [...newTask.labelIds, labelId]
         }
-
         dispatch(updateTask(boardId, groupId, newTask))
     }
 

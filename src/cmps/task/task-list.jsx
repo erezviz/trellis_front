@@ -1,20 +1,20 @@
 import { Link } from "react-router-dom"
-import { TaskPreview } from "./task-preview"
 import { Droppable } from "react-beautiful-dnd"
+
+import { TaskPreview } from "./task-preview"
 
 export const TaskList = (props) => {
     const { tasks, idx } = props
-     if (!tasks || !tasks.length ) return (
-     <Droppable type='task' index={idx} droppableId={`${props.groupId}`}>
+    if (!tasks || !tasks.length) return (
+        <Droppable type='task' index={idx} droppableId={`${props.groupId}`}>
             {(provided) => {
-               return <div key={idx} {...provided.droppableProps} ref={provided.innerRef}>
+                return <div key={idx} {...provided.droppableProps} ref={provided.innerRef}>
                     No tasks
                     {provided.placeholder}
                 </div>
-                }}
-            </Droppable>)
-    // if (!tasks || !tasks.length ) return <p>No tasks</p>
-    if (tasks || tasks.length ) return (
+            }}
+        </Droppable>)
+    if (tasks || tasks.length) return (
         <Droppable type='task' index={idx} droppableId={`${props.groupId}`}>
             {(provided) => {
                 return <section className="task-list" {...provided.droppableProps} ref={provided.innerRef}>
@@ -36,6 +36,6 @@ export const TaskList = (props) => {
                     {provided.placeholder}
                 </section>
             }}
-            </Droppable>
+        </Droppable>
     )
 }

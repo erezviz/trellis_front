@@ -1,11 +1,10 @@
 import { Draggable } from "react-beautiful-dnd"
 import { useSelector } from "react-redux"
+
 import { ReactComponent as Date } from '../../assets/icon/dates-icon.svg'
-// import { ReactComponent as Attachment } from '../../assets/icon/attachment-icon.png'
-// import { ReactComponent as Checklist } from '../../assets/icon/checklist-icon.png'
-// import { ReactComponent as Description } from '../../assets/icon/description-icon.png'
 
 export const TaskPreview = (props) => {
+
     const { task, idx } = props
     const board = useSelector(state => state.boardModule.currBoard)
     if (!board) return <></>

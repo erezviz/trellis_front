@@ -1,8 +1,10 @@
 import { useEffect, useRef, useState } from "react"
 import { useDispatch } from "react-redux"
 import { useRouteMatch } from "react-router-dom"
+
 import { uploadService } from "../../../services/upload.service"
 import { utilService } from "../../../services/util.service"
+
 import { updateTask } from "../../../store/board.action"
 import { TrellisSpinner } from "../../util-cmps/trellis-spinner"
 
@@ -26,21 +28,16 @@ export const CreateAttachment = ({ task, isShown, cb }) => {
             createdAt: Date.now(),
             url: ''
         }
-
         setAttachment(prevAttachment => prevAttachment = emptyAttach)
     }
-
 
     const handleChange = ev => {
         ev.preventDefault()
         const { value, name } = ev.target
         setAttachment(prevAttachment => ({ ...prevAttachment, [name]: value }))
-
     }
     useEffect(() => {
         if (attachment.url && isUploading) onSaveAttachment()
-
-
     }, [attachment])
 
     const handleUploadClick = ev => {
@@ -72,7 +69,6 @@ export const CreateAttachment = ({ task, isShown, cb }) => {
         if (newTask.attachments) newTask.attachments = [...newTask.attachments, newAttachment]
         else newTask.attachments = [newAttachment]
 
-
         dispatch(updateTask(boardId, groupId, newTask))
         resetAttachment()
         cb()
@@ -83,14 +79,12 @@ export const CreateAttachment = ({ task, isShown, cb }) => {
         if (length === 0) setIsTyping(false)
         else if (length > 0) setIsTyping(true)
 
-
     }
     const pos = {
         left: "433px",
         top: "285px"
     }
     if (!task) return <TrellisSpinner />
-
     return (
 
         <div className={`pop-over ${isShown ? 'shown' : ''} `} style={pos}>
@@ -128,7 +122,6 @@ export const CreateAttachment = ({ task, isShown, cb }) => {
                             placeholder="Paste any link here..."
                             autoFocus
                             value={attachment.url}
-
                         />
                         {isTyping &&
                             <>
@@ -147,6 +140,4 @@ export const CreateAttachment = ({ task, isShown, cb }) => {
             </div>
         </div>
     )
-
-
 }

@@ -1,13 +1,6 @@
-import { storageService } from './async-storage.service.js'
 import { utilService } from './util.service.js'
-import { userService } from './user.service.js'
 import { httpService } from './http.service.js'
-import { socketService, SOCKET_EMIT_SEND_BOARD, SOCKET_EVENT_ADD_BOARD } from './socket.service.js'
-// import { getActionRemoveBoard, getActionAddBoard, getActionUpdateBoard } from '../store/board.actions.js'
-
-const STORAGE_KEY = 'board'
-// const boardChannel = new BroadcastChannel('boardChannel')
-// const listeners = []
+import { socketService, SOCKET_EMIT_SEND_BOARD } from './socket.service.js'
 
 export const boardService = {
     query,
@@ -24,59 +17,41 @@ export const boardService = {
     updateTask,
     createAttachment,
     getAttachmentTitle,
-    // subscribe,
-    // unsubscribe
-
 }
-window.cs = boardService;
-
 
 function query() {
     return httpService.get('board')
 }
 
-// async function getTaskById(taskId,groupId,boardId){
-//     const board = await getById(boardId)
-//      board.find(board => {
-//         return  
-//     })
-
-// }
-
 function getById(boardId) {
     return httpService.get(`board/${boardId}`)
 
 }
+
 async function remove(boardId) {
     httpService.delete(`board/${boardId}`)
 
 }
+
 async function save(board) {
     var savedBoard
     if (board._id) {
         socketService.emit(SOCKET_EMIT_SEND_BOARD, board)
         savedBoard = await httpService.put(`board/:${board._id}`, board)
-        // return 
     } else {
-        // socketService.emit(SOCKET_EMIT_SEND_BOARD, board)
         board.labels = _getBoardLabels()
         savedBoard = await httpService.post('board', board)
-
-
     }
-
     return savedBoard
 }
 
 function getEmptyBoard() {
     return {
         title: '',
-        // backgroundImg: url,
     }
 }
 
 //Group CRUDL
-
 async function addGroup(boardId, newGroup) {
     try {
         const board = await getById(boardId)
@@ -88,15 +63,16 @@ async function addGroup(boardId, newGroup) {
         throw err
     }
 }
+
 async function updateGroup(boardId, groupToSave) {
+
     try {
         const board = await boardService.getById(boardId)
-
         const updatedGroups = board.groups.map(group => {
             if (group.id === groupToSave.id) group = groupToSave
             return group
         })
-        const updatedBoard = { ...board, groups: updatedGroups }
+        const updatedBoard = {...board, groups: updatedGroups }
         save(updatedBoard)
         return updatedBoard
     } catch (err) {
@@ -105,18 +81,6 @@ async function updateGroup(boardId, groupToSave) {
     }
 }
 
-
-// async function updateGroup(boardId, groupId, newName) {
-//     try {
-//         const board = await getById(boardId)
-//         const groupToUpdate = board.groups.find(group => group.id === groupId)
-//         groupToUpdate.title = newName
-//         return save(board)
-//     } catch (err) {
-//         console.log('Cannot update group', err)
-//         throw err
-//     }
-// }
 async function deleteGroup(boardId, groupId) {
     try {
         const board = await getById(boardId)
@@ -129,13 +93,14 @@ async function deleteGroup(boardId, groupId) {
         throw err
     }
 }
+
 //Task CRUDL
 function getEmptyTask() {
     return {
         title: '',
     }
 }
-//? THIS FUNCTION WORKS -- DO NOT DELETE
+
 function getTask(board, groupId, taskId) {
     const group = board.groups.find(group => group.id === groupId)
     const task = group.tasks.find(task => task.id === taskId)
@@ -176,7 +141,7 @@ async function updateTask(boardId, groupId, taskToSave) {
             }
             return group
         })
-        const updatedBoard = { ...board, groups: updatedGroups }
+        const updatedBoard = {...board, groups: updatedGroups }
         save(updatedBoard)
         return updatedBoard
     } catch (err) {
@@ -191,7 +156,6 @@ function createAttachment(attachmentType, str) {
         createdAt: Date.now(),
         title: '',
         details: ''
-
     }
     switch (attachmentType) {
         case 'link':
@@ -208,67 +172,38 @@ function getAttachmentTitle(urlStr) {
     let url = new URL(urlStr)
 }
 
-// function subscribe(listener) {
-//     boardChannel.addEventListener('message', listener)
-// }
 
-// function unsubscribe(listener) {
-//     boardChannel.removeEventListener('message', listener)
-// }
-
-
-//? TEST DATA FOR HOMEPAGE
-// storageService.post(STORAGE_KEY, {
-//     _id: utilService.makeId(),
-//     title: 'Board 1',
-//     groups: [{
-//         id: "G-" + utilService.makeId(),
-//         title: "Group 1",
-//         tasks: [{
-//                 id: "T-" + utilService.makeId(),
-//                 title: "Replace logo"
-//             },
-//             {
-//                 id: "T-" + utilService.makeId(),
-//                 title: "Add Samples"
-//             }
-//         ],
-//     }]
 
 function _getBoardLabels() {
     return [{
-        id: "l101",
-        title: "Done",
-        color: "#61bd4f"
-    },
-    {
-        id: "l102",
-        title: "Progress",
-        color: "#f2d600"
-    },
-    {
-        id: "l104",
-        title: "Urgent",
-        color: "#ff9f1a"
-    },
-    {
-        id: "l103",
-        title: "Open",
-        color: " #eb5a46"
-    },
-    {
-        id: "l106",
-        title: "Assigned",
-        color: "#c377e0"
-    },
-    {
-        id: "l105",
-        title: "Irrelevant",
-        color: "#0079bf"
-    }
+            id: "l101",
+            title: "Done",
+            color: "#61bd4f"
+        },
+        {
+            id: "l102",
+            title: "Progress",
+            color: "#f2d600"
+        },
+        {
+            id: "l104",
+            title: "Urgent",
+            color: "#ff9f1a"
+        },
+        {
+            id: "l103",
+            title: "Open",
+            color: " #eb5a46"
+        },
+        {
+            id: "l106",
+            title: "Assigned",
+            color: "#c377e0"
+        },
+        {
+            id: "l105",
+            title: "Irrelevant",
+            color: "#0079bf"
+        }
     ]
 }
-
-
-// storageService.post(STORAGE_KEY, { _id: utilService.makeId(), title: 'Board 2' }).then(x => console.log(x))
-// storageService.post(STORAGE_KEY, { _id: utilService.makeId(), title: 'Board 3' }).then(x => console.log(x))

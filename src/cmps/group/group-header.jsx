@@ -1,6 +1,5 @@
 import { useState } from "react"
 
-
 export const GroupHeader = (props) => {
 
     const [header, setHeader] = useState(props.title)

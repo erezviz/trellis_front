@@ -18,10 +18,8 @@ const PhotoComp = ({ photo }) => {
       <img className="img" src={urls.regular} />
       <a
         className="credit"
-        // target="_blank"
         href={`https://unsplash.com/@${user.username}`}
       >
-        {/* {user.name} */}
       </a>
     </Fragment>
   );

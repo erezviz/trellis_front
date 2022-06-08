@@ -5,7 +5,6 @@ import { useState } from "react"
 import { TrellisSpinner } from "../util-cmps/trellis-spinner"
 import { GroupPreview } from "./group-preview"
 
-
 export const GroupList = ({ groups, onDeleteGroup, boardId, onToggleDetails, onToggleWarning }) => {
     let { currBoard } = useSelector(state => state.boardModule)
     let [isLabelOpen, setIsLabelOpen] = useState(false)
@@ -16,10 +15,8 @@ export const GroupList = ({ groups, onDeleteGroup, boardId, onToggleDetails, onT
             <Droppable key={currBoard._id} droppableId="group-list" direction="horizontal" type="column">
                 {(provided) => {
                     return <div className="group-list" {...provided.droppableProps} ref={provided.innerRef}>
-                        {currBoard.groups.map((group, idx) => {
+                        {currBoard.groups.map((group) => {
                             return (
-
-                                // <div key={group.id} >
                                 <GroupPreview
                                     onToggleWarning={onToggleWarning}
                                     isLabelOpen={isLabelOpen}
@@ -30,7 +27,6 @@ export const GroupList = ({ groups, onDeleteGroup, boardId, onToggleDetails, onT
                                     group={group}
                                     key={group.id}
                                 />
-                                // </div>
                             )
                         })}
                         {provided.placeholder}

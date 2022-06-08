@@ -1,10 +1,10 @@
 import { userService } from '../services/user.service.js'
 
-
 const initialState = {
     user: userService.getLoggedinUser(),
     users: null,
 }
+
 export function userReducer(state = initialState, action) {
     var newState = state;
     switch (action.type) {
@@ -25,9 +25,5 @@ export function userReducer(state = initialState, action) {
             break;
         default:
     }
-    // For debug:
-    // window.userState = newState;
-    // console.log('State:', newState);
     return newState;
-
 }

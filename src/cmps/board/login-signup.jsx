@@ -44,14 +44,15 @@ class _LoginSignup extends Component {
         this.props.history.push('/home')
     }
 
-
     toggleSignup = () => {
         this.setState({ isSignup: !this.state.isSignup })
     }
+
     render() {
         const { user } = this.props
         const { username, password, fullname } = this.state.credentials;
         const { isSignup } = this.state;
+   
         return (
             <div className="login-page">
                 {!user && < section className="login-signup">
@@ -141,6 +142,5 @@ const mapDispatchToProps = {
     onSignup,
     onLogout
 }
-
 
 export const LoginSignup = connect(mapStateToProps, mapDispatchToProps)(_LoginSignup)

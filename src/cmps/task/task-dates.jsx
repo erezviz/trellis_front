@@ -1,4 +1,4 @@
-import { DatePicker, TimePicker } from '@material-ui/pickers'
+import { DatePicker } from '@material-ui/pickers'
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useRouteMatch } from 'react-router-dom';
@@ -12,7 +12,6 @@ export const TaskDate = (props) => {
     let { params: { boardId, groupId } } = useRouteMatch()
     const [date, setDate] = useState(new Date());
     const dispatch = useDispatch()
-
 
     const onSaveDate = () => {
         const newTask = utilService.getDeepCopy(props.task)
@@ -44,9 +43,6 @@ export const TaskDate = (props) => {
                     <DatePicker
                         autoOk
                         disableToolbar
-
-                        // emptyLabel
-                        // orientation="landscape"
                         variant="static"
                         openTo="date"
                         value={date}

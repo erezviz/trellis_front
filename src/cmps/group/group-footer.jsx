@@ -1,7 +1,7 @@
 import { TextField } from "@mui/material"
 import { React, useState } from "react"
 import { ReactComponent as Close } from '../../assets/icon/close.svg'
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
 import { onUpdateGroup } from "../../store/board.action"
 import { utilService } from "../../services/util.service"
 import { ReactComponent as Plus } from '../../assets/icon/plus-icon.svg'
@@ -20,7 +20,6 @@ export const GroupFooter = (props) => {
         ev.preventDefault()
 
         const boardId = props.boardId
-        const groupId = props.group.id
         let groupToSave = utilService.getDeepCopy(props.group)
         let taskToSave = utilService.getDeepCopy(task)
         taskToSave.id = utilService.makeId()
@@ -52,10 +51,8 @@ export const GroupFooter = (props) => {
                     <span className="btn-exit" onClick={onToggle}><Close /></span>
                 </div>
             </form>}
-
         </section>
     )
-
 }
 
 

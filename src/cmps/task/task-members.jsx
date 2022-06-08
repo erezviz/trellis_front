@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
 import { useRouteMatch } from 'react-router-dom';
+
 import { updateTask } from '../../store/board.action';
-import pen from '../../assets/icon/pen.svg'
 import { utilService } from '../../services/util.service'
 
 import { ReactComponent as Close } from '../../assets/icon/close.svg'
@@ -9,7 +9,6 @@ import { ReactComponent as Close } from '../../assets/icon/close.svg'
 export const TaskMembers = (props) => {
     let { params: { boardId, groupId } } = useRouteMatch();
     const dispatch = useDispatch()
-
 
     const onToggleMember = async (memberId) => {
         const newTask = utilService.getDeepCopy(props.task)
@@ -23,6 +22,7 @@ export const TaskMembers = (props) => {
         }
         dispatch(updateTask(boardId, groupId, newTask))
     }
+
     console.log('members', props.members);
     return (
         <section className="task-members">
