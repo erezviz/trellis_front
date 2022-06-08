@@ -1,4 +1,3 @@
-const gBoards = require('../data/board.json')
 
 export const storageService = {
     query,
@@ -10,7 +9,7 @@ export const storageService = {
 }
 
 function query(entityType, delay = 600) {
-    var entities = JSON.parse(localStorage.getItem(entityType)) || gBoards
+    var entities = JSON.parse(localStorage.getItem(entityType)) 
 
     return new Promise((resolve, reject) => {
             setTimeout(() => {
