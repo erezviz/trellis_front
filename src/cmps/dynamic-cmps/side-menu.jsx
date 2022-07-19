@@ -54,7 +54,7 @@ export const SideMenu = ({ props }) => {
   }
 
   if (data === null) {
-    return <div>Loading...</div>;
+    return <></>;
   } else if (data.errors) {
     return (
       <div>

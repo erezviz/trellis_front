@@ -143,8 +143,7 @@
     overflow: hidden;
     position: relative;
     max-width: 852px;
-    max-height: 100vh;
-    width: 100%;
+    width: 95%;
     z-index: 25;
     padding: 0 0 40px 0;
 
@@ -156,7 +155,7 @@
 
     .desc-container {
         .desc-empty {
-            width: 520px;
+            width: 430px;
             align-items: flex-start;
             justify-content: flex-start;
             margin-inline-start: 46px;

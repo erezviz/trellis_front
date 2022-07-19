@@ -7,6 +7,22 @@
     }
 }
 
+@media screen and (max-width: 900px) {
+    .task-details {
+        max-width: 740px;
+    }
+}
+
+@media screen and (max-width: 740px) {
+    .details-container .details-contents {
+        flex-direction: column;
+    }
+
+    section.details-sidebar>div.main-add-actions {
+       padding: 1em 0 1em 0;
+        position: inherit;
+    }
+}
 
 @media screen and (max-width: 780px) {
     .hero .hero-img-container {
@@ -22,24 +38,84 @@
 }
 
 
-@media screen and (min-width: 1350px) {
-    .home-page .board-list-container{
+@media screen and (min-width: 1184px) {
+    .home-page .board-list-container {
         height: 100vh;
     }
 }
 
 @media screen and (max-width: 490px) {
-    .hero-container {
-        position: relative;
-        top: 3rem;
-        display: flex;
-        flex-direction: column;
+    .App .app-container {
+        display: block;
+    }
 
-        .hero-p {
-            margin-top: 130px;
+    .hero {
+
+        .hero-container {
+            margin: 0;
+            padding-inline: 8vw;
+            text-align: center;
+
+            .enter-link {
+                position: relative;
+                left: 5em;
+            }
+        }
+    }
+
+    .teaser-container {
+        padding-inline: 5vw;
+    }
+
+    .Hero .user-link {
+        height: 4rem;
+
+        .login {
+            color: transparent;
+            padding-right: 0;
+        }
+        
+        .login::before {
+            content: "Login";
+            color: #828282;
+        }
+
+        .signup {
+            padding-right: 0;
+            color: transparent;
+        }
+
+        .signup::before {
+            content: "Signup";
+            color: $clr2;
         }
     }
 }
+
+@media screen and (max-width: 407px) {
+    .Hero .user-link{
+        .login, .signup{
+            display: none;
+        }
+    }
+    .hero{
+        justify-content: center;
+        .hero-container{
+            width: 75%;
+            display: flex;
+            flex-direction: column;
+            .enter-link{
+                left: 0;
+                top: 6em;
+            }
+            .hero-p{
+                display: none;
+            }
+        }
+    } 
+
+}
+
 
 @media screen and (max-height: 960px) {
 
@@ -48,13 +124,5 @@
         height: 100%;
         top: 5rem;
     }
-
-}
-
-@media screen and (max-height: 716px) {
-    .hero {
-        position: relative;
-        top: 5rem;
-    }
-
+    
 }
